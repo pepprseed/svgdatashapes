@@ -2,15 +2,15 @@
 
 <!doctype html>
 <head>
-<link rel="shortcut icon" href="/static/img/favicon.ico">
+<link rel="shortcut icon" href="http://bhmpd01.jax.org:5005/static/img/favicon.ico">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/static/css/pack1.css">
+<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/pack1.css">
 
-<script src="/static/js/jquery-1.11.3.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery-1.11.3.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -65,7 +65,7 @@
   <span class="text11">
   <nobr>Stephen Grubb &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="https://github.com/grubbcode/minplot">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
-  <nobr><a href="./LICENSE.txt">MIT License</a></nobr>
+  <nobr><a href="http://bhmpd01.jax.org:5005/LICENSE.txt">MIT License</a></nobr>
   </span>
 </div>
 <br>
@@ -79,26 +79,26 @@ represented as an array of dict or other similar 2-D python iterable.
 Numeric, categorical, and dates/times are all supported.
 <br><br>
 Developing graphs with minplot.py is meant to be agile, rapid, and straightforward.
-To get started <a href="minplot.py">download minplot.py</a> and import it.  
-The <a href="#api">minplot.py API</a> is procedural and non-complex.
+To get started <a href="http://bhmpd01.jax.org:5005/minplot.py">download minplot.py</a> and import it.  
+The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
 In web pages you can display your SVG result inline (embedded directly within your html), or using  &lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;.
 <br><br>
-Here's a first minplot.py example: &nbsp; <a href="/examples/e1">View code</a>
+Here's a first minplot.py example: &nbsp; <a href="examples/e1.html">View code</a>
 <br>
-<img src="/static/img/example1.svg" >
+<img src="static/img/example1.svg" >
 <br><br>
 Minplot.py works nicely within frameworks such as Bootstrap or Flask. 
 No javascript or CSS coding is necessary, and detailed knowledge of SVG is not required.
 Minplot can do some basic reactive UI things like automatic SVG sizing, tooltips, clickthru, and hide/show of certain plot elements.  
 If you need fullblown interactive data visualization or animations use something like D3.js instead.
 <br><br>
-Here's a scatterplot example. <a href="/examples/e2">View code</a>
+Here's a scatterplot example. <a href="examples/e2.html">View code</a>
 <br>
-<img src="/static/img/example2.svg" >
+<img src="static/img/example2.svg" >
 <br><br>
-And a pie chart example. <a href="/examples/e3">View code</a>
+And a pie chart example. <a href="examples/e3.html">View code</a>
 <br>
-<img src="/static/img/example3.svg" >
+<img src="static/img/example3.svg" >
 <br>
 More examples are <span class="blue">coming soon</span>.
 <br><br><br>
@@ -133,9 +133,9 @@ More examples are <span class="blue">coming soon</span>.
   If you wish you can run frequency distributions using <span class="fxn">catinfo()</span>.
   <br><br>
   To work with <u>dates and times</u>, 
-  first you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
-  See these examples of <a href="/examples/e4">plotting dates</a> and <a href="/examples/e5">plotting dates + times</a>.
-  Many date notations and formats are supported; for details see the <a href="#dt">datetime section below</a>.
+  first you'll need to <a href="http://bhmpd01.jax.org:5005/minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
+  See these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
+  Many date notations and formats are supported; for details see the <a href="index.html#dt">datetime section below</a>.
   </p>
   
   <br>
@@ -160,7 +160,7 @@ More examples are <span class="blue">coming soon</span>.
   Here's some terminology we use.
   </p><p>
   <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
-  Origin (0, 0) is lower-left corner.  <a href="/examples/eunits">Here's an illustration</a>.
+  Origin (0, 0) is lower-left corner.  <a href="examples/eunits.html">Here's an illustration</a>.
   </p><p>
   <u>Plot area</u> is the rectangular area where you plot your data.  
   To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
@@ -195,9 +195,9 @@ More examples are <span class="blue">coming soon</span>.
   </p><p>
   Another difference is that the inline SVG can be influenced by styles present in 
   the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
-  above which uses &lt;img&gt; vs. the fonts seen in <a href="/examples/3">this inline SVG example</a>; 
+  above which uses &lt;img&gt; vs. the fonts seen in <a href="http://bhmpd01.jax.org:5005/examples/3">this inline SVG example</a>; 
   You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
-  like we did <a href="/examples/e1">here</a>.
+  like we did <a href="examples/e1.html">here</a>.
   </p>
 
 <a name="api"></a>
@@ -220,7 +220,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="svgbegin">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#svgbegin" href="#svgbegin-content">&bull; svgbegin( width, height )</a>
+    <a data-toggle="collapse" data-parent="#svgbegin" href="index.html#svgbegin-content">&bull; svgbegin( width, height )</a>
     </i></b></span>
     <div id="svgbegin-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -265,7 +265,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="findrange">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#findrange" href="#findrange-content">&bull; findrange( )</a>
+    <a data-toggle="collapse" data-parent="#findrange" href="index.html#findrange-content">&bull; findrange( )</a>
     </i></b></span>
     <div id="findrange-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -316,7 +316,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="numspace">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numspace" href="#numspace-content">&bull; numspace( axis, axmin, axmax )</a>
+    <a data-toggle="collapse" data-parent="#numspace" href="index.html#numspace-content">&bull; numspace( axis, axmin, axmax )</a>
     </i></b></span>
     <div id="numspace-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -352,7 +352,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="catspace">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catspace" href="#catspace-content">&bull; catspace( axis, catlist )</a>
+    <a data-toggle="collapse" data-parent="#catspace" href="index.html#catspace-content">&bull; catspace( axis, catlist )</a>
     </i></b></span>
     <div id="catspace-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -360,7 +360,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
   Set up categorical scaling in one dimension (either X or Y) of your plot area.
   Normal behavior is for categories to be placed from left to right on X axis, or from
   top to bottom on Y axis.  This function returns a list of the category panels with
-  names and boundary locations, useful when setting up <a href="#multipanel">multipanel displays</a>.
+  names and boundary locations, useful when setting up <a href="index.html#multipanel">multipanel displays</a>.
   </p><p>
   <span class="parm">axis=</span> is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>
   </p><p>
@@ -385,7 +385,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="datafieldnames">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datafieldnames" href="#datafieldnames-content">&bull; datafieldnames( namelist )</a>
+    <a data-toggle="collapse" data-parent="#datafieldnames" href="index.html#datafieldnames-content">&bull; datafieldnames( namelist )</a>
     </i></b></span>
     <div id="datafieldnames-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -410,7 +410,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="numinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numinfo" href="#numinfo-content">&bull; numinfo( numfield, datarows )</a>
+    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( numfield, datarows )</a>
     </i></b></span>
     <div id="numinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -468,7 +468,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="catinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catinfo" href="#catinfo-content">&bull; catinfo( catfield, datarows )</a>
+    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( catfield, datarows )</a>
     </i></b></span>
     <div id="catinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -515,7 +515,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="lineprops">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#lineprops" href="#lineprops-content">&bull; lineprops( )</a>
+    <a data-toggle="collapse" data-parent="#lineprops" href="index.html#lineprops-content">&bull; lineprops( )</a>
     </i></b></span>
     <div id="lineprops-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -553,7 +553,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="textprops">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#textprops" href="#textprops-content">&bull; textprops( )</a>
+    <a data-toggle="collapse" data-parent="#textprops" href="index.html#textprops-content">&bull; textprops( )</a>
     </i></b></span>
     <div id="textprops-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -625,7 +625,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="axisrender">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#axisrender" href="#axisrender-content">&bull; axisrender( axis )</a>
+    <a data-toggle="collapse" data-parent="#axisrender" href="index.html#axisrender-content">&bull; axisrender( axis )</a>
     </i></b></span>
     <div id="axisrender-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -690,7 +690,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="plotdeco">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#plotdeco" href="#plotdeco-content">&bull; plotdeco( )</a>
+    <a data-toggle="collapse" data-parent="#plotdeco" href="index.html#plotdeco-content">&bull; plotdeco( )</a>
     </i></b></span>
     <div id="plotdeco-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -732,7 +732,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="bar">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#bar" href="#bar-content">&bull; bar( x, y )</a>
+    <a data-toggle="collapse" data-parent="#bar" href="index.html#bar-content">&bull; bar( x, y )</a>
     </i></b></span>
     <div id="bar-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -772,7 +772,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="errorbar">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#errorbar" href="#errorbar-content">&bull; errorbar( x, y, erramt )</a>
+    <a data-toggle="collapse" data-parent="#errorbar" href="index.html#errorbar-content">&bull; errorbar( x, y, erramt )</a>
     </i></b></span>
     <div id="errorbar-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -810,7 +810,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="datapoint">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datapoint" href="#datapoint-content">&bull; datapoint( x, y ) &nbsp; &nbsp; &nbsp; &bull; clustermode( )</a>
+    <a data-toggle="collapse" data-parent="#datapoint" href="index.html#datapoint-content">&bull; datapoint( x, y ) &nbsp; &nbsp; &nbsp; &bull; clustermode( )</a>
     </i></b></span>
     <div id="datapoint-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -865,7 +865,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="curve">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#curve" href="#curve-content">&bull; curvebegin( ) &nbsp; &nbsp; &nbsp; &nbsp; &bull; curvenext( x, y )</a>
+    <a data-toggle="collapse" data-parent="#curve" href="index.html#curve-content">&bull; curvebegin( ) &nbsp; &nbsp; &nbsp; &nbsp; &bull; curvenext( x, y )</a>
     </i></b></span>
     <div id="curve-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -923,7 +923,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="pieslice">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#pieslice" href="#pieslice-content">&bull; pieslice( pctval, startval, fill )</a>
+    <a data-toggle="collapse" data-parent="#pieslice" href="index.html#pieslice-content">&bull; pieslice( pctval, startval, fill )</a>
     </i></b></span>
     <div id="pieslice-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -932,7 +932,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
   are ignored and can be specified as anything).
   You can specify a square plotting area, or a wider one with room for the legend to one side or the other.  
   A legend is always used with piegraphs because slice labelling isn't supported.
-  Here's a <a href="/examples/e3">piegraph example</a>.
+  Here's a <a href="examples/e3.html">piegraph example</a>.
   </p><p>
   Slice size is specified as a percentage of the whole (0.00 to 1.00).  If you need to compute this on the fly for your
   data use <span class="fxn">numinfo()</span> to get <tt>sum</tt> then divide each value by it.
@@ -967,7 +967,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="rectangle">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#rectangle" href="#rectangle-content">&bull; rectangle( x, y )</a>
+    <a data-toggle="collapse" data-parent="#rectangle" href="index.html#rectangle-content">&bull; rectangle( x, y )</a>
     </i></b></span>
     <div id="rectangle-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -989,7 +989,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
   </p><p>
   <span class="parm">outline=True</span> &nbsp; if specified, the rectangle will be outlined using current line properties.
   </p><p>
-  To render a rectangle using minplot units use the <a href="#lowlevel">low-level function rect()</a>.
+  To render a rectangle using minplot units use the <a href="index.html#lowlevel">low-level function rect()</a>.
   </p>
       
 
@@ -1002,7 +1002,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="label">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#label" href="#label-content">&bull; label( x, y, text )</a>
+    <a data-toggle="collapse" data-parent="#label" href="index.html#label-content">&bull; label( x, y, text )</a>
     </i></b></span>
     <div id="label-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1022,7 +1022,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
   <span class="parm">xofs=</span> and <span class="parm">yofs=</span> are distances in minplot units to offset the text from <tt>x, y</tt>.
   Often useful for labeling purposes.  Default for both is 5.0 
   </p><p>
-  To render text at a specific location in minplot coordinates, you can use <a href="#lowlevel">low-level function txt()</a>
+  To render text at a specific location in minplot coordinates, you can use <a href="index.html#lowlevel">low-level function txt()</a>
   </p>
       
 
@@ -1035,7 +1035,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="line">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#line" href="#line-content">&bull; line( x1, y1, x2, y2 ) &nbsp; &nbsp; &nbsp; &bull; arrow( x1, y1, x2, y2)</a>
+    <a data-toggle="collapse" data-parent="#line" href="index.html#line-content">&bull; line( x1, y1, x2, y2 ) &nbsp; &nbsp; &nbsp; &bull; arrow( x1, y1, x2, y2)</a>
     </i></b></span>
     <div id="line-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1083,7 +1083,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="tooltip">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#tooltip" href="#tooltip-content">&bull; tooltip( )</a>
+    <a data-toggle="collapse" data-parent="#tooltip" href="index.html#tooltip-content">&bull; tooltip( )</a>
     </i></b></span>
     <div id="tooltip-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1126,7 +1126,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="legend">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#legend" href="#legend-content">&bull; legenditem( sample, label ) &nbsp; &nbsp; &bull; legendrender( )</a>
+    <a data-toggle="collapse" data-parent="#legend" href="index.html#legend-content">&bull; legenditem( sample, label ) &nbsp; &nbsp; &bull; legendrender( )</a>
     </i></b></span>
     <div id="legend-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1195,7 +1195,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="svgresult">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#svgresult" href="#svgresult-content">&bull; svgresult( )</a>
+    <a data-toggle="collapse" data-parent="#svgresult" href="index.html#svgresult-content">&bull; svgresult( )</a>
     </i></b></span>
     <div id="svgresult-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1222,7 +1222,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="dt">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#dt" href="#dt-content">&bull; Plotting dates and times &nbsp; &nbsp; &bull; setformat( ) &nbsp; &bull; dtrange( ) &nbsp; &bull; num( ) &nbsp; &bull; diff( )</a>
+    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Plotting dates and times &nbsp; &nbsp; &bull; setformat( ) &nbsp; &bull; dtrange( ) &nbsp; &bull; num( ) &nbsp; &bull; diff( )</a>
     </i></b></span>
     <div id="dt-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1235,12 +1235,12 @@ Unless otherwise noted below, the function return values aren't too useful... us
   </p><p>
   The basic approach is to use <span class="fxn">pdt.num()</span> to convert dates to integers, then plot in numeric space.
   To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.dtrange()</span>.
-  Here's an example where dates are plotted. <a href="/examples/e4">View code</a>
+  Here's an example where dates are plotted. <a href="examples/e4.html">View code</a>
   </p>
   <br>
-  <img src="/static/img/example4.svg" >
+  <img src="static/img/example4.svg" >
   <br>
-  An example where dates+times are plotted is <a href="/examples/e5">here</a>.
+  An example where dates+times are plotted is <a href="examples/e5.html">here</a>.
   <br><br>
   <p>
   <b>Date formats:</b> 
@@ -1340,7 +1340,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
   The same thing goes for number of elapsed hours expressed numerically.
   </p><p>
   You can create business and trading types of graphs that cover business days and business hours without any gaps
-  for weekends, holidays, or overnights; use the <a href="#multipanel">multiple panel approach</a> with one panel per day where business
+  for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> with one panel per day where business
   activity occurred, then within each panel set up a date X space for the desired business hour range.
   </p><p>
   To get different combinations of stubs and tics you can invoke <span class+"fxn">dtrange()</span> and <span class="fxn">axisrender()</span> 
@@ -1375,7 +1375,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="reactivity">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#reactivity" href="#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &nbsp; &bull; groupbegin( id, css ) &nbsp; &nbsp; &bull; groupend( ) </a>
+    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &nbsp; &bull; groupbegin( id, css ) &nbsp; &nbsp; &bull; groupend( ) </a>
     </i></b></span>
     <div id="reactivity-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1428,7 +1428,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="multipanel">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#multipanel" href="#multipanel-content">&bull; Multiple panel displays</a>
+    <a data-toggle="collapse" data-parent="#multipanel" href="index.html#multipanel-content">&bull; Multiple panel displays</a>
     </i></b></span>
     <div id="multipanel-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1479,7 +1479,7 @@ Unless otherwise noted below, the function return values aren't too useful... us
     <div class="panel-group" id="lowlevel">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#lowlevel" href="#lowlevel-content">&bull; Low-level functions for drawing and units conversion</a>
+    <a data-toggle="collapse" data-parent="#lowlevel" href="index.html#lowlevel-content">&bull; Low-level functions for drawing and units conversion</a>
     </i></b></span>
     <div id="lowlevel-content" class="panel-collapse collapse "> <div class="panel-body">
 
