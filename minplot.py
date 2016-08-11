@@ -1,3 +1,6 @@
+#
+# minplot.py  0.3  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    github.com/grubbcode/minplot
+#
 
 import math
 import collections
