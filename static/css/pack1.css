@@ -56,7 +56,7 @@ span.green { color:#44aa44; }
 span.blue { color:#4444aa; }
 
 span.fxnp { color:#b00090; font-family: courier; }
-span.fxn { color:#555; font-family: courier; }
+span.fxn { color:#555; font-family: courier; font-weight:bold; }
 
 /* set text background (like a hiliter) */
 span.bggraye7  { background-color:#e7e7e7; }

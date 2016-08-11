@@ -68,6 +68,7 @@
   </span>
 </div>
 <br>
+
 minplot.py is a somewhat minimalist general-purpose python library for creating various types of
 bar graphs, line plots, scatterplots, piegraphs, boxplots, errorbars, heatmaps, multipanel displays and more
 with plenty of control over plot options, axes, legends, colors, transparency, and other details.
@@ -103,6 +104,18 @@ More examples are <span class="blue">coming soon</span>.
 <br><br><br>
 
 
+<h3>Minplot units, plot areas, data space</h3>
+  <p>
+  Here's some terminology we use:
+  <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
+  Origin (0, 0) is lower-left corner.  <a href="examples/eunits.html">Here's an illustration</a>.
+  The <u>plot area</u> is the rectangular area where you plot your data.  
+  To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
+  <u>Data space</u> is based on the ranges of your data points.
+  </p>
+  <br>
+
+
 <h3>Plot data and fields</h3>
   <p>
   minplot.py works with data that you have put into a two-dimensional python iterative,
@@ -113,101 +126,62 @@ More examples are <span class="blue">coming soon</span>.
   </p>
   <br>
 
+
 <h3>Working with different data types</h3>
-  Numeric, categorical, and dates/times are all supported.
-  <u>Numerics</u> are integers, or values in floating point or scientific notation.  
-  <u>Categoricals</u> are tags, words, or anything non-continuous.
-  <u>Dates</u> are calendar dates; clock times can optionally be appended.
-  <br><br>
-  Here's the process for working with <u>numeric</u> data:
+  <p>
+  To work with <u>numerics</u>:
   First, if you need to find your data's numeric range on the fly use <span class="fxn">findrange()</span>.  
   Then set up your numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and
   draw your X or Y numeric axis using <span class="fxn">axisrender()</span>.  
   If you wish, you can find quartiles or run frequency distributions using <span class="fxn">numinfo()</span>.
-  <br><br>
-  Here's the process for working with <u>categorical</u> data:
+  Numerics can be integers, floating point, or scientific notation values.
+  </p><p>
+  To work with <u>categorical</u> data:
   First, if you need to derive a unique list of category terms from your data use <span class="fxn">catinfo()</span>.
   Then set up your categorical data space in X or Y using <span class="fxn">catspace()</span>, and
   draw your X or Y categorical axis using <span class="fxn">axisrender()</span>.  
   If you wish you can run frequency distributions using <span class="fxn">catinfo()</span>.
-  <br><br>
+  Categorical data are tags, labels or any other non-continuous data.
+  </p><p>
   To work with <u>dates and times</u>, 
   first you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
   See these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
-  Many date notations and formats are supported; for details see the <a href="index.html#dt">datetime section below</a>.
+  Dates are calendar dates; clock times can optionally be appended.
+  Many notations and formats are supported; for details see the <a href="index.html#dt">datetime section below</a>.
   </p>
   
   <br>
 
-<h3>Handling of missing data or invalid data</h3>
-  <p>
-  Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
-  When <tt>None</tt> is encountered most of the plotting functions silently return 
-  <tt>False</tt> without rendering anything or raising an error.
-  The <span class="fxn">curvenext()</span> and <span class="fxn">rectangle()</span> functions differ from this a little.
-  </p><p>
-  If an invalid piece of data other than <tt>None</tt> is encountered, these functions will raise an error 
-  (class <span class="fxn">AppError</span>).
-  Examples of this are a non-numeric value when numeric is expected, an unrecognized categorical term, a malformed date,
-  or a zero-length item (as opposed to <tt>None</tt>).
-  </p>
-  <br>
 
-
-<h3>Minplot units, plot areas, data space</h3>
+<h3>Line and text properties, colors, opacity, CSS</h3>
   <p>
-  Here's some terminology we use.
+  Use <span class="fxn">lineprops()</span> to set the
+  color, thickness, opacity, and dash pattern of lines.
+  Use <span class="fxn">textprops()</span> to set the size, color, and other properties for text.
+  These settings persist until specified again.  
   </p><p>
-  <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
-  Origin (0, 0) is lower-left corner.  <a href="examples/eunits.html">Here's an illustration</a>.
-  </p><p>
-  <u>Plot area</u> is the rectangular area where you plot your data.  
-  To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
-  </p><p>
-  <u>Data space</u> is based on the ranges of your data points.
-  </p>
-  <br>
-
-<h3>Line and text properties, CSS, colors, opacity</h3>
-  <p>
-  Line and text properties are specified using <span class="fxn">lineprops()</span> and <span class="fxn">textprops()</span>
-  and persist until specified again.
-  </p><p>
-  <u>CSS:</u> &nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
-  via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
-  You'll sometimes want to specify <i>nodefaults=True</i> to avoid conflicts with minplot defaults.
-  <u>Note:</u> It's best to set text size using the function arg, not CSS.
-  </p><p>
-  <u>Colors</u> are specified in the usual way for example <tt>'#a0ffa0'</tt> is light green; '#aaa' is a light shade of gray.
+  Colors are specified in the usual way for example <tt>'#a0ffa0'</tt> is light green; '#aaa' is a light shade of gray.
   There are also a number of <a href="http://www.december.com/html/spec/colorsvg.html" target="_blank">named colors</a>
   such as <tt>'powderblue'</tt> that SVG recognizes.
   </p><p>
-  <u>Opacity</u> is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
+  Opacity is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
+  </p><p>
+  CSS:&nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
+  via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
+  You'll sometimes want to specify <i>nodefaults=True</i> to avoid conflicts with minplot defaults.
+  <u>Note:</u> It's best to set text size using the function arg, not CSS.
   </p>
   <br>
 
-<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt;</h3>
-  <p>
-  Use whatever approach is most convenient.
-  Inline SVG tends to be more convenient in dynamic web content systems.
-  Fluid SVG sizing probably won't work with &lt;img&gt;
-  </p><p>
-  Another difference is that the inline SVG can be influenced by styles present in 
-  the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
-  above which uses &lt;img&gt; vs. the fonts seen in <a href="examples/e3.html">this inline SVG example</a>; 
-  You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
-  like we did <a href="examples/e1.html">here</a>.
-  </p>
 
 <a name="api"></a>
 <br>
 <br>
 <h3>minplot.py API</h3>
-Arguments are keyword args unless otherwise indicated;
-mandatory args are shown within the function templates and indicated as such.
-If unspecified the optional args will fall back to the indicated defaults, so
-in many cases decent results are possible just by supplying the mandatory args.
-Unless otherwise noted below, the function return values aren't too useful... usually just <tt>True</tt>.
+<p>
+Arguments are keyword args unless otherwise indicated.
+Mandatory args are shown within the function templates and indicated as such.
+In many cases decent results are possible just by supplying the mandatory args.
 </p>
 
 
@@ -1227,8 +1201,9 @@ Unless otherwise noted below, the function return values aren't too useful... us
 
   <p>
   Minplot can work with calendar dates in a variety of formats, with clock times optionally appended
-  (we'll refer to all of these as "dates").
-  To get minplot's date-related functionality you'll need two imports like this:
+  (all referred to as "dates").
+  To get minplot's date-related functionality you'll need to <a href="minplot_dt.py">download minplot_dt.py</a>
+  and then use two imports like this:
   <br><tt>import minplot as p</tt>
   <br><tt>import minplot_dt as pdt</tt>
   </p><p>
@@ -1508,6 +1483,34 @@ Unless otherwise noted below, the function return values aren't too useful... us
 <br>
 <br>
 <br>
+
+<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt;</h3>
+  <p>
+  Use whatever approach is most convenient.
+  Inline SVG tends to be more convenient in dynamic web content systems.
+  Fluid SVG sizing probably won't work with &lt;img&gt;
+  </p><p>
+  Another difference is that the inline SVG can be influenced by styles present in 
+  the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
+  above which uses &lt;img&gt; vs. the fonts seen in <a href="examples/e3.html">this inline SVG example</a>; 
+  You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
+  like we did <a href="examples/e1.html">here</a>.
+  </p>
+  <br>
+
+<h3>Handling of missing data or invalid data</h3>
+  <p>
+  Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
+  When <tt>None</tt> is encountered most of the plotting functions silently return 
+  <tt>False</tt> without rendering anything or raising an error.
+  The <span class="fxn">curvenext()</span> and <span class="fxn">rectangle()</span> functions differ from this a little.
+  </p><p>
+  If an invalid piece of data other than <tt>None</tt> is encountered, these functions will raise an error 
+  (class <span class="fxn">AppError</span>).
+  Examples of this are a non-numeric value when numeric is expected, an unrecognized categorical term, a malformed date,
+  or a zero-length item (as opposed to <tt>None</tt>).
+  </p>
+  <br>
 <br>
 <br>
 <br>
