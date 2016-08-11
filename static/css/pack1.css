@@ -1,0 +1,75 @@
+
+
+
+@media print {      /* settings applicable to hardcopy-printed bootstrap pages only */
+
+  /* override bootstrap tendency to display all embedded href urls when printing... 
+   * source https://www.itsupportguides.com/tech-tips-tricks/how-to-hide-urlhref-when-printing-bootstrap-website/ */
+  a[href]:after { content: none !important; }
+
+  /* when bordered tables printed the borders tend to be very faint, this makes the borders darker */
+  .table-print, .table-print td, .table-print th { border-color: black !important; }
+
+  }
+
+
+/* text styles associated with specific use in mpd v2 */
+span.usermessage { color:#808080; font-size:13pt; font-weight:bold; font-style:italic; }
+span.futurelink { color:#8080e0; }
+
+
+/* encourage <select> boxes to render at correct height on mac / chrome */
+select.mpdselect { height: 32px; line-height: 32px; } 
+
+
+/* hanging indents ... source http://www.thesitewizard.com/css/hanging-indents.shtml */
+.hangingindent1 { padding-left: 35px ; text-indent: -35px ; } 
+
+
+/* turn off bold bootstrap table headers */
+.nobold { font-weight: normal }
+
+
+/* set text size */
+.text6 { font-size: 6pt }
+.text7 { font-size: 7pt }
+.text8 { font-size: 8pt }
+.text9 { font-size: 9pt }
+.text10 { font-size: 10pt }
+.text11 { font-size: 11pt }
+.text12 { font-size: 12pt }
+.text13 { font-size: 13pt }
+.text14 { font-size: 14pt }
+.text15 { font-size: 15pt }
+.text16 { font-size: 16pt }
+.text18 { font-size: 18pt }
+.text22 { font-size: 22pt }
+
+
+/* set text color */
+span.gray7 { color:#777; }
+span.graya { color:#aaa; }
+span.purple { color:#b00090; }
+span.brown { color:#ba9876; } 
+span.brown { color:#987654; } 
+span.green { color:#44aa44; }
+span.blue { color:#4444aa; }
+
+span.fxnp { color:#b00090; font-family: courier; }
+span.fxn { color:#555; font-family: courier; }
+
+/* set text background (like a hiliter) */
+span.bggraye7  { background-color:#e7e7e7; }
+span.bggrayf0  { background-color:#f0f0f0; }
+span.bgyellow { background-color:#ffffd0; }
+span.bgyellow2 { background-color:#ffffe0; }
+span.bgorange { background-color:#fedcba; }
+span.bgorange2 { background-color:#ffedcb; }
+span.bgpink  { background-color:#ffecec; }
+span.bgblue  { background-color:#e0e0ff; }
+span.low_n   { background-color:#ffecec; }
+
+
+/* table cell styling for pheno compact view */
+td.cp { border: 1px solid #dde; border-bottom: 3px solid #dde }
+td.cpbar { border-bottom: 3px solid #dde }

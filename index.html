@@ -1,1 +1,1519 @@
-<h2>Hello world ... again.</h3>
+
+
+<!doctype html>
+<head>
+<link rel="shortcut icon" href="http://bhmpd01.jax.org:5005/static/img/favicon.ico">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/css/pack1.css">
+
+<script src="static/js/jquery-1.11.3.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+
+</head>
+
+<body text="000000" link="5533aa" vlink="5533aa" alink="5533aa" bgcolor="ffffff">
+
+
+
+
+  
+<nav role="navigation" class="navbar navbar-default navbar-static-top" >    
+
+
+    <div class="container">
+        
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <br><br>
+        </div>
+
+        
+        
+    </div>
+</nav>
+
+
+
+
+<div class="container">  
+
+
+<div class="row"><div class="col-md-2"></div><div class="col-md-8">
+
+
+
+<style> 
+  span.parm { background-color:#f0f0f0; color:#4040a0; font-weight:bold; font-style:italic; }
+</style>
+
+
+
+<span class="text14">
+
+<h2><i>minplot.py</i></h2>
+<div align=right><a href="https://github.com/grubbcode/minplot">https://github.com/grubbcode/minplot</a></div>
+minplot.py is a somewhat minimalist general-purpose python library for creating various types of
+bar graphs, line plots, scatterplots, piegraphs, boxplots, errorbars, heatmaps, multipanel displays and more
+with plenty of control over plot options, axes, legends, colors, transparency, and other details.
+Graphics are produced in SVG format and are viewable in any modern web browser.
+<br><br>
+Your plot data can come from a database or anywhere else, and can be
+represented as an array of dict or other similar 2-D python iterable.
+Numeric, categorical, and dates/times are all supported.
+<br><br>
+Developing graphs with minplot.py is meant to be agile, rapid, and straightforward.
+To get started <a href="minplot.py">download minplot.py</a> and import it.  
+The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
+In web pages you can display your SVG result inline (embedded directly within your html), or using  &lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;.
+<br><br>
+Here's a first minplot.py example: &nbsp; <a href="examples/e1.html">View code</a>
+<br>
+<img src="static/img/example1.svg" >
+<br><br>
+Minplot.py works nicely within frameworks such as Bootstrap or Flask. 
+No javascript or CSS coding is necessary, and detailed knowledge of SVG is not required.
+Minplot can do some basic reactive UI things like automatic SVG sizing, tooltips, clickthru, and hide/show of certain plot elements.  
+If you need fullblown interactive data visualization or animations use something like D3.js instead.
+<br><br>
+Here's a scatterplot example. <a href="examples/e2.html">View code</a>
+<br>
+<img src="static/img/example2.svg" >
+<br><br>
+And a pie chart example. <a href="examples/e3.html">View code</a>
+<br>
+<img src="static/img/example3.svg" >
+<br>
+More examples are <span class="blue">coming soon</span>.
+<br><br><br>
+
+
+<h3>Plot data and fields</h3>
+  <p>
+  minplot.py works with data that you have put into a two-dimensional python iterative,
+  for example an array of dict or an array of array.
+  If your data are in an array of dict you can identify fields simply by giving dict element names.
+  Otherwise you can assign field names by calling <span class="fxn">datafieldnames()</span>, or
+  identify fields by index position e.g. <tt>'0'</tt>.
+  </p>
+  <br>
+
+<h3>Working with different data types</h3>
+  Numeric, categorical, and dates/times are all supported.
+  <u>Numerics</u> are integers, or values in floating point or scientific notation.  
+  <u>Categoricals</u> are tags, words, or anything non-continuous.
+  <u>Dates</u> are calendar dates; clock times can optionally be appended.
+  <br><br>
+  Here's the process for working with <u>numeric</u> data:
+  First, if you need to find your data's numeric range on the fly use <span class="fxn">findrange()</span>.  
+  Then set up your numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and
+  draw your X or Y numeric axis using <span class="fxn">axisrender()</span>.  
+  If you wish, you can find quartiles or run frequency distributions using <span class="fxn">numinfo()</span>.
+  <br><br>
+  Here's the process for working with <u>categorical</u> data:
+  First, if you need to derive a unique list of category terms from your data use <span class="fxn">catinfo()</span>.
+  Then set up your categorical data space in X or Y using <span class="fxn">catspace()</span>, and
+  draw your X or Y categorical axis using <span class="fxn">axisrender()</span>.  
+  If you wish you can run frequency distributions using <span class="fxn">catinfo()</span>.
+  <br><br>
+  To work with <u>dates and times</u>, 
+  first you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
+  See these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
+  Many date notations and formats are supported; for details see the <a href="index.html#dt">datetime section below</a>.
+  </p>
+  
+  <br>
+
+<h3>Handling of missing data or invalid data</h3>
+  <p>
+  Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
+  When <tt>None</tt> is encountered most of the plotting functions silently return 
+  <tt>False</tt> without rendering anything or raising an error.
+  The <span class="fxn">curvenext()</span> and <span class="fxn">rectangle()</span> functions differ from this a little.
+  </p><p>
+  If an invalid piece of data other than <tt>None</tt> is encountered, these functions will raise an error 
+  (class <span class="fxn">AppError</span>).
+  Examples of this are a non-numeric value when numeric is expected, an unrecognized categorical term, a malformed date,
+  or a zero-length item (as opposed to <tt>None</tt>).
+  </p>
+  <br>
+
+
+<h3>Minplot units, plot areas, data space</h3>
+  <p>
+  Here's some terminology we use.
+  </p><p>
+  <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
+  Origin (0, 0) is lower-left corner.  <a href="examples/eunits.html">Here's an illustration</a>.
+  </p><p>
+  <u>Plot area</u> is the rectangular area where you plot your data.  
+  To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
+  </p><p>
+  <u>Data space</u> is based on the ranges of your data points.
+  </p>
+  <br>
+
+<h3>Line and text properties, CSS, colors, opacity</h3>
+  <p>
+  Line and text properties are specified using <span class="fxn">lineprops()</span> and <span class="fxn">textprops()</span>
+  and persist until specified again.
+  </p><p>
+  <u>CSS:</u> &nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
+  via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
+  You'll sometimes want to specify <i>nodefaults=True</i> to avoid conflicts with minplot defaults.
+  <u>Note:</u> It's best to set text size using the function arg, not CSS.
+  </p><p>
+  <u>Colors</u> are specified in the usual way for example <tt>'#a0ffa0'</tt> is light green; '#aaa' is a light shade of gray.
+  There are also a number of <a href="http://www.december.com/html/spec/colorsvg.html" target="_blank">named colors</a>
+  such as <tt>'powderblue'</tt> that SVG recognizes.
+  </p><p>
+  <u>Opacity</u> is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
+  </p>
+  <br>
+
+<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt;</h3>
+  <p>
+  Use whatever approach is most convenient.
+  Inline SVG tends to be more convenient in dynamic web content systems.
+  Fluid SVG sizing probably won't work with &lt;img&gt;
+  </p><p>
+  Another difference is that the inline SVG can be influenced by styles present in 
+  the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
+  above which uses &lt;img&gt; vs. the fonts seen in <a href="http://bhmpd01.jax.org:5005/examples/3">this inline SVG example</a>; 
+  You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
+  like we did <a href="examples/e1.html">here</a>.
+  </p>
+
+<a name="api"></a>
+<br>
+<br>
+<h3>minplot.py API</h3>
+Arguments are keyword args unless otherwise indicated;
+mandatory args are shown within the function templates and indicated as such.
+If unspecified the optional args will fall back to the indicated defaults, so
+in many cases decent results are possible just by supplying the mandatory args.
+Unless otherwise noted below, the function return values aren't too useful... usually just <tt>True</tt>.
+</p>
+
+
+<br>
+<h3><i>Preliminaries</i></h3>
+
+
+
+    <div class="panel-group" id="svgbegin">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#svgbegin" href="index.html#svgbegin-content">&bull; svgbegin( width, height )</a>
+    </i></b></span>
+    <div id="svgbegin-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Initialize minplot.py and begin a new SVG graphic.
+  <br>
+  In most cases you'll start with <span class="fxn">svgbegin()</span> and end with <span class="fxn">svgresult()</span>.
+  </p><p>
+  <span class="parm">width=</span> and <span class="parm">height=</span> are mandatory integers that specify the SVG's size and aspect ratio.
+  They also determine the minplot coordinate system: X will range from 0 to <i>width</i>, and Y from 0 to <i>height</i>
+  with origin in the lower-left corner.  
+  To create a fixed-size SVG the above is all you need, and <i>width</i> and <i>height</i> are same as
+  screen pixels.  To create a dynamically-sized SVG use <i>fluidsize=True</i> and your SVG will be
+  sized relative to the containing &lt;div> and <i>width</i>, <i>height</i> will influence the aspect ratio.
+  </p><p>
+  <span class="parm">fluidsize=True</span> &nbsp;  
+  create an SVG that's sized relative to its containing &lt;div> .
+  This works for inline SVG; you'll also need to specify <i>browser=</i> 
+  </p><p>
+  <span class="parm">bgcolor=color</span> &nbsp; if specified the entire SVG is shaded with this color initially.
+  </p><p>
+  <span class="parm">testgrid=True</span> &nbsp; if specified, render a test grid so that you can see the minplot coordinate system,
+  and if you're using the fluid sizing, see how it behaves for different sized containers / devices.
+  A grid line is rendered at every 100 minplot units.
+  </p><p>
+  <span class="parm">notag=True</span> &nbsp; if specified this suppresses the opening &lt;svg> tag, in case you want to generate your own.
+  If you do, the width and height you give in your svg tag must match svgbegin's <i>width</i> and <i>height</i> args.
+  </p><p>
+  <span class="parm">browser=</span> &nbsp; This is only needed with <i>fluidsize=True</i> and is necessary due to browser's
+  implementing SVG dynamic sizing differently.  It indicates the user's browser type, one of
+  <tt>'firefox'</tt>, <tt>'chrome'</tt>, <tt>'safari'</tt>, or <tt>'msie'</tt>. In flask you can use <tt>request.user_agent.browser</tt> to get this.
+  </p>
+  Multiple <span class="fxn">svgbegin()</span> and <span class="fxn">svgend()</span> can be used within one python program.
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="findrange">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#findrange" href="index.html#findrange-content">&bull; findrange( )</a>
+    </i></b></span>
+    <div id="findrange-content" class="panel-collapse collapse "> <div class="panel-body">
+
+   <p>
+   Determine a reasonable axis numeric min and max using your data.
+   To use this you iterate over your data rows and call <span class="fxn">findrange()</span> for each row.
+   Then when done call it once more to return the results.  Here's an example:
+   <pre>
+   import minplot as p
+   for row in dataset:
+       p.findrange( testval=row["avg"] )
+   result = p.findrange( finished=True )
+   print str(result.axmin), str(result.axmax)
+   </pre>
+   It's set up this way to give you the flexibility to check one data field or several, which is needed
+   if you're doing stacked bars, clustered bars, error bars, showing several curves, or plotting cumulative values.
+  </p><p>
+  Results are returned in a namedtuple having these members: 
+  <br><tt>axmin</tt> and <tt>axmax</tt> ... the nicely adjusted axis min and max 
+  <br><tt>datamin</tt> and <tt>datamax</tt> ... the actual raw data min and max 
+  <br>Also includes <tt>nvals</tt>, <tt>allint</tt>, <tt>allpos</tt>, <tt>allneg</tt> and <tt>nbadvals</tt>
+  which have same meaning as in <span class="fxn">numinfo()</span> below.
+  </p><p>
+  <span class="parm">testval=</span> &nbsp; a numeric value to test
+  </p><p>
+  <span class="parm">testfor=</span> &nbsp; if specified as <tt>'max'</tt> it will look for a maxima only.
+  If specified as <tt>'min'</tt> it will look for a minima only.  This allows the programmer to
+  pass different things for max and min, eg. bar+errorbar when looking for a max, and bar-errorbar when looking for a min.
+  Default is <tt>'both'</tt> meaning that it will look for both a minima and a maxima.
+  </p><p>
+  <span class="parm">finished=True</span> &nbsp; if specified, return the result.
+  </p><p>
+  <span class="parm">nearest=</span> and <span class="parm">addlpad=</span> &nbsp; can be specified along with 
+  <i>finished=True</i> to help get a clean boundary for the axis min and max.   For example if you had data ranging from 17 to 62 
+  <span class="fxn">findrange()</span> would normally determine the axis range to be from 15 to 65 with stubs every 5.
+  To get stubs (etc) every 10 you could specify <i>nearest=10</i>.  For automated situations 
+  where data magnitude varies you can use eg. <i>addlpad=1</i> or <i>addlpad=2</i> to get additional 
+  padding at the ends that's proportional to your data range.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="numspace">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#numspace" href="index.html#numspace-content">&bull; numspace( axis, axmin, axmax )</a>
+    </i></b></span>
+    <div id="numspace-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Set up numeric scaling in one dimension (either X or Y) of your plot area.
+  </p><p>
+  <span class="parm">axis=</span> &nbsp; is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>
+  </p><p>
+  <span class="parm">axmin=</span> and <span class="parm">axmax=</span> &nbsp; are mandatory; they're the axis min and max.
+  <i>axmin</i> must be less then <i>axmax</i>.
+  May be specified explicitly or computed in advance using <span class="fxn">findrange()</span> 
+  </p><p>
+  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; specifies the location of the axis 
+  in minplot units.  For example if you're doing X space, <i>poslo=100, poshi=400</i> will set up X space from
+  minplot coordinates 100 to 400 in the SVG. If not specified default behavior will occur.
+  </p><p>
+  <span class="parm">log=True</span> &nbsp; if specified, sets up logarithmic scaling.  You can also specify <i>log='log+1'</i>
+  </p><p>
+  <span class="parm">reverse=True</span> &nbsp; if specified, the axis will use high-to-low data scaling, opposite of usual.
+  </p>
+  <span class="parm">allint=False</span> &nbsp; if specified, indicates that the data in this space are all integers
+  (to avoid an odd-looking scale increment of 0.5 for example).
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+
+    <div class="panel-group" id="catspace">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#catspace" href="index.html#catspace-content">&bull; catspace( axis, catlist )</a>
+    </i></b></span>
+    <div id="catspace-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Set up categorical scaling in one dimension (either X or Y) of your plot area.
+  Normal behavior is for categories to be placed from left to right on X axis, or from
+  top to bottom on Y axis.  This function returns a list of the category panels with
+  names and boundary locations, useful when setting up <a href="index.html#multipanel">multipanel displays</a>.
+  </p><p>
+  <span class="parm">axis=</span> is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>
+  </p><p>
+  <span class="parm">catlist=</span> &nbsp; is mandatory.  It's an iterable containing the desired category terms as they appear in your
+  data, in the order they are to be placed.  It can include members of None or '' which 
+  will act as spacers.  The terms should be unique with no duplication (except in the
+  case of spacers).  To derive this from your data you can use <span class="fxn">catinfo()</span>
+  </p><p>
+  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; specify the locations of the axis min and max,
+  in minplot units.  For example, <i>poslo=100, poshi=400</i>. If not specified default behavior will occur.
+  </p><p>
+  <span class="parm">reverse=True</span> &nbsp; if specified, categories will be ordered opposite of usual in the axis.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="datafieldnames">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#datafieldnames" href="index.html#datafieldnames-content">&bull; datafieldnames( namelist )</a>
+    </i></b></span>
+    <div id="datafieldnames-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Populate minplot's internal field name list with some data field names, so that you can identify data fields by name.
+  If your data structure uses dict rows you don't need to use this.
+  You can use <tt>datafieldnames( namelist=None )</tt> to clear the internal field name list.
+  If your plot data changes the fieldnames can be updated by calling this function again.
+  </p><p>
+  <span class="parm">namelist=</span> &nbsp; is a list of fieldnames in left-to-right order as they appear in 
+  your data structure.  If you're getting data from a DBMS there's usually a way to get such a list
+  for the most recent query.  
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="numinfo">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( numfield, datarows )</a>
+    </i></b></span>
+    <div id="numinfo-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Return a tuple of characteristics for a numeric data field, optionally including 
+  frequency distributions and boxplot percentiles.
+  </p><p>
+  Results are returned as a namedtuple having these members: 
+  <br><tt>min</tt> and <tt>max</tt> ... the min and max observations
+  <br><tt>mean</tt> ... the average
+  <br><tt>nvals</tt> ... number of valid observations
+  <br><tt>sd</tt> ... standard deviation
+  <br><tt>sem</tt> ... standard error of measurement
+  <br><tt>nbad</tt> ... number of missing or non-numeric observations
+  <br><tt>sum</tt> ... the sum of all observations
+  <br><tt>allint</tt> ... <tt>True</tt> if all valid data are int
+  <br><tt>numsorted</tt> ... <tt>True</tt> if all data are numeric sorted 
+  <br><tt>distribution</tt> ... optional distribution bins structure
+  <br><tt>distbinsize</tt> ... the binsize used in the above
+  <br><tt>percentiles</tt> ... optional percentiles structure
+  </p><p>
+  <span class="parm">numfield=</span> &nbsp; identifies the numeric data field to be characterized.
+  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
+  (see Basics: Your Data Structure above for more info)
+  </p><p>
+  <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).  
+  </p><p>
+  <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency distribution on the 
+  examined data field and it in the <tt>distribution</tt> member of the result.
+  A reasonable default numeric binsize is determined (it can be overridden using <i>distbinsize=</i>, see below).  
+  The result is suitable for plotting if you wish.
+  </p><p>
+  <span class="parm">distbinsize=</span> &nbsp; may be used with <i>distrib=True</i> to explicitly control 
+  a frequency distribution's binsize.  It may be a number eg. <i>distbinsize=10</i> which sets the 
+  binsize explicitly, or it may be a construct such as <i>distbinsize='inc/2'</i> which sets the the 
+  binsize to the tic increment (which was computed on-the-fly earlier) divided by 2.
+  </p><p>
+  <span class="parm">accumfield=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  field holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
+  incrementally.  Default is <tt>None</tt>.
+  </p><p>
+  <span class="parm">percentiles=True</span> &nbsp; if specified, compute the 5th, 25th, 50th (median), 
+  75th, and 95th percentile for the examined data field and put them in the <tt>percentiles</tt> member
+  of the result.  The examined data field <u>must</u> already be sorted 
+  numerically from low to high.  The usual use for these percentiles data is to generate box plots 
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="catinfo">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( catfield, datarows )</a>
+    </i></b></span>
+    <div id="catinfo-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Return some characteristics of a categorical data field, including a 
+  unique list of the categories seen (for subsequent use by <span class="fxn">catspace()</span>), or
+  frequency distributions (which can later be plotted).
+  Categories are accumulated in the order encountered.
+  </p><p>
+  Results are returned in a namedtuple having these members: 
+  <br><tt>catlist</tt> ... the unique list of categories in the order encountered
+  <br><tt>distribution</tt> ... optional distribution bins structure
+  </p><p>
+  <span class="parm">catfield=</span> &nbsp; identifies the data field to be characterizaed. 
+  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>
+  (see Basics: Your Data Structure above for more info)
+  </p><p>
+  <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).
+  </p><p>
+  <span class="parm">nullspacers=True</span> &nbsp;  retains encountered category terms which are 
+  None or ''; these can serve as spacers.  Default is <tt>True</tt> 
+  </p><p>
+  <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency 
+  distribution on the categorical data field of interest, and put it in the <tt>distribution</tt>
+  member of the result; this can be plotted if you wish.
+  </p><p>
+  <span class="parm">accumfield=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  field holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
+  incrementally.  Default is <tt>None</tt>.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+<br>
+<h3><i>Line and text properties / styles</i></h3>
+
+
+
+    <div class="panel-group" id="lineprops">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#lineprops" href="index.html#lineprops-content">&bull; lineprops( )</a>
+    </i></b></span>
+    <div id="lineprops-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Set the current properties to be applied to subsequent line rendering.  
+  Any line properties below that aren't specified as function args are reset to the defaults (except when <i>nodefaults=True</i>),
+  </p><p>
+  <span class="parm">width=</span> &nbsp; sets the line stroke width.  Default is 1.0.
+  </p><p>
+  <span class="parm">color=</span> &nbsp; sets the line stroke color.  Default is "#000000" (black).
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; sets the line opacity.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">dash=</span> &nbsp; sets the dash pattern.  Example dash pattern <tt>'5,2'</tt>.
+  Default is <tt>None</tt> which gives a solid line.
+  </p><p>
+  <span class="parm">css=</span> &nbsp; 
+  A CSS element name or style string for the line.
+  If the value contains a colon it will be conveyed as <tt>style=</tt>,
+  otherwise it will be conveyed as <tt>class=</tt>.
+  If you get conflicts vs. the function arg defaults try <i>nodefaults=True</i>.
+  </p><p>
+  <span class="parm">nodefaults=</span> &nbsp; if <i>nodefaults=True</i> then <i>width=</i>, <i>color=</i>, <i>opacity=</i>, and <i>dash=</i> 
+  will not take on default values as mentioned above.  This allows <i>css=</i> 
+  to influence these aspects of the line without interference. Default is <tt>False</tt>.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="textprops">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#textprops" href="index.html#textprops-content">&bull; textprops( )</a>
+    </i></b></span>
+    <div id="textprops-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Set the current properties to be applied to subsequent text rendering.  
+  Any text properties below that aren't specified as function args are reset to the defaults (except when <i>nodefaults=True</i>),
+  </p><p>
+  <span class="parm">ptsize=</span> &nbsp; sets the text point size.  Integer. Default is 10.
+  It's best to set <i>ptsize=</i> directly rather than using <i>css='font-size:...'</i> (see notes below). 
+  because minplot uses text size when 
+  computing certain layouts.
+  </p><p>
+  </p><p>
+  <span class="parm">color=</span> &nbsp; sets the text color.  Default is <tt>'#000'</tt> (black).
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; sets the text opacity.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">anchor=</span> &nbsp; sets the text alignment.  Use <tt>'left'</tt> for left-adjusted text;
+  <tt>'middle'</tt> for centered text; <tt>'end'</tt> for right-adjusted text.  Default is <tt>'start'</tt>
+  </p><p>
+  <span class="parm">rotate=</span> &nbsp; sets the text rotation. In degrees clockwise.  <i>rotate=0</i> gives
+  ordinary horizontal text.  Usually a value from 0 to 90, or 0 to -90.  Default is <tt>None</tt>
+  </p><p>
+  <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to the text position.  Specify as a list of
+  (xofs, yofs) in minplot units.  Default is <tt>None</tt>.
+  </p><p>
+  <span class="parm">css=</span> &nbsp; 
+  A CSS element name or style string for the text.
+  If the value contains a colon it will be conveyed as <tt>style=</tt>,
+  otherwise it will be conveyed as <tt>class=</tt>.
+  If you get conflicts vs. the function arg defaults try <i>nodefaults=True</i>.
+  See also the remarks with <i>ptsize=</i> above.
+  </p><p>
+  <span class="parm">nodefaults=</span> &nbsp; if <i>nodefaults=True</i> then <i>ptsize=</i>, <i>color=</i>, and <i>opacity=</i> 
+  will not take on default values as mentioned above.  This allows <i>css=</i> to influence 
+  these aspects of the text without interference.  Default is <tt>False</tt>.
+  </p><p>
+  </p><p>
+  <b>Notes</b> on minplot text rendering:
+  </p><p>
+  SVG natively supports html special character constructs such as &amp;micro; (the &micro; symbol)
+  </p><p>
+  HTML superscript and subscript constructs are supported eg.  &lt;sup>2&lt;/sup> and &lt;sub>2&lt;/sub> 
+  </p><p>
+  Embedded newlines are supported.  Use: \n
+  </p><p>
+  It's possible to propagate line or text css styles to sets of elements within an SVG &lg;g&gt; construct.
+  See <span class="fxn">gbegin()</span> below.
+  </p>
+  For best results set <i>ptsize=</i> function arg directly rather than using <i>css='font-size:...'</i>.
+  This is because minplot uses text size when computing certain layouts.
+      
+
+    </div></div></div></div>
+
+
+
+
+
+
+
+
+<br>
+<h3><i>Plotting and drawing</i></h3>
+
+
+
+
+    <div class="panel-group" id="axisrender">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#axisrender" href="index.html#axisrender-content">&bull; axisrender( axis )</a>
+    </i></b></span>
+    <div id="axisrender-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Render an X axis or a Y axis in the currently defined space.  The axis can have a line, 
+  tic marks, and scaling labels (stubs).  Grid lines can also be rendered.  Behavior is numeric 
+  or categorical (depending on how the space was set up).  The only required parameter is <i>axis</i>.
+  </p><p>
+  <span class="parm">axis=</span> &nbsp; is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>.
+  </p><p>
+  <span class="parm">axisline=True</span> &nbsp; draw an axis line using current line properties.  Default is <tt>True</tt> 
+  </p><p>
+  <span class="parm">inc=</span> &nbsp; if specified as a number, tics and stubs will be rendered using this increment, 
+  and the inc that was determined earlier in <span class="fxn">numspace()</span> is overridden.  
+  Applies only to numeric space, not categorical.
+  </p><p>
+  <span class="parm">stubs=True</span> &nbsp; render axis scaling labels (stubs), using current text properties.
+  With numeric scaling incremental numeric stubs are displayed.  With categorical scaling
+  the category terms are displayed.  X axis stubs are automatically rotated 45 degrees
+  when needed to help them fit.  You can also use the <span class="fxn">textprops()</span> <i>rotate=</i> parameter to get 
+  rotated stubs.  Rotate values can range from 0 to 90 or 0 to -90 for stubs.
+  Default is <tt>True</tt>.
+  </p><p>
+  <span class="parm">tics=</span> &nbsp; can be specified to have tic marks be drawn to the given length in minplot units
+  using current line properties.  Positive values give tics that run outward from the 
+  plotting area; negative values give tics that run inward.  Default is <tt>None</tt>.
+  </p><p>
+  <span class="parm">grid=True</span> &nbsp; can be specified to draw grid lines using current line properties.
+  </p><p>
+  <span class="parm">loc=</span> &nbsp; if specified controls axis position. 
+  Examples: <i>loc='top'</i> or <i>loc='right'</i>.  Constructs like
+  <i>loc='left-30'</i> or <i>loc='top+20'</i> would render the Y axis 30 minplot units from the plot area's left 
+  side, or 20 units above the plot area's top, respectively.
+  </p><p>
+  <span class="parm">stubfmt=</span> &nbsp; is a "printf-style" formatting string.  With numeric scaling the default is <tt>'%g'</tt>
+  and you can specify other formats such as <tt>'%.4f'</tt> to control the numeric format.  For text 
+  stubs the default is <tt>'%s'</tt> and you can specify other formats such as <tt>'%.10s'</tt> to truncate
+  to ten characters.
+  </p><p>
+  <span class="parm">divideby=</span> &nbsp; may be given as a numeric value to have the displayed stubs be the 
+  underlying data value divided by this value (usually a power of 10).  E.g. with
+  high-magnitude data you might use <i>divideby=1000</i>; for very small magnitude data you
+  might use <i>divideby=0.001</i>.  
+  </p><p>
+  <span class="parm">sep=</span> &nbsp; may be given as a numeric value to require stubs to be at least
+  this far away (in minplot units) from one another in order to be rendered, otherwise they're hidden.
+  This can be used to avoid stub collisions when using log scaling.  
+  </p><p>
+  <span class="parm">stublist=</span> &nbsp; may be given as a list of pairs.  The left member of each pair is 
+  a numeric value and the right member of each pair is a label.  If specified then stubs and perhaps 
+  grid lines will be rendered only the given numeric locations using the given labels.  Does not
+  apply to categorical scaling.
+  </p>
+      
+
+    </div></div></div></div>
+
+  
+
+
+
+    <div class="panel-group" id="plotdeco">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#plotdeco" href="index.html#plotdeco-content">&bull; plotdeco( )</a>
+    </i></b></span>
+    <div id="plotdeco-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  After a plot area is set up, use this to do things like
+  render a title at the top, render X or Y axis labels, outline the plot area, or to shade the entire plot area to a certain color.
+  You can do several things in one call, or use several separate calls.
+  The text items use current text properties, and the outline uses current line properties.
+  Note, if you're doing a tooltip it will be associated with the first-rendered title or label only.
+  </p><p>
+  <span class="parm">title=</span> &nbsp; a title to appear directly above the top of the plot area.  
+  <span class="parm">titlepos=</span> &nbsp; determines if the title will be positioned 
+  <tt>'left'</tt>, <tt>'center'</tt>, or <tt>'right'</tt> with
+   respect to the plotting area.  Default is <tt>'left'</tt>.
+  </p><p>
+  <span class="parm">xlabel=</span> &nbsp; an X axis label to appear below the X axis along bottom.
+  <span class="parm">xlabeldist=</span> can specify a numeric distance in minplot units where the <i>xlabel</i> will be 
+  positioned, below the plot area.
+  </p><p>
+  <span class="parm">ylabel=</span> &nbsp;  a Y axis label for the left side of the plot area
+  (text will be rotated by -90 degrees).  There's also
+  <span class="parm">y2label=</span> &nsbp; which is a Y axis label for the right of the plot area
+  (text will be rotated by 90 degrees).
+  <span class="parm">ylabeldist=</span> can specify a numeric distance in minplot units where the <i>ylabel</i> will be 
+  positioned, to the left of the plot area (or for y2label, to the right of the plot area).
+  </p><p>
+  <span class="parm">shade=</span> &nbsp; if specified, the entire plot area will be shaded to this color.
+  </p><p>
+  <span class="parm">outline=</span> &nbsp; if <tt>True</tt> the plot area will be outlined using current line properties.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="bar">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#bar" href="index.html#bar-content">&bull; bar( x, y )</a>
+    </i></b></span>
+    <div id="bar-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Render a column bar. 
+  </p><p>
+  <span class="parm">x=</span> &nbsp; mandatory; bar will be centered on this location in X data space.
+  </p><p>
+  <span class="parm">y=</span> &nbsp; mandatory; top of bar will be at this location in Y data space.
+  </p><p>
+  <span class="parm">width=</span> &nbsp; if specified this controls bar width.  A numeric value in minplot units.
+  </p><p>
+  <span class="parm">ybase=</span> &nbsp;  if specified this will be location of the base (typically the bottom) of the bar in data space.
+  Default is the bottom of the plotting area.  This can be used to get a mixture of upward and downward bars for example if 
+  you specify <i>ybase=0</i> any negative values will be shown with downward bars and positive values with upward bars.
+  </p><p>
+  <span class="parm">fill=</span> &nbsp; the color of the bar. Default color is <tt>'#e0ffe0'</tt> (light green).  <tt>fill=None</tt> is ok.
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the bar fill.  Default is 1.0  (opaque).
+  </p><p>
+  <span class="parm">outline=True</span> &nbsp; if specified, outline the bar using current line properties.
+  </p><p>
+  <span class="parm">xofs=</span> &nbsp; if specified, the bar is offset this numeric distance rightward in minplot units (if xofs > 0).
+  or leftward (if xofs < 0).  Useful with a categorical axis for rendering pairs, triples (etc) of bars.
+  </p><p>
+  <span class="parm">horiz=True</span> &nbsp; if specified, you'll get a horizontal bar instead of a vertical one.  
+  (But supply the other <span class="fxn">bar()</span> args as if doing a vertical one).
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="errorbar">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#errorbar" href="index.html#errorbar-content">&bull; errorbar( x, y, erramt )</a>
+    </i></b></span>
+    <div id="errorbar-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Render an error bar using the current line properties.  
+  The above template applies except when <i>ymin</i> and <i>ymax</i> are being used.
+  </p><p>
+  <span class="parm">x=</span> &nbsp; mandatory; error bar will be centered on this location in X data space.
+  </p><p>
+  <span class="parm">y=</span> &nbsp; Y data location of underlying data point.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
+  </p><p>
+  <span class="parm">erramt=</span> &nbsp; is the SD, SEM or other error statistic.  It will be rendered 
+  symetrically down and up.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
+  </p><p>
+  <span class="parm">ymin=</span> and <span class="parm">ymax</span> &nbsp; may be specified to explicitly control
+  where top and bottom of bar will be located, to produce hi-lo bars and similar.
+  </p><p>
+  <span class="parm">tailsize=</span> &nbsp; if specified this will be a numeric value to control the length 
+  of the little tails at each end.  Default is 5.0.
+  </p><p>
+  <span class="parm">xofs=</span> &nbsp; if specified, has similar purpose as with <span class="fxn">bar()</span> above.
+  </p><p>
+  <span class="parm">horiz=True</span> &nbsp; if specified you'll get a horizontal bar instead of a vertical one.  
+  (But supply the other <span class="fxn">errorbar()</span> args as if doing a vertical one).
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+
+    <div class="panel-group" id="datapoint">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#datapoint" href="index.html#datapoint-content">&bull; datapoint( x, y ) &nbsp; &nbsp; &nbsp; &bull; clustermode( )</a>
+    </i></b></span>
+    <div id="datapoint-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <h4>datapoint( x, y )</h4>
+  <p>
+  Render a round data point symbol.  Typical use is in scatterplots.
+  <br>Automatic clustering of duplicate data points is available, see <span class="fxn">clustermode()</span>
+  </p><p>
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; mandatory; data point will be centered on this location in data space.
+  </p><p>
+  <span class="parm">diameter=</span> &nbsp; diameter of the circle in minplot units.  Default is 5.
+  </p><p>
+  <span class="parm">fill=</span> &nbsp; is a fill color.  Default is <tt>None</tt>
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0  (opaque).
+  </p><p>
+  <span class="parm">outline=True</span> &nbsp; if specified, the circle is outlined using current line properties.
+  </p><p>
+  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> have similar purpose as with <span class="fxn">bar()</span> above.
+  </p><p>
+
+  <br>
+  <h4>clustermode( )</h4>
+  <p> 
+  Enable <span class="fxn">datapoint()</span> to slightly offset duplicate or near-duplicate data points
+  to give the viewer a feel for the amount of duplicity.  Also can be used to do simple frequency
+  distributions or beeswarms (data must be sorted on x, y for this to work).
+  </p><p>
+  <span class="parm">mode=</span> &nbsp; controls placement of clustered data points.
+  One of <tt>'surround'</tt>, <tt>'rightward'</tt>, <tt>'left+right'</tt>, <tt>'upward'</tt> or None.  
+  This controls where cluster members will be placed relative to the home data point.
+  Default is <tt>None</tt> which turns off clustering.
+  </p><p>
+  <span class="parm">offset=</span> &nbsp; is a numeric value that indicates the distance that duplicate data
+  points will be offset, in minplot units.  Default is 0.8
+  </p><p>
+  <span class="parm">tolerance=</span> &nbsp; is a numeric value that indicates how close (in minplot units) two 
+  data points must be in order to be considered the "same" for clustering purposes.  Default is 0.0
+  </p><p>
+  <span class="parm">dampen=</span> &nbsp; is an integer value that can be set to > 1 when there are a lot of duplicates 
+  such that clustering is overwhelmed.  For example, with dampen=3 three duplicates 
+  encountered in the data will be counted as one for clustering purposes.  Default is 1.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="curve">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#curve" href="index.html#curve-content">&bull; curvebegin( ) &nbsp; &nbsp; &nbsp; &nbsp; &bull; curvenext( x, y )</a>
+    </i></b></span>
+    <div id="curve-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  To render a lineplot or filled band, start by calling <span class="fxn">curvebegin()</span>.  Then iterate over 
+  your data rows and for each row call <span class="fxn">curvenext()</span>.  The lineplot will be rendered using 
+  the current line properties.  
+  </p><p>
+
+  <br>
+  <h4>curvebegin( )</h4>
+  </p><p>
+  Sets up to begin a lineplot or filled band.
+  </p><p>
+  <span class="parm">stairs=True</span> &nbsp; if specified a stairstep curve will be rendered.  
+  The stairstep will end on a vertical; you'll need to append an additional data row to get a horizontal tail end.
+  This option cannot be used with <i>fill</i> or <i>band</i>.
+  </p><p>
+  <span class="parm">fill=</span> &nbsp; if specified the area under the curve (or the area within the band if <tt>band=True</tt>) 
+   will be filled with this color.
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">onbadval=</span> &nbsp; controls the behavior when an unplottable or <tt>None</tt> value is encountered. 
+  It can be specified as <tt>'gap'</tt> which causes the line or band show a gap to indicate missing data. 
+  Default is <tt>'bridge'</tt> which causes the line to bridge the gap.
+  </p><p>
+  <span class="parm">band=True</span> &nbsp; if specified a filled band will be rendered rather than a lineplot.
+  The bottom of the band will be controlled by <i>y2</i> in <span class="fxn">curvenext()</span>.
+  </p><p>
+  <span class="parm">xofs=</span> &nbsp; if specified, the plotted data points are adjusted rightward (if xofs > 0) or leftward 
+   (if xofs < 0) by this distance in minplot units.  Uses include aligning a stairstep curve over a bar graph.
+  </p>
+
+  <br>
+  <h4>curvenext( x=, y= )</h4>
+  <p>
+  Called for every data point to be plotted, including the first one.
+  </p><p>
+  <span class="parm">x=</span> and <span class="parm">y</span> &nbsp; mandatory; location where the curve will go next, in data space.
+  </p><p>
+  <span class="parm">y2=</span> &nbsp; if specified a filled band
+  is rendered with the top at <i>y</i> and the bottom at <i>y2</i>.
+  </p><p>
+  <span class="parm">label=</span> &nbsp; if specified this will be a label rendered near the end of the curve using current text properties.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="pieslice">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#pieslice" href="index.html#pieslice-content">&bull; pieslice( pctval, startval, fill )</a>
+    </i></b></span>
+    <div id="pieslice-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Render one pie graph slice.  To do a pie graph, first set up a plotting area (because piegraphs have no X or Y axes, axmin and axmax 
+  are ignored and can be specified as anything).
+  You can specify a square plotting area, or a wider one with room for the legend to one side or the other.  
+  A legend is always used with piegraphs because slice labelling isn't supported.
+  Here's a <a href="examples/e3.html">piegraph example</a>.
+  </p><p>
+  Slice size is specified as a percentage of the whole (0.00 to 1.00).  If you need to compute this on the fly for your
+  data use <span class="fxn">numinfo()</span> to get <tt>sum</tt> then divide each value by it.
+  Slice position is similarly specified as a percentage.  Usually the first slice uses <i>startval=0.0</i> (for top-right) then as each slice is 
+  rendered its <i>pctval</i> is accumulated and then this is given as the next <i>startval</i>, rendering subsequent slices 
+  in a clockwise manner.
+  </p><p>
+  <span class="parm">pctval=</span> &nbsp; the value to be plotted.  
+  Must be expressed as a percent of the whole in the form of a decimal number between 0.00 and 1.00.
+  </p><p>
+  <span class="parm">startval=</span> &nbsp; controls where the slice "starts" in radial space and (similarly to <i>pctval</i>)
+  is between 0.00 to 1.00.  
+  </p><p>
+  <span class="parm">fill=</span> &nbsp; fill the pie slice with this color.
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 0.8.
+  </p><p>
+  <span class="parm">outline=</span> &nbsp; if <tt>True</tt> outline the pie slice using current line properties.
+  A nice effect is to use a fat white line for the outline; this gives separation to the slices.
+  </p><p>
+  <span class="parm">placement=</span> &nbsp; placement of the entire pie.  If <i>placement="left"</i> the pie will be put in the left
+  side of the rectangular plotting area.  The legend can be put in the remaining area.  Default is <i>right</i>.  
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="rectangle">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#rectangle" href="index.html#rectangle-content">&bull; rectangle( x, y )</a>
+    </i></b></span>
+    <div id="rectangle-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p> 
+  Render a rectangle or square of a certain color.  Used to create heatmaps or to
+  highlight a particular category or region in the display.
+  </p><p>
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; location of the center of the rectangle, in data space.
+  </p><p>
+  <span class="parm">width=</span> and <span class="parm">height=</span> &nbsp; control the size of the rectangle, in data units.
+  If your X and Y space are both numeric, <i>width</i> and <i>height</i> are both required.
+  If your X space is categorical and your Y space is numeric, just specify <i>height</i> (<i>height='all'</i> is allowed).
+  If your X space is numeric and your Y space is categorical, just specify <i>width</i> (<i>width='all'</i> is allowed).
+  If both axes are categorical neither <i>height</i> nor <i>width</i> should be specified.
+  </p><p>
+  <span class="parm">fill=</span> &nbsp; controls the shading of the rectangle.  Default is <tt>'#e0ffe0'</tt>
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">outline=True</span> &nbsp; if specified, the rectangle will be outlined using current line properties.
+  </p><p>
+  To render a rectangle using minplot units use the <a href="index.html#lowlevel">low-level function rect()</a>.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="label">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#label" href="index.html#label-content">&bull; label( x, y, text )</a>
+    </i></b></span>
+    <div id="label-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Render a piece of text at a specific X, Y location in data space.
+  Text is rendered using the current text properties.
+  Useful in labeling other data elements.  
+  You can also use it to create scatterplots with text as the data point symbol.
+  </p><p>
+  <span class="parm">x=</span> and <span class="parm">y</span> &nbsp; mandatory; the location in data space.
+  </p><p>
+  <span class="parm">text=</span> &nbsp; the text to be rendered.
+  </p><p>
+  <span class="parm">anchor=</span> controls how the text is aligned relative to <tt>x, y</tt> and is one of 
+  <tt>'start'</tt>, <tt>'middle',</tt> or <tt>'end'</tt>.  Default is <tt>'start'</tt>
+  </p><p>
+  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> are distances in minplot units to offset the text from <tt>x, y</tt>.
+  Often useful for labeling purposes.  Default for both is 5.0 
+  </p><p>
+  To render text at a specific location in minplot coordinates, you can use <a href="index.html#lowlevel">low-level function txt()</a>
+  </p>
+      
+
+    </div></div></div></div>
+
+
+  
+
+
+    <div class="panel-group" id="line">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#line" href="index.html#line-content">&bull; line( x1, y1, x2, y2 ) &nbsp; &nbsp; &nbsp; &bull; arrow( x1, y1, x2, y2)</a>
+    </i></b></span>
+    <div id="line-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <h4>line( x1, y1, x2, y2 )</h4>
+  <p>
+  Draw a line between x1, y1 and x2, y2 in data space using the current line properties.
+  Typical use is for threshold lines and other annotation.
+  </p><p>
+  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; define where the line begins.
+  </p><p>
+  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; define where the line ends.
+  </p><p>
+  <i>x1</i> and <i>x2</i> may be specified as <tt>'min'</tt> or <tt>'max'</tt> to get the
+  X minima or maxima respectively.  Similarly
+  <i>xy</i> and <i>y2</i> may be specified as <tt>'min'</tt> or <tt>'max'</tt> to get the
+  Y minima or maxima respectively.
+  </p>
+
+  <br>
+  <h4>arrow( x1, y1, x2, y2 )</h4>
+  <p>
+  Draw an arrow starting at x1, y1 with the arrowhead at x2, y2.
+  Typical use is for annotation or vector plots such as weather windbarbs.
+  </p><p>
+  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; define where the line begins.
+  </p><p>
+  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; define where the line ends and the arrowhead is rendered.
+  </p><p>
+  <span class="parm">headlen=</span> &nbsp; length of the arrowhead in minplot units.  Default is 18.
+  </p><p>
+  <span class="parm">headwid=</span> &nbsp; a theta value controlling stoutness of the arrowhead.  Default is 0.3
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+<br>
+<h3><i>Adding tooltips / clickthru, and a legend</i></h3>
+
+
+
+    <div class="panel-group" id="tooltip">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#tooltip" href="index.html#tooltip-content">&bull; tooltip( )</a>
+    </i></b></span>
+    <div id="tooltip-content" class="panel-collapse collapse "> <div class="panel-body">
+
+   <p>
+   Enable a tooltip (and/or a clickthru hyperlink) using the bounding box of
+   whatever plot element is rendered next.  
+   </p><p>
+   Plot element functions that support tooltips / clickthru are:
+   <span class="fxn">bar(), datapoint(), label(), rectangle(), pieslice(), legenditem(), plotdeco()</span>, and <span class="fxn">axisrender()</span>.
+   You call <span class="fxn">tooltip()</span> once for each desired tooltip, usually within the loop where you're iterating
+   over your data, just before drawing the object that the tooltip will be associated with. 
+   The tooltip settings do not persist after the associated plot element is rendered.
+   </p><p>
+   <span class="parm">title=</span> &nbsp; the text to appear for ordinary tooltips.  Also used with bs_popovers,
+    see below.
+   </p><p>
+   <span class="parm">url=</span> &nbsp; if specified, an xlink hyperlink to this url will be generated, allowing user to click thru.
+   </p><p>
+   <span class="parm">target=</span> &nbsp; may be specified with <tt>url</tt> to open it in a new or different window.
+   For example, <i>target='_blank'</i>
+   </p><p>
+   <span class="parm">bs_popover=True</span> &nbsp; if specified render a bootstrap popover tooltip
+   instead of an ordinary tooltip.
+   <i>title</i> will be the text in the top part of the tooltip, and <i>content</i> will be the bottom text.  
+   You must be using Bootstrap and include a javascript snippet as described in the Bootstrap popover documentation.
+   </p><p>
+   <span class="parm">content=</span> &nbsp; used with <i>bs_popover=True</i>, see above.
+   </p>
+
+   
+
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="legend">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#legend" href="index.html#legend-content">&bull; legenditem( sample, label ) &nbsp; &nbsp; &bull; legendrender( )</a>
+    </i></b></span>
+    <div id="legend-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Call <span class="fxn">legenditem()</span> for each legend entry you wish to show. 
+  Then when ready to render the legend, call <span class="fxn">legendrender()</span>.
+  </p>
+  <br>
+  <h4>legenditem( sample, label )</h4>
+  <p>
+  <span class="parm">sample=</span> &nbsp; determines how the legend entry's sample will appear.  
+  It can be either <tt>'circle'</tt>, <tt>'square'</tt> or <tt>'line'</tt>.  
+  If <tt>'circle'</tt> or <tt>'square'</tt> then <i>color</i> must be specified.
+  If <tt>'line'</tt> the current line properties will be used.
+  </p><p>
+  <span class="parm">label=</span> &nbsp; the text that will appear for this entry. 
+  </p><p>
+  <span class="parm">width=</span> &nbsp; if specified this allows control of the entry's width in minplot units.
+  </p><p>
+  <span class="parm">color=</span> &nbsp; required for <i>shape='circle'</i> and <i>shape='square'</i>.
+   ignored for <i>shape='line'</i>
+  </p><p>
+  <span class="parm">outline=True</span> &nbsp; outline the circle or square sample using the line properties in
+   effect when the legend is rendered.
+  </p>
+  <br>
+
+  <h4>legendrender( )</h4>
+  <p>
+  Render a legend, made up of all currently posted legend entries.  Labels are rendered 
+  using current text properties.  Any outlines will use current line properties.
+  When this function finishes, the internal list of legend entries is cleared.
+  </p><p>
+  <span class="parm">location=</span> &nbsp; is optional and can be one of: 
+  <tt>'upperleft'</tt>, <tt>'lowerleft'</tt>, <tt>'upperright'</tt>, or <tt>'loweright'</tt>
+  (relative to the plotting area).  Default is <tt>upperleft</tt>
+  </p><p>
+  <span class="parm">xpos=</span> and/or <span class="parm">ypos=</span> &nbsp; if specified with <i>location</i>
+  they serve as adjustments to improve the legend's position.
+  Or, if <i>location</i> is not specified at all, <i>xpos</i> and <i>ypos</i> are taken to be the 
+  coordinates of the legend's upper right corner in minplot units.
+  </p><p>
+  <span class="parm">format=</span> &nbsp; if specified as <tt>'across'</tt>, legend entries are 
+  rendered side by side.  Default is <tt>'down"</tt>.
+  </p><p>
+  <span class="parm">sampsize=</span> &nbsp; if specified, this controls the size of circle or square
+  color samples. It is a distance in minplot units.   Default is 6.
+  </p><p>
+  <span class="parm">linelen=</span> &nbsp; if specified, this controls the length of line samples.  It is a 
+  distance in minplot units.  Longer samples might be wanted if dashed lines are in use. Default is 20.
+  </p><p>
+  <span class="parm">title=</span> &nbsp; if specified, this string will be rendered as a legend title,
+  using the same text properties as the rest of the legend.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+<br>
+<h3><i>Getting your SVG result</i></h3>
+
+
+
+    <div class="panel-group" id="svgresult">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#svgresult" href="index.html#svgresult-content">&bull; svgresult( )</a>
+    </i></b></span>
+    <div id="svgresult-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Returns your SVG result, as a string.
+  </p><p>
+  <span class="parm">noclose=True</span> &nbsp; if specified, suppresses the closing &lt;/svg> tag and allows your SVG 
+   result to be gotten incrementally in chunks.  This is done by calling
+  <span class="fxn">svgresult()</span> multiple times; each call will return the SVG code that was generated since the previous call (or since svgbegin) .
+  </p>
+      
+
+    </div></div></div></div>
+
+
+<br>
+
+
+<h3><i>Going further</i></h3>
+
+<a name="dt"></a>
+
+
+    <div class="panel-group" id="dt">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Plotting dates and times &nbsp; &nbsp; &bull; setformat( ) &nbsp; &bull; dtrange( ) &nbsp; &bull; num( ) &nbsp; &bull; diff( )</a>
+    </i></b></span>
+    <div id="dt-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Minplot can work with calendar dates in a variety of formats, with clock times optionally appended
+  (we'll refer to all of these as "dates").
+  To get minplot's date-related functionality you'll need two imports like this:
+  <br><tt>import minplot as p</tt>
+  <br><tt>import minplot_dt as pdt</tt>
+  </p><p>
+  The basic approach is to use <span class="fxn">pdt.num()</span> to convert dates to integers, then plot in numeric space.
+  To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.dtrange()</span>.
+  Here's an example where dates are plotted. <a href="examples/e4.html">View code</a>
+  </p>
+  <br>
+  <img src="static/img/example4.svg" >
+  <br>
+  An example where dates+times are plotted is <a href="examples/e5.html">here</a>.
+  <br><br>
+  <p>
+  <b>Date formats:</b> 
+  The default date format is <tt>'%Y-%m-%d'</tt>.  Minplot uses
+  <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior" target="_blank">
+  python's strftime / strptime date format specifiers</a>.
+  See also your local system's strftime and strptime man pages for additional codes (OS-dependent).
+  </p><p>
+  <br>
+
+  <h4>setformat( formatstring )</h4>
+  <p>Set the current format for parsing the dates in your data.
+  </p><p>
+  <span class="parm">formatstring</span> &nbsp; the date format to be used in parsing your dates.  
+  This is <u>not</u> a keyword arg.  Default is <tt>'%Y-%m-%d'</tt>
+  An example to handle dates with times (separated by a 'T' as is often done) is <nobr><tt>pdt.setdateformat( '%Y-%m-%dT%H:%M:%S' )</tt></nobr>.
+  Within this string use punctuation to match the date constructs you're parsing.  Typical codes include:
+  <br>
+  <tt>%Y</tt> = 4-digit year &nbsp; &nbsp; &nbsp; &nbsp; <tt>%y</tt> = 2-digit year<br>
+  <tt>%m</tt> = integer month &nbsp; &nbsp; <tt>%d</tt> = integer day<br>
+  <tt>%H</tt> = integer hour (24-hour notation)<br>
+  <tt>%M</tt> = integer minute &nbsp; &nbsp; <tt>%S</tt> = integer second<br>
+  See Date Formats above for additional possibilities.
+  During date parsing the month and day values are tolerated with or without a leading zero.
+  </p>
+  <br>
+
+  <h4>num( dateval )</h4>
+  <p>Given a date in the current format, return the equivalent integer value for plotting.
+  <nobr>Example: <tt>pdt.num( '2016-02-29' )</tt></nobr>
+  </p><p> 
+  <span class="parm">dateval</span> &nbsp; a date or datetime in the current format.  This is <u>not</u> a keyword arg.
+  </p>
+  <br>
+
+  <h4>dtrange( dtfield, datarows, nearest, stubformat )</h4>
+  
+  <p>Returns a tuple with these members:  <tt>axmin</tt>, <tt>axmax</tt>, and <tt>stublist</tt>.
+  This function examines a field in your data that contains dates, and determines the axis min and max
+  (<tt>axmin</tt> and <tt>axmax</tt>) along with 
+  a list of formatted axis stubs (<tt>stublist</tt>); this can later be passed to <span class="fxn">axisrender()</span>.
+  </p><p>
+  <span class="parm">dtfield=</span> &nbsp; identifies the numeric data field to be characterized.
+  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
+  (see Basics: Your Data Structure above for more info)
+  </p><p>
+  <span class="parm">datarows=</span> &nbsp; this is your data structure (mandatory).
+  </p><p>
+  <span class="parm">nearest=</span> &nbsp; mandatory; must be specified.  Determines a clean
+  boundary for axis min and max.  For example, <tt>nearest=month</tt> gives an axis min
+  and max on month boundaries.  Allowed values include:
+  <nobr><tt>year  3month  month  week  week_dayN  day  12hour  6hour  4hour  3hour  hour  30minute  10minute  minute</tt></nobr>
+  <br>(<tt>week</tt> uses Mondays.  To get other weekday use eg. <tt>week_day2</tt> for Wednesdays or <tt>week_day6</tt> for Sundays).
+  </p><p>
+  <span class="parm">inc=</span> &nbsp; the increment to be used in building a list of axis stubs.  
+  If not specified it will be same as <i>nearest</i>.
+  If specified it may be one of the <i>nearest=</i> allowed values that fits cleanly with <i>nearest=</i>
+  (most combinations where <i>inc=</i> is more granular than <i>nearest=</i> will work, but months and
+  weeks cannot be used together).
+  </p><p>
+  <span class="parm">stubformat=</span> &nbsp; The date formatting for the stubs.  See Date Formats section above.  
+  To do tics only (without stubs) use <i>stubformat=''</i>.
+  </p><p>
+  <span class="parm">inc2=</span> &nbsp; Allows "rollovers" to be denoted as additional (or alternate) stub content.
+  For example if your axis is months and you cross from Dec to Jan you might want to mention the new year in the Jan stub.
+  Supported values include: <tt>year  3month  month  day</tt>.  Default is <tt>None</tt>
+  </p>
+  <ul>
+  The following parameters are related to <i>inc2</i>:
+  </p><p>
+  <span class="parm">stub2format=</span> &nbsp; The formatting for the additional stub content.  See Format codes above.  
+  </p><p>
+  <span class="parm">stub2place=</span> &nbsp; Default is <tt>append</tt>.  Other possible values: <tt>prepend  replace</tt>
+  </p><p>
+  <span class="parm">stub2start=</span> &nbsp; Default is <tt>True</tt> causing the first stub to be treated as a "boundary" and embellished.
+  Use <tt>False</tt> to not do this.
+  </ul>
+  <br>
+
+  <h4>diff( dateval1, dateval2, resulttype )</h4>
+  <p>Computes the numeric difference of <nobr><i>datetval1</i>&ndash;<i>dateval2</i></nobr> .
+  By default it returns the number of days between two dates.
+  </p><p>
+  <span class="parm">dateval1</span> and 
+  <span class="parm">dateval2</span> &nbsp; are two date objects in current format.
+  </p><p>
+  <span class="parm">resulttype</span> &nbsp; controls the granularity of the returned numeric difference.  
+  Default is <tt>days</tt>.  Other accepted values include: <tt>hours  minutes  seconds</tt>
+  </p>
+  <br>
+  <br>
+  <p>
+  <b>Hints for working with dates</b>
+  </p><p>
+  Be sure your data really are dates and not just plain numbers.
+  For example if your data are just years then you've got plain numerics, not dates.
+  The same thing goes for number of elapsed hours expressed numerically.
+  </p><p>
+  You can create business and trading types of graphs that cover business days and business hours without any gaps
+  for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> with one panel per day where business
+  activity occurred, then within each panel set up a date X space for the desired business hour range.
+  </p><p>
+  To get different combinations of stubs and tics you can invoke <span class+"fxn">dtrange()</span> and <span class="fxn">axisrender()</span> 
+  two or more times.
+  If you just want to render tics call <span class="fxn">dtrange()</span> with <i>stubformat=''</i>
+  </p><p>
+  If you just have time values eg. <tt>14:35</tt> without any dates, you can prepend a faux date to each and then 
+  ignore the date portion when plotting.
+  </p><p>
+  If you have year+month values eg. <tt>2016-03</tt> you can append a faux day such as <tt>15</tt>.
+  </p><p>
+  If you're plotting quarter-year values, try pre-converting your data to plain numerics, eg.
+  2015.2 for 1st quarter of 2015, and 2015.4, 2015.6, and 2015.8 for the other quarters... then plot them as plain numerics.
+  </p><p>
+  To get one-letter month stubs (eg. J F M A M J J A S O N D)
+  use %b in <span class="fxn">dtrange()</span> then in <span class="fxn">axisrender()</span> use <tt>stubformat='%.1s'</tt>.
+  </p><p>
+  <b>Frequency distributions and tabulations on dates:</b>
+  There's no special function for computing frequency distributions on dates,
+  but you may be able to use <span class="fxn">catinfo()</span> to do this.  For example if you have
+  a collection of <tt>yyyy-mm-dd dates</tt> and want to tabulate on month, just strip off the <tt>-dd</tt>
+  portion and use <span class="fxn">catinfo()</span> on the result.
+  </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="reactivity">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &nbsp; &bull; groupbegin( id, css ) &nbsp; &nbsp; &bull; groupend( ) </a>
+    </i></b></span>
+    <div id="reactivity-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  There are some ways to do basic updates to your rendered plots and graphs without a roundtrip
+  back to the server for a complete redraw, such as to to hide or show labels,
+  or select which of several elements to show and hide the others.  
+  Hiding/showing elements is straightforward, as are certain other basic style alterations.  
+  If you need to do more elaborate clientside activity consider something like D3.js instead of minplot.
+  </p><p>
+  To do this use <span class="fxn">groupbegin()</span> and <span class="fxn">groupend()</span> to set up an SVG &lt;g&gt; container for a set of elements
+  you render.  These groupings have element IDs and can have CSS style attributes.
+  You can pass this element ID to a javascript function which updates the style attributes.
+  </p><p>
+  <b>Hiding / showing things:</b> There are several options for CSS style attributes 
+  to make things hidden or shown.  One is <tt>'display: none'</tt>.
+  Another is <tt>'visibility: hidden'</tt> and <tt>'visibility: visible'</tt>.
+  Yet another is to simple change the opacity, e.g. <tt>'opacity=0'</tt> or <tt>'opacity=1'</tt>.
+  Opacity is apparently the most "expensive" in terms of clientside computation.
+  </p>
+  <br>
+  <h4>groupbegin( id, css, transform )</h4>
+  <p>Begin an SVG &lt;g&gt; element group container.
+  </p><p>
+  <span class="parm">id=</span> &nbsp; dom object ID string.  
+  </p><p>
+  <span class="parm">css=</span> &nbsp;
+  A CSS element name or style string that will propagate to all elements in the container.  
+  If the value contains a colon it will be conveyed as <tt>style=</tt>, otherwise it will be conveyed as <tt>class=</tt>.
+  For example to try hiding an object use <tt>css='visibility: hidden'</tt>.
+  </p><p>
+  <span class="parm">transform=</span> &nbsp; apply a matrix manipulations / transformations to 
+  all elements in the container.  See SVG documentation for details.
+  </p>
+  <br>
+  <h4>groupend( )</h4>
+  <p>Ends an SVG &lt;/g&gt; element group container.
+  </p>
+
+      
+
+    </div></div></div></div>
+
+
+
+<a name="multipanel"></a>
+
+
+
+    <div class="panel-group" id="multipanel">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#multipanel" href="index.html#multipanel-content">&bull; Multiple panel displays</a>
+    </i></b></span>
+    <div id="multipanel-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Suppose you're doing a display with 10 side-by-side panels all using the same Y axis scaling.
+  Minplot provides some ways to make it easier to define the 10 plot areas you'll need.
+  You start with a categorical space where the area for each category panel becomes a 
+  separate individual plot area.  Your python code then iterates over the panels
+  and renders a plot inside each one in the normal fashion.  (Or, you might iterate over your
+  data and render one plot for each chunk of data). Usually you'll have a data field that 
+  corresponds to the category / panel name.
+  </p><p>
+  Multiple panel displays can be useful for rendering:
+  <br> &nbsp; &bull; a series of plots side by side for easy visual comparison 
+  <br> &nbsp; &bull; a series of curves grouped from top to bottom for comparison
+  <br> &nbsp; &bull; business day / business hour and market/trading plots
+  <br> &nbsp; &bull; 2-D matrices of plots such as scatterplot matrix
+  </p><p>
+  Here's the basic approach:
+  Suppose you're doing a display with 10 side-by-side panels all using the same Y axis scaling.
+  First you'd set up your Y scaling with <span class="fxn">numspace()</span>.
+  Next you'd call <span class="fxn">catspace()</span> to set up the categorical X axis; it returns a list of 
+  category / panel names along with the coordinates for each panel.
+  You can then iterate over this panel list (or perhaps over your data), and for each panel 
+  set a new X data space using <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span>, then plot your data however you wish.
+  </p><p>
+  For 2-D matrices you'd extend the above to start with categorical in both X and Y, and
+  you'd have two panel coordinate lists to work from.
+  </p><p>
+  To see what <span class="fxn">catspace()</span> is returning you can do something like this:
+  </p>
+  <pre>
+  panellist = p.catspace( axis='X', catlist=states, poslo=50, poshi=500 )
+  for pan in panellist:
+      print pan.name, str(pan.poslo), str(pan.poshi)
+  </pre> 
+      
+
+    </div></div></div></div>
+
+
+<a name="lowlevel"></a>
+<br>
+<br>
+
+
+
+    <div class="panel-group" id="lowlevel">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#lowlevel" href="index.html#lowlevel-content">&bull; Low-level functions for drawing and units conversion</a>
+    </i></b></span>
+    <div id="lowlevel-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  These low-level functions may occasionally be useful.  
+  For these, the parameters are <u>not</u> keyword args unless shown as such.
+  </p>
+  &bull; lin( x1, y1, x2, y2 ) &nbsp; draw a line from (x1, y1) to (x2, y2) in minplot units using current line properties.
+  </p><p> 
+  &bull; txt( x, y, text ) &nbsp; render text at (x, y) in minplot units, using current text properties.
+  </p><p> 
+  &bull; rect( x1, y1, x2, y2, fill="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a rectangle in minplot units.
+  </p><p> 
+  &bull; circle( x, y, diameter, fill="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a circle in minplot units.
+  </p><p> 
+  &bull; comment( commenttext ) &nbsp; write a comment into the SVG file.
+  </p><p> 
+  &bull; nx( dataval ) &nbsp; &bull; ny( dataval ) &nbsp; return a minplot coordinate given a data value in X or Y.
+  </p><p> 
+  &bull; nmin( axis ) &nbsp; &bull; nmax( axis ) &nbsp; return the minplot coordinate of an edge of the plotting area.
+  </p><p> 
+  &bull; dmin( axis ) &nbsp; &bull; dmax( axis ) &nbsp; return the data value at an edge of the plotting area.
+      
+
+    </div></div></div></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div></div>
+
