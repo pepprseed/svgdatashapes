@@ -72,7 +72,7 @@
 minplot.py is a somewhat minimalist general-purpose python library for creating various types of
 bar graphs, line plots, scatterplots, piegraphs, boxplots, errorbars, heatmaps, multipanel displays and more
 with plenty of control over plot options, axes, legends, colors, transparency, and other details.
-Graphics are produced in SVG format and are viewable in any modern web browser.
+Graphics are produced in SVG format.
 <br><br>
 Your plot data can come from a database or anywhere else, and can be
 represented as an array of dict or other similar 2-D python iterable.
@@ -129,25 +129,20 @@ More examples are <span class="blue">coming soon</span>.
 
 <h3>Working with different data types</h3>
   <p>
-  To work with <u>numerics</u>:
-  First, if you need to find your data's numeric range on the fly use <span class="fxn">findrange()</span>.  
-  Then set up your numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and
+  Numerics can be integers, floating point, or scientific notation values.  To work with numerics,
+  set up a numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and
   draw your X or Y numeric axis using <span class="fxn">axisrender()</span>.  
-  If you wish, you can find quartiles or run frequency distributions using <span class="fxn">numinfo()</span>.
-  Numerics can be integers, floating point, or scientific notation values.
+  If you wish, you can find your the numeric range of your data, or compute quartiles or run frequency distributions using <span class="fxn">numinfo()</span>.
   </p><p>
-  To work with <u>categorical</u> data:
-  First, if you need to derive a unique list of category terms from your data use <span class="fxn">catinfo()</span>.
-  Then set up your categorical data space in X or Y using <span class="fxn">catspace()</span>, and
+  Categorical data are tags, labels or any other non-continuous data.  To work with categorical data,
+  set up a categorical data space in X or Y using <span class="fxn">catspace()</span>, and
   draw your X or Y categorical axis using <span class="fxn">axisrender()</span>.  
-  If you wish you can run frequency distributions using <span class="fxn">catinfo()</span>.
-  Categorical data are tags, labels or any other non-continuous data.
+  If you wish you can find a unique list of categories, or run frequency distributions, using <span class="fxn">catinfo()</span>.
   </p><p>
-  To work with <u>dates and times</u>, 
-  first you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
-  See these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
-  Dates are calendar dates; clock times can optionally be appended.
-  Many notations and formats are supported; for details see the <a href="index.html#dt">datetime section below</a>.
+  To plot dates and times, 
+  you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
+  Then see these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
+  Many date / time notations are supported; for details see the <a href="index.html#dt">datetime section below</a>.
   </p>
   
   <br>
@@ -166,10 +161,13 @@ More examples are <span class="blue">coming soon</span>.
   </p><p>
   Opacity is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
   </p><p>
+  Text things: Use <tt>\n</tt> to embed newlines in text.
+  Use eg. &lt;sup>2&lt;/sup> and &lt;sub>2&lt;/sub> to get superscripts or subscripts.
+  Special character constructs such as &amp;micro; (the &micro; symbol) are supported natively by SVG.
+  </p><p>
   CSS:&nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
   via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
-  You'll sometimes want to specify <i>nodefaults=True</i> to avoid conflicts with minplot defaults.
-  <u>Note:</u> It's best to set text size using the function arg, not CSS.
+  It's also possible to style sets of elements together, see <span class="fxn">gbegin()</span> below.
   </p>
   <br>
 
@@ -535,9 +533,8 @@ In many cases decent results are possible just by supplying the mandatory args.
   Any text properties below that aren't specified as function args are reset to the defaults (except when <i>nodefaults=True</i>),
   </p><p>
   <span class="parm">ptsize=</span> &nbsp; sets the text point size.  Integer. Default is 10.
-  It's best to set <i>ptsize=</i> directly rather than using <i>css='font-size:...'</i> (see notes below). 
-  because minplot uses text size when 
-  computing certain layouts.
+  It's best to set <i>ptsize=</i> directly rather than using <i>css='font-size:...'</i> 
+  for correct internal computation of layouts. 
   </p><p>
   </p><p>
   <span class="parm">color=</span> &nbsp; sets the text color.  Default is <tt>'#000'</tt> (black).
@@ -563,21 +560,6 @@ In many cases decent results are possible just by supplying the mandatory args.
   <span class="parm">nodefaults=</span> &nbsp; if <i>nodefaults=True</i> then <i>ptsize=</i>, <i>color=</i>, and <i>opacity=</i> 
   will not take on default values as mentioned above.  This allows <i>css=</i> to influence 
   these aspects of the text without interference.  Default is <tt>False</tt>.
-  </p><p>
-  </p><p>
-  <b>Notes</b> on minplot text rendering:
-  </p><p>
-  SVG natively supports html special character constructs such as &amp;micro; (the &micro; symbol)
-  </p><p>
-  HTML superscript and subscript constructs are supported eg.  &lt;sup>2&lt;/sup> and &lt;sub>2&lt;/sub> 
-  </p><p>
-  Embedded newlines are supported.  Use: \n
-  </p><p>
-  It's possible to propagate line or text css styles to sets of elements within an SVG &lg;g&gt; construct.
-  See <span class="fxn">gbegin()</span> below.
-  </p>
-  For best results set <i>ptsize=</i> function arg directly rather than using <i>css='font-size:...'</i>.
-  This is because minplot uses text size when computing certain layouts.
       
 
     </div></div></div></div>
