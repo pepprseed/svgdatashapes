@@ -1,14 +1,13 @@
 #
-# minplot.py  0.30  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
+# minplot_dt.py  0.30  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
 #
-
 
 import minplot
 from minplot import p_dtformat 
 import collections
 import datetime as d
 import time
-import calendar    # yes one function has to come from here to do this all in GMT
+import calendar    
 
 class AppDt_Error(Exception): pass
 

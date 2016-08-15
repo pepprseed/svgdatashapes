@@ -1,0 +1,133 @@
+
+
+<!doctype html>
+
+<!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../static/css/pack1.css">
+
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+
+</head>
+
+<body text="000000" link="5533aa" vlink="5533aa" alink="5533aa" bgcolor="ffffff">
+
+
+
+
+  
+<nav role="navigation" class="navbar navbar-default navbar-static-top" >    
+
+
+    <div class="container">
+        
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <br><br>
+        </div>
+
+        
+        
+    </div>
+</nav>
+
+
+
+
+<div class="container">  
+
+
+<div class="row">
+<div class="col-md-1"></div>
+
+<div class="col-md-10">
+<h3>Test of freq distributions and percentiles computation</h3>
+
+
+   <pre>
+   
+----
+
+Numeric distribtion result:
+[{'accum': 0, 'binmid': 0.5, 'binlo': 0.0}, {'accum': 14, 'binmid': 1.5, 'binlo': 1.0}, {'accum': 2, 'binmid': 2.5, 'binlo': 2.0}, {'accum': 1, 'binmid': 3.5, 'binlo': 3.0}, {'accum': 3, 'binmid': 4.5, 'binlo': 4.0}, {'accum': 4, 'binmid': 5.5, 'binlo': 5.0}, {'accum': 9, 'binmid': 6.5, 'binlo': 6.0}, {'accum': 12, 'binmid': 7.5, 'binlo': 7.0}, {'accum': 5, 'binmid': 8.5, 'binlo': 8.0}, {'accum': 10, 'binmid': 9.5, 'binlo': 9.0}]
+----
+
+Percentiles result:
+{'75th': 7.5, '5th': 1.0, '25th': 2.5, 'median': 5.5, '95th': 9.0}
+----
+
+Categorical distribution result:
+{'term': 'red', 'accum': 12}
+{'term': 'green', 'accum': 9}
+{'term': 'blue', 'accum': 1}
+
+   </pre>
+
+
+<br>
+<br>
+
+
+<pre><span class="purple">
+
+
+import minplot as p
+
+def test_distribs():
+
+    # This tests the frequency distribution capabilities of numinfo() and catinfo()
+    # as well as the percentile computation capability of numinfo().
+    
+    outstr = ""
+    
+    dataset1 = ( (1,2), (1,3), (1,4), (1,5), (2,1), (2,1), (3,1), (4,1), (4,1), (4,1), (5,2), (5,2), (6,3), (6,3), (6,3), 
+           (7,4), (7,4), (7,4), (8,5), (9,2), (9,2), (9,2), (9,2), (9,2) )
+    
+    outstr += "\n----\n\nNumeric distribtion result:\n"
+    
+    p.datafieldnames( ( "f1",  "f2") )
+    result = p.numinfo( numfield="f1", datarows=dataset1, distrib=True, distbinsize=1, accumfield="f2" )
+    outstr += str(result.distribution)
+    
+    outstr += "\n----\n\nPercentiles result:\n"
+    
+    result = p.numinfo( numfield="f1", datarows=dataset1, percentiles=True )
+    outstr += str(result.percentiles)
+    
+    
+    # for row in result["distribution"]:
+    #    print str(row)
+    
+    outstr += "\n----\n\nCategorical distribution result:\n"
+    
+    dataset2 = ( [ "red", 4 ], ["green", 2], ["red", 8 ], ["blue", 1 ], ["green", 7] )
+    
+    p.datafieldnames( ( "f1", "f2" ) )
+    result = p.catinfo( catfield="f1", datarows=dataset2, distrib=True, accumfield="f2" )
+    
+    for row in result.distribution:
+        outstr += str(row) + "\n"
+    
+    
+    return outstr
+</span></pre>
+
+</div>
+
+</div> 
+</div> 
+
+</body>
+</html>

@@ -1,6 +1,9 @@
 
 
 <!doctype html>
+
+<!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,6 +66,7 @@
 <div align=right>
   <span class="text11">
   <nobr>Stephen Grubb &nbsp; &nbsp; &nbsp;</nobr>
+  <nobr><a href="pages/examplist.html">Examples</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="https://github.com/grubbcode/minplot">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
   <nobr><a href="LICENSE.txt">MIT License</a></nobr>
   </span>
@@ -83,7 +87,7 @@ To get started <a href="minplot.py">download minplot.py</a> and import it.
 The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
 In web pages you can display your SVG result inline (embedded directly within your html), or using  &lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;.
 <br><br>
-Here's a first minplot.py example: &nbsp; <a href="examples/e1.html">View code</a>
+Here's a first minplot.py example: &nbsp; <a href="pages/e1.html">View code</a>
 <br>
 <img src="static/img/example1.svg" >
 <br><br>
@@ -92,15 +96,15 @@ No javascript or CSS coding is necessary, and detailed knowledge of SVG is not r
 Minplot can do some basic reactive UI things like automatic SVG sizing, tooltips, clickthru, and hide/show of certain plot elements.  
 If you need fullblown interactive data visualization or animations use something like D3.js instead.
 <br><br>
-Here's a scatterplot example. <a href="examples/e2.html">View code</a>
+Here's a scatterplot example. <a href="pages/e2.html">View code</a>
 <br>
 <img src="static/img/example2.svg" >
 <br><br>
-And a pie chart example. <a href="examples/e3.html">View code</a>
+And a pie chart example. <a href="pages/e3.html">View code</a>
 <br>
 <img src="static/img/example3.svg" >
 <br>
-More examples are <span class="blue">coming soon</span>.
+<a href="pages/examplist.html">Listing of all examples</a>.
 <br><br><br>
 
 
@@ -108,7 +112,7 @@ More examples are <span class="blue">coming soon</span>.
   <p>
   Here's some terminology we use:
   <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
-  Origin (0, 0) is lower-left corner.  <a href="examples/eunits.html">Here's an illustration</a>.
+  Origin (0, 0) is lower-left corner.  <a href="pages/eunits.html">Here's an illustration</a>.
   The <u>plot area</u> is the rectangular area where you plot your data.  
   To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
   <u>Data space</u> is based on the ranges of your data points.
@@ -121,7 +125,7 @@ More examples are <span class="blue">coming soon</span>.
   minplot.py works with data that you have put into a two-dimensional python iterative,
   for example an array of dict or an array of array.
   If your data are in an array of dict you can identify fields simply by giving dict element names.
-  Otherwise you can assign field names by calling <span class="fxn">datafieldnames()</span>, or
+  Otherwise you can assign field names using <span class="fxn">datafieldnames()</span>, or
   identify fields by index position e.g. <tt>'0'</tt>.
   </p>
   <br>
@@ -141,7 +145,7 @@ More examples are <span class="blue">coming soon</span>.
   </p><p>
   To plot dates and times, 
   you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
-  Then see these examples of <a href="examples/e4.html">plotting dates</a> and <a href="examples/e5.html">plotting dates + times</a>.
+  Then see these examples of <a href="pages/e4.html">plotting dates</a> and <a href="pages/e5.html">plotting dates + times</a>.
   Many date / time notations are supported; for details see the <a href="index.html#dt">datetime section below</a>.
   </p>
   
@@ -162,8 +166,8 @@ More examples are <span class="blue">coming soon</span>.
   Opacity is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
   </p><p>
   Text things: Use <tt>\n</tt> to embed newlines in text.
-  Use eg. &lt;sup>2&lt;/sup> and &lt;sub>2&lt;/sub> to get superscripts or subscripts.
-  Special character constructs such as &amp;micro; (the &micro; symbol) are supported natively by SVG.
+  Use eg. <tt>&lt;sup>2&lt;/sup></tt> and <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
+  Special character constructs such as <tt>&amp;micro;</tt> (the &micro; symbol) are supported natively by SVG.
   </p><p>
   CSS:&nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
   via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
@@ -177,9 +181,9 @@ More examples are <span class="blue">coming soon</span>.
 <br>
 <h3>minplot.py API</h3>
 <p>
-Arguments are keyword args unless otherwise indicated.
+Here's the minplot API reference.  
 Mandatory args are shown within the function templates and indicated as such.
-In many cases decent results are possible just by supplying the mandatory args.
+All args are keyword args unless otherwise indicated.
 </p>
 
 
@@ -361,10 +365,8 @@ In many cases decent results are possible just by supplying the mandatory args.
     <div id="datafieldnames-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Populate minplot's internal field name list with some data field names, so that you can identify data fields by name.
+  Set the internal current data field name list so that data fields can be identified by name.
   If your data structure uses dict rows you don't need to use this.
-  You can use <tt>datafieldnames( namelist=None )</tt> to clear the internal field name list.
-  If your plot data changes the fieldnames can be updated by calling this function again.
   </p><p>
   <span class="parm">namelist=</span> &nbsp; is a list of fieldnames in left-to-right order as they appear in 
   your data structure.  If you're getting data from a DBMS there's usually a way to get such a list
@@ -405,7 +407,6 @@ In many cases decent results are possible just by supplying the mandatory args.
   </p><p>
   <span class="parm">numfield=</span> &nbsp; identifies the numeric data field to be characterized.
   Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
-  (see Basics: Your Data Structure above for more info)
   </p><p>
   <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).  
   </p><p>
@@ -455,7 +456,6 @@ In many cases decent results are possible just by supplying the mandatory args.
   </p><p>
   <span class="parm">catfield=</span> &nbsp; identifies the data field to be characterizaed. 
   Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>
-  (see Basics: Your Data Structure above for more info)
   </p><p>
   <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).
   </p><p>
@@ -887,7 +887,7 @@ In many cases decent results are possible just by supplying the mandatory args.
   are ignored and can be specified as anything).
   You can specify a square plotting area, or a wider one with room for the legend to one side or the other.  
   A legend is always used with piegraphs because slice labelling isn't supported.
-  Here's a <a href="examples/e3.html">piegraph example</a>.
+  Here's a <a href="pages/e3.html">piegraph example</a>.
   </p><p>
   Slice size is specified as a percentage of the whole (0.00 to 1.00).  If you need to compute this on the fly for your
   data use <span class="fxn">numinfo()</span> to get <tt>sum</tt> then divide each value by it.
@@ -1191,12 +1191,12 @@ In many cases decent results are possible just by supplying the mandatory args.
   </p><p>
   The basic approach is to use <span class="fxn">pdt.num()</span> to convert dates to integers, then plot in numeric space.
   To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.dtrange()</span>.
-  Here's an example where dates are plotted. <a href="examples/e4.html">View code</a>
+  Here's an example where dates are plotted. <a href="pages/e4.html">View code</a>
   </p>
   <br>
   <img src="static/img/example4.svg" >
   <br>
-  An example where dates+times are plotted is <a href="examples/e5.html">here</a>.
+  An example where dates+times are plotted is <a href="pages/e5.html">here</a>.
   <br><br>
   <p>
   <b>Date formats:</b> 
@@ -1241,7 +1241,6 @@ In many cases decent results are possible just by supplying the mandatory args.
   </p><p>
   <span class="parm">dtfield=</span> &nbsp; identifies the numeric data field to be characterized.
   Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
-  (see Basics: Your Data Structure above for more info)
   </p><p>
   <span class="parm">datarows=</span> &nbsp; this is your data structure (mandatory).
   </p><p>
@@ -1474,9 +1473,9 @@ In many cases decent results are possible just by supplying the mandatory args.
   </p><p>
   Another difference is that the inline SVG can be influenced by styles present in 
   the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
-  above which uses &lt;img&gt; vs. the fonts seen in <a href="examples/e3.html">this inline SVG example</a>; 
+  above which uses &lt;img&gt; vs. the fonts seen in <a href="pages/e3.html">this inline SVG example</a>; 
   You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
-  like we did <a href="examples/e1.html">here</a>.
+  like we did <a href="pages/e1.html">here</a>.
   </p>
   <br>
 
