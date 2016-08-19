@@ -13,13 +13,13 @@ def test_distribs():
     
     outstr += "\n----\n\nNumeric distribtion result:\n"
     
-    p.datafieldnames( ( "f1",  "f2") )
-    result = p.numinfo( numfield="f1", datarows=dataset1, distrib=True, distbinsize=1, accumfield="f2" )
+    p.datacolumns( [ "f1", "f2"] )
+    result = p.numinfo( numcol="f1", datarows=dataset1, distrib=True, distbinsize=1, accumcol="f2" )
     outstr += str(result.distribution)
     
     outstr += "\n----\n\nPercentiles result:\n"
     
-    result = p.numinfo( numfield="f1", datarows=dataset1, percentiles=True )
+    result = p.numinfo( numcol="f1", datarows=dataset1, percentiles=True )
     outstr += str(result.percentiles)
     
     
@@ -30,8 +30,8 @@ def test_distribs():
     
     dataset2 = ( [ "red", 4 ], ["green", 2], ["red", 8 ], ["blue", 1 ], ["green", 7] )
     
-    p.datafieldnames( ( "f1", "f2" ) )
-    result = p.catinfo( catfield="f1", datarows=dataset2, distrib=True, accumfield="f2" )
+    p.datacolumns( [ "f1", "f2" ] )
+    result = p.catinfo( catcol="f1", datarows=dataset2, distrib=True, accumcol="f2" )
     
     for row in result.distribution:
         outstr += str(row) + "\n"

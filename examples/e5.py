@@ -9,7 +9,7 @@ def example5():                                          # plot some dates with 
     
     p.svgbegin( width=800, height=300 )
 
-    xrange = pdt.dtrange( dtfield="0", datarows=dataset1, nearest="day", inc="6hour", stubformat="%l%P", 
+    xrange = pdt.dtrange( dtcol="0", datarows=dataset1, nearest="day", inc="6hour", stubformat="%l%P", 
                           inc2="day", stub2format="%b %d", stub2place="replace" )
 
     # set up X space...

@@ -18,7 +18,7 @@ def example1():
     p.svgbegin( width=550, height=450 )
 
     # get an list of unique state names from the data...
-    catinfo = p.catinfo( catfield='state', datarows=dataset )
+    catinfo = p.catinfo( catcol='state', datarows=dataset )
     states = catinfo.catlist
 
     # set up the X categorical space... in the svg it will be 450 minplot units wide
@@ -32,28 +32,26 @@ def example1():
     ymin = yrange.axmin
     ymax = yrange.axmax
 
-    textcss = "font-family: arial, sans-serif"    # ensure sans-serif even via [img]
+    textstyle = "font-family: sans-serif;"    # ensure sans-serif even via [img]
 
     # set up the Y numerically scaled space... in the svg it will be 300 minplot units high
     p.numspace( axis='Y', axmin=ymin, axmax=ymax, poslo=100, poshi=400 )
 
     # render X and Y axes...  light red, with light gray grid lines... 
+    p.textprops( ptsize=12, color='#caa', cssstyle=textstyle )  
     p.lineprops( color='#e0e0e0' )
-    p.textprops( ptsize=12, color='#c0a0a0', css=textcss )  
     p.axisrender( axis='X', tics=8 )
-
-    p.textprops( ptsize=12, color='#c0a0a0', css=textcss )
     p.axisrender( axis='Y', axisline=False, grid=True )
 
     # render the green curve lineplot.... set up its legend entry too
-    p.lineprops( color='#80d080', width=2, dash="5,2"  )
+    p.lineprops( color='#8d8', width=2, dash="5,2"  )
     p.legenditem( label='line\nplot\ncurve', sample='line' )
     p.curvebegin()
     for row in dataset:
         p.curvenext( x=row['state'], y=row['avg'] )
 
     # render the column bars and error bars.... set up its legend entry too
-    p.lineprops( color='#8080ff', width=0.5 )
+    p.lineprops( color='#88f', width=0.5 )
     orange = '#fedcba'
     p.legenditem( label='bar\ngraph', sample='square', color=orange, outline=True )
     for row in dataset:
@@ -62,8 +60,8 @@ def example1():
         p.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
 
     # render the legend...
-    p.textprops( ptsize=12, color='#888', css=textcss )
-    p.lineprops( color='#aaaaff', width=0.5 )
+    p.textprops( ptsize=12, color='#888' )
+    p.lineprops( color='#aaf', width=0.5 )
     p.legendrender( location='topleft', format='across' )
 
     # capture the entire SVG...

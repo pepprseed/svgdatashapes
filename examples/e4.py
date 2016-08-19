@@ -9,11 +9,11 @@ def example4():                                        # plot some date-based da
 
     p.svgbegin( width=500, height=300 )
 
-    xrange = pdt.dtrange( dtfield="0", datarows=dataset1, nearest="3month", inc="3month", 
+    xrange = pdt.dtrange( dtcol="0", datarows=dataset1, nearest="3month", inc="3month", 
                 stubformat="%b", inc2="year", stub2format=" %Y" )
-    # alt1:  xrange = pdt.dtrange( dtfield="0", datarows=dataset1, 
+    # alt1:  xrange = pdt.dtrange( dtcol="0", datarows=dataset1, 
     #          nearest="year", inc="month", stubformat="1 %b '%y" )  
-    # alt2:  xrange = pdt.dtrange( dtfield="0", datarows=dataset1, 
+    # alt2:  xrange = pdt.dtrange( dtcol="0", datarows=dataset1, 
     #          nearest="week_day2", stubformat="%b %d" )             
 
     # set up X space...

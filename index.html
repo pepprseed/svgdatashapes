@@ -5,6 +5,7 @@
 <!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
 
 <head>
+<title>minplot.py on GitHub</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -84,25 +85,30 @@ Numeric, categorical, and dates/times are all supported.
 Developing graphs with minplot.py is meant to be agile, rapid, and straightforward.
 To get started <a href="minplot.py">download minplot.py</a> and import it.  
 The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
-In web pages you can display your SVG result inline (embedded directly within your html), or using  &lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;.
+In web pages you can use <a href="index.html#inline">inline SVG</a> (embedded directly within your html), 
+or use <a href="index.html#inline">&lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;</a>.
 <br><br>
 Here's a first minplot.py example: &nbsp; <a href="pages/e1.html">View code</a>
 <br>
 <img src="static/img/example1.svg" >
 <br><br>
 Minplot.py works nicely within frameworks such as Bootstrap or Flask. 
-No javascript or CSS coding is necessary, and detailed knowledge of SVG is not required.
+No javascript coding is necessary, and detailed knowledge of SVG or CSS is not required although it wouldn't hurt.
 Minplot can do some basic reactive UI things like automatic SVG sizing, tooltips, clickthru, and hide/show of certain plot elements.  
 If you need fullblown interactive data visualization or animations use something like D3.js instead.
+<br><br>
+Here's a lineplot example. <a href="pages/e6.html">View code</a>
+<br>
+<img src="static/img/example6.svg" height=350>
 <br><br>
 Here's a scatterplot example. <a href="pages/e2.html">View code</a>
 <br>
 <img src="static/img/example2.svg" >
 <br><br>
-And a pie chart example. <a href="pages/e3.html">View code</a>
+Here's a pie chart example. <a href="pages/e3.html">View code</a>
 <br>
 <img src="static/img/example3.svg" >
-<br>
+<br><br>
 <a href="pages/examplist.html">Listing of all examples</a>.
 <br><br><br>
 
@@ -119,13 +125,13 @@ And a pie chart example. <a href="pages/e3.html">View code</a>
   <br>
 
 
-<h3>Plot data and fields</h3>
+<h3>Plot data</h3>
   <p>
-  minplot.py works with data that you have put into a two-dimensional python iterative,
-  for example an array of dict or an array of array.
-  If your data are in an array of dict you can identify fields simply by giving dict element names.
-  Otherwise you can assign field names using <span class="fxn">datafieldnames()</span>, or
-  identify fields by index position e.g. <tt>'0'</tt>.
+  minplot.py works with data that you have put into a two-dimensional python iterative that can be thought of as rows and columns, 
+  such as an array of dict or an array of array.
+  With array of dict you can identify columns simply by giving the dict element names.
+  Otherwise you can assign column names using <span class="fxn">datacolumns()</span>, or
+  just identify columns by array index position.
   </p>
   <br>
 
@@ -146,6 +152,8 @@ And a pie chart example. <a href="pages/e3.html">View code</a>
   you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
   Then see these examples of <a href="pages/e4.html">plotting dates</a> and <a href="pages/e5.html">plotting dates + times</a>.
   Many date / time notations are supported; for details see the <a href="index.html#dt">datetime section below</a>.
+  </p><p>
+  <a href="index.html#missingdata">What happens with missing / invalid data</a>
   </p>
   
   <br>
@@ -153,8 +161,6 @@ And a pie chart example. <a href="pages/e3.html">View code</a>
 
 <h3>Line and text properties, colors, opacity, CSS</h3>
   <p>
-  <span class="usermessage">[Under construction]</span><br><br>
-<!--
   Use <span class="fxn">lineprops()</span> to set the
   color, thickness, opacity, and dash pattern of lines.
   Use <span class="fxn">textprops()</span> to set the size, color, and other properties for text.
@@ -170,12 +176,14 @@ And a pie chart example. <a href="pages/e3.html">View code</a>
   Use eg. <tt>&lt;sup>2&lt;/sup></tt> and <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
   Special character constructs such as <tt>&amp;micro;</tt> (the &micro; symbol) are supported natively by SVG.
   </p><p>
-  CSS:&nbsp; If you wish, lines and text can be styled using CSS elements or style specifications 
-  via the <i>css=</i> argument to <span class="fxn">textprops()</span> or <span class="fxn">lineprops()</span>.
-  It's also possible to style sets of elements together, see <span class="fxn">groupbegin()</span> below.
+  CSS:&nbsp; If you wish, lines and text can be explicitly CSS-styled 
+  using the <i>cssclass=</i> and/or <i>cssstyle=</i> arguments.
+  Elements in inline SVGs are generally influenced by / have access to the containing page's css.
+  Within an SVG there are things like colors that can be done either via CSS or explicit SVG parameters;
+    if both are given the CSS typically takes precedence.
+  To CSS-style sets of elements together, see <span class="fxn">groupbegin()</span> below.
   </p>
   <br>
--->
 
 
 <a name="api"></a>
@@ -257,7 +265,7 @@ All args are keyword args unless otherwise indicated.
    result = p.findrange( finished=True )
    print str(result.axmin), str(result.axmax)
    </pre>
-   It's set up this way to give you the flexibility to check one data field or several, which is needed
+   It's set up this way to give you the flexibility to check one data column or several, which is needed
    if you're doing stacked bars, clustered bars, error bars, showing several curves, or plotting cumulative values.
   </p><p>
   Results are returned in a namedtuple having these members: 
@@ -358,20 +366,28 @@ All args are keyword args unless otherwise indicated.
 
 
 
-    <div class="panel-group" id="datafieldnames">
+    <div class="panel-group" id="datacolumns">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datafieldnames" href="index.html#datafieldnames-content">&bull; datafieldnames( namelist )</a>
+    <a data-toggle="collapse" data-parent="#datacolumns" href="index.html#datacolumns-content">&bull; datacolumns( namelist ) &nbsp; &nbsp; icol( name )</a>
     </i></b></span>
-    <div id="datafieldnames-content" class="panel-collapse collapse "> <div class="panel-body">
+    <div id="datacolumns-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Set the internal current data field name list so that data fields can be identified by name.
-  If your data structure uses dict rows you don't need to use this.
+  <b>datacolumns( namelist )</b>
   </p><p>
-  <span class="parm">namelist=</span> &nbsp; an iterable list or array of fieldnames in left-to-right order as they appear in 
+  Set the internal current data column name list so that data columns can be identified by name.
+  If your data structure uses dict rows you don't use this.
+  </p><p>
+  <span class="parm">namelist=</span> &nbsp; an iterable list or array of column names in left-to-right order as they appear in 
   your data structure.  Most DBMS provide a way to get a list of query result column names.  
+  </p><p>
+  <br>
+  <b>icol( colname )</b>
+  </p><p>
+  Given a column name that was registered earlier with <span class="fxn">datacolumns()</span>, this returns its integer array index.
   </p>
+  
       
 
     </div></div></div></div>
@@ -383,12 +399,12 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="numinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( numfield, datarows )</a>
+    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( numcol, datarows )</a>
     </i></b></span>
     <div id="numinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Return a tuple of characteristics for a numeric data field, optionally including 
+  Return a tuple of characteristics for a numeric data column, optionally including 
   frequency distributions and boxplot percentiles.
   </p><p>
   Results are returned as a namedtuple having these members: 
@@ -405,13 +421,13 @@ All args are keyword args unless otherwise indicated.
   <br><tt>distbinsize</tt> ... the binsize used in the above
   <br><tt>percentiles</tt> ... optional percentiles structure
   </p><p>
-  <span class="parm">numfield=</span> &nbsp; identifies the numeric data field to be characterized.
-  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
+  <span class="parm">numcol=</span> &nbsp; identifies the numeric data column to be characterized.
+  Either a name or an integer array index.
   </p><p>
   <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).  
   </p><p>
   <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency distribution on the 
-  examined data field and it in the <tt>distribution</tt> member of the result.
+  examined data column and it in the <tt>distribution</tt> member of the result.
   A reasonable default numeric binsize is determined (it can be overridden using <i>distbinsize=</i>, see below).  
   The result is suitable for plotting if you wish.
   </p><p>
@@ -420,13 +436,13 @@ All args are keyword args unless otherwise indicated.
   binsize explicitly, or it may be a construct such as <i>distbinsize='inc/2'</i> which sets the the 
   binsize to the tic increment (which was computed on-the-fly earlier) divided by 2.
   </p><p>
-  <span class="parm">accumfield=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
-  field holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
+  <span class="parm">accumcol=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
   incrementally.  Default is <tt>None</tt>.
   </p><p>
   <span class="parm">percentiles=True</span> &nbsp; if specified, compute the 5th, 25th, 50th (median), 
-  75th, and 95th percentile for the examined data field and put them in the <tt>percentiles</tt> member
-  of the result.  The examined data field <u>must</u> already be sorted 
+  75th, and 95th percentile for the examined data column and put them in the <tt>percentiles</tt> member
+  of the result.  The examined data column <u>must</u> already be sorted 
   numerically from low to high.  The usual use for these percentiles data is to generate box plots 
   </p>
       
@@ -440,12 +456,12 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="catinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( catfield, datarows )</a>
+    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( catcol, datarows )</a>
     </i></b></span>
     <div id="catinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Return some characteristics of a categorical data field, including a 
+  Return some characteristics of a categorical data column, including a 
   unique list of the categories seen (for subsequent use by <span class="fxn">catspace()</span>), or
   frequency distributions (which can later be plotted).
   Categories are accumulated in the order encountered.
@@ -454,8 +470,8 @@ All args are keyword args unless otherwise indicated.
   <br><tt>catlist</tt> ... the unique list of categories in the order encountered
   <br><tt>distribution</tt> ... optional distribution bins structure
   </p><p>
-  <span class="parm">catfield=</span> &nbsp; identifies the data field to be characterizaed. 
-  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>
+  <span class="parm">catcol=</span> &nbsp; identifies the data column to be characterizaed. 
+  Either a name or an integer array index.
   </p><p>
   <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).
   </p><p>
@@ -463,11 +479,11 @@ All args are keyword args unless otherwise indicated.
   None or ''; these can serve as spacers.  Default is <tt>True</tt> 
   </p><p>
   <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency 
-  distribution on the categorical data field of interest, and put it in the <tt>distribution</tt>
+  distribution on the categorical data column of interest, and put it in the <tt>distribution</tt>
   member of the result; this can be plotted if you wish.
   </p><p>
-  <span class="parm">accumfield=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
-  field holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
+  <span class="parm">accumcol=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
   incrementally.  Default is <tt>None</tt>.
   </p>
       
@@ -479,10 +495,8 @@ All args are keyword args unless otherwise indicated.
 
 
 <br>
-<h3><i>Line and text properties / styles</i></h3>
-
-  <span class="usermessage">[Under construction]</span><br><br>
-<!--
+<h3><i>Line and text styles / properties</i></h3>
+ 
 
 
     <div class="panel-group" id="lineprops">
@@ -494,26 +508,23 @@ All args are keyword args unless otherwise indicated.
 
   <p>
   Set the current properties to be applied to subsequent line rendering.  
-  Any line properties below that aren't specified as function args are reset to the defaults (except when <i>nodefaults=True</i>),
+  Each property corresponds with an argument below.  You can specify one or several.
+  Individual properties remain in effect until explicitly updated or <tt>reset</tt>
   </p><p>
   <span class="parm">width=</span> &nbsp; sets the line stroke width.  Default is 1.0.
   </p><p>
-  <span class="parm">color=</span> &nbsp; sets the line stroke color.  Default is "#000000" (black).
+  <span class="parm">color=</span> &nbsp; sets the line stroke color.  Default is "#000" (black).
   </p><p>
   <span class="parm">opacity=</span> &nbsp; sets the line opacity.  Default is 1.0 (opaque).
   </p><p>
   <span class="parm">dash=</span> &nbsp; sets the dash pattern.  Example dash pattern <tt>'5,2'</tt>.
-  Default is <tt>None</tt> which gives a solid line.
+  Default is <tt>None</tt> for solid line.
   </p><p>
-  <span class="parm">css=</span> &nbsp; 
-  A CSS element name or style string for the line.
-  If the value contains a colon it will be conveyed as <tt>style=</tt>,
-  otherwise it will be conveyed as <tt>class=</tt>.
-  If you get conflicts vs. the function arg defaults try <i>nodefaults=True</i>.
+  <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the line.  Default is None.
   </p><p>
-  <span class="parm">nodefaults=</span> &nbsp; if <i>nodefaults=True</i> then <i>width=</i>, <i>color=</i>, <i>opacity=</i>, and <i>dash=</i> 
-  will not take on default values as mentioned above.  This allows <i>css=</i> 
-  to influence these aspects of the line without interference. Default is <tt>False</tt>.
+  <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the line.  Default is None.
+  </p><p>
+  <span class="parm">reset=True</span> &nbsp; sets the line style to use all the defaults.
   </p>
       
 
@@ -531,12 +542,12 @@ All args are keyword args unless otherwise indicated.
     <div id="textprops-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Set the current properties to be applied to subsequent text rendering.  
-  Any text properties below that aren't specified as function args are reset to the defaults (except when <i>nodefaults=True</i>),
+  Set the current properties to be applied to subsequent text rendering. 
+  Each property corresponds with an argument below.  You can specify one or several.
+  Individual properties remain in effect until explicitly updated or <tt>reset</tt>
   </p><p>
   <span class="parm">ptsize=</span> &nbsp; sets the text point size.  Integer. Default is 10.
-  It's best to set <i>ptsize=</i> directly rather than using <i>css='font-size:...'</i> 
-  for correct internal computation of layouts. 
+  It's best to always set <i>ptsize=</i> to get proper minplot layout computations.
   </p><p>
   </p><p>
   <span class="parm">color=</span> &nbsp; sets the text color.  Default is <tt>'#000'</tt> (black).
@@ -552,21 +563,15 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to the text position.  Specify as a list of
   (xofs, yofs) in minplot units.  Default is <tt>None</tt>.
   </p><p>
-  <span class="parm">css=</span> &nbsp; 
-  A CSS element name or style string for the text.
-  If the value contains a colon it will be conveyed as <tt>style=</tt>,
-  otherwise it will be conveyed as <tt>class=</tt>.
-  If you get conflicts vs. the function arg defaults try <i>nodefaults=True</i>.
-  See also the remarks with <i>ptsize=</i> above.
+  <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the text.  Default is None.
   </p><p>
-  <span class="parm">nodefaults=</span> &nbsp; if <i>nodefaults=True</i> then <i>ptsize=</i>, <i>color=</i>, and <i>opacity=</i> 
-  will not take on default values as mentioned above.  This allows <i>css=</i> to influence 
-  these aspects of the text without interference.  Default is <tt>False</tt>.
+  <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the text.  Default is None.
+  </p><p>
+  <span class="parm">reset=True</span> &nbsp; sets the text style to use all the defaults.
       
 
     </div></div></div></div>
 
--->
 
 
 
@@ -1234,15 +1239,14 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <h4>dtrange( dtfield, datarows, nearest, stubformat )</h4>
-  
+  <h4>dtrange( dtcol, datarows, nearest, stubformat )</h4>
   <p>Returns a tuple with these members:  <tt>axmin</tt>, <tt>axmax</tt>, and <tt>stublist</tt>.
-  This function examines a field in your data that contains dates, and determines the axis min and max
+  This function examines a column in your data that contains dates, and determines the axis min and max
   (<tt>axmin</tt> and <tt>axmax</tt>) along with 
   a list of formatted axis stubs (<tt>stublist</tt>); this can later be passed to <span class="fxn">axisrender()</span>.
   </p><p>
-  <span class="parm">dtfield=</span> &nbsp; identifies the numeric data field to be characterized.
-  Either a name or an integer index as a str eg. <tt>'0'</tt> or <tt>'2'</tt>.
+  <span class="parm">dtcol=</span> &nbsp; identifies the numeric data column to be characterized.
+  Either a name or an integer array index.
   </p><p>
   <span class="parm">datarows=</span> &nbsp; this is your data structure (mandatory).
   </p><p>
@@ -1395,7 +1399,7 @@ All args are keyword args unless otherwise indicated.
   You start with a categorical space where the area for each category panel becomes a 
   separate individual plot area.  Your python code then iterates over the panels
   and renders a plot inside each one in the normal fashion.  (Or, you might iterate over your
-  data and render one plot for each chunk of data). Usually you'll have a data field that 
+  data and render one plot for each chunk of data). Usually you'll have a data column that 
   corresponds to the category / panel name.
   </p><p>
   Multiple panel displays can be useful for rendering:
@@ -1464,23 +1468,34 @@ All args are keyword args unless otherwise indicated.
     </div></div></div></div>
 
 <br>
+
+
+<a name="inline"></a>
 <br>
 <br>
 
-<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt;</h3>
+<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt; or &lt;object&gt;</h3>
   <p>
-  Use whatever approach is most convenient.
   Inline SVG tends to be more convenient in dynamic web content systems.
+  </p><p>
+  Some people don't like the big blob of SVG code sitting in the midst of their html and would vote for &lt;img&gt; 
+  </p><p>
+  CSS classes probably won't work with &lt;img&gt;, although <tt>style</tt> does work.
+  </p><p>
+  Inline SVG's are generally influenced by / have access to CSS styles present in 
+  the containing page but with &lt;img&gt; this isn't the case.
+  </p><p>
+  With &lt;img&gt; you can use width= and height= to conveniently adjust the size.
+  </p><p>
   Fluid SVG sizing probably won't work with &lt;img&gt;
   </p><p>
-  Another difference is that the inline SVG can be influenced by styles present in 
-  the containing page but with &lt;img&gt; this isn't the case (this can be seen by comparing the fonts in the pie graph 
-  above which uses &lt;img&gt; vs. the fonts seen in <a href="pages/e3.html">this inline SVG example</a>; 
-  You can add explicit css= to the <span class="fxn">textprops()</span> calls to ensure sans-serif,
-  like we did <a href="pages/e1.html">here</a>.
+  &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
   </p>
   <br>
 
+<a name="missingdata"></a>
+<br>
+<br>
 <h3>Handling of missing data or invalid data</h3>
   <p>
   Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
