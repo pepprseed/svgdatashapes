@@ -73,29 +73,28 @@
 </div>
 <br>
 
-minplot.py is a somewhat minimalist general-purpose python library for creating various types of
+minplot.py is a somewhat minimalist general-purpose python library for creating 
 bar graphs, line plots, scatterplots, piegraphs, boxplots, errorbars, heatmaps, multipanel displays and more
 with plenty of control over plot options, axes, legends, colors, transparency, and other details.
 Graphics are produced in SVG format.
 <br><br>
-Your plot data can come from a database or anywhere else, and can be
-represented as an array of dict or other similar 2-D python iterable.
-Numeric, categorical, and dates/times are all supported.
+Your plot data can be numeric, categorical, or date/time and can come from a database or anywhere else. 
+You represent it as an array of dict or other similar 2-D python iterable.
 <br><br>
-Developing graphs with minplot.py is meant to be agile, rapid, and straightforward.
+Developing with minplot.py is meant to be agile, rapid, straightforward.
 To get started <a href="minplot.py">download minplot.py</a> and import it.  
 The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
-In web pages you can use <a href="index.html#inline">inline SVG</a> (embedded directly within your html), 
-or use <a href="index.html#inline">&lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;</a>.
+In web pages you can display your SVG <a href="index.html#inline">inline</a> or using
+<a href="index.html#inline">&lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;</a>.
 <br><br>
 Here's a first minplot.py example: &nbsp; <a href="pages/e1.html">View code</a>
 <br>
 <img src="static/img/example1.svg" >
 <br><br>
-Minplot.py works nicely within frameworks such as Bootstrap or Flask. 
-No javascript coding is necessary, and detailed knowledge of SVG or CSS is not required although it wouldn't hurt.
-Minplot can do some basic reactive UI things like automatic SVG sizing, tooltips, clickthru, and hide/show of certain plot elements.  
-If you need fullblown interactive data visualization or animations use something like D3.js instead.
+Minplot.py works nicely in frameworks such as Flask.
+No javascript coding is necessary, and knowledge of SVG or CSS isn't required (but could be useful).
+Minplot does some reactive UI such as tooltips, clickthru, and hide/show of certain elements, but
+for full interactive visualization / animations use d3.js or similar instead.
 <br><br>
 Here's a lineplot example. <a href="pages/e6.html">View code</a>
 <br>
@@ -116,18 +115,17 @@ Here's a pie chart example. <a href="pages/e3.html">View code</a>
 <h3>Minplot units, plot areas, data space</h3>
   <p>
   Here's some terminology we use:
-  <u>Minplot units</u> are based on the SVG width and height as given with <span class="fxn">svgbegin()</span>.
-  Origin (0, 0) is lower-left corner.  <a href="pages/eunits.html">Here's an illustration</a>.
+  <u>Minplot units</u> are based on the SVG width and height with
+  origin (0, 0) in lower-left corner.  <a href="pages/eunits.html">Here's an illustration</a>.
   The <u>plot area</u> is the rectangular area where you plot your data.  
-  To create your plot area use <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span> once for X and once for Y.
-  <u>Data space</u> is based on the ranges of your data points.
+  <u>Data space</u> is the X, Y space expressed in the context of your data points in X and Y.
   </p>
   <br>
 
 
-<h3>Plot data</h3>
+<h3>Plot data and column names</h3>
   <p>
-  minplot.py works with data that you have put into a two-dimensional python iterative that can be thought of as rows and columns, 
+  minplot.py works with data that you have put into a 2-D python iterative (rows and columns), 
   such as an array of dict or an array of array.
   With array of dict you can identify columns simply by giving the dict element names.
   Otherwise you can assign column names using <span class="fxn">datacolumns()</span>, or
@@ -138,20 +136,21 @@ Here's a pie chart example. <a href="pages/e3.html">View code</a>
 
 <h3>Working with different data types</h3>
   <p>
-  Numerics can be integers, floating point, or scientific notation values.  To work with numerics,
-  set up a numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and
-  draw your X or Y numeric axis using <span class="fxn">axisrender()</span>.  
-  If you wish, you can find your the numeric range of your data, or compute quartiles or run frequency distributions using <span class="fxn">numinfo()</span>.
+  Numerics can be integers, floating point, or scientific notation values.  To work with numeric data,
+  set up a numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and then
+  render a numeric axis using <span class="fxn">axisrender()</span>.  
+  If you wish, you can find the numeric range of your data, or compute quartiles or 
+  frequency distributions using <span class="fxn">numinfo()</span>.
   </p><p>
   Categorical data are tags, labels or any other non-continuous data.  To work with categorical data,
   set up a categorical data space in X or Y using <span class="fxn">catspace()</span>, and
-  draw your X or Y categorical axis using <span class="fxn">axisrender()</span>.  
+  render a categorical axis using <span class="fxn">axisrender()</span>.  
   If you wish you can find a unique list of categories, or run frequency distributions, using <span class="fxn">catinfo()</span>.
   </p><p>
   To plot dates and times, 
-  you'll need to <a href="minplot_dt.py">download minplot_dt.py</a> and import it along with minplot.py.
-  Then see these examples of <a href="pages/e4.html">plotting dates</a> and <a href="pages/e5.html">plotting dates + times</a>.
+  you'll need <a href="minplot_dt.py">minplot_dt.py</a>; import it along with minplot.py.
   Many date / time notations are supported; for details see the <a href="index.html#dt">datetime section below</a>.
+  <a href="pages/e4.html">Dates example</a> &nbsp; <a href="pages/e5.html">Dates + times example</a>.
   </p><p>
   <a href="index.html#missingdata">What happens with missing / invalid data</a>
   </p>
@@ -162,24 +161,22 @@ Here's a pie chart example. <a href="pages/e3.html">View code</a>
 <h3>Line and text properties, colors, opacity, CSS</h3>
   <p>
   Use <span class="fxn">lineprops()</span> to set the
-  color, thickness, opacity, and dash pattern of lines.
-  Use <span class="fxn">textprops()</span> to set the size, color, and other properties for text.
-  These settings persist until specified again.  
+  color, width, and dash pattern of lines.
+  Use <span class="fxn">textprops()</span> to set the size, color, and other properties of rendered text.
   </p><p>
   Colors are specified in the usual way for example <tt>'#a0ffa0'</tt> is light green; '#aaa' is a light shade of gray.
-  There are also a number of <a href="http://www.december.com/html/spec/colorsvg.html" target="_blank">named colors</a>
-  such as <tt>'powderblue'</tt> that SVG recognizes.
+  There are also some <a href="http://www.december.com/html/spec/colorsvg.html" target="_blank">named colors</a> that SVG recognizes.
   </p><p>
   Opacity is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
   </p><p>
   Text things: Use <tt>\n</tt> to embed newlines in text.
-  Use eg. <tt>&lt;sup>2&lt;/sup></tt> and <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
+  Use eg. <tt>&lt;sup>2&lt;/sup></tt> or <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
   Special character constructs such as <tt>&amp;micro;</tt> (the &micro; symbol) are supported natively by SVG.
   </p><p>
   CSS:&nbsp; If you wish, lines and text can be explicitly CSS-styled 
   using the <i>cssclass=</i> and/or <i>cssstyle=</i> arguments.
-  Elements in inline SVGs are generally influenced by / have access to the containing page's css.
-  Within an SVG there are things like colors that can be done either via CSS or explicit SVG parameters;
+  Exactly how CSS behaves depends on how your <a href="index.html#inline">SVG is incorporated</a>.
+  Within an SVG there are attributes (eg. colors) that can be done either via CSS or explicit SVG parameters;
     if both are given the CSS typically takes precedence.
   To CSS-style sets of elements together, see <span class="fxn">groupbegin()</span> below.
   </p>
@@ -669,15 +666,19 @@ All args are keyword args unless otherwise indicated.
    respect to the plotting area.  Default is <tt>'left'</tt>.
   </p><p>
   <span class="parm">xlabel=</span> &nbsp; an X axis label to appear below the X axis along bottom.
-  <span class="parm">xlabeldist=</span> can specify a numeric distance in minplot units where the <i>xlabel</i> will be 
-  positioned, below the plot area.
+  <span class="parm">xlabeladj=</span> can specify an (x, y) offset to adjust the <i>xlabel</i>, in minplot units.
+     eg. <tt>xlabeladj=(0,-60)</tt>
   </p><p>
   <span class="parm">ylabel=</span> &nbsp;  a Y axis label for the left side of the plot area
-  (text will be rotated by -90 degrees).  There's also
+    (text will be rotated by -90 degrees).
+  </p><p>
+  <span class="parm">ylabeladj=</span> can specify an (x, y) offset to adjust the <i>ylabel</i>, in minplot units.
+     eg. <tt>ylabeladj=(0,-60)</tt>
   <span class="parm">y2label=</span> &nsbp; which is a Y axis label for the right of the plot area
-  (text will be rotated by 90 degrees).
-  <span class="parm">ylabeldist=</span> can specify a numeric distance in minplot units where the <i>ylabel</i> will be 
-  positioned, to the left of the plot area (or for y2label, to the right of the plot area).
+      (text will be rotated by 90 degrees).
+  </p><p>
+  <span class="parm">y2labeladj=</span> can specify an (x, y) offset to adjust the <i>y2label</i>, in minplot units.
+     eg. <tt>ylabeladj=(0,-60)</tt>
   </p><p>
   <span class="parm">shade=</span> &nbsp; if specified, the entire plot area will be shaded to this color.
   </p><p>
@@ -1476,20 +1477,24 @@ All args are keyword args unless otherwise indicated.
 
 <h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt; or &lt;object&gt;</h3>
   <p>
-  Inline SVG tends to be more convenient in dynamic web content systems.
+  "Inline SVG" is an SVG chunk embedded within an html document.
+     This tends to be convenient with dynamic web content systems.
   </p><p>
-  Some people don't like the big blob of SVG code sitting in the midst of their html and would vote for &lt;img&gt; 
+  Or, you can display an SVG by storing it as a separate file and 
+  using &lt;img&gt; for example &lt;img src="/img/example2.svg"&gt; 
   </p><p>
-  CSS classes probably won't work with &lt;img&gt;, although <tt>style</tt> does work.
+  <li> To avoid the blob of SVG code within your html, you might prefer &lt;img&gt; 
   </p><p>
-  Inline SVG's are generally influenced by / have access to CSS styles present in 
-  the containing page but with &lt;img&gt; this isn't the case.
+  <li> With &lt;img&gt; you can use width= and height= to conveniently adjust the size.
   </p><p>
-  With &lt;img&gt; you can use width= and height= to conveniently adjust the size.
+  <li> CSS classes probably won't work with &lt;img&gt;, although <tt>style</tt> does work.
   </p><p>
-  Fluid SVG sizing probably won't work with &lt;img&gt;
+  <li> Inline SVGs are have access to the containing page's CSS and can be influenced by it;
+  with &lt;img&gt; this isn't the case.
   </p><p>
-  &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
+  <li> "Fluid" SVG sizing probably won't work with &lt;img&gt;
+  </p><p>
+  <li> &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
   </p>
   <br>
 
