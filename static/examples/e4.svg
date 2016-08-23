@@ -1,23 +1,24 @@
-
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<!-- Inline SVG data display produced by minplot -->
+<!-- SVG graphic by minplot -->
 <rect x="60.0" y="20" width="340" height="220" stroke="#777"  fill="none" />
-<text x="60" y="15" font-size="10pt" fill="#777"  text-anchor="start" >Date time data</text>
+<text x="60" y="15" fill="#777" >Date time data</text>
 <polyline points="60,240 400,240" stroke="#777"  />
 <polyline points="400,240 60,240" stroke="#777"  />
-<text x="55.83" y="256" font-size="10pt" fill="#777"  text-anchor="start" transform="rotate(45 55.83,256)" >Apr 2015</text>
+<text x="55.83" y="253" fill="#777" transform="rotate(45 55.83,253)" >Apr 2015</text>
 <polyline points="60,240 60,248" stroke="#777"  />
 <polyline points="60,240 60,20" stroke="#777"  />
-<text x="140.37" y="256" font-size="10pt" fill="#777"  text-anchor="start" transform="rotate(45 140.37,256)" >Jul</text>
+<text x="140.37" y="253" fill="#777" transform="rotate(45 140.37,253)" >Jul</text>
 <polyline points="144.54,240 144.54,248" stroke="#777"  />
 <polyline points="144.54,240 144.54,20" stroke="#777"  />
-<text x="225.83" y="256" font-size="10pt" fill="#777"  text-anchor="start" transform="rotate(45 225.83,256)" >Oct</text>
+<text x="225.83" y="253" fill="#777" transform="rotate(45 225.83,253)" >Oct</text>
 <polyline points="230,240 230,248" stroke="#777"  />
 <polyline points="230,240 230,20" stroke="#777"  />
-<text x="311.30" y="256" font-size="10pt" fill="#777"  text-anchor="start" transform="rotate(45 311.30,256)" >Jan 2016</text>
+<text x="311.30" y="253" fill="#777" transform="rotate(45 311.30,253)" >Jan 2016</text>
 <polyline points="315.46,240 315.46,248" stroke="#777"  />
 <polyline points="315.46,240 315.46,20" stroke="#777"  />
-<text x="395.83" y="256" font-size="10pt" fill="#777"  text-anchor="start" transform="rotate(45 395.83,256)" >Apr</text>
+<text x="395.83" y="253" fill="#777" transform="rotate(45 395.83,253)" >Apr</text>
 <polyline points="400,240 400,248" stroke="#777"  />
 <polyline points="400,240 400,20" stroke="#777"  />
 <polyline points="60,240 60,20" stroke="#777"  />
@@ -29,13 +30,13 @@
 <polyline points="60,93.33 52,93.33" stroke="#777"  />
 <polyline points="60,56.67 52,56.67" stroke="#777"  />
 <polyline points="60,20 52,20" stroke="#777"  />
-<text x="50" y="244.17" font-size="10pt" fill="#777"  text-anchor="end" >20</text>
-<text x="50" y="207.50" font-size="10pt" fill="#777"  text-anchor="end" >25</text>
-<text x="50" y="170.83" font-size="10pt" fill="#777"  text-anchor="end" >30</text>
-<text x="50" y="134.17" font-size="10pt" fill="#777"  text-anchor="end" >35</text>
-<text x="50" y="97.50" font-size="10pt" fill="#777"  text-anchor="end" >40</text>
-<text x="50" y="60.83" font-size="10pt" fill="#777"  text-anchor="end" >45</text>
-<text x="50" y="24.17" font-size="10pt" fill="#777"  text-anchor="end" >50</text>
+<text x="50" y="244.17" fill="#777"  text-anchor="end" >20</text>
+<text x="50" y="207.50" fill="#777"  text-anchor="end" >25</text>
+<text x="50" y="170.83" fill="#777"  text-anchor="end" >30</text>
+<text x="50" y="134.17" fill="#777"  text-anchor="end" >35</text>
+<text x="50" y="97.50" fill="#777"  text-anchor="end" >40</text>
+<text x="50" y="60.83" fill="#777"  text-anchor="end" >45</text>
+<text x="50" y="24.17" fill="#777"  text-anchor="end" >50</text>
 <rect x="65.8606557377" y="56.67" width="5" height="183.33" fill="#d44" opacity="0.6"/>
 <rect x="285.095628415" y="144.67" width="5" height="95.33" fill="#d44" opacity="0.6"/>
 <rect x="289.740437158" y="225.33" width="5" height="14.67" fill="#d44" opacity="0.6"/>

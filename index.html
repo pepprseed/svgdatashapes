@@ -58,6 +58,7 @@
   span.parm { background-color:#f0f0f0; color:#4040a0; font-weight:bold; font-style:italic; }
 </style>
 
+<a name="top"></a>
 
 
 <span class="text14">
@@ -66,6 +67,7 @@
 
 <div align=right>
   <span class="text11">
+  <nobr><a href="index.html#api">API</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="pages/examplist.html">Examples</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="https://github.com/grubbcode/minplot">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
   <nobr><a href="LICENSE.txt">MIT License</a></nobr>
@@ -89,24 +91,25 @@ In web pages you can display your SVG <a href="index.html#inline">inline</a> or 
 <br><br>
 Here's a first minplot.py example: &nbsp; <a href="pages/e1.html">View code</a>
 <br>
-<img src="static/img/example1.svg" >
+<img src="static/examples/e1.svg" >
 <br><br>
 Minplot.py works nicely in frameworks such as Flask.
 No javascript coding is necessary, and knowledge of SVG or CSS isn't required (but could be useful).
 Minplot does some reactive UI such as tooltips, clickthru, and hide/show of certain elements, but
 for full interactive visualization / animations use d3.js or similar instead.
+Minplot can compute means, SD, SEM, distributions and quartiles but that's about it for stats functionality.
 <br><br>
 Here's a lineplot example. <a href="pages/e6.html">View code</a>
 <br>
-<img src="static/img/example6.svg" height=350>
+<img src="static/examples/e6.svg" height=350>
 <br><br>
 Here's a scatterplot example. <a href="pages/e2.html">View code</a>
 <br>
-<img src="static/img/example2.svg" >
+<img src="static/examples/e2.svg" >
 <br><br>
 Here's a pie chart example. <a href="pages/e3.html">View code</a>
 <br>
-<img src="static/img/example3.svg" >
+<img src="static/examples/e3.svg" >
 <br><br>
 <a href="pages/examplist.html">Listing of all examples</a>.
 <br><br><br>
@@ -123,7 +126,7 @@ Here's a pie chart example. <a href="pages/e3.html">View code</a>
   <br>
 
 
-<h3>Plot data and column names</h3>
+<h3>Plot data and "column" names</h3>
   <p>
   minplot.py works with data that you have put into a 2-D python iterative (rows and columns), 
   such as an array of dict or an array of array.
@@ -180,8 +183,9 @@ Here's a pie chart example. <a href="pages/e3.html">View code</a>
     if both are given the CSS typically takes precedence.
   To CSS-style sets of elements together, see <span class="fxn">groupbegin()</span> below.
   </p>
-  <br>
 
+<a name="api"></a>
+<br>
 
 <a name="api"></a>
 <br>
@@ -396,7 +400,7 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="numinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( numcol, datarows )</a>
+    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( datarows, numcol )</a>
     </i></b></span>
     <div id="numinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -418,10 +422,11 @@ All args are keyword args unless otherwise indicated.
   <br><tt>distbinsize</tt> ... the binsize used in the above
   <br><tt>percentiles</tt> ... optional percentiles structure
   </p><p>
-  <span class="parm">numcol=</span> &nbsp; identifies the numeric data column to be characterized.
-  Either a name or an integer array index.
+  <span class="parm">datarows=</span> &nbsp; your 2-D data set (mandatory).  If you have a 1-D vector
+  you can use <span class="fxn">handle1d()</span> to convert it.
   </p><p>
-  <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).  
+  <span class="parm">numcol=</span> &nbsp; identifies the numeric data column to be characterized.
+  Either a column name, dict element name, or an integer (array index).  Mandatory.
   </p><p>
   <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency distribution on the 
   examined data column and it in the <tt>distribution</tt> member of the result.
@@ -453,7 +458,7 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="catinfo">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( catcol, datarows )</a>
+    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( datarows, catcol )</a>
     </i></b></span>
     <div id="catinfo-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -467,10 +472,11 @@ All args are keyword args unless otherwise indicated.
   <br><tt>catlist</tt> ... the unique list of categories in the order encountered
   <br><tt>distribution</tt> ... optional distribution bins structure
   </p><p>
-  <span class="parm">catcol=</span> &nbsp; identifies the data column to be characterizaed. 
-  Either a name or an integer array index.
+  <span class="parm">datarows=</span> &nbsp; your 2-D data set (mandatory).  If you have a 1-D vector
+  you can use <span class="fxn">handle1d()</span> to convert it.
   </p><p>
-  <span class="parm">datarows=</span> &nbsp; is your data structure (mandatory).
+  <span class="parm">catcol=</span> &nbsp; identifies the data column to be characterizaed. 
+  Either a column name, dict element name, or an integer (array index).  Mandatory.
   </p><p>
   <span class="parm">nullspacers=True</span> &nbsp;  retains encountered category terms which are 
   None or ''; these can serve as spacers.  Default is <tt>True</tt> 
@@ -483,6 +489,30 @@ All args are keyword args unless otherwise indicated.
   column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
   incrementally.  Default is <tt>None</tt>.
   </p>
+      
+
+    </div></div></div></div>
+
+
+
+
+
+    <div class="panel-group" id="vec2d">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#vec2d" href="index.html#vec2d-content">&bull; vec2d( vector )</a>
+    </i></b></span>
+    <div id="vec2d-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  Given a one-dimensional array of data (a vector), return a two-dimensional (rows with 1 column) representation that can be used with 
+  <span class="fxn">numinfo()</span> or <span class="fxn">catinfo()</span> 
+  (use <i>numfield=0</i> or <i>catfield=0</i>).
+  Provided for convenience.
+  </p><p>
+  <span class="parm">vector=</span> &nbsp; a 1-D array / data vector.
+  </p>
+
       
 
     </div></div></div></div>
@@ -508,20 +538,21 @@ All args are keyword args unless otherwise indicated.
   Each property corresponds with an argument below.  You can specify one or several.
   Individual properties remain in effect until explicitly updated or <tt>reset</tt>
   </p><p>
-  <span class="parm">width=</span> &nbsp; sets the line stroke width.  Default is 1.0.
+  <span class="parm">width=</span> &nbsp; line stroke width.  Default is 1.0.
   </p><p>
-  <span class="parm">color=</span> &nbsp; sets the line stroke color.  Default is "#000" (black).
+  <span class="parm">color=</span> &nbsp; line stroke color.  Default is "#000" (black).
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; sets the line opacity.  Default is 1.0 (opaque).
+  <span class="parm">opacity=</span> &nbsp; line opacity.  Default is 1.0 (opaque).
   </p><p>
-  <span class="parm">dash=</span> &nbsp; sets the dash pattern.  Example dash pattern <tt>'5,2'</tt>.
+  <span class="parm">dash=</span> &nbsp; dash pattern.  Example: <tt>dash='5,2'</tt>.
   Default is <tt>None</tt> for solid line.
   </p><p>
   <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the line.  Default is None.
   </p><p>
   <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the line.  Default is None.
   </p><p>
-  <span class="parm">reset=True</span> &nbsp; sets the line style to use all the defaults.
+  <span class="parm">reset=True</span> &nbsp; apply all of the defaults.  
+       Can be combined with any other args.
   </p>
       
 
@@ -543,18 +574,18 @@ All args are keyword args unless otherwise indicated.
   Each property corresponds with an argument below.  You can specify one or several.
   Individual properties remain in effect until explicitly updated or <tt>reset</tt>
   </p><p>
-  <span class="parm">ptsize=</span> &nbsp; sets the text point size.  Integer. Default is 10.
+  <span class="parm">ptsize=</span> &nbsp; text point size.  Integer. Default is 10.
   It's best to always set <i>ptsize=</i> to get proper minplot layout computations.
   </p><p>
   </p><p>
-  <span class="parm">color=</span> &nbsp; sets the text color.  Default is <tt>'#000'</tt> (black).
+  <span class="parm">color=</span> &nbsp; text color.  Default is <tt>'#000'</tt> (black).
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; sets the text opacity.  Default is 1.0 (opaque).
+  <span class="parm">opacity=</span> &nbsp; text opacity.  Default is 1.0 (opaque).
   </p><p>
-  <span class="parm">anchor=</span> &nbsp; sets the text alignment.  Use <tt>'left'</tt> for left-adjusted text;
+  <span class="parm">anchor=</span> &nbsp; text alignment.  Use <tt>'start'</tt> for left-adjusted text;
   <tt>'middle'</tt> for centered text; <tt>'end'</tt> for right-adjusted text.  Default is <tt>'start'</tt>
   </p><p>
-  <span class="parm">rotate=</span> &nbsp; sets the text rotation. In degrees clockwise.  <i>rotate=0</i> gives
+  <span class="parm">rotate=</span> &nbsp; text rotation (degrees clockwise).  <i>rotate=0</i> gives
   ordinary horizontal text.  Usually a value from 0 to 90, or 0 to -90.  Default is <tt>None</tt>
   </p><p>
   <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to the text position.  Specify as a list of
@@ -564,7 +595,8 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the text.  Default is None.
   </p><p>
-  <span class="parm">reset=True</span> &nbsp; sets the text style to use all the defaults.
+  <span class="parm">reset=True</span> &nbsp; apply all of the defaults.  
+       Can be combined with any other args.
       
 
     </div></div></div></div>
@@ -601,18 +633,18 @@ All args are keyword args unless otherwise indicated.
   and the inc that was determined earlier in <span class="fxn">numspace()</span> is overridden.  
   Applies only to numeric space, not categorical.
   </p><p>
-  <span class="parm">stubs=True</span> &nbsp; render axis scaling labels (stubs), using current text properties.
+  <span class="parm">stubs=True</span> &nbsp; render axis scale labels (stubs), using current text properties.
   With numeric scaling incremental numeric stubs are displayed.  With categorical scaling
   the category terms are displayed.  X axis stubs are automatically rotated 45 degrees
-  when needed to help them fit.  You can also use the <span class="fxn">textprops()</span> <i>rotate=</i> parameter to get 
-  rotated stubs.  Rotate values can range from 0 to 90 or 0 to -90 for stubs.
+  when needed to help them fit (use the <span class="fxn">textprops()</span> <i>rotate=</i> parameter 
+  to control rotated stubs).  
   Default is <tt>True</tt>.
   </p><p>
   <span class="parm">tics=</span> &nbsp; can be specified to have tic marks be drawn to the given length in minplot units
   using current line properties.  Positive values give tics that run outward from the 
   plotting area; negative values give tics that run inward.  Default is <tt>None</tt>.
   </p><p>
-  <span class="parm">grid=True</span> &nbsp; can be specified to draw grid lines using current line properties.
+  <span class="parm">grid=True</span> &nbsp; draw grid lines using current line properties. Default is <tt>False</tt>
   </p><p>
   <span class="parm">loc=</span> &nbsp; if specified controls axis position. 
   Examples: <i>loc='top'</i> or <i>loc='right'</i>.  Constructs like
@@ -655,34 +687,40 @@ All args are keyword args unless otherwise indicated.
 
   <p>
   After a plot area is set up, use this to do things like
-  render a title at the top, render X or Y axis labels, outline the plot area, or to shade the entire plot area to a certain color.
+  render a title at the top, render labels beside or below the plot area, outline or shade the plot area.
+  Call either before or after axes are rendered, whichever gives best results.
   You can do several things in one call, or use several separate calls.
   The text items use current text properties, and the outline uses current line properties.
   Note, if you're doing a tooltip it will be associated with the first-rendered title or label only.
   </p><p>
   <span class="parm">title=</span> &nbsp; a title to appear directly above the top of the plot area.  
-  <span class="parm">titlepos=</span> &nbsp; determines if the title will be positioned 
-  <tt>'left'</tt>, <tt>'center'</tt>, or <tt>'right'</tt> with
-   respect to the plotting area.  Default is <tt>'left'</tt>.
   </p><p>
-  <span class="parm">xlabel=</span> &nbsp; an X axis label to appear below the X axis along bottom.
-  <span class="parm">xlabeladj=</span> can specify an (x, y) offset to adjust the <i>xlabel</i>, in minplot units.
-     eg. <tt>xlabeladj=(0,-60)</tt>
+  <span class="parm">xlabel=</span> &nbsp; a label associated with the bottom of the plot area.
   </p><p>
-  <span class="parm">ylabel=</span> &nbsp;  a Y axis label for the left side of the plot area
-    (text will be rotated by -90 degrees).
+  <span class="parm">ylabel=</span> &nbsp;  a vertical label associated with the plot area's left side.
   </p><p>
-  <span class="parm">ylabeladj=</span> can specify an (x, y) offset to adjust the <i>ylabel</i>, in minplot units.
-     eg. <tt>ylabeladj=(0,-60)</tt>
-  <span class="parm">y2label=</span> &nsbp; which is a Y axis label for the right of the plot area
-      (text will be rotated by 90 degrees).
-  </p><p>
-  <span class="parm">y2labeladj=</span> can specify an (x, y) offset to adjust the <i>y2label</i>, in minplot units.
-     eg. <tt>ylabeladj=(0,-60)</tt>
-  </p><p>
-  <span class="parm">shade=</span> &nbsp; if specified, the entire plot area will be shaded to this color.
+  <span class="parm">y2label=</span> &nbsp; a vertical label associated with the plot area's right side.
   </p><p>
   <span class="parm">outline=</span> &nbsp; if <tt>True</tt> the plot area will be outlined using current line properties.
+  </p><p>
+  <span class="parm">shade=</span> &nbsp; if specified as a color, the entire plot area will be shaded e.g. <i>shade='#aaa'</i>.
+  </p><p>
+  <span class="parm">titlepos=</span> &nbsp; title's position with respect to the plot area.  
+  One of <tt>'left'</tt>, <tt>'center'</tt>, or <tt>'right'</tt>.  Default is <tt>'left'</tt>.
+  </p><p>
+  <span class="parm">xlabeladj=</span> specify an (x, y) offset to adjust the <i>xlabel</i>, in minplot units.
+     eg. <i>xlabeladj=(0,-20)</i> would adjust the xlabel downward from its default position.  Default is None.
+  </p><p>
+  <span class="parm">ylabeladj=</span> specify an (x, y) offset to adjust the <i>ylabel</i>, in minplot units.
+     eg. <i>ylabeladj=(-20,0)</i> would adjust the ylabel leftward from its default position.  Default is None.
+  </p><p>
+  <span class="parm">y2labeladj=</span> same as <i>ylabeladj</i> but for the <i>y2label</i>,
+     eg. <i>ylabeladj=(20,0)</i> would adjust the y2label rightward.
+  </p><p>
+  <span class="parm">rectadj=</span> allows fine tuning (stretching) the size of <i>outline=</i> or <i>shade=</i>. 
+       If specified as an integer it will be an amount of extra margin to add on all 4 sides, eg. <i>rectmargin=8</i>.
+       Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be 
+       controlled individually for each of the 4 sides eg. <i>rectmargin=(-20,-10,20,10)</i> 
   </p>
       
 
@@ -847,7 +885,7 @@ All args are keyword args unless otherwise indicated.
   The stairstep will end on a vertical; you'll need to append an additional data row to get a horizontal tail end.
   This option cannot be used with <i>fill</i> or <i>band</i>.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; if specified the area under the curve (or the area within the band if <tt>band=True</tt>) 
+  <span class="parm">fill=</span> &nbsp; if specified the area under the curve (or the area within the band if <i>band=True</i>) 
    will be filled with this color.
   </p><p>
   <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0 (opaque).
@@ -868,7 +906,7 @@ All args are keyword args unless otherwise indicated.
   <p>
   Called for every data point to be plotted, including the first one.
   </p><p>
-  <span class="parm">x=</span> and <span class="parm">y</span> &nbsp; mandatory; location where the curve will go next, in data space.
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; mandatory; location where the curve will go next, in data space.
   </p><p>
   <span class="parm">y2=</span> &nbsp; if specified a filled band
   is rendered with the top at <i>y</i> and the bottom at <i>y2</i>.
@@ -891,33 +929,29 @@ All args are keyword args unless otherwise indicated.
     <div id="pieslice-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Render one pie graph slice.  To do a pie graph, first set up a plotting area (because piegraphs have no X or Y axes, axmin and axmax 
-  are ignored and can be specified as anything).
-  You can specify a square plotting area, or a wider one with room for the legend to one side or the other.  
-  A legend is always used with piegraphs because slice labelling isn't supported.
+  This function renders one pie slice.  It is called several times in succession to build a complete pie graph.
+  </p><p>
+  Rendering a pie graph requires a plotting area for placement and sizing of the pie (use axmin=0 and axmax=1, these are required but ignored).
+  A legend is usually needed with piegraphs; there's no direct slice labelling.
   Here's a <a href="pages/e3.html">piegraph example</a>.
   </p><p>
-  Slice size is specified as a percentage of the whole (0.00 to 1.00).  If you need to compute this on the fly for your
-  data use <span class="fxn">numinfo()</span> to get <tt>sum</tt> then divide each value by it.
-  Slice position is similarly specified as a percentage.  Usually the first slice uses <i>startval=0.0</i> (for top-right) then as each slice is 
-  rendered its <i>pctval</i> is accumulated and then this is given as the next <i>startval</i>, rendering subsequent slices 
-  in a clockwise manner.
+  <span class="parm">pctval=</span> &nbsp; controls the size of the slice. A percentage value expressed as a number between 0.0 and 1.0).  Mandatory.
   </p><p>
-  <span class="parm">pctval=</span> &nbsp; the value to be plotted.  
-  Must be expressed as a percent of the whole in the form of a decimal number between 0.00 and 1.00.
-  </p><p>
-  <span class="parm">startval=</span> &nbsp; controls where the slice "starts" in radial space and (similarly to <i>pctval</i>)
-  is between 0.00 to 1.00.  
+  <span class="parm">startval=</span> &nbsp; controls where the slice "starts" in radial space, and is a number between 0.0 and 1.0).  Mandatory.
+  See the example for usage pattern.
   </p><p>
   <span class="parm">fill=</span> &nbsp; fill the pie slice with this color.
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 0.8.
+  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0.
   </p><p>
   <span class="parm">outline=</span> &nbsp; if <tt>True</tt> outline the pie slice using current line properties.
   A nice effect is to use a fat white line for the outline; this gives separation to the slices.
   </p><p>
-  <span class="parm">placement=</span> &nbsp; placement of the entire pie.  If <i>placement="left"</i> the pie will be put in the left
-  side of the rectangular plotting area.  The legend can be put in the remaining area.  Default is <i>right</i>.  
+  <span class="parm">placement=</span> &nbsp; placement of the entire pie relative to plotting area.  Either <tt>left</tt> or <tt>right</tt>.
+  Default is <tt>right</tt>.  
+  </p><p>
+  <span class="parm">showpct=</span> &nbsp; if <tt>True</tt> the slice's percentage value is shown as a label.
+  Can also be specified as a printf format eg. <tt>%0.1f</tt>.  Uses current text properties. Default is <tt>None</tt>.  
   </p>
       
 
@@ -979,10 +1013,10 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">text=</span> &nbsp; the text to be rendered.
   </p><p>
-  <span class="parm">anchor=</span> controls how the text is aligned relative to <tt>x, y</tt> and is one of 
+  <span class="parm">anchor=</span> controls how the text is aligned relative to <i>x, y</i> and is one of 
   <tt>'start'</tt>, <tt>'middle',</tt> or <tt>'end'</tt>.  Default is <tt>'start'</tt>
   </p><p>
-  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> are distances in minplot units to offset the text from <tt>x, y</tt>.
+  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> are distances in minplot units to offset the text from <i>x, y</i>.
   Often useful for labeling purposes.  Default for both is 5.0 
   </p><p>
   To render text at a specific location in minplot coordinates, you can use <a href="index.html#lowlevel">low-level function txt()</a>
@@ -1051,8 +1085,9 @@ All args are keyword args unless otherwise indicated.
     <div id="tooltip-content" class="panel-collapse collapse "> <div class="panel-body">
 
    <p>
-   Enable a tooltip (and/or a clickthru hyperlink) using the bounding box of
-   whatever plot element is rendered next.  
+   Enable a tooltip and/or a clickthru hyperlink using the bounding box of
+   whatever plot element is rendered next.  (A tooltip is a text box that appears when the user hovers
+   their mouse pointer over a specific element.)
    </p><p>
    Plot element functions that support tooltips / clickthru are:
    <span class="fxn">bar(), datapoint(), label(), rectangle(), pieslice(), legenditem(), plotdeco()</span>, and <span class="fxn">axisrender()</span>.
@@ -1125,7 +1160,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">location=</span> &nbsp; is optional and can be one of: 
   <tt>'upperleft'</tt>, <tt>'lowerleft'</tt>, <tt>'upperright'</tt>, or <tt>'loweright'</tt>
-  (relative to the plotting area).  Default is <tt>upperleft</tt>
+  (relative to the plotting area).  Default is <tt>'upperleft'</tt>
   </p><p>
   <span class="parm">xpos=</span> and/or <span class="parm">ypos=</span> &nbsp; if specified with <i>location</i>
   they serve as adjustments to improve the legend's position.
@@ -1202,7 +1237,7 @@ All args are keyword args unless otherwise indicated.
   Here's an example where dates are plotted. <a href="pages/e4.html">View code</a>
   </p>
   <br>
-  <img src="static/img/example4.svg" >
+  <img src="static/examples/e4.svg" >
   <br>
   An example where dates+times are plotted is <a href="pages/e5.html">here</a>.
   <br><br>
@@ -1252,7 +1287,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">datarows=</span> &nbsp; this is your data structure (mandatory).
   </p><p>
   <span class="parm">nearest=</span> &nbsp; mandatory; must be specified.  Determines a clean
-  boundary for axis min and max.  For example, <tt>nearest=month</tt> gives an axis min
+  boundary for axis min and max.  For example, <i>nearest=month</i> gives an axis min
   and max on month boundaries.  Allowed values include:
   <nobr><tt>year  3month  month  week  week_dayN  day  12hour  6hour  4hour  3hour  hour  30minute  10minute  minute</tt></nobr>
   <br>(<tt>week</tt> uses Mondays.  To get other weekday use eg. <tt>week_day2</tt> for Wednesdays or <tt>week_day6</tt> for Sundays).
@@ -1275,7 +1310,8 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">stub2format=</span> &nbsp; The formatting for the additional stub content.  See Format codes above.  
   </p><p>
-  <span class="parm">stub2place=</span> &nbsp; Default is <tt>append</tt>.  Other possible values: <tt>prepend  replace</tt>
+  <span class="parm">stub2place=</span> &nbsp; Default is <tt>'append'</tt>.  Other possible values: <tt>'prepend'</tt> or <tt>'replace'</tt>
+
   </p><p>
   <span class="parm">stub2start=</span> &nbsp; Default is <tt>True</tt> causing the first stub to be treated as a "boundary" and embellished.
   Use <tt>False</tt> to not do this.
@@ -1290,7 +1326,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">dateval2</span> &nbsp; are two date objects in current format.
   </p><p>
   <span class="parm">resulttype</span> &nbsp; controls the granularity of the returned numeric difference.  
-  Default is <tt>days</tt>.  Other accepted values include: <tt>hours  minutes  seconds</tt>
+  Default is <tt>'days'</tt>.  Other accepted values include: <tt>'hours'  'minutes'  'seconds'</tt>
   </p>
   <br>
   <br>
@@ -1318,12 +1354,12 @@ All args are keyword args unless otherwise indicated.
   2015.2 for 1st quarter of 2015, and 2015.4, 2015.6, and 2015.8 for the other quarters... then plot them as plain numerics.
   </p><p>
   To get one-letter month stubs (eg. J F M A M J J A S O N D)
-  use %b in <span class="fxn">dtrange()</span> then in <span class="fxn">axisrender()</span> use <tt>stubformat='%.1s'</tt>.
+  use %b in <span class="fxn">dtrange()</span> then in <span class="fxn">axisrender()</span> use <i>stubformat='%.1s'</i>.
   </p><p>
   <b>Frequency distributions and tabulations on dates:</b>
   There's no special function for computing frequency distributions on dates,
   but you may be able to use <span class="fxn">catinfo()</span> to do this.  For example if you have
-  a collection of <tt>yyyy-mm-dd dates</tt> and want to tabulate on month, just strip off the <tt>-dd</tt>
+  a collection of <tt>yyyy-mm-dd</tt> dates and want to tabulate on month, just strip off the <tt>-dd</tt>
   portion and use <span class="fxn">catinfo()</span> on the result.
   </p>
       
@@ -1353,21 +1389,23 @@ All args are keyword args unless otherwise indicated.
   You can pass this element ID to a javascript function which updates the style attributes.
   </p><p>
   <b>Hiding / showing things:</b> There are several options for CSS style attributes 
-  to make things hidden or shown.  One is <tt>'display: none'</tt>.
-  Another is <tt>'visibility: hidden'</tt> and <tt>'visibility: visible'</tt>.
-  Yet another is to simple change the opacity, e.g. <tt>'opacity=0'</tt> or <tt>'opacity=1'</tt>.
+  to make things hidden or shown.  One is <tt>display: none</tt>.
+  Another is <tt>visibility: hidden</tt> and <tt>visibility: visible</tt>.
+  Yet another is to simple change the opacity, e.g. <tt>opacity=0</tt> or <tt>opacity=1</tt>.
   Opacity is apparently the most "expensive" in terms of clientside computation.
   </p>
   <br>
-  <h4>groupbegin( id, css, transform )</h4>
+  <h4>groupbegin( id, cssclass, cssstyle, transform )</h4>
   <p>Begin an SVG &lt;g&gt; element group container.
   </p><p>
   <span class="parm">id=</span> &nbsp; dom object ID string.  
   </p><p>
-  <span class="parm">css=</span> &nbsp;
-  A CSS element name or style string that will propagate to all elements in the container.  
-  If the value contains a colon it will be conveyed as <tt>style=</tt>, otherwise it will be conveyed as <tt>class=</tt>.
-  For example to try hiding an object use <tt>css='visibility: hidden'</tt>.
+  <span class="parm">cssclass=</span> &nbsp;
+  A CSS element name that will influence all elements within the container.  
+  </p><p>
+  <span class="parm">cssstyle=</span> &nbsp;
+  A CSS style string that will influence all elements within the container.  
+  For example to try hiding an object use <tt>cssstyle='visibility: hidden'</tt>.
   </p><p>
   <span class="parm">transform=</span> &nbsp; apply a matrix manipulations / transformations to 
   all elements in the container.  See SVG documentation for details.
@@ -1478,23 +1516,25 @@ All args are keyword args unless otherwise indicated.
 <h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt; or &lt;object&gt;</h3>
   <p>
   "Inline SVG" is an SVG chunk embedded within an html document.
-     This tends to be convenient with dynamic web content systems.
+     This tends to be convenient with dynamic web content systems, and is how we display the
+     <a href="pages/e1.html">individual example pages</a> on this site (go to an example page and View Page Source).
   </p><p>
-  Or, you can display an SVG by storing it as a separate file and 
-  using &lt;img&gt; for example &lt;img src="/img/example2.svg"&gt; 
+  You could also display an SVG by storing it as a separate file and 
+  using &lt;img&gt; for example &lt;img src="examples/e2.svg"&gt;. This is how we display
+  the examples that are visible near the <a href="index.html#top">top of this page</a>.
+  An <tt><?xml?></tt> and a <tt>doctype</tt> statement should be present at top.
+  You can use &lt;img&gt; width= and height= to conveniently adjust the size, 
+  and these objects are cacheable.
   </p><p>
-  <li> To avoid the blob of SVG code within your html, you might prefer &lt;img&gt; 
+  &bull; Inline SVGs have access to the containing page's CSS and can be influenced by it;
+  with &lt;img&gt; this isn't the case (although <tt>style=</tt> statements should work and
+  <a href="https://www.w3.org/TR/SVG/styling.html#StyleElementExample" target="_blank">CSS can be embedded in the SVG</a>).
   </p><p>
-  <li> With &lt;img&gt; you can use width= and height= to conveniently adjust the size.
+  &bull; Tooltips probably won't work via &lt;img&gt; unless special arrangements are made.
   </p><p>
-  <li> CSS classes probably won't work with &lt;img&gt;, although <tt>style</tt> does work.
+  &bull; Special character HTML constructs such as &amp;Delta; that work find in an inline SVG don't work via &lt;img&gt; 
   </p><p>
-  <li> Inline SVGs are have access to the containing page's CSS and can be influenced by it;
-  with &lt;img&gt; this isn't the case.
-  </p><p>
-  <li> "Fluid" SVG sizing probably won't work with &lt;img&gt;
-  </p><p>
-  <li> &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
+  &bull; &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
   </p>
   <br>
 

@@ -1,15 +1,17 @@
 
 import minplot as p
 
-def example6():
-
+def example6( bandsopt=False ):     
+    # produce a plot with 3 curves, error bars, and irregular X axis stubs, and data point tooltips 
+    # bandsopt .... if True show shaded SEM bands also
+   
     colnames = [ "time", "group1", "group1sem", "group2", "group2sem", "group3", "group3sem" ]
 
     dataset = [ [  0, 33, 2.4, 49, 4.3, 75, 5.8 ],
                 [  3, 35, 3.1, 44, 3.9, 70, 6.1 ],
                 [  6, 30, 2.8, 51, 3.2, 67, 4.0 ],
                 [ 12, 34, 3.7, 58, 3.8, 66, 3.9 ],
-                [ 24, 27, 5.0, 63, 6.2, 77, 8.2 ] ]
+                [ 24, 27, 5.0, 75, 6.2, 63, 8.2 ] ]
     
     # define our xstubs this way because they are irregularly spaced
     xstubs = [ [ 0, "0" ], [ 3, "3"], [ 6, "6" ], [ 12, "12" ], [ 24, "24" ] ]
@@ -35,7 +37,7 @@ def example6():
     p.textprops( ptsize=12, color='#777', cssstyle=textstyle )  
     p.axisrender( axis='X', axisline=False, stublist=xstubs, loc='bottom-10' )
     p.axisrender( axis='Y', axisline=False, grid=True, loc='left-20' )
-    p.plotdeco( xlabel="Months of follow up", xlabeladj=(-20,-65), ylabel="Observed rate [%]", ylabeladj=(-80,0) )
+    p.plotdeco( xlabel="Months of follow up", xlabeladj=(-20,-10), ylabel="O<sub>2</sub> exchange ratio [%]", ylabeladj=(-20,0) )
 
     # render the curves 
     for group in ["group1", "group2", "group3"]:
@@ -45,9 +47,15 @@ def example6():
         semcol = p.icol( group + "sem" )
 
         # color...
-        if group == "group1": linecolor = "#8d8"
-        elif group == "group2": linecolor = "#88d"
-        elif group == "group3": linecolor = "#d88"
+        if group == "group1": linecolor = "#8d8"; bandcolor="#cfc"
+        elif group == "group2": linecolor = "#88d"; bandcolor="#ccf"
+        elif group == "group3": linecolor = "#d88"; bandcolor="#fcc"
+
+        # shaded bands option
+        if bandsopt == True:
+            p.curvebegin( band=True, fill=bandcolor, opacity=0.5 )
+            for row in dataset:
+                p.curvenext( x=row[xcol], y=row[ycol]+row[semcol], y2=row[ycol]-row[semcol] )
 
         # initialize line style and register a legend item...
         p.lineprops( color=linecolor, width=4 )
@@ -60,7 +68,9 @@ def example6():
             p.curvenext( x=row[xcol], y=row[ycol] )  
             p.lineprops( width=2 )   
             p.errorbar( x=row[xcol], y=row[ycol], erramt=row[semcol] )  
-            p.datapoint( x=row[xcol], y=row[ycol], fill=linecolor, diameter=12 )
+        for row in dataset:
+            p.tooltip( str(row[ycol])+" %"  )
+            p.datapoint( x=row[xcol], y=row[ycol], fill=linecolor, diameter=12, opacity=0.5 )  # do datapoints last
 
     # display the legend...
     p.legendrender( location='topleft', format='across' )

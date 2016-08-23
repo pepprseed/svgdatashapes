@@ -13,7 +13,7 @@ def example3():                                       # pie graph example
     p.lineprops( color='#aaa', width=0.5 ); 
     p.plotdeco( outline=True )
 
-    colors = [ '#f00', '#0f0', '#00f', '#0ff', '#ff0', '#f0f' ]
+    colors = [ '#f00', '#0f0', '#aaf', '#0ff', '#ff0', '#f0f' ]
     labels = [ 'Delaware', 'Vermont', 'Alabama', 'Utah', 'Arkansas' ]
     p.lineprops( color='#fff', width=4 )   # outline slices with a fat white line
 
@@ -21,7 +21,7 @@ def example3():                                       # pie graph example
     accum = 0.0; islice = 0
     for val in dataset1:
         p.tooltip( title=labels[islice] )
-        p.pieslice( pctval=val, startval=accum, fill=colors[islice], outline=True )
+        p.pieslice( pctval=val, startval=accum+0.4, fill=colors[islice], outline=True, showpct=True, opacity=0.5 )
         p.legenditem( sample='square', label=labels[islice], color=colors[islice] )
         accum += val
         islice += 1

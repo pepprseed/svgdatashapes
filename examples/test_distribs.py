@@ -14,7 +14,7 @@ def test_distribs():
     outstr += "\n----\n\nNumeric distribtion result:\n"
     
     p.datacolumns( [ "f1", "f2"] )
-    result = p.numinfo( numcol="f1", datarows=dataset1, distrib=True, distbinsize=1, accumcol="f2" )
+    result = p.numinfo( numcol="f1", datarows=dataset1, distrib=True, distbinsize=2, accumcol="f2" )
     outstr += str(result.distribution)
     
     outstr += "\n----\n\nPercentiles result:\n"
@@ -36,5 +36,18 @@ def test_distribs():
     for row in result.distribution:
         outstr += str(row) + "\n"
     
+
+    outstr += "\n----\n\nnuminfo Using 1D array via vec2d() ...\n"
+    vector = [ 5, 2, 7, 11, 15, 21 ]
+    datarows = p.vec2d( vector )
+    result = p.numinfo( datarows=datarows, numcol=0, distrib=True, distbinsize=5 )
+    outstr += str(result.distribution)
+
+    outstr += "\n----\n\ncatinfo Using 1D array via vec2d() ...\n"
+    vector = [ 'red', 'red', 'red', 'blue' ]
+    datarows = p.vec2d( vector )
+    result = p.catinfo( datarows=datarows, catcol=0, distrib=True )
+    outstr += str(result.distribution)
+
     
     return outstr

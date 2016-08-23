@@ -66,7 +66,7 @@
 ----
 
 Numeric distribtion result:
-[{'accum': 0, 'binmid': 0.5, 'binlo': 0.0}, {'accum': 14, 'binmid': 1.5, 'binlo': 1.0}, {'accum': 2, 'binmid': 2.5, 'binlo': 2.0}, {'accum': 1, 'binmid': 3.5, 'binlo': 3.0}, {'accum': 3, 'binmid': 4.5, 'binlo': 4.0}, {'accum': 4, 'binmid': 5.5, 'binlo': 5.0}, {'accum': 9, 'binmid': 6.5, 'binlo': 6.0}, {'accum': 12, 'binmid': 7.5, 'binlo': 7.0}, {'accum': 5, 'binmid': 8.5, 'binlo': 8.0}, {'accum': 10, 'binmid': 9.5, 'binlo': 9.0}]
+[{'accum': 14, 'binmid': 1.0, 'binlo': 0.0}, {'accum': 3, 'binmid': 3.0, 'binlo': 2.0}, {'accum': 7, 'binmid': 5.0, 'binlo': 4.0}, {'accum': 21, 'binmid': 7.0, 'binlo': 6.0}, {'accum': 15, 'binmid': 9.0, 'binlo': 8.0}]
 ----
 
 Percentiles result:
@@ -78,10 +78,20 @@ Categorical distribution result:
 {'term': 'green', 'accum': 9}
 {'term': 'blue', 'accum': 1}
 
+----
+
+numinfo Using 1D array via vec2d() ...
+[{'accum': 1, 'binmid': 2.5, 'binlo': 0.0}, {'accum': 2, 'binmid': 7.5, 'binlo': 5.0}, {'accum': 1, 'binmid': 12.5, 'binlo': 10.0}, {'accum': 1, 'binmid': 17.5, 'binlo': 15.0}, {'accum': 1, 'binmid': 22.5, 'binlo': 20.0}]
+----
+
+catinfo Using 1D array via vec2d() ...
+[{'term': 'red', 'accum': 3}, {'term': 'blue', 'accum': 1}]
    </pre>
 
 
 <br>
+
+
 <br>
 
 
@@ -103,7 +113,7 @@ def test_distribs():
     outstr += "\n----\n\nNumeric distribtion result:\n"
     
     p.datacolumns( [ "f1", "f2"] )
-    result = p.numinfo( numcol="f1", datarows=dataset1, distrib=True, distbinsize=1, accumcol="f2" )
+    result = p.numinfo( numcol="f1", datarows=dataset1, distrib=True, distbinsize=2, accumcol="f2" )
     outstr += str(result.distribution)
     
     outstr += "\n----\n\nPercentiles result:\n"
@@ -125,6 +135,19 @@ def test_distribs():
     for row in result.distribution:
         outstr += str(row) + "\n"
     
+
+    outstr += "\n----\n\nnuminfo Using 1D array via vec2d() ...\n"
+    vector = [ 5, 2, 7, 11, 15, 21 ]
+    datarows = p.vec2d( vector )
+    result = p.numinfo( datarows=datarows, numcol=0, distrib=True, distbinsize=5 )
+    outstr += str(result.distribution)
+
+    outstr += "\n----\n\ncatinfo Using 1D array via vec2d() ...\n"
+    vector = [ 'red', 'red', 'red', 'blue' ]
+    datarows = p.vec2d( vector )
+    result = p.catinfo( datarows=datarows, catcol=0, distrib=True )
+    outstr += str(result.distribution)
+
     
     return outstr
 </span></pre>

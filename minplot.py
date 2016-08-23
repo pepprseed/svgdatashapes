@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.31  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# minplot.py  v0.32  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 
 import math
@@ -43,7 +43,8 @@ def _init():
     p_svg["active"] = True
     p_space[0]["scalefactor"] = None; p_space[1]["scalefactor"] = None
     p_text["ptsize"] = 10; p_text["color"] = "#000"; p_text["opacity"] = 1.0;  \
-        p_text["anchor"] = "start"; p_text["rotate"] = 0; p_text["adjust"] = None; p_text["class"] = None; p_text["style"] = None; p_text["props"] = None; 
+        p_text["anchor"] = "start"; p_text["rotate"] = 0; p_text["adjust"] = None; p_text["class"] = None; p_text["style"] = None; p_text["props"] = ""; \
+        p_text["height"] =  (p_text["ptsize"]/72.0)*100.0
     p_line["width"] = 1.0; p_line["color"] = "#000"; p_line["opacity"] = 1.0; \
         p_line["dash"] = None; p_line["class"] = None; p_line["style"] = None; p_line["props"] = None;
     p_clust["mode"] = None
@@ -96,11 +97,11 @@ def textprops( ptsize=None, color=None, opacity=None, anchor=None, rotate=None, 
             except: raise AppError( "textprops() is expecting adjust as 2 member numeric list, but got: " + str(adjust) )
         p_text["adjust"] = adjust
 
-    if reset == True or cssclass != False:           # cssclass .... note False vs. None; user can specify  cssclass=None
+    if reset == True or cssclass != False:      # cssclass .... note False vs. None; user can specify  cssclass=None
         if cssclass == False: cssclass = None
         p_text["class"] = cssclass
 
-    if reset == True or cssstyle != False:           # cssstyle .... note False vs. None; user can specify  cssstyle=None
+    if reset == True or cssstyle != False:      # cssstyle .... note False vs. None; user can specify  cssstyle=None
         if cssstyle == False: cssstyle = None
         p_text["style"] = cssstyle
 
@@ -117,7 +118,6 @@ def textprops( ptsize=None, color=None, opacity=None, anchor=None, rotate=None, 
 
 
 def lineprops( width=None, color=None, opacity=None, dash=False, cssclass=False, cssstyle=False, reset=False ):
-# def lineprops( css=None, width=1.0, color="#000000", opacity=1.0, dash=None, nodefaults=False ):
     # set line properties for subsequent line rendering...
     # if reset==True we'll go to width=1.0, color=black, opacity=1.0, dash=None, css=None (SVG hard defaults)
     # Otherwise, only the specified attributes change, others remain as before.
@@ -362,7 +362,7 @@ def svgbegin( width=None, height=None, fluidsize=False, browser=None, testgrid=N
         p_svg["out"] += "width=" + quo(width) + " height=" + quo(height)     # fixed size (viewBox not used)
     p_svg["out"] += " " + boilerplate + ">\n" 
     if notag == True:  p_svg["out"] = ""
-    p_svg["out"] += "<!-- SVG graphics by minplot (on github.com) -->\n"  # this must remain intact per Terms of Use
+    p_svg["out"] += "<!-- SVG graphic by minplot -->\n"  # this must remain intact per Terms of Use
     p_svg["height"] = height; p_svg["width"] = width   # set globals
     _init()   # initialize the graphics state
     if bgcolor != None:  rect( 0, 0, width, height, bgcolor )
@@ -495,7 +495,7 @@ def findrange( testval=None, testfor='both', finish=False, nearest=None, addlpad
             try: nearest = float(nearest)
             except: raise ValueError( "if nearest= is specified it must be numeric" )
             if nearest <= 0.0: raise ValueError( "if nearest= is specified it must be a number > 0" )
-        if addlpad != None and ( addlpad.isdigit() == False or addlpad <= 0 ): raise ValueError( "if addlpad= is specified it must be an integer > 0" )
+        if addlpad != None and ( type(addlpad) is not int or addlpad <= 0 ): raise ValueError( "if addlpad= is specified it must be an integer > 0" )
 
         # determine inc for 'nearest' and 'addlpad' purposes...
         inc = nearest
@@ -553,10 +553,11 @@ def icol( colname ):
     except: raise AppError( "icol(): '" + str(colname) + "' is not recognized / not defined using datacolumns()" )
 
 
-def numinfo( numcol=None, datarows=None, distrib=False, distbinsize=None, accumcol=None, percentiles=False ):
+def numinfo( datarows=None, numcol=None, distrib=False, distbinsize=None, accumcol=None, percentiles=False ):
     # Return some characteristics of a numeric data column
     # Has options for frequency distributions and percentiles for boxplots
 
+    if datarows == None: raise AppError( "numinfo() expecting mandatory arg 'datarows'" )
     if numcol == None: raise AppError( "numinfo() expecting mandatory arg 'numcol'" )
 
     dfindex = getdfindex( numcol, datarows )
@@ -648,10 +649,11 @@ def numinfo( numcol=None, datarows=None, distrib=False, distbinsize=None, accumc
     return Numinfo( min, max, nvals, nbadvals, allint, numsorted, mean, sd, sem, sum, dist, binsize, pcl )
 
 
-def catinfo( catcol=None, datarows=None, nullspacers=False, distrib=False, accumcol=None ):
+def catinfo( datarows=None, catcol=None, nullspacers=False, distrib=False, accumcol=None ):
     # return some characteristics of a categorical data column.
     # Option for frequency distributions 
 
+    if datarows == None: raise AppError( "catinfo() expecting mandatory arg 'datarows'" )
     if catcol == None: raise AppError( "catinfo() expecting mandatory arg 'catcol'" )
 
     dfindex = getdfindex( catcol, datarows )
@@ -696,37 +698,50 @@ def catinfo( catcol=None, datarows=None, nullspacers=False, distrib=False, accum
 
 
 
-def plotdeco( title=None, titlepos="left", xlabel=None, xlabeladj=(0,-40), ylabel=None, ylabeladj=(-40,0), y2label=None, y2labeladj=(40,0), outline=False, shade=None ):
+def plotdeco( title=None, outline=False, shade=None, xlabel=None, ylabel=None, y2label=None, 
+              titlepos="left", xlabeladj=None, ylabeladj=None, y2labeladj=None, rectadj=None ):
     global p_text
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "plotdeco(): plot area has not yet been set up yet." )
 
-    if outline != None or shade != None:  rect( nmin('X'), nmin('Y'), nmax('X'), nmax('Y'), fill=shade, outline=outline )
+    titleadj = 0
+    if outline != None or shade != None:  
+        mx1 = my1 = mx2 = my2 = 0
+        if rectadj != None: 
+            if type(rectadj) is int: mx1 = my1 = -rectadj; mx2 = my2 = rectadj
+            else:
+                try: mx1 = rectadj[0]; my1 = rectadj[1]; mx2 = rectadj[2]; my2 = rectadj[3];
+                except: pass
+            titleadj=my2
+        rect( nmin('X')+mx1, nmin('Y')+my1, nmax('X')+mx2, nmax('Y')+my2, fill=shade, outline=outline )
 
     rothold = p_text["rotate"] 
     if title != None: 
         _gtooltip( "begin" )
-        if titlepos == "center": txt( (nmin("X")+nmax("X"))/2.0, nmax("Y")+5, title, anchor="middle" )
-        elif titlepos == "right": txt( nmax("X"), nmax("Y")+5, title, anchor="end" )
-        else: txt( nmin("X"), nmax("Y")+5, title, anchor="start" )
+        if titlepos == "center": txt( (nmin("X")+nmax("X"))/2.0, nmax("Y")+(titleadj+5), title, anchor="middle" )
+        elif titlepos == "right": txt( nmax("X"), nmax("Y")+(titleadj+5), title, anchor="end" )
+        else: txt( nmin("X"), nmax("Y")+(titleadj+5), title, anchor="start" )
         _gtooltip( "end" )
     if xlabel != None:
-        xofs = 0; yofs = -40
-        try: xofs = float(xlabeladj[0]); yofs = float(xlabeladj[1])
-        except: raise AppError( "plotdeco() is expecting xlabeladj as 2 member numeric list, but got: " + str(xlabeladj) )
-        _gtooltip( "begin" ); txt( ((nmin("X")+nmax("X"))/2.0)+xofs, nmin("Y")+yofs, xlabel, anchor="middle" ); _gtooltip( "end" )
+        xofs = 0; yofs = -48; xadj = 0; yadj = 0
+        if xlabeladj != None:
+            try: xadj = float(xlabeladj[0]); yadj = float(xlabeladj[1])    # see if specified as (xadj, yadj)
+            except: raise AppError( "plotdeco() is expecting xlabeladj as 2 member numeric list, but got: " + str(xlabeladj) )
+        _gtooltip( "begin" ); txt( ((nmin("X")+nmax("X"))/2.0)+(xofs+xadj), nmin("Y")+(yofs+yadj), xlabel, anchor="middle" ); _gtooltip( "end" )
     if ylabel != None:
-        xofs = -40; yofs = 0
-        try: xofs = float(ylabeladj[0]); yofs = float(ylabeladj[1]);
-        except: raise AppError( "plotdeco() is expecting ylabeladj as 2 member numeric list, but got: " + str(ylabeladj) )
+        xofs = -40; yofs = 0; xadj = 0; yadj = 0
+        if ylabeladj != None:
+            try: xadj = float(ylabeladj[0]); yadj = float(ylabeladj[1]);
+            except: raise AppError( "plotdeco() is expecting ylabeladj as 2 member numeric list, but got: " + str(ylabeladj) )
         p_text["rotate"] = -90
-        _gtooltip( "begin" ); txt( nmin("X")+xofs, ((nmin("Y")+nmax("Y"))/2.0)+yofs, ylabel, anchor="middle" ); _gtooltip( "end" )
+        _gtooltip( "begin" ); txt( nmin("X")+(xofs+xadj), ((nmin("Y")+nmax("Y"))/2.0)+(yofs+yadj), ylabel, anchor="middle" ); _gtooltip( "end" )
     if y2label != None:
-        xofs = 40; yofs = 0
-        try: xofs = float(y2labeladj[0]); yofs = float(y2labeladj[1]); 
-        except: raise AppError( "plotdeco() is expecting y2labeladj as 2 member numeric list, but got: " + str(y2labeladj) )
+        xofs = 40; yofs = 0; xadj = 0; yadj = 0
+        if ylabeladj2 != None:
+            try: xadj = float(y2labeladj[0]); yadj = float(y2labeladj[1]); 
+            except: raise AppError( "plotdeco() is expecting y2labeladj as 2 member numeric list, but got: " + str(y2labeladj) )
         p_text["rotate"] = 90
-        _gtooltip( "begin" ); txt( nmax("X")+xofs, ((nmin("Y")+nmax("Y"))/2.0)+yofs, y2label, anchor="middle" ); _gtooltip( "end" )
+        _gtooltip( "begin" ); txt( nmax("X")+(xofs+xadj), ((nmin("Y")+nmax("Y"))/2.0)+(yofs+yadj), y2label, anchor="middle" ); _gtooltip( "end" )
     p_text["rotate"] = rothold
     return True
     
@@ -1092,14 +1107,14 @@ def arrow( x1=None, y1=None, x2=None, y2=None, headlen=18, headwid=0.3, fill="#8
     return True
 
 
-def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=0.8, placement="right" ):
+def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0, placement="right", showpct=None ):
     # render a piegraph slice.   pctval controls size of slice and is 0.0 to 1.0.
     # startval controls where (radially) the slice "starts" and is also 0.0 to 1.0.
 
     if pctval == None or pctval <= 0.0: return False
     elif pctval > 1.0: raise AppError( "pieslice() pctval= must be a number between 0.00 and 1.00" )
 
-    if startval == None or startval < 0.0 or startval > 8:  raise AppError( "pieslice() startval= must be a number between 0.00 and 1.00 or so" )
+    if startval == None or startval < 0.0 or startval > 8:  raise AppError( "pieslice() startval= out of range" )
 
     twopi = 6.28319; 
     halfpi = 1.5707963
@@ -1112,6 +1127,7 @@ def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=0.8
 
     theta = (startval * -1.0 * twopi) + halfpi    # starting theta
     endtheta =  theta - (pctval * twopi)          # ending theta
+    txttheta = (theta+endtheta)/2.0               # for placing text percentage, if needed
 
     pts = []
     # do the two straight edges...
@@ -1125,7 +1141,17 @@ def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=0.8
 
     _gtooltip( "begin" )
     polygon( pts, fill=fill, outline=outline, opacity=opacity )
+
+    if showpct != None:
+        txtrad = radius * 0.7
+        if showpct == True: showpct = "%.0f"
+        pctstr = showpct % (pctval*100.0)
+        tx = cx+(txtrad*math.cos(txttheta))
+        ty = cy+(txtrad*math.sin(txttheta))
+        txt( tx, ty, pctstr+"%", anchor="middle" )
+
     _gtooltip( "end" )
+
     return True
 
 
@@ -1134,7 +1160,7 @@ def legenditem( sample=None, label=None, color=None, outline=None, width=None ):
     global p_leg, p_tt
     if sample == None or label == None: raise AppError( "legenditem() is expecting mandatory parameters 'sample' and 'label'" )
     if width == None:   # make a rough guess of line length
-        width = ((label.find("\n")+1) * (p_text["height"] *0.5))+15;  # contains a newline
+        width = ((label.find("\n")+1) * (p_text["height"] *0.7))+15;  # contains a newline
         if width <= 0: width = (len(label) * (p_text["height"] *0.7)+15);  # usual case...
     if sample in [ "circle", "square" ]:
         if color == None: raise AppError( "legenditem() is expecting 'color' parameter with sample " + str(sample) )
@@ -1145,17 +1171,22 @@ def legenditem( sample=None, label=None, color=None, outline=None, width=None ):
     p_leg[-1]["tooltip"] = p_tt.copy(); p_tt = {}   # take a copy of any current tooltip settings, then clear p_tt
     return True
 
-def legendrender( location=None, xpos=0.0, ypos=0.0, format="down", sampsize=6, linelen=20, title=None ):
+def legendrender( location=None, locadj=None, format="down", sampsize=6, linelen=20, title=None ):
     # render the legend using entries posted earlier
     global p_leg, p_tt
-    if location == None and (xpos == None or ypos == None): location = "topleft"
-    if location == "topleft": xpos += nmin("X")+5; ypos += nmax("Y")-p_text["height"]
-    elif location == "bottomleft": xpos += nmin("X")+5; ypos += nmin("Y")+3
-    elif location == "topright": xpos += nmax("X")-200; ypos += nmax("Y")-p_text["height"]
-    elif location == "bottomright": xpos += nmax("X")-200; ypos += nmin("Y")+3
-    try: xloc = float(xpos); ypos = float(ypos);
-    except: raise AppError( "legendrender() location= arg error" )
-    if len( p_leg ) == 0: raise AppError( "legendrender(): no legenditem() yet" )
+    if len( p_leg ) == 0: raise AppError( "legendrender(): no legend entries defined yet, use legenditem() first" )
+
+    if location == None and locadj == None: location = "topleft"
+    if location == "topleft": xpos = nmin("X")+5; ypos = nmax("Y")-p_text["height"]
+    elif location == "bottomleft": xpos = nmin("X")+5; ypos = nmin("Y")+3
+    elif location == "topright": xpos = nmax("X")-200; ypos = nmax("Y")-p_text["height"]
+    elif location == "bottomright": xpos = nmax("X")-200; ypos = nmin("Y")+3
+    if location == None and locadj != None:
+        try: xpos = locadj[0]; ypos = locadj[1]
+        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list" )
+    elif locadj != None:
+        try: xpos += locadj[0]; ypos += locadj[1];
+        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list" )
 
     if format == "down":
         sampw = 10
@@ -1193,14 +1224,13 @@ def tooltip( title=None, url=None, target=None, content=None, bs_popover=False )
     return True
 
 
-def groupbegin( id=None, css=None, transform=None ):
+def groupbegin( id=None, cssclass=None, cssstyle=None, transform=None ):
     # start an svg <g> group
     p_svg["out"] += "<g"
     if id != None: p_svg["out"] += " id=" + quo(id) 
-    if css != None: 
-        if ":" in css: p_svg["out"] += " style=" + quo(css) 
-        else: p_svg["out"] += " class=" + quo(css)
-    if transform != None: p_svg["out"] += " transform=" + quo(css)
+    if cssclass != None: p_svg["out"] += " class=" + quo(cssclass)
+    if cssstyle != None: p_svg["out"] += " style=" + quo(cssstyle) 
+    if transform != None: p_svg["out"] += " transform=" + quo(transform)
     p_svg["out"] += ">\n"
     return True
 
@@ -1228,6 +1258,14 @@ def quo( val ):
 def str2f( val ):
     # return str() of val, with val rounded to 2 decimal places (for use with svg native coordinates)
     return str( "{:.2f}".format( val ).replace(".00", "" ) ) 
+
+
+def vec2d( invect ):
+    # convert a 1-D array to 2-D representation for compatibility with anything that uses getdfindex()
+    out = []
+    for val in invect: 
+        out.append( (val,) )
+    return out
 
 
 def getdfindex( colname=None, datarows=None ):
