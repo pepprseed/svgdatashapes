@@ -73,7 +73,7 @@ def example6( bandsopt=False ):
             p.datapoint( x=row[xcol], y=row[ycol], fill=linecolor, diameter=12, opacity=0.5 )  # do datapoints last
 
     # display the legend...
-    p.legendrender( location='topleft', format='across' )
+    p.legendrender( location='upperleft', format='across' )
 
     # capture the entire SVG...
     return p.svgresult()

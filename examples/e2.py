@@ -56,7 +56,7 @@ def example2():                                          # scatterplot example
         p.tooltip( "("+str(dp[0])+","+str(dp[1])+")" )
         p.datapoint( x=dp[0], y=dp[1], fill='#00a', diameter=8, opacity=0.6 )
 
-    p.legendrender( location='topleft', locadj=(0,30), format='across' )
+    p.legendrender( location='upperleft', locadj=(0,30), format='across' )
 
     # return the svg 
     return p.svgresult()

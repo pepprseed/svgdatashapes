@@ -46,7 +46,7 @@ def example1():
         p.bar( x=row['state'], y=row['avg'], ybase=0.0, fill=barcolor, width=20, opacity=0.8 )
 
     # render the legend...
-    p.legendrender( location='topleft', format='across' )
+    p.legendrender( location='upperleft', format='across' )
 
     # return the SVG...
     return p.svgresult()

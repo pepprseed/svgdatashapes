@@ -981,8 +981,9 @@
 import minplot as p
 import sampledata as sd
 
-def example7a():
-    # essentially same code as example7 but with a log Y axis
+def example7( ylog=False ):
+    # produce beeswarm and boxplot display
+    # ylog .... if True use a log Y axis; otherwise use linear
 
     plotdata = {}
 
@@ -1002,15 +1003,18 @@ def example7a():
             p.findrange( testval=val )
     yrange = p.findrange( finish=True )
 
-    # set up Y space...
+    # set up X space...
     p.catspace( axis='X', catlist=[ '1f', '2f', '1m', '2m' ], poslo=100, poshi=500 )
-    p.numspace( axis='Y', axmin=5, axmax=yrange.axmax, poslo=60, poshi=340, log=True )  
+
+    if ylog == False: p.numspace( axis='Y', axmin=5, axmax=yrange.axmax, poslo=60, poshi=340 )  
+    else: p.numspace( axis='Y', axmin=5, axmax=yrange.axmax, poslo=60, poshi=340, log=True )  
 
     # render axes and plotting area
     p.lineprops( color='#aaa' )
     p.textprops( color='#777', cssstyle=textstyle )
     p.axisrender( axis='X', axisline=False, loc='min-8' )
-    p.axisrender( axis='y', tics=8, loc='min-8', grid=True, inc=5, stubcull=20 )   
+    if ylog == False: p.axisrender( axis='y', tics=8, loc='min-8', grid=True )
+    else: p.axisrender( axis='y', tics=8, loc='min-8', grid=True, inc=5, stubcull=20 )   
     p.plotdeco( ylabel='glucose [mg/dL]', ylabeladj=(-20,0) )
 
     # compute percentiles and other summary info for each 1-D array

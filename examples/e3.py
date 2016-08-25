@@ -29,6 +29,6 @@ def example3():                                       # pie graph example
         islice += 1
 
     p.textprops( color='#888' )
-    p.legendrender( location='topleft', title='Pie graph example' )
+    p.legendrender( location='upperleft', title='Pie graph example' )
 
     return p.svgresult()
