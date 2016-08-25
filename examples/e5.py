@@ -35,5 +35,4 @@ def example5():                                          # plot some dates with 
     for dp in dataset1:
         p.bar( x=pdt.num(dp[0]), y=dp[1], fill='#4f4', width=5, opacity=0.6 )
 
-    svg = p.svgresult()
-    return svg
+    return p.svgresult()

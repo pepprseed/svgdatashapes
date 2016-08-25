@@ -1,4 +1,3 @@
-import random
 import minplot as p
 
 def example2():                                          # scatterplot example
@@ -16,7 +15,10 @@ def example2():                                          # scatterplot example
        (-8.6, -3.6), (1.4, 1.8), (-5.5, 8.6), (1.1, -2.0), (7.8, -2.3) ]
 
 
-    p.svgbegin( width=300, height=340 )
+    p.svgbegin( width=400, height=400 )
+
+    p.textprops( color='#777', cssstyle="font-family: sans-serif; font-weight: bold;" )
+    p.lineprops( color='#777' )
 
     # pretend we're getting data dynamically and find the data range in X and Y
     for dp in dataset1 + dataset2:       # find range in X
@@ -27,16 +29,15 @@ def example2():                                          # scatterplot example
     yrange = p.findrange( finish=True )
 
     # set up X and Y space...
-    p.numspace( axis='X', axmin=xrange.axmin, axmax=xrange.axmax, poslo=60, poshi=280 )
-    p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=60, poshi=280 )
+    p.numspace( axis='X', axmin=xrange.axmin, axmax=xrange.axmax, poslo=100, poshi=350 )
+    p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=100, poshi=350 )
 
     # render axes and plotting area
-    p.lineprops( color='#777' )
-    p.textprops( color='#777' )
     p.axisrender( axis='X', tics=8, loc="min-8" )
     p.axisrender( axis='y', tics=8, loc="min-8" )
+    p.plotdeco( shade='#eee', outline=True, rectadj=8 )
     p.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; density [g/cm<sup>2</sup>]', 
-          shade='#eee', outline=True, rectadj=8 )
+          ylabeladj=(-15,0), xlabeladj=(0,-10) )
 
     # do crosshairs at 0, 0
     p.lineprops( color='#888', dash="3,3" )
@@ -57,5 +58,5 @@ def example2():                                          # scatterplot example
 
     p.legendrender( location='topleft', locadj=(0,30), format='across' )
 
-    svg = p.svgresult()
-    return svg
+    # return the svg 
+    return p.svgresult()

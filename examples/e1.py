@@ -14,7 +14,7 @@ def example1():
     dataset.append( { 'state':'New Hampshire', 'avg':97.5, 'sem':27.8 , 'new':False} )
     dataset.append( { 'state':'Georgia',       'avg':89,   'sem':19.2 , 'new':False} )
 
-    textstyle = 'font-family: sans-serif;'    # ensure sans-serif even via [img]
+    textstyle = 'font-family: sans-serif; font-weight: bold;'    
 
     # initialize minplot and begin building our svg...
     p.svgbegin( width=550, height=450 )
@@ -48,7 +48,5 @@ def example1():
     # render the legend...
     p.legendrender( location='topleft', format='across' )
 
-    # capture the entire SVG...
-    svg = p.svgresult()
-
-    return svg
+    # return the SVG...
+    return p.svgresult()

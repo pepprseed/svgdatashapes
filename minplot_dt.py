@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.32  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
+# minplot.py  v0.33  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
 #
 
 
@@ -73,7 +73,7 @@ def dtrange( dtcol=None, datarows=None, nearest=None, inc=None, stubformat=None,
 
     dfindex = minplot.getdfindex( dtcol, datarows )
 
-    if nearest == None: raise AppDt_Error( "findrange() requires a nearest= parameter value" )
+    if nearest == None: raise AppDt_Error( "findrange() requires a nearest= arg " )
     if inc == None: inc = nearest
     # if inc != nearest:
     #    if nearest == "year" and inc == "month": pass

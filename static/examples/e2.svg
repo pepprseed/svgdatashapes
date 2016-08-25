@@ -1,278 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="300" height="340" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- SVG graphic by minplot -->
-<polyline points="60,288 280,288" stroke="#777"  />
-<polyline points="280,288 60,288" stroke="#777"  />
-<polyline points="60,288 60,296" stroke="#777"  />
-<polyline points="115,288 115,296" stroke="#777"  />
-<polyline points="170,288 170,296" stroke="#777"  />
-<polyline points="225,288 225,296" stroke="#777"  />
-<polyline points="280,288 280,296" stroke="#777"  />
-<text x="60" y="309.89" fill="#777"  text-anchor="middle" >-10</text>
-<text x="115" y="309.89" fill="#777"  text-anchor="middle" >-5</text>
-<text x="170" y="309.89" fill="#777"  text-anchor="middle" >0</text>
-<text x="225" y="309.89" fill="#777"  text-anchor="middle" >5</text>
-<text x="280" y="309.89" fill="#777"  text-anchor="middle" >10</text>
-<polyline points="52,280 52,60" stroke="#777"  />
-<polyline points="52,60 52,280" stroke="#777"  />
-<polyline points="52,280 44,280" stroke="#777"  />
-<polyline points="52,225 44,225" stroke="#777"  />
-<polyline points="52,170 44,170" stroke="#777"  />
-<polyline points="52,115 44,115" stroke="#777"  />
-<polyline points="52,60 44,60" stroke="#777"  />
-<text x="42" y="284.17" fill="#777"  text-anchor="end" >-10</text>
-<text x="42" y="229.17" fill="#777"  text-anchor="end" >-5</text>
-<text x="42" y="174.17" fill="#777"  text-anchor="end" >0</text>
-<text x="42" y="119.17" fill="#777"  text-anchor="end" >5</text>
-<text x="42" y="64.17" fill="#777"  text-anchor="end" >10</text>
-<rect x="52.0" y="52" width="236" height="236" stroke="#777"  fill="#eee" />
-<text x="170" y="328" fill="#777"  text-anchor="middle" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
-<text x="20" y="170" fill="#777"  text-anchor="middle" transform="rotate(-90 20,170)" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
-<polyline points="60,170 280,170" stroke="#888" stroke-dasharray="3,3"  />
-<polyline points="170,280 170,60" stroke="#888" stroke-dasharray="3,3"  />
+<polyline points="100,308 350,308" stroke="#777"  />
+<polyline points="350,308 100,308" stroke="#777"  />
+<polyline points="100,308 100,316" stroke="#777"  />
+<polyline points="162.50,308 162.50,316" stroke="#777"  />
+<polyline points="225,308 225,316" stroke="#777"  />
+<polyline points="287.50,308 287.50,316" stroke="#777"  />
+<polyline points="350,308 350,316" stroke="#777"  />
+<text x="100" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >-10</text>
+<text x="162.50" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >-5</text>
+<text x="225" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >0</text>
+<text x="287.50" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >5</text>
+<text x="350" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >10</text>
+<polyline points="92,300 92,50" stroke="#777"  />
+<polyline points="92,50 92,300" stroke="#777"  />
+<polyline points="92,300 84,300" stroke="#777"  />
+<polyline points="92,237.50 84,237.50" stroke="#777"  />
+<polyline points="92,175 84,175" stroke="#777"  />
+<polyline points="92,112.50 84,112.50" stroke="#777"  />
+<polyline points="92,50 84,50" stroke="#777"  />
+<text x="82" y="304.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >-10</text>
+<text x="82" y="241.67" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >-5</text>
+<text x="82" y="179.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >0</text>
+<text x="82" y="116.67" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >5</text>
+<text x="82" y="54.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >10</text>
+<rect x="92.0" y="42" width="266" height="266" stroke="#777"  fill="#eee" />
+<rect x="100.0" y="50" width="250" height="250" fill="none" />
+<text x="225" y="365" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
+<text x="37" y="175" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" transform="rotate(-90 37,175)" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
+<polyline points="100,175 350,175" stroke="#888" stroke-dasharray="3,3"  />
+<polyline points="225,300 225,50" stroke="#888" stroke-dasharray="3,3"  />
 <g><title>(-6.3,-5.2)</title>
-<circle cx="100.70" cy="227.20" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="146.25" cy="240" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(0.4,1.8)</title>
-<circle cx="174.40" cy="150.20" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="230" cy="152.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(8.1,8.7)</title>
-<circle cx="259.10" cy="74.30" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="326.25" cy="66.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-3.7,-5.1)</title>
-<circle cx="129.30" cy="226.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="178.75" cy="238.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(8.6,8.2)</title>
-<circle cx="264.60" cy="79.80" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="332.50" cy="72.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-7.5,-8.3)</title>
-<circle cx="87.50" cy="261.30" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="131.25" cy="278.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-8.0,-9.2)</title>
-<circle cx="82" cy="271.20" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="125" cy="290" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-9.8,-9.1)</title>
-<circle cx="62.20" cy="270.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="102.50" cy="288.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-6.7,-5.5)</title>
-<circle cx="96.30" cy="230.50" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="141.25" cy="243.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(7.6,6.9)</title>
-<circle cx="253.60" cy="94.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="320" cy="88.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-3.0,-2.3)</title>
-<circle cx="137" cy="195.30" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="187.50" cy="203.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-4.8,-5.4)</title>
-<circle cx="117.20" cy="229.40" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="165" cy="242.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-1.1,-0.8)</title>
-<circle cx="157.90" cy="178.80" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="211.25" cy="185" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(6.4,5.7)</title>
-<circle cx="240.40" cy="107.30" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="305" cy="103.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-5.2,-5.7)</title>
-<circle cx="112.80" cy="232.70" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="160" cy="246.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(9.7,9.9)</title>
-<circle cx="276.70" cy="61.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="346.25" cy="51.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(5.9,4.9)</title>
-<circle cx="234.90" cy="116.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="298.75" cy="113.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-1.1,-2.5)</title>
-<circle cx="157.90" cy="197.50" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="211.25" cy="206.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-8.3,-8.5)</title>
-<circle cx="78.70" cy="263.50" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="121.25" cy="281.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(5.8,5.5)</title>
-<circle cx="233.80" cy="109.50" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="297.50" cy="106.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(9.1,7.6)</title>
-<circle cx="270.10" cy="86.40" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="338.75" cy="80" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-3.8,-3.8)</title>
-<circle cx="128.20" cy="211.80" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="177.50" cy="222.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-7.0,-6.1)</title>
-<circle cx="93" cy="237.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="137.50" cy="251.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-1.9,-2.7)</title>
-<circle cx="149.10" cy="199.70" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="201.25" cy="208.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-5.9,-6.1)</title>
-<circle cx="105.10" cy="237.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="151.25" cy="251.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(0.3,-0.1)</title>
-<circle cx="173.30" cy="171.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="228.75" cy="176.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-3.4,-4.7)</title>
-<circle cx="132.60" cy="221.70" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="182.50" cy="233.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(8.9,8.9)</title>
-<circle cx="267.90" cy="72.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="336.25" cy="63.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(1.0,2.1)</title>
-<circle cx="181" cy="146.90" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="237.50" cy="148.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-3.5,-4.7)</title>
-<circle cx="131.50" cy="221.70" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="181.25" cy="233.75" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(4.0,1.6)</title>
-<circle cx="214" cy="152.40" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="275" cy="155" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(2.9,8.3)</title>
-<circle cx="201.90" cy="78.70" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="261.25" cy="71.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-0.2,5.6)</title>
-<circle cx="167.80" cy="108.40" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="222.50" cy="105" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(2.4,-4.1)</title>
-<circle cx="196.40" cy="215.10" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="255" cy="226.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(1.4,-7.0)</title>
-<circle cx="185.40" cy="247" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="242.50" cy="262.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(1.6,7.6)</title>
-<circle cx="187.60" cy="86.40" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="245" cy="80" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-1.0,-9.0)</title>
-<circle cx="159" cy="269" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="212.50" cy="287.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(8.8,0.7)</title>
-<circle cx="266.80" cy="162.30" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="335" cy="166.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(-5.1,5.4)</title>
-<circle cx="113.90" cy="110.60" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="161.25" cy="107.50" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(5.7,-4.5)</title>
-<circle cx="232.70" cy="219.50" r="4" fill="#a00" opacity="0.6"/>
+<circle cx="296.25" cy="231.25" r="4" fill="#a00" opacity="0.6"/>
 </g>
 <g><title>(4.9,4.2)</title>
-<circle cx="223.90" cy="123.80" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="286.25" cy="122.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-4.9,-3.8)</title>
-<circle cx="116.10" cy="211.80" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="163.75" cy="222.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(8.6,8.7)</title>
-<circle cx="264.60" cy="74.30" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="332.50" cy="66.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(0.9,1.1)</title>
-<circle cx="179.90" cy="157.90" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="236.25" cy="161.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-7.8,-7.9)</title>
-<circle cx="84.20" cy="256.90" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="127.50" cy="273.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-0.1,0.0)</title>
-<circle cx="168.90" cy="170" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="223.75" cy="175" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(8.6,8.0)</title>
-<circle cx="264.60" cy="82" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="332.50" cy="75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-3.4,-3.1)</title>
-<circle cx="132.60" cy="204.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="182.50" cy="213.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-3.8,-4.5)</title>
-<circle cx="128.20" cy="219.50" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="177.50" cy="231.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(6.7,8.1)</title>
-<circle cx="243.70" cy="80.90" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="308.75" cy="73.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-3.4,-3.0)</title>
-<circle cx="132.60" cy="203" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="182.50" cy="212.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(8.4,8.4)</title>
-<circle cx="262.40" cy="77.60" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="330" cy="70" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-4.3,-5.1)</title>
-<circle cx="122.70" cy="226.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="171.25" cy="238.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(2.8,3.4)</title>
-<circle cx="200.80" cy="132.60" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="260" cy="132.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(5.4,5.3)</title>
-<circle cx="229.40" cy="111.70" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="292.50" cy="108.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(4.0,4.9)</title>
-<circle cx="214" cy="116.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="275" cy="113.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(8.3,9.6)</title>
-<circle cx="261.30" cy="64.40" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="328.75" cy="55" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(7.7,6.9)</title>
-<circle cx="254.70" cy="94.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="321.25" cy="88.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(1.7,2.2)</title>
-<circle cx="188.70" cy="145.80" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="246.25" cy="147.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-6.8,-6.0)</title>
-<circle cx="95.20" cy="236" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="140" cy="250" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(6.4,5.8)</title>
-<circle cx="240.40" cy="106.20" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="305" cy="102.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(4.4,3.8)</title>
-<circle cx="218.40" cy="128.20" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="280" cy="127.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(2.8,4.3)</title>
-<circle cx="200.80" cy="122.70" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="260" cy="121.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-2.0,-0.8)</title>
-<circle cx="148" cy="178.80" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="200" cy="185" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-5.4,-5.7)</title>
-<circle cx="110.60" cy="232.70" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="157.50" cy="246.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-0.2,1.2)</title>
-<circle cx="167.80" cy="156.80" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="222.50" cy="160" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-3.3,-2.2)</title>
-<circle cx="133.70" cy="194.20" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="183.75" cy="202.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(5.7,5.5)</title>
-<circle cx="232.70" cy="109.50" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="296.25" cy="106.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(2.2,1.9)</title>
-<circle cx="194.20" cy="149.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="252.50" cy="151.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-0.2,0.9)</title>
-<circle cx="167.80" cy="160.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="222.50" cy="163.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(7.7,-8.1)</title>
-<circle cx="254.70" cy="259.10" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="321.25" cy="276.25" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-7.6,-8.0)</title>
-<circle cx="86.40" cy="258" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="130" cy="275" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(8.3,3.7)</title>
-<circle cx="261.30" cy="129.30" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="328.75" cy="128.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-9.9,-0.3)</title>
-<circle cx="61.10" cy="173.30" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="101.25" cy="178.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(7.2,6.0)</title>
-<circle cx="249.20" cy="104" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="315" cy="100" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-8.6,-3.6)</title>
-<circle cx="75.40" cy="209.60" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="117.50" cy="220" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(1.4,1.8)</title>
-<circle cx="185.40" cy="150.20" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="242.50" cy="152.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(-5.5,8.6)</title>
-<circle cx="109.50" cy="75.40" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="156.25" cy="67.50" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(1.1,-2.0)</title>
-<circle cx="182.10" cy="192" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="238.75" cy="200" r="4" fill="#00a" opacity="0.6"/>
 </g>
 <g><title>(7.8,-2.3)</title>
-<circle cx="255.80" cy="195.30" r="4" fill="#00a" opacity="0.6"/>
+<circle cx="322.50" cy="203.75" r="4" fill="#00a" opacity="0.6"/>
 </g>
-<circle cx="70" cy="39.72" r="3.50" fill="#a00" />
-<text x="78" y="43.89" fill="#777" >Group A</text>
-<circle cx="158" cy="39.72" r="3.50" fill="#00a" />
-<text x="166" y="43.89" fill="#777" >Group B</text>
+<circle cx="110" cy="29.72" r="3.50" fill="#a00" />
+<text x="118" y="33.89" style="font-family: sans-serif; font-weight: bold;" fill="#777" >Group A</text>
+<circle cx="198" cy="29.72" r="3.50" fill="#00a" />
+<text x="206" y="33.89" style="font-family: sans-serif; font-weight: bold;" fill="#777" >Group B</text>
 </svg>

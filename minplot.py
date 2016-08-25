@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.32  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# minplot.py  v0.33  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 
 import math
@@ -698,7 +698,7 @@ def catinfo( datarows=None, catcol=None, nullspacers=False, distrib=False, accum
 
 
 
-def plotdeco( title=None, outline=False, shade=None, xlabel=None, ylabel=None, y2label=None, 
+def plotdeco( title=None, outline=False, shade=None, opacity=1.0, xlabel=None, ylabel=None, y2label=None, 
               titlepos="left", xlabeladj=None, ylabeladj=None, y2labeladj=None, rectadj=None ):
     global p_text
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
@@ -713,7 +713,7 @@ def plotdeco( title=None, outline=False, shade=None, xlabel=None, ylabel=None, y
                 try: mx1 = rectadj[0]; my1 = rectadj[1]; mx2 = rectadj[2]; my2 = rectadj[3];
                 except: pass
             titleadj=my2
-        rect( nmin('X')+mx1, nmin('Y')+my1, nmax('X')+mx2, nmax('Y')+my2, fill=shade, outline=outline )
+        rect( nmin('X')+mx1, nmin('Y')+my1, nmax('X')+mx2, nmax('Y')+my2, fill=shade, opacity=opacity, outline=outline )
 
     rothold = p_text["rotate"] 
     if title != None: 
@@ -723,20 +723,20 @@ def plotdeco( title=None, outline=False, shade=None, xlabel=None, ylabel=None, y
         else: txt( nmin("X"), nmax("Y")+(titleadj+5), title, anchor="start" )
         _gtooltip( "end" )
     if xlabel != None:
-        xofs = 0; yofs = -48; xadj = 0; yadj = 0
+        xofs = 0; yofs = -55; xadj = 0; yadj = 0  # was -48
         if xlabeladj != None:
             try: xadj = float(xlabeladj[0]); yadj = float(xlabeladj[1])    # see if specified as (xadj, yadj)
             except: raise AppError( "plotdeco() is expecting xlabeladj as 2 member numeric list, but got: " + str(xlabeladj) )
         _gtooltip( "begin" ); txt( ((nmin("X")+nmax("X"))/2.0)+(xofs+xadj), nmin("Y")+(yofs+yadj), xlabel, anchor="middle" ); _gtooltip( "end" )
     if ylabel != None:
-        xofs = -40; yofs = 0; xadj = 0; yadj = 0
+        xofs = -48; yofs = 0; xadj = 0; yadj = 0   # was -40
         if ylabeladj != None:
             try: xadj = float(ylabeladj[0]); yadj = float(ylabeladj[1]);
             except: raise AppError( "plotdeco() is expecting ylabeladj as 2 member numeric list, but got: " + str(ylabeladj) )
         p_text["rotate"] = -90
         _gtooltip( "begin" ); txt( nmin("X")+(xofs+xadj), ((nmin("Y")+nmax("Y"))/2.0)+(yofs+yadj), ylabel, anchor="middle" ); _gtooltip( "end" )
     if y2label != None:
-        xofs = 40; yofs = 0; xadj = 0; yadj = 0
+        xofs = 48; yofs = 0; xadj = 0; yadj = 0    # was 40
         if ylabeladj2 != None:
             try: xadj = float(y2labeladj[0]); yadj = float(y2labeladj[1]); 
             except: raise AppError( "plotdeco() is expecting y2labeladj as 2 member numeric list, but got: " + str(y2labeladj) )
@@ -747,7 +747,7 @@ def plotdeco( title=None, outline=False, shade=None, xlabel=None, ylabel=None, y
     
 
 def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=False, 
-               loc=None, stubformat=None, divideby=None, sep=None, stublist=None ):
+               loc=None, stubformat=None, divideby=None, stubcull=None, stublist=None, stubrotate=None ):
     # render an axis scale
     global p_space, p_text
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
@@ -764,16 +764,19 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
     loc = loc.replace( " ", "" )
     if "+" in loc:
         chunks = loc.split("+")
-        if len( chunks ) != 2: raise AppError( "axisrender(): invalid loc= construct: "+loc )
+        if len( chunks ) != 2: raise AppError( "axisrender(): invalid loc= construct: " + str(loc) )
         loc = chunks[0]; ofs = float(chunks[1])
     elif "-" in loc:
         chunks = loc.split("-")
-        if len( chunks ) != 2: raise AppError( "axisrender(): invalid loc= construct: "+loc )
+        if len( chunks ) != 2: raise AppError( "axisrender(): invalid loc= construct: " + str(loc) )
         loc = chunks[0]; ofs = float(chunks[1]) * -1.0
 
     if loc in ["right", "top", "max"]:     loc = "max"; c = nmax(othax)      ; d = nmin(othax) + ofs
     elif loc in ['left', 'bottom', 'min']: loc = "min"; c = nmin(othax) + ofs; d = nmax(othax) 
-    else: raise AppError( "axisrender(): invalid loc= construct: "+loc )
+    else: raise AppError( "axisrender(): invalid loc= construct: "+ str(loc) )
+
+    if stubcull != None and type(stubcull) is not int: raise AppError( "axisrender(): stubcull= must be integer, got: "+ str(stubcull) )
+        
 
     if axisline == True:
         if axis == "X":  lin( a, c, b, c ); lin( b, c, a, c )
@@ -796,31 +799,36 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
         else:   ticend = c - tics
 
     if tics != 0.0 and stublist == None:
-        val = valstart
+        val = valstart-valinc
+        prevdrawn = -500.0
         while val <= valend:
+            val += valinc
             if inspace( axis, val ) == False: val += valinc; continue
+            if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
             if axis == "X":   lin( nx( val ), c, nx( val ), ticend )
             else:   lin( c, ny( val ), ticend, ny( val ) )
-            val += valinc
+            prevdrawn = nu( axis, val ) 
 
 
     if grid == True and stublist == None:   # grid for stublist done below...
         gridend = d
-        val = valstart
+        val = valstart-valinc
+        prevdrawn = -500.0
         while val <= valend:
+            val += valinc
             if inspace( axis, val ) == False:   val += valinc; continue
+            if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
             if axis == "X":   lin( nx( val ), c, nx( val ), gridend )
             else:   lin( c, ny( val ), gridend, ny( val ) )
-            val += valinc
+            prevdrawn = nu( axis, val ) 
 
     if stubs == True:
         txtadj = 0.0
         xstubanchor = "middle"
 
         # we spend a fair amt of effort here fine-tuning rotated stubs... rotate = -90 to 90
-        rot0 = False
-        if p_text["rotate"] == 0:      # default to rotate=45 when appropriate....
-            rot0 = True            # remember rotate was = None so we can restore afterward
+        rot0 = p_text["rotate"]
+        if stubrotate == None:      # default to rotate=45 when appropriate....
             if axis == "X":      # see if any X axis stubs will be long (> 3 chars)...
                 if iscat == True:
                     for cat in p_space[iax]["catlist"]:   
@@ -829,6 +837,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
                     for pair in stublist:
                         if len( pair[1] ) > 3:  p_text["rotate"] = 45; break
                 elif valend >= 1000:   p_text["rotate"] = 45
+        else: p_text["rotate"] = stubrotate
 
         rotate = p_text["rotate"]   
 
@@ -895,13 +904,12 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
             if stubformat == None: stubformat = "%g"
             if divideby == None: divideby = 1
             try:
-                # prevdrawn = nu( axis, valstart ) + p_text["height"]
                 prevdrawn = -500.0
                 val = valstart - valinc
                 while val <= valend:
                     val += valinc
                     if inspace( axis, val ) == False:  continue
-                    if sep != None and math.fabs(nu( axis, val ) - prevdrawn) < sep:  continue
+                    if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
                     outstr = stubformat % (val/divideby)
                     if axis == "X":  txt( nx( val )-txtadj, stubstart, outstr, anchor=xstubanchor )
                     else:  txt( stubstart, ny( val )-txtadj, outstr, anchor="end" )
@@ -910,7 +918,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
                 raise AppError( "axisrender(): error while generating numeric stubs for " + str(axis) + " axis" )
 
         _gtooltip( "end" )
-        if rot0: p_text["rotate"] = 0    # restore...
+        p_text["rotate"] = rot0    # restore...
     return True
 
 
@@ -961,12 +969,12 @@ def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=Non
     global p_clust
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "datapoint(): plot area has not been set up yet." )
-    if x == None or y == None:  return False   # coords may include None... render nothing
+    if x == None or y == None:  return False   # tolerate None coords... render nothing
     if fill == None and outline == None:  raise AppError( "datapoint() 'fill' or 'outline' must be specified" )
     natx = nx(x)+xofs; naty = ny(y)+yofs
     cofsx = 0.0; cofsy = 0.0;
-    if p_clust["mode"] != None:
-        if math.fabs( natx - p_clust["prevx"] ) <= p_clust["tol"] and math.fabs( naty - p_clust["prevy"] ) <= p_clust["tol"]:
+    if p_clust["mode"] != None:    # clustering...
+        if math.fabs( natx - p_clust["prevx"] ) <= p_clust["tol"] and math.fabs( naty - p_clust["prevy"] ) <= p_clust["tol"]:  
             p_clust["ndup"] += 1
             ndup = (p_clust["ndup"])/p_clust["dampen"]; ofs = p_clust["offset"]
             if p_clust["mode"] == "surround":
@@ -978,11 +986,13 @@ def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=Non
                 else: cofsx = (ndup/2.0) * ofs * -4.0
             elif p_clust["mode"] == "upward":
                 cofsy = ndup * ofs * 4.0
+        else:
+            p_clust["prevx"] = natx; p_clust["prevy"] = naty;
+            p_clust["ndup"] = 0
 
     _gtooltip( "begin" )
     circle( natx+cofsx, naty+cofsy, diameter=diameter, fill=fill, opacity=opacity, outline=outline )
     _gtooltip( "end" )
-    if p_clust["mode"] != None: p_clust["prevx"] = natx; p_clust["prevy"] = naty;
     return True
         
 
@@ -1020,7 +1030,7 @@ def rectangle( x=None, y=None, width=None, height=None, fill="#e0ffe0", opacity=
         if p_space[1]["scaletype"] == "categorical": natheight = p_space[1]["natinc"]
         elif height == "all": pass
         else:  natheight = ndist("Y", height )
-    except: raise AppError( "rectangle(): invalid parameters" )
+    except: raise AppError( "rectangle(): invalid args" )
     if width  == "all": nx1 = nmin("X"); nx2 = nmax("X")
     else: nx1 = nx(x)-(natwidth/2.0); nx2 = nx(x)+(natwidth/2.0)
     if height == "all": ny1 = nmin("Y"); ny2 = nmax("Y")
@@ -1155,38 +1165,42 @@ def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0
     return True
 
 
-def legenditem( sample=None, label=None, color=None, outline=None, width=None ):
+def legenditem( sample='square', label=None, color=None, outline=None, width=None ):
     # post a legend entry, to be rendered later using legendrender()
     global p_leg, p_tt
-    if sample == None or label == None: raise AppError( "legenditem() is expecting mandatory parameters 'sample' and 'label'" )
+    if label == None: raise AppError( "legenditem() is expecting mandatory 'label' arg" )
     if width == None:   # make a rough guess of line length
         width = ((label.find("\n")+1) * (p_text["height"] *0.7))+15;  # contains a newline
         if width <= 0: width = (len(label) * (p_text["height"] *0.7)+15);  # usual case...
     if sample in [ "circle", "square" ]:
-        if color == None: raise AppError( "legenditem() is expecting 'color' parameter with sample " + str(sample) )
+        if color == None: raise AppError( "legenditem() is expecting 'color' arg with sample " + str(sample) )
         p_leg.append( { "shape":sample, "color":color, "label":label, "outline":outline, "width":width } )
     elif sample == "line":
         p_leg.append( { "shape":"line", "lineprops":p_line["props"], "label":label, "width":width } )
-    else: raise AppError( "legenditem() unrecognized 'sample' parameter: " + str(sample) )
+    else: raise AppError( "legenditem() unrecognized 'sample' arg: " + str(sample) )
     p_leg[-1]["tooltip"] = p_tt.copy(); p_tt = {}   # take a copy of any current tooltip settings, then clear p_tt
     return True
 
 def legendrender( location=None, locadj=None, format="down", sampsize=6, linelen=20, title=None ):
     # render the legend using entries posted earlier
     global p_leg, p_tt
-    if len( p_leg ) == 0: raise AppError( "legendrender(): no legend entries defined yet, use legenditem() first" )
 
-    if location == None and locadj == None: location = "topleft"
-    if location == "topleft": xpos = nmin("X")+5; ypos = nmax("Y")-p_text["height"]
-    elif location == "bottomleft": xpos = nmin("X")+5; ypos = nmin("Y")+3
-    elif location == "topright": xpos = nmax("X")-200; ypos = nmax("Y")-p_text["height"]
-    elif location == "bottomright": xpos = nmax("X")-200; ypos = nmin("Y")+3
+    if len( p_leg ) == 0: raise AppError( "legendrender(): no legend entries defined yet, use legenditem() first" )
+    if location != None and location not in [ 'upperleft', 'lowerleft', 'upperright', 'lowerright' ]: 
+        raise AppError( "legendrender(): invalid value for 'location' arg, got: " + location )
+
+    if location == None and locadj == None: location = "upperleft" 
+
+    if location == "upperleft": xpos = nmin("X")+5; ypos = nmax("Y")-p_text["height"]
+    elif location == "lowerleft": xpos = nmin("X")+5; ypos = nmin("Y")+3
+    elif location == "upperright": xpos = nmax("X")-200; ypos = nmax("Y")-p_text["height"]
+    elif location == "lowerright": xpos = nmax("X")-200; ypos = nmin("Y")+3
     if location == None and locadj != None:
-        try: xpos = locadj[0]; ypos = locadj[1]
-        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list" )
+        try: xpos = int(locadj[0]); ypos = int(locadj[1])
+        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list of int" )
     elif locadj != None:
-        try: xpos += locadj[0]; ypos += locadj[1];
-        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list" )
+        try: xpos += int(locadj[0]); ypos += int(locadj[1])
+        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list of int" )
 
     if format == "down":
         sampw = 10
@@ -1217,8 +1231,8 @@ def legendrender( location=None, locadj=None, format="down", sampsize=6, linelen
 def tooltip( title=None, url=None, target=None, content=None, bs_popover=False ):
     # capture the necessary info in order to associate a tooltip/xlink with subsequent plot element
     global p_tt
-    if title == None and url == None: raise AppError( "tooltip() is expecting 'title' and/or 'url' parameters" )
-    if bs_popover == True and ( title == None or content == None ): raise AppError( "tooltip() is expecting 'title' and 'content' parameters for bootstrap popover" )
+    if title == None and url == None: raise AppError( "tooltip() is expecting 'title' and/or 'url' args" )
+    if bs_popover == True and ( title == None or content == None ): raise AppError( "tooltip() is expecting 'title' and 'content' args for bootstrap popover" )
     p_tt = {}
     p_tt["title"] = title; p_tt["url"] = url; p_tt["target"] = target; p_tt["content"] = content; p_tt["popover"] = bs_popover;
     return True

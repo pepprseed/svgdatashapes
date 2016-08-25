@@ -4,8 +4,8 @@ To install simply put minplot.py into your project directory.  Then in your pyth
 import minplot
 
 
-To get date and time plotting functionality also put minplot_dt.py into your project directory.
-In your python code do:  
+To get date and time plotting functionality also put minplot_dt.py into your project directory
+and do this:  
 
 import minplot
 import minplot_dt

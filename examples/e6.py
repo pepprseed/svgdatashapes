@@ -76,6 +76,4 @@ def example6( bandsopt=False ):
     p.legendrender( location='topleft', format='across' )
 
     # capture the entire SVG...
-    svg = p.svgresult()
-
-    return svg
+    return p.svgresult()

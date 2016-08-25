@@ -6,6 +6,8 @@ def example3():                                       # pie graph example
 
     p.svgbegin( width=500, height=300 )
 
+    p.textprops( color='#333', cssstyle="font-family: sans-serif; font-weight: bold;" )
+
     # set up X space and Y space for the sake of centering pie... axmin and max don't matter
     p.numspace( axis='X', poslo=50, poshi=400, axmin=0.0, axmax=1.0, )
     p.numspace( axis='Y', poslo=50, poshi=280, axmin=0.0, axmax=1.0, )
@@ -29,5 +31,4 @@ def example3():                                       # pie graph example
     p.textprops( color='#888' )
     p.legendrender( location='topleft', title='Pie graph example' )
 
-    svg = p.svgresult()
-    return svg
+    return p.svgresult()
