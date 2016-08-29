@@ -81,8 +81,8 @@
 <text x="78" y="115" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >80</text>
 <text x="78" y="55" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >100</text>
 <rect x="100.0" y="50" width="400" height="300" fill="none" />
-<text x="280" y="415" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Months of follow up</text>
-<text x="32" y="200" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" transform="rotate(-90 32,200)" >O<tspan dy="5.0" font-size="9.60pt">2</tspan><tspan dy="-5.0"> exchange ratio [%]</tspan></text>
+<text x="280" y="420" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Months of follow up</text>
+<text x="20" y="200" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" transform="rotate(-90 20,200)" >O<tspan dy="5.0" font-size="9.60pt">2</tspan><tspan dy="-5.0"> exchange ratio [%]</tspan></text>
 <polyline points="100,258.20 100,243.80" stroke-width="2" stroke="#8d8"  />
 <polyline points="97.50,258.20 102.50,258.20" stroke-width="2" stroke="#8d8"  />
 <polyline points="97.50,243.80 102.50,243.80" stroke-width="2" stroke="#8d8"  />
@@ -200,14 +200,15 @@
 <br>
 
 
-<pre><span class="purple">
 
+
+<pre><span class="purple">
+# curves plot with error bars; irregular X axis stubs; data point tooltips 
+# option: bandsopt .... if True show shaded SEM bands also
 
 import minplot as p
 
 def example6( bandsopt=False ):     
-    # produce a plot with 3 curves, error bars, and irregular X axis stubs, and data point tooltips 
-    # bandsopt .... if True show shaded SEM bands also
    
     colnames = [ "time", "group1", "group1sem", "group2", "group2sem", "group3", "group3sem" ]
 
@@ -234,7 +235,6 @@ def example6( bandsopt=False ):
 
     # set up the Y numerically scaled space... 
     p.numspace( axis='Y', axmin=0.0, axmax=100.0, poslo=100, poshi=400 )
-    # with alt1 use: p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=100, poshi=400 )
 
     # render X and Y axes...  
     p.lineprops( color='#aaa' )
@@ -277,7 +277,7 @@ def example6( bandsopt=False ):
             p.datapoint( x=row[xcol], y=row[ycol], fill=linecolor, diameter=12, opacity=0.5 )  # do datapoints last
 
     # display the legend...
-    p.legendrender( location='upperleft', format='across' )
+    p.legendrender( location='top', format='across' )
 
     # capture the entire SVG...
     return p.svgresult()

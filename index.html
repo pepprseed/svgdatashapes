@@ -217,32 +217,30 @@ All args are keyword args unless otherwise indicated.
   Initialize minplot.py and begin a new SVG graphic.
   <br>
   In most cases you'll start with <span class="fxn">svgbegin()</span> and end with <span class="fxn">svgresult()</span>.
+  In more elaborate applications <span class="fxn">svgbegin()</span> and <span class="fxn">svgend()</span> can be used multiple times.
   </p><p>
-  <span class="parm">width=</span> and <span class="parm">height=</span> are mandatory integers that specify the SVG's size and aspect ratio.
-  They also determine the minplot coordinate system: X will range from 0 to <i>width</i>, and Y from 0 to <i>height</i>
-  with origin in the lower-left corner.  
+  <span class="parm">width=</span> and <span class="parm">height=</span> &nbsp; Mandatory.  
+  Integers that specify the SVG's size, aspect ratio, and the minplot units
+  (X will range from 0 to <i>width</i>, and Y from 0 to <i>height</i> with origin in the lower-left corner).  
   To create a fixed-size SVG the above is all you need, and <i>width</i> and <i>height</i> are same as
   screen pixels.  To create a dynamically-sized SVG use <i>fluidsize=True</i> and your SVG will be
   sized relative to the containing &lt;div> and <i>width</i>, <i>height</i> will influence the aspect ratio.
   </p><p>
-  <span class="parm">fluidsize=True</span> &nbsp;  
+  <span class="parm">fluidsize=True</span> &nbsp; optional; 
   create an SVG that's sized relative to its containing &lt;div> .
   This works for inline SVG; you'll also need to specify <i>browser=</i> 
   </p><p>
-  <span class="parm">bgcolor=color</span> &nbsp; if specified the entire SVG is shaded with this color initially.
+  <span class="parm">bgcolor=color</span> &nbsp; optional; shade entire SVG with this color initially.
   </p><p>
-  <span class="parm">testgrid=True</span> &nbsp; if specified, render a test grid so that you can see the minplot coordinate system,
-  and if you're using the fluid sizing, see how it behaves for different sized containers / devices.
-  A grid line is rendered at every 100 minplot units.
+  <span class="parm">testgrid=True</span> &nbsp; optional; render a test grid showing minplot units.
   </p><p>
-  <span class="parm">notag=True</span> &nbsp; if specified this suppresses the opening &lt;svg> tag, in case you want to generate your own.
+  <span class="parm">notag=True</span> &nbsp; optional; suppress the opening &lt;svg> tag, in case you want to generate your own.
   If you do, the width and height you give in your svg tag must match svgbegin's <i>width</i> and <i>height</i> args.
   </p><p>
-  <span class="parm">browser=</span> &nbsp; This is only needed with <i>fluidsize=True</i> and is necessary due to browser's
+  <span class="parm">browser=</span> &nbsp; optional; only needed with <i>fluidsize=True</i> and is necessary due to browser's
   implementing SVG dynamic sizing differently.  It indicates the user's browser type, one of
   <tt>'firefox'</tt>, <tt>'chrome'</tt>, <tt>'safari'</tt>, or <tt>'msie'</tt>. In flask you can use <tt>request.user_agent.browser</tt> to get this.
   </p>
-  Multiple <span class="fxn">svgbegin()</span> and <span class="fxn">svgend()</span> can be used within one python program.
       
 
     </div></div></div></div>
@@ -266,7 +264,7 @@ All args are keyword args unless otherwise indicated.
    import minplot as p
    for row in dataset:
        p.findrange( testval=row["avg"] )
-   result = p.findrange( finished=True )
+   result = p.findrange( finish=True )
    print str(result.axmin), str(result.axmax)
    </pre>
    It's set up this way to give you the flexibility to check one data column or several, which is needed
@@ -278,17 +276,19 @@ All args are keyword args unless otherwise indicated.
   <br>Also includes <tt>nvals</tt>, <tt>allint</tt>, <tt>allpos</tt>, <tt>allneg</tt> and <tt>nbadvals</tt>
   which have same meaning as in <span class="fxn">numinfo()</span> below.
   </p><p>
-  <span class="parm">testval=</span> &nbsp; a numeric value to test
+  <span class="parm">testval=</span> &nbsp; Mandatory. A numeric value to test, in data units.
   </p><p>
-  <span class="parm">testfor=</span> &nbsp; if specified as <tt>'max'</tt> it will look for a maxima only.
-  If specified as <tt>'min'</tt> it will look for a minima only.  This allows the programmer to
-  pass different things for max and min, eg. bar+errorbar when looking for a max, and bar-errorbar when looking for a min.
-  Default is <tt>'both'</tt> meaning that it will look for both a minima and a maxima.
+  <span class="parm">erramt=</span> &nbsp; optional; an error bar value in data units.  This will be added to <i>testval=</i>
+    in finding maxima, and deducted from <i>testval=</i> for finding minima.
   </p><p>
-  <span class="parm">finished=True</span> &nbsp; if specified, return the result.
+  <span class="parm">testfor=</span> &nbsp; optional; if given as <tt>'max'</tt> look for a maxima only.
+  If given as <tt>'min'</tt> look for a minima only.  
+  Default is <tt>'both'</tt> (look for both minima and maxima).
   </p><p>
-  <span class="parm">nearest=</span> and <span class="parm">addlpad=</span> &nbsp; can be specified along with 
-  <i>finished=True</i> to help get a clean boundary for the axis min and max.   For example if you had data ranging from 17 to 62 
+  <span class="parm">finish=True</span> &nbsp; Mandatory on last call. Causes the result to be returned.
+  </p><p>
+  <span class="parm">nearest=</span> and <span class="parm">addlpad=</span> &nbsp; optional; can be specified along with 
+  <i>finish=True</i> to help get a clean boundary for the axis min and max.   For example if you had data ranging from 17 to 62 
   <span class="fxn">findrange()</span> would normally determine the axis range to be from 15 to 65 with stubs every 5.
   To get stubs (etc) every 10 you could specify <i>nearest=10</i>.  For automated situations 
   where data magnitude varies you can use eg. <i>addlpad=1</i> or <i>addlpad=2</i> to get additional 
@@ -305,28 +305,28 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="numspace">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numspace" href="index.html#numspace-content">&bull; numspace( axis, axmin, axmax )</a>
+    <a data-toggle="collapse" data-parent="#numspace" href="index.html#numspace-content">&bull; numspace( axis, axmin, axmax, poslo, poshi )</a>
     </i></b></span>
     <div id="numspace-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
   Set up numeric scaling in one dimension (either X or Y) of your plot area.
   </p><p>
-  <span class="parm">axis=</span> &nbsp; is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>
+  <span class="parm">axis=</span> &nbsp; Mandatory.  Either <tt>'X'</tt> or <tt>'Y'</tt>
   </p><p>
-  <span class="parm">axmin=</span> and <span class="parm">axmax=</span> &nbsp; are mandatory; they're the axis min and max.
+  <span class="parm">axmin=</span> and <span class="parm">axmax=</span> &nbsp; Mandatory. The axis min and max.
   <i>axmin</i> must be less then <i>axmax</i>.
-  May be specified explicitly or computed in advance using <span class="fxn">findrange()</span> 
+  These may be computed in advance using <span class="fxn">findrange()</span> 
   </p><p>
-  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; specifies the location of the axis 
+  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; Mandatory.  Specify the location of the axis 
   in minplot units.  For example if you're doing X space, <i>poslo=100, poshi=400</i> will set up X space from
-  minplot coordinates 100 to 400 in the SVG. If not specified default behavior will occur.
+  minplot coordinates 100 to 400 in the SVG.  
   </p><p>
-  <span class="parm">log=True</span> &nbsp; if specified, sets up logarithmic scaling.  You can also specify <i>log='log+1'</i>
+  <span class="parm">log=True</span> &nbsp; optional; set up logarithmic scaling.  You can also specify <i>log='log+1'</i>
   </p><p>
-  <span class="parm">reverse=True</span> &nbsp; if specified, the axis will use high-to-low data scaling, opposite of usual.
+  <span class="parm">reverse=True</span> &nbsp; optional; if specified the axis will use high-to-low data scaling, opposite of usual.
   </p>
-  <span class="parm">allint=True</span> &nbsp; if specified, indicates that the data are all integers (ensures that scale increment is never fractional). 
+  <span class="parm">allint=True</span> &nbsp; optional; indicates that the all data are integer to avoid odd-looking fractional scale increments.
   </p>
       
 
@@ -340,7 +340,7 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="catspace">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catspace" href="index.html#catspace-content">&bull; catspace( axis, catlist )</a>
+    <a data-toggle="collapse" data-parent="#catspace" href="index.html#catspace-content">&bull; catspace( axis, catlist, poslo, poshi )</a>
     </i></b></span>
     <div id="catspace-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -353,17 +353,18 @@ All args are keyword args unless otherwise indicated.
   names and boundary coordinates (an array of tuples each with: <tt>name poslo poshi</tt>) 
   which is useful when doing <a href="index.html#multipanel">multipanel displays</a>.
   </p><p>
-  <span class="parm">axis=</span> is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>
+  <span class="parm">axis=</span> Mandatory.  Either <tt>'X'</tt> or <tt>'Y'</tt>
   </p><p>
-  <span class="parm">catlist=</span> &nbsp; is mandatory.  It's an iterable containing the desired category terms as they appear in your
+  <span class="parm">catlist=</span> &nbsp; Mandatory. An iterable containing the desired category terms as they appear in your
   data, in the order they are to be placed.  It can include members of None or '' which 
-  will act as spacers.  The terms should be unique with no duplication (except in the
-  case of spacers).  To derive this from your data you can use <span class="fxn">catinfo()</span>
+  will act as spacers.  The non-spacer terms should be unique with no duplication.
+  To derive this from your data you can use <span class="fxn">catinfo()</span>
   </p><p>
-  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; specify the locations of the axis min and max,
-  in minplot units.  For example, <i>poslo=100, poshi=400</i>. If not specified default behavior will occur.
+  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; Mandatory. Specify the locations of the axis min and max,
+  in minplot units.  For example if you're doing X space, <i>poslo=100, poshi=400</i> will set up X space from
+  minplot coordinates 100 to 400 in the SVG.  
   </p><p>
-  <span class="parm">reverse=True</span> &nbsp; if specified, categories will be ordered opposite of usual in the axis.
+  <span class="parm">reverse=True</span> &nbsp; optional; order the categories opposite of usual.
   </p>
       
 
@@ -386,7 +387,7 @@ All args are keyword args unless otherwise indicated.
   Set the internal current data column name list so that data columns can be identified by name.
   If your data structure uses dict rows you don't use this.
   </p><p>
-  <span class="parm">namelist=</span> &nbsp; an iterable list or array of column names in left-to-right order as they appear in 
+  <span class="parm">namelist=</span> &nbsp; Mandatory.  Iterable of column names in left-to-right order as they appear in 
   your data structure.  Most DBMS provide a way to get a list of query result column names.  
   </p><p>
   <br>
@@ -428,30 +429,30 @@ All args are keyword args unless otherwise indicated.
   <br><tt>distbinsize</tt> ... the binsize used in the above
   <br><tt>percentiles</tt> ... optional percentiles dict (see below)
   </p><p>
-  <span class="parm">datarows=</span> &nbsp; your 2-D data set (mandatory).  If you have a 1-D vector
-  you can use <span class="fxn">handle1d()</span> to convert it.
+  <span class="parm">datarows=</span> &nbsp; Mandatory. Your 2-D data structure.  (If you have a 1-D vector
+  you can use <span class="fxn">vec2d()</span> to convert it.)
   </p><p>
-  <span class="parm">numcol=</span> &nbsp; identifies the numeric data column to be characterized.
-  Either a column name, dict element name, or an integer (array index).  Mandatory.
+  <span class="parm">numcol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
+  Either a column name, dict element name, or an integer (array index).  
   </p><p>
-  <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency distribution on the 
+  <span class="parm">distrib=True</span> &nbsp; optional; if specified, compute a frequency distribution on the 
   examined data column and provide it in the <tt>distribution</tt> member of the result
-  (an array of dict each having <tt>binlo binmid accum</tt>).
-  A reasonable default numeric binsize is determined (it can be overridden using <i>distbinsize=</i>, see below).  
+  (an array of namedtuple each having members <tt>binlo binmid accum</tt>).
+  A reasonable default numeric binsize (inc/2) is determined (it can be overridden using <i>distbinsize=</i>, see below).  
   The result is suitable for plotting if you wish.
   </p><p>
-  <span class="parm">distbinsize=</span> &nbsp; may be used with <i>distrib=True</i> to explicitly control 
+  <span class="parm">distbinsize=</span> &nbsp; optional; may be used with <i>distrib=True</i> to explicitly control 
   a frequency distribution's binsize.  It may be a number eg. <i>distbinsize=10</i> which sets the 
-  binsize explicitly, or it may be a construct such as <i>distbinsize='inc/2'</i> which sets the the 
-  binsize to the tic increment (which was computed on-the-fly earlier) divided by 2.
+  binsize explicitly, or it may be a construct such as <i>distbinsize='inc/4'</i> which sets the the 
+  binsize to the tic increment (which was computed on-the-fly earlier) divided by 4.
   </p><p>
-  <span class="parm">accumcol=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  <span class="parm">accumcol=</span> &nbsp; optional; if specified with <i>distrib=True</i> this identifies a data
   column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
   incrementally.  Default is <tt>None</tt>.
   </p><p>
-  <span class="parm">percentiles=True</span> &nbsp; if specified, compute the 5th, 25th, 50th (median), 
+  <span class="parm">percentiles=True</span> &nbsp; optional; if specified, compute the 5th, 25th, 50th (median), 
   75th, and 95th percentile for the examined data column and put them in the <tt>percentiles</tt> member
-  of the result (a dict with elements: <tt>5th 25th median 75th 95th</tt>).
+  of the result (a namedtuple with members <tt>p5 p25 median p75 p95</tt>).
   The examined data column <u>must</u> already be sorted 
   numerically from low to high.  The usual use for these percentiles data is to generate box plots 
   </p>
@@ -480,20 +481,20 @@ All args are keyword args unless otherwise indicated.
   <br><tt>catlist</tt> ... the unique list of categories in the order encountered
   <br><tt>distribution</tt> ... optional distribution bins structure
   </p><p>
-  <span class="parm">datarows=</span> &nbsp; your 2-D data set (mandatory).  If you have a 1-D vector
-  you can use <span class="fxn">handle1d()</span> to convert it.
+  <span class="parm">datarows=</span> &nbsp; Mandatory. Your 2-D data structure.  (If you have a 1-D vector
+  you can use <span class="fxn">vec2d()</span> to convert it.)
   </p><p>
-  <span class="parm">catcol=</span> &nbsp; identifies the data column to be characterizaed. 
-  Either a column name, dict element name, or an integer (array index).  Mandatory.
+  <span class="parm">catcol=</span> &nbsp; Mandatory. Identifies the data column to be characterizaed. 
+  Either a column name, dict element name, or an integer (array index). 
   </p><p>
-  <span class="parm">nullspacers=True</span> &nbsp;  retains encountered category terms which are 
-  None or ''; these can serve as spacers.  Default is <tt>True</tt> 
+  <span class="parm">nullspacers=True</span> &nbsp; optional; if True then any encountered category terms 
+  that are None or '' are retained to serve as spacers.  Default is <tt>True</tt> 
   </p><p>
-  <span class="parm">distrib=True</span> &nbsp; if specified, compute a frequency 
+  <span class="parm">distrib=True</span> &nbsp; optional; if specified, compute a frequency 
   distribution on the categorical data column of interest, and put it in the <tt>distribution</tt>
   member of the result; this can be plotted if you wish.
   </p><p>
-  <span class="parm">accumcol=</span> &nbsp; if specified with <i>distrib=True</i>, identifies a data
+  <span class="parm">accumcol=</span> &nbsp; optional; if specified with <i>distrib=True</i>, identifies a data
   column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
   incrementally.  Default is <tt>None</tt>.
   </p>
@@ -543,8 +544,9 @@ All args are keyword args unless otherwise indicated.
 
   <p>
   Set the current properties to be applied to subsequent line rendering.  
-  Each property corresponds with an argument below.  You can specify one or several.
-  Individual properties remain in effect until explicitly updated or <tt>reset</tt>
+  Each property corresponds with an argument below.  
+  Individual properties remain in effect until explicitly updated or <tt>reset</tt>.
+  All args are optional; specify one or several.
   </p><p>
   <span class="parm">width=</span> &nbsp; line stroke width.  Default is 1.0.
   </p><p>
@@ -579,8 +581,9 @@ All args are keyword args unless otherwise indicated.
 
   <p>
   Set the current properties to be applied to subsequent text rendering. 
-  Each property corresponds with an argument below.  You can specify one or several.
+  Each property corresponds with an argument below.  
   Individual properties remain in effect until explicitly updated or <tt>reset</tt>
+  All args are optional; specify one or several.
   </p><p>
   <span class="parm">ptsize=</span> &nbsp; text point size.  Integer. Default is 10.
   It's best to always set <i>ptsize=</i> to get proper minplot layout computations.
@@ -596,12 +599,12 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">rotate=</span> &nbsp; text rotation (degrees clockwise).  <i>rotate=0</i> gives
   ordinary horizontal text.  Usually a value from 0 to 90, or 0 to -90.  Default is <tt>None</tt>
   </p><p>
-  <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to the text position.  Specify as a list of
-  (xofs, yofs) in minplot units.  Default is <tt>None</tt>.
-  </p><p>
   <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the text.  Default is None.
   </p><p>
   <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the text.  Default is None.
+  </p><p>
+  <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to future text positions.  
+       Specify as a 2-member list of (x, y) in minplot units.  Default is <tt>None</tt>.
   </p><p>
   <span class="parm">reset=True</span> &nbsp; apply all of the defaults.  
        Can be combined with any other args.
@@ -633,47 +636,48 @@ All args are keyword args unless otherwise indicated.
   tic marks, and scaling labels (stubs).  Grid lines can also be rendered.  Behavior is numeric 
   or categorical (depending on how the space was set up).  The only required parameter is <i>axis</i>.
   </p><p>
-  <span class="parm">axis=</span> &nbsp; is mandatory; it's either <tt>'X'</tt> or <tt>'Y'</tt>.
+  <span class="parm">axis=</span> &nbsp; Mandatory. Either <tt>'X'</tt> or <tt>'Y'</tt>.
   </p><p>
-  <span class="parm">axisline=True</span> &nbsp; draw an axis line using current line properties.  Default is <tt>True</tt> 
+  <span class="parm">axisline=True</span> &nbsp; optional; draw an axis line using current line properties.  Default is <tt>True</tt> 
   </p><p>
-  <span class="parm">loc=</span> &nbsp; if specified controls axis position. 
-  Examples: <i>loc='top'</i> or <i>loc='right'</i>.  Constructs like
-  <i>loc='left-30'</i> or <i>loc='top+20'</i> would render the Y axis 30 minplot units from the plot area's left 
-  side, or 20 units above the plot area's top, respectively.
+  <span class="parm">loc=</span> &nbsp; optional; controls the axis position. 
+  For example to render a Y axis at the right side of the plot area use <i>loc='right'</i>.
+  For example to render an X axis at the top of the plot area use <i>loc='top'</i>.
+  To render a Y axis 30 minplot units to the left of the plot area's left side use <i>loc='left-30'</i>.
+  Default is <tt>bottom</tt> for X axis and <tt>left</tt> for Y axis.
   </p><p>
-  <span class="parm">tics=</span> &nbsp; can be specified to have tic marks be drawn to the given length in minplot units
+  <span class="parm">tics=</span> &nbsp; optional integer; draw tic marks to this length in minplot units
   using current line properties.  Positive values give tics that run outward from the 
   plotting area; negative values give tics that run inward.  Default is <tt>None</tt>.
   </p><p>
-  <span class="parm">grid=True</span> &nbsp; draw grid lines using current line properties. Default is <tt>False</tt>
+  <span class="parm">grid=True</span> &nbsp; optional; draw grid lines using current line properties. Default is <tt>False</tt>
   </p><p>
-  <span class="parm">inc=</span> &nbsp; if specified as a number, tics and stubs will be rendered using this increment 
-  (numeric space only).
+  <span class="parm">inc=</span> &nbsp; optional; if specified as a number, tics and stubs will be rendered using this increment.
+  Applies to numeric space only.
   </p><p>
-  <span class="parm">stubs=</span> &nbsp; if <tt>True</tt> render axis scale labels (stubs), using current text properties.
+  <span class="parm">stubs=</span> &nbsp; optional; if <tt>True</tt> render axis scale labels (stubs), using current text properties.
   With numeric scaling incremental numeric stubs are displayed.  
   With categorical scaling the category terms are displayed.  
   Set to <tt>False</tt> to not render any stubs.  Default is <tt>True</tt>.
   </p><p>
-  <span class="parm">stubrotate=</span> &nbsp; A value in degrees clockwise to rotate stubs.
+  <span class="parm">stubrotate=</span> &nbsp; optional; a value in degrees clockwise to rotate stub texts.
   Default is <tt>None</tt> which means 0 degrees except 45 degrees when longer X axis stubs are detected.
   Use <i>stubrotate=0</i> for no rotation.
   </p><p>
-  <span class="parm">stubformat=</span> &nbsp; is a "printf-style" formatting string.  With numeric scaling the default is <tt>'%g'</tt>
+  <span class="parm">stubformat=</span> &nbsp; optional; a "printf-style" formatting string.  With numeric scaling the default is <tt>'%g'</tt>
   and you can specify other formats such as <tt>'%.4f'</tt> to control the numeric format.  For text 
   stubs the default is <tt>'%s'</tt> and you can specify other formats such as <tt>'%.10s'</tt> to truncate
   to ten characters.
   </p><p>
-  <span class="parm">stublist=</span> &nbsp; may be given as a list of pairs.  The left member of each pair is 
+  <span class="parm">stublist=</span> &nbsp; optional; defines irregularly placed numeric stubs.  Given as a list of pairs: the left member of each pair is 
   a numeric value and the right member of each pair is a label.  If specified then stubs and perhaps 
   grid lines will be rendered only the given numeric locations using the given labels.  Does not
   apply to categorical scaling.
   </p><p>
-  <span class="parm">stubcull=</span> &nbsp; if specified (numeric value, minplot units) any stubs that are closer
-  together than this distance will be suppressed.  Mostly useful with log scaling.  Default is <tt>None</tt>.
+  <span class="parm">stubcull=</span> &nbsp; optional; any stubs closer together than this distance will be omitted.
+  An integer minplot units value. Mostly useful with log scaling.  Default is <tt>None</tt>.
   </p><p>
-  <span class="parm">divideby=</span> &nbsp; may be given as a numeric value to have the displayed stubs be the 
+  <span class="parm">divideby=</span> &nbsp; optional; a numeric value to have the displayed stubs be the 
   underlying data value divided by this value (usually a power of 10).  E.g. with
   high-magnitude data you might use <i>divideby=1000</i>; for very small magnitude data you
   might use <i>divideby=0.001</i>.  
@@ -697,9 +701,8 @@ All args are keyword args unless otherwise indicated.
   After a plot area is set up, use this to do things like
   render a title at the top, render labels beside or below the plot area, outline or shade the plot area.
   Call either before or after axes are rendered, whichever gives best results.
-  You can do several things in one call, or use several separate calls.
   The text items use current text properties, and the outline uses current line properties.
-  Note, if you're doing a tooltip it will be associated with the first-rendered title or label only.
+  All args are optional, specify one or several.  
   </p><p>
   <span class="parm">title=</span> &nbsp; a title to appear directly above the top of the plot area.  
   </p><p>
@@ -711,26 +714,28 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">outline=</span> &nbsp; if <tt>True</tt> the plot area will be outlined using current line properties.
   </p><p>
-  <span class="parm">shade=</span> &nbsp; if specified as a color, the entire plot area will be shaded e.g. <i>shade='#aaa'</i>.
+  <span class="parm">shade=</span> &nbsp; a color to shade the entire plot area e.g. <i>shade='#aaa'</i>.
   </p><p>
   <span class="parm">opacity=</span> &nbsp; opacity for <i>shade=</i>. Default is 1.0.
   </p><p>
   <span class="parm">titlepos=</span> &nbsp; title's position with respect to the plot area.  
   One of <tt>'left'</tt>, <tt>'center'</tt>, or <tt>'right'</tt>.  Default is <tt>'left'</tt>.
   </p><p>
-  <span class="parm">xlabeladj=</span> specify an (x, y) offset to adjust the <i>xlabel</i>, in minplot units.
-     eg. <i>xlabeladj=(0,-20)</i> would adjust the xlabel downward from its default position.  Default is None.
+  <span class="parm">xlabeladj=</span> specify an (x, y) adjustment of the <i>xlabel</i>, in minplot units.
+     eg. <i>xlabeladj=(0,-20)</i> adjusts the xlabel downward from its default position.  Default is None.
   </p><p>
-  <span class="parm">ylabeladj=</span> specify an (x, y) offset to adjust the <i>ylabel</i>, in minplot units.
-     eg. <i>ylabeladj=(-20,0)</i> would adjust the ylabel leftward from its default position.  Default is None.
+  <span class="parm">ylabeladj=</span> specify an (x, y) adjustment of the <i>ylabel</i>, in minplot units.
+     eg. <i>ylabeladj=(-20,0)</i> adjusts the ylabel leftward from its default position.  Default is None.
   </p><p>
   <span class="parm">y2labeladj=</span> same as <i>ylabeladj</i> but for the <i>y2label</i>,
-     eg. <i>ylabeladj=(20,0)</i> would adjust the y2label rightward.
+     eg. <i>ylabeladj=(20,0)</i> adjusts the y2label rightward.
   </p><p>
   <span class="parm">rectadj=</span> allows fine tuning (stretching) the size of <i>outline=</i> or <i>shade=</i>. 
        If specified as an integer it will be an amount of extra margin to add on all 4 sides, eg. <i>rectmargin=8</i>.
        Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be 
-       controlled individually for each of the 4 sides eg. <i>rectmargin=(-20,-10,20,10)</i> 
+       controlled individually for each of the 4 sides eg. <i>rectmargin=(-20,-10,20,10)</i>.  All values are minplot units.
+  </p><p>
+  Note, if you're doing a tooltip it will be associated with the first-rendered title or label only.
   </p>
       
 
@@ -750,27 +755,28 @@ All args are keyword args unless otherwise indicated.
   <p>
   Render a column bar. 
   </p><p>
-  <span class="parm">x=</span> &nbsp; mandatory; bar will be centered on this location in X data space.
+  <span class="parm">x=</span> &nbsp; Mandatory. Bar will be centered on this location in X data space.
   </p><p>
-  <span class="parm">y=</span> &nbsp; mandatory; top of bar will be at this location in Y data space.
+  <span class="parm">y=</span> &nbsp; Mandatory. "Top" of bar will be at this location in Y data space.
   </p><p>
-  <span class="parm">width=</span> &nbsp; if specified this controls bar width.  A numeric value in minplot units.
+  <span class="parm">width=</span> &nbsp; optional; bar width.  An integer minplot units value. Default is 8.
   </p><p>
-  <span class="parm">ybase=</span> &nbsp;  if specified this will be location of the base (typically the bottom) of the bar in data space.
-  Default is the bottom of the plotting area.  This can be used to get a mixture of upward and downward bars for example if 
-  you specify <i>ybase=0</i> any negative values will be shown with downward bars and positive values with upward bars.
+  <span class="parm">ybase=</span> &nbsp;  optional; location of the "bottom" or "base" of the bar in data space.
+  Default is the bottom of the plotting area.  Typical use is to 
+  specify <i>ybase=0</i> to show negative values with downward bars and positive values with upward bars.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; the color of the bar. Default color is <tt>'#e0ffe0'</tt> (light green).  <tt>fill=None</tt> is ok.
+  <span class="parm">fill=</span> &nbsp; optional; bar color. Default is light green.  <tt>fill=None</tt> is ok.
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the bar fill.  Default is 1.0  (opaque).
+  <span class="parm">opacity=</span> &nbsp; optional; opacity of the bar fill.  Default is 1.0  (opaque).
   </p><p>
-  <span class="parm">outline=True</span> &nbsp; if specified, outline the bar using current line properties.
+  <span class="parm">outline=True</span> &nbsp; optional; outline the bar using current line properties.
   </p><p>
-  <span class="parm">xofs=</span> &nbsp; if specified, the bar is offset this numeric distance rightward in minplot units (if xofs > 0).
-  or leftward (if xofs < 0).  Useful with a categorical axis for rendering pairs, triples (etc) of bars.
+  <span class="parm">adjust=</span> &nbsp; optional; adjusts bar's position by this numeric distance rightward in minplot units.
+    Supply a negative value to adjust leftward.
+    Useful with a categorical axis for rendering pairs, triples (etc) of bars.
   </p><p>
-  <span class="parm">horiz=True</span> &nbsp; if specified, you'll get a horizontal bar instead of a vertical one.  
-  (But supply the other <span class="fxn">bar()</span> args as if doing a vertical one).
+  <span class="parm">horiz=True</span> &nbsp; optional; render a horizontal bar instead of a vertical one.  
+  (But supply all the other <span class="fxn">bar()</span> args as if doing a vertical one).
   </p>
       
 
@@ -791,23 +797,22 @@ All args are keyword args unless otherwise indicated.
   Render an error bar using the current line properties.  
   The above template applies except when <i>ymin</i> and <i>ymax</i> are being used.
   </p><p>
-  <span class="parm">x=</span> &nbsp; mandatory; error bar will be centered on this location in X data space.
+  <span class="parm">x=</span> &nbsp; Mandatory.  Error bar will be centered on this location in X data space.
   </p><p>
-  <span class="parm">y=</span> &nbsp; Y data location of underlying data point.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
+  <span class="parm">y=</span> &nbsp; Usually required.  Y data location of underlying data point.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
   </p><p>
-  <span class="parm">erramt=</span> &nbsp; is the SD, SEM or other error statistic.  It will be rendered 
-  symetrically down and up.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
+  <span class="parm">erramt=</span> &nbsp; Usually required.  The SD, SEM or other error statistic.  It will be rendered 
+  symetrically upward and downward.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
   </p><p>
-  <span class="parm">ymin=</span> and <span class="parm">ymax</span> &nbsp; may be specified to explicitly control
-  where top and bottom of bar will be located, to produce hi-lo bars and similar.
+  <span class="parm">ymin=</span> and <span class="parm">ymax</span> &nbsp; optional; may be specified to explicitly control
+  where top and bottom of bar will be located, to produce assymetric error bars, hi-lo bars and similar.
   </p><p>
-  <span class="parm">tailsize=</span> &nbsp; if specified this will be a numeric value to control the length 
-  of the little tails at each end.  Default is 5.0.
+  <span class="parm">tailsize=</span> &nbsp; optional; integer minplot units value to control the length 
+    of the little tails at each end.  Default is 5
   </p><p>
-  <span class="parm">xofs=</span> &nbsp; if specified, has similar purpose as with <span class="fxn">bar()</span> above.
+  <span class="parm">adjust=</span> &nbsp; optional; has similar purpose as with <span class="fxn">bar()</span> above.
   </p><p>
-  <span class="parm">horiz=True</span> &nbsp; if specified you'll get a horizontal bar instead of a vertical one.  
-  (But supply the other <span class="fxn">errorbar()</span> args as if doing a vertical one).
+  <span class="parm">horiz=True</span> &nbsp; optional; has similar purpose as with <span class="fxn">bar()</span> above.
   </p>
       
 
@@ -830,17 +835,20 @@ All args are keyword args unless otherwise indicated.
   Render a round data point symbol.  Typical use is in scatterplots.
   <br>Automatic clustering of duplicate data points is available, see <span class="fxn">clustermode()</span>
   </p><p>
-  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; mandatory; data point will be centered on this location in data space.
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; Mandatory.  Location in data space where data point will be renderd.
   </p><p>
-  <span class="parm">diameter=</span> &nbsp; diameter of the circle in minplot units.  Default is 5.
+  <span class="parm">diameter=</span> &nbsp; optional; diameter of the circle in minplot units.  Default is 5.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; is a fill color.  Default is <tt>None</tt>
+  <span class="parm">fill=</span> &nbsp; optional; data point fill color.  Default is <tt>None</tt>
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0  (opaque).
+  <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0  (opaque).
   </p><p>
-  <span class="parm">outline=True</span> &nbsp; if specified, the circle is outlined using current line properties.
+  <span class="parm">outline=True</span> &nbsp; optional; outline the data point using current line properties.
   </p><p>
-  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> have similar purpose as with <span class="fxn">bar()</span> above.
+  <span class="parm">xadjust=</span> &nbsp; optional; adjust location of data point in X by this distance in minplot units;
+     sometimes useful with categorical scaling.
+  </p><p>
+  <span class="parm">yadjust=</span> &nbsp; optional; same as above but for Y.
   </p><p>
 
   <br>
@@ -849,19 +857,20 @@ All args are keyword args unless otherwise indicated.
   Enable <span class="fxn">datapoint()</span> to slightly offset duplicate or near-duplicate data points
   to give the viewer a feel for the amount of duplicity.  Also can be used to do simple frequency
   distributions or beeswarms (data must be sorted on x, y for this to work).
+  All args are optional, specify one or several.
   </p><p>
-  <span class="parm">mode=</span> &nbsp; controls placement of clustered data points.
+  <span class="parm">mode=</span> &nbsp; specifies the cluster placement method.
   One of <tt>'surround'</tt>, <tt>'rightward'</tt>, <tt>'left+right'</tt>, <tt>'upward'</tt> or None.  
   This controls where cluster members will be placed relative to the home data point.
   Default is <tt>None</tt> which turns off clustering.
   </p><p>
-  <span class="parm">offset=</span> &nbsp; is a numeric value that indicates the distance that duplicate data
-  points will be offset, in minplot units.  Default is 0.8
+  <span class="parm">offset=</span> &nbsp; a numeric minplot value indicating the distance that 
+  duplicate data points will be offset, in minplot units.  Default is 0.8
   </p><p>
-  <span class="parm">tolerance=</span> &nbsp; is a numeric value that indicates how close (in minplot units) two 
+  <span class="parm">tolerance=</span> &nbsp; numeric value that indicates how close (in minplot units) two 
   data points must be in order to be considered the "same" for clustering purposes.  Default is 0.0
   </p><p>
-  <span class="parm">dampen=</span> &nbsp; is an integer value that can be set to > 1 when there are a lot of duplicates 
+  <span class="parm">dampen=</span> &nbsp; an integer value that can be set to > 1 when there are a lot of duplicates 
   such that clustering is overwhelmed.  For example, with dampen=3 three duplicates 
   encountered in the data will be counted as one for clustering purposes.  Default is 1.
   </p>
@@ -885,43 +894,43 @@ All args are keyword args unless otherwise indicated.
   your data rows and for each row call <span class="fxn">curvenext()</span>.  The lineplot will be rendered using 
   the current line properties.  
   </p><p>
+  <a href="pages/e6.html"><img src="static/examples/e6.svg" )" height=200></a>
 
   <br>
-  <h4>curvebegin( )</h4>
+  <h3><i>curvebegin( )</i></h3>
   </p><p>
   Sets up to begin a lineplot or filled band.
   </p><p>
-  <span class="parm">stairs=True</span> &nbsp; if specified a stairstep curve will be rendered.  
-  The stairstep will end on a vertical; you'll need to append an additional data row to get a horizontal tail end.
-  This option cannot be used with <i>fill</i> or <i>band</i>.
+  <span class="parm">fill=</span> &nbsp; optional; fill the area under the curve (or the area within the band if <i>band=True</i>) 
+    with this color.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; if specified the area under the curve (or the area within the band if <i>band=True</i>) 
-   will be filled with this color.
+  <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0 (opaque).
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0 (opaque).
-  </p><p>
-  <span class="parm">onbadval=</span> &nbsp; controls the behavior when an unplottable or <tt>None</tt> value is encountered. 
+  <span class="parm">onbadval=</span> &nbsp; optional; controls the behavior when an unplottable or <tt>None</tt> value is encountered. 
   It can be specified as <tt>'gap'</tt> which causes the line or band show a gap to indicate missing data. 
   Default is <tt>'bridge'</tt> which causes the line to bridge the gap.
   </p><p>
-  <span class="parm">band=True</span> &nbsp; if specified a filled band will be rendered rather than a lineplot.
+  <span class="parm">band=True</span> &nbsp; optional; if specified a filled band will be rendered rather than a lineplot.
   The bottom of the band will be controlled by <i>y2</i> in <span class="fxn">curvenext()</span>.
   </p><p>
-  <span class="parm">xofs=</span> &nbsp; if specified, the plotted data points are adjusted rightward (if xofs > 0) or leftward 
-   (if xofs < 0) by this distance in minplot units.  Uses include aligning a stairstep curve over a bar graph.
+  <span class="parm">stairs=True</span> &nbsp; optional; render a stairstep curve.
+  The stairstep will end on a vertical; you'll need to append an additional data row to get a horizontal tail end.
+  This option cannot be used with <i>fill</i> or <i>band</i>.
+  </p><p>
+  <span class="parm">adjust=</span> &nbsp; optional; has similar purpose as with <span class="fxn">bar()</span> above,
+    sometimes useful with categorical axis.
   </p>
 
   <br>
-  <h4>curvenext( x=, y= )</h4>
+  <h3><i>curvenext( x, y )</i></h3>
   <p>
   Called for every data point to be plotted, including the first one.
   </p><p>
-  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; mandatory; location where the curve will go next, in data space.
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; Mandatory. Location in data space where the curve will go next.
   </p><p>
-  <span class="parm">y2=</span> &nbsp; if specified a filled band
-  is rendered with the top at <i>y</i> and the bottom at <i>y2</i>.
+  <span class="parm">y2=</span> &nbsp; optional; if specified a filled band is rendered with the top at <i>y</i> and the bottom at <i>y2</i>.
   </p><p>
-  <span class="parm">label=</span> &nbsp; if specified this will be a label rendered near the end of the curve using current text properties.
+  <span class="parm">label=</span> &nbsp; optional; render a label near the end of the curve using current text properties.
   </p>
       
 
@@ -943,25 +952,26 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   Rendering a pie graph requires a plotting area for placement and sizing of the pie (use axmin=0 and axmax=1, these are required but ignored).
   A legend is usually needed with piegraphs; there's no direct slice labelling.
-  Here's a <a href="pages/e3.html">piegraph example</a>.
   </p><p>
-  <span class="parm">pctval=</span> &nbsp; controls the size of the slice. A percentage value expressed as a number between 0.0 and 1.0).  Mandatory.
+  <a href="pages/e3.html"><img src="static/examples/e3.svg" height=200></a>.
   </p><p>
-  <span class="parm">startval=</span> &nbsp; controls where the slice "starts" in radial space, and is a number between 0.0 and 1.0).  Mandatory.
+  <span class="parm">pctval=</span> &nbsp; Mandatory. The size of the slice. A percentage value expressed as a number between 0.0 and 1.0
+  </p><p>
+  <span class="parm">startval=</span> &nbsp; Mandatory.  Where the slice "starts" in radial space, and is a number between 0.0 and 1.0.
   See the example for usage pattern.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; fill the pie slice with this color.
+  <span class="parm">fill=</span> &nbsp; optional; fill the pie slice with this color.
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0.
+  <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0.
   </p><p>
-  <span class="parm">outline=</span> &nbsp; if <tt>True</tt> outline the pie slice using current line properties.
+  <span class="parm">outline=</span> &nbsp; optional; if <tt>True</tt> outline the pie slice using current line properties.
   A nice effect is to use a fat white line for the outline; this gives separation to the slices.
   </p><p>
-  <span class="parm">placement=</span> &nbsp; placement of the entire pie relative to plotting area.  Either <tt>left</tt> or <tt>right</tt>.
+  <span class="parm">placement=</span> &nbsp; optional; placement of the entire pie relative to plotting area.  Either <tt>left</tt> or <tt>right</tt>.
   Default is <tt>right</tt>.  
   </p><p>
-  <span class="parm">showpct=</span> &nbsp; if <tt>True</tt> the slice's percentage value is shown as a label.
-  Can also be specified as a printf format eg. <tt>%0.1f</tt>.  Uses current text properties. Default is <tt>None</tt>.  
+  <span class="parm">showpct=</span> &nbsp; optional; if <tt>True</tt> the slice's percentage value is shown as a label using current text properties.
+  Can also be specified as a printf format eg. <tt>%0.1f</tt>.  Default is <tt>False</tt>.  
   </p>
       
 
@@ -981,8 +991,13 @@ All args are keyword args unless otherwise indicated.
   <p> 
   Render a rectangle or square of a certain color.  Used to create heatmaps or to
   highlight a particular category or region in the display.
+  The rectangle is positioned and sized using various combinations of <i>x=</i>, <i>y=</i>, <i>width=</i> and <i>height=</i>
+  and perhaps <i>adjust=</i>, 
+  and exactly how depends on what you're doing, and the scale types (numeric or categorical).  See the examples for clarification.
   </p><p>
-  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; location of the center of the rectangle, in data space.
+  <span class="parm">x=</span> &nbsp; X location of rectangle's center in data units.
+  </p><p>
+  <span class="parm">y=</span> &nbsp; Y location of rectangle's center in data units.
   </p><p>
   <span class="parm">width=</span> and <span class="parm">height=</span> &nbsp; control the size of the rectangle, in data units.
   If your X and Y space are both numeric, <i>width</i> and <i>height</i> are both required.
@@ -990,11 +1005,16 @@ All args are keyword args unless otherwise indicated.
   If your X space is numeric and your Y space is categorical, just specify <i>width</i> (<i>width='all'</i> is allowed).
   If both axes are categorical neither <i>height</i> nor <i>width</i> should be specified.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; controls the shading of the rectangle.  Default is <tt>'#e0ffe0'</tt>
+  <span class="parm">adjust=</span> allows fine tuning the rectangle's size.
+       If specified as an integer it will be an amount of extra margin to add on all 4 sides, eg. <i>adjust=8</i>.
+       Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be
+       controlled individually for each of the 4 sides eg. <i>adjust=(-20,-10,20,10)</i>.  All values are minplot units.
   </p><p>
-  <span class="parm">opacity=</span> &nbsp; controls the opacity of the fill.  Default is 1.0 (opaque).
+  <span class="parm">fill=</span> &nbsp; optional; shading of rectangle.  Default is light green.
   </p><p>
-  <span class="parm">outline=True</span> &nbsp; if specified, the rectangle will be outlined using current line properties.
+  <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">outline=True</span> &nbsp; optional; outline the rectangle using current line properties.  Default is <tt>False</tt>
   </p><p>
   To render a rectangle using minplot units use the <a href="index.html#lowlevel">low-level function rect()</a>.
   </p>
@@ -1009,27 +1029,27 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="label">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#label" href="index.html#label-content">&bull; label( x, y, text )</a>
+    <a data-toggle="collapse" data-parent="#label" href="index.html#label-content">&bull; label( text )</a>
     </i></b></span>
     <div id="label-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Render a piece of text at a specific X, Y location in data space.
-  Text is rendered using the current text properties.
-  Useful in labeling other data elements.  
-  You can also use it to create scatterplots with text as the data point symbol.
+  Render some text at a specific location using the current text properties.
+  Uses include general labeling as well as creation of a scatterplot-like display with text as the data point symbol.
+  Location can be specified in data units, or minplot units, or a combination of the two.
   </p><p>
-  <span class="parm">x=</span> and <span class="parm">y</span> &nbsp; mandatory; the location in data space.
+  <span class="parm">text=</span> &nbsp; Mandatory.  The text to be rendered.
   </p><p>
-  <span class="parm">text=</span> &nbsp; the text to be rendered.
+  <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; optional; a location in data space.
   </p><p>
-  <span class="parm">anchor=</span> controls how the text is aligned relative to <i>x, y</i> and is one of 
+  <span class="parm">xdjust=</span> &nbsp; optional; integer value in minplot units.  
+     If data location <i>x=</i> is supplied this adjusts the label's <i>x=</i> location.
+     Otherwise this specifies the label's absolute x location.  Default is 0.
+  </p><p>
+  <span class="parm">ydjust=</span> &nbsp; optional; same as above but for Y.  Default is 0.
+  </p><p>
+  <span class="parm">anchor=</span> optional; text alignment, one of 
   <tt>'start'</tt>, <tt>'middle',</tt> or <tt>'end'</tt>.  Default is <tt>'start'</tt>
-  </p><p>
-  <span class="parm">xofs=</span> and <span class="parm">yofs=</span> are distances in minplot units to offset the text from <i>x, y</i>.
-  Often useful for labeling purposes.  Default for both is 5.0 
-  </p><p>
-  To render text at a specific location in minplot coordinates, you can use <a href="index.html#lowlevel">low-level function txt()</a>
   </p>
       
 
@@ -1051,13 +1071,13 @@ All args are keyword args unless otherwise indicated.
   Draw a line between x1, y1 and x2, y2 in data space using the current line properties.
   Typical use is for threshold lines and other annotation.
   </p><p>
-  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; define where the line begins.
+  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; Mandatory.  Where the line begins.
   </p><p>
-  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; define where the line ends.
+  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; Mandatory.  Where the line ends.
   </p><p>
   <i>x1</i> and <i>x2</i> may be specified as <tt>'min'</tt> or <tt>'max'</tt> to get the
   X minima or maxima respectively.  Similarly
-  <i>xy</i> and <i>y2</i> may be specified as <tt>'min'</tt> or <tt>'max'</tt> to get the
+  <i>x2</i> and <i>y2</i> may be specified as <tt>'min'</tt> or <tt>'max'</tt> to get the
   Y minima or maxima respectively.
   </p>
 
@@ -1067,13 +1087,13 @@ All args are keyword args unless otherwise indicated.
   Draw an arrow starting at x1, y1 with the arrowhead at x2, y2.
   Typical use is for annotation or vector plots such as weather windbarbs.
   </p><p>
-  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; define where the line begins.
+  <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; Mandatory. Location of the non-tip end.
   </p><p>
-  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; define where the line ends and the arrowhead is rendered.
+  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; Mandatory. Location of the arrowhead tip.
   </p><p>
-  <span class="parm">headlen=</span> &nbsp; length of the arrowhead in minplot units.  Default is 18.
+  <span class="parm">headlen=</span> &nbsp; optional; length of the arrowhead in minplot units.  Default is 18.
   </p><p>
-  <span class="parm">headwid=</span> &nbsp; a theta value controlling stoutness of the arrowhead.  Default is 0.3
+  <span class="parm">headwid=</span> &nbsp; optional; a theta value controlling stoutness of the arrowhead.  Default is 0.3
   </p>
       
 
@@ -1105,10 +1125,12 @@ All args are keyword args unless otherwise indicated.
    over your data, just before drawing the object that the tooltip will be associated with. 
    The tooltip settings do not persist after the associated plot element is rendered.
    </p><p>
+   All args are optional, specify one or several.
+   </p><p>
    <span class="parm">title=</span> &nbsp; the text to appear for ordinary tooltips.  Also used with bs_popovers,
     see below.
    </p><p>
-   <span class="parm">url=</span> &nbsp; if specified, an xlink hyperlink to this url will be generated, allowing user to click thru.
+   <span class="parm">url=</span> &nbsp; an xlink hyperlink to this url will be generated, allowing user to click thru.
    </p><p>
    <span class="parm">target=</span> &nbsp; may be specified with <tt>url</tt> to open it in a new or different window.
    For example, <i>target='_blank'</i>
@@ -1143,49 +1165,53 @@ All args are keyword args unless otherwise indicated.
   Then when ready to render the legend, call <span class="fxn">legendrender()</span>.
   </p>
   <br>
-  <h4>legenditem( sample, label )</h4>
+  <h3>legenditem( sample, label )</h3>
   <p>
-  <span class="parm">label=</span> &nbsp; the text that will appear for this legend entry. 
+  <span class="parm">label=</span> &nbsp; Mandatory.  The text that will appear for this legend entry. 
   </p><p>
-  <span class="parm">sample=</span> &nbsp; type of sample for this legend entry.
+  <span class="parm">sample=</span> &nbsp; optional; type of sample for this legend entry.
   One of <tt>'square'</tt>, <tt>'circle'</tt>, or <tt>'line'</tt>.  
   If <tt>'line'</tt> the current line properties will be used; otherwise <i>color=</i> must be specified.
   Default is <tt>'square'</tt>
   </p><p>
-  <span class="parm">width=</span> &nbsp; if specified this allows control of the entry's width in minplot units.
+  <span class="parm">width=</span> &nbsp; optional; controls the entry's displayed width in minplot units.
   </p><p>
   <span class="parm">color=</span> &nbsp; required for <i>shape='circle'</i> and <i>shape='square'</i>.
    ignored for <i>shape='line'</i>
   </p><p>
-  <span class="parm">outline=True</span> &nbsp; outline the circle or square sample using the line properties in
+  <span class="parm">outline=True</span> &nbsp; optional; outline the circle or square using the line properties in
    effect when the legend is rendered.
   </p>
   <br>
 
-  <h4>legendrender( )</h4>
+  <h3>legendrender( )</h3>
   <p>
   Render a legend, made up of all currently posted legend entries.  Labels are rendered 
   using current text properties.  Any outlines will use current line properties.
   When this function finishes, the internal list of legend entries is cleared.
   </p><p>
-  <span class="parm">location=</span> &nbsp; is optional and can be one of: 
-  <tt>'upperleft'</tt>, <tt>'lowerleft'</tt>, <tt>'upperright'</tt>, or <tt>'loweright'</tt>
-  (relative to the plotting area).  Default is <tt>'upperleft'</tt>
+  <span class="parm">location=</span> &nbsp; optional; one of:
+  <tt>'top'</tt> to position the legend in the top-left of plotting area, or <tt>'bottom'</tt> to position
+   it in the bottom-left of the plotting area.
   </p><p>
-  <span class="parm">locadj=</span> &nbsp; a two-member list of location adjustments (x, y) in minplot units.
-  If <i>location</i> was not specified, these minplot coordinates will position the legend's
-  upper left corner directly.  Example: <tt>locadj=(-20,45)</tt>
+  <span class="parm">xdjust=</span> &nbsp; integer value in minplot units.
+     If <i>location=</i> is supplied this adjusts the legend's X location.
+     Otherwise it specifies the legend's absolute X location.  
+     The legend's upper-left corner is used for positioning purposes.
+     Default is 0.
   </p><p>
-  <span class="parm">format=</span> &nbsp; if specified as <tt>'across'</tt>, legend entries are 
+  <span class="parm">ydjust=</span> &nbsp; same as above but for Y.  Default is 0.
+  </p><p>
+  <span class="parm">format=</span> &nbsp; optional; if specified as <tt>'across'</tt>, legend entries are 
   rendered side by side.  Default is <tt>'down"</tt>.
   </p><p>
-  <span class="parm">sampsize=</span> &nbsp; if specified, this controls the size of circle or square
+  <span class="parm">sampsize=</span> &nbsp; optional; diameter of circle or square
   color samples. It is a distance in minplot units.   Default is 6.
   </p><p>
-  <span class="parm">linelen=</span> &nbsp; length of line sample in minplot units. Default is 20.
+  <span class="parm">linelen=</span> &nbsp; optional; length of line sample in minplot units. Default is 20.
   </p><p>
-  <span class="parm">title=</span> &nbsp; if specified, this string will be rendered as a legend title,
-  using the same text properties as the rest of the legend.
+  <span class="parm">title=</span> &nbsp; optional; a legend title.
+  Rendered using the same text properties as the rest of the legend.
   </p>
       
 
@@ -1208,7 +1234,7 @@ All args are keyword args unless otherwise indicated.
   <p>
   Returns your SVG result, as a string.
   </p><p>
-  <span class="parm">noclose=True</span> &nbsp; if specified, suppresses the closing &lt;/svg> tag and allows your SVG 
+  <span class="parm">noclose=True</span> &nbsp; optional; suppress the closing &lt;/svg> tag and allows your SVG 
    result to be gotten incrementally in chunks.  This is done by calling
   <span class="fxn">svgresult()</span> multiple times; each call will return the SVG code that was generated since the previous call (or since svgbegin) .
   </p>
@@ -1289,27 +1315,27 @@ All args are keyword args unless otherwise indicated.
   (<tt>axmin</tt> and <tt>axmax</tt>) along with 
   a list of formatted axis stubs (<tt>stublist</tt>); this can later be passed to <span class="fxn">axisrender()</span>.
   </p><p>
-  <span class="parm">dtcol=</span> &nbsp; identifies the numeric data column to be characterized.
+  <span class="parm">datarows=</span> &nbsp; Mandatory. Your data structure.
+  </p><p>
+  <span class="parm">dtcol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
   Either a name or an integer array index.
   </p><p>
-  <span class="parm">datarows=</span> &nbsp; this is your data structure (mandatory).
-  </p><p>
-  <span class="parm">nearest=</span> &nbsp; mandatory; must be specified.  Determines a clean
+  <span class="parm">nearest=</span> &nbsp; Mandatory.  Determines a clean
   boundary for axis min and max.  For example, <i>nearest=month</i> gives an axis min
   and max on month boundaries.  Allowed values include:
   <nobr><tt>year  3month  month  week  week_dayN  day  12hour  6hour  4hour  3hour  hour  30minute  10minute  minute</tt></nobr>
   <br>(<tt>week</tt> uses Mondays.  To get other weekday use eg. <tt>week_day2</tt> for Wednesdays or <tt>week_day6</tt> for Sundays).
   </p><p>
-  <span class="parm">inc=</span> &nbsp; the increment to be used in building a list of axis stubs.  
+  <span class="parm">inc=</span> &nbsp; optional; the increment to be used in building a list of axis stubs.  
   If not specified it will be same as <i>nearest</i>.
   If specified it may be one of the <i>nearest=</i> allowed values that fits cleanly with <i>nearest=</i>
   (most combinations where <i>inc=</i> is more granular than <i>nearest=</i> will work, but months and
   weeks cannot be used together).
   </p><p>
-  <span class="parm">stubformat=</span> &nbsp; The date formatting for the stubs.  See Date Formats section above.  
+  <span class="parm">stubformat=</span> &nbsp; optional; The date formatting for the stubs.  See Date Formats section above.  
   To do tics only (without stubs) use <i>stubformat=''</i>.
   </p><p>
-  <span class="parm">inc2=</span> &nbsp; Allows "rollovers" to be denoted as additional (or alternate) stub content.
+  <span class="parm">inc2=</span> &nbsp; optional; allows "rollovers" to be denoted as additional (or alternate) stub content.
   For example if your axis is months and you cross from Dec to Jan you might want to mention the new year in the Jan stub.
   Supported values include: <tt>year  3month  month  day</tt>.  Default is <tt>None</tt>
   </p>
@@ -1331,9 +1357,9 @@ All args are keyword args unless otherwise indicated.
   By default it returns the number of days between two dates.
   </p><p>
   <span class="parm">dateval1</span> and 
-  <span class="parm">dateval2</span> &nbsp; are two date objects in current format.
+  <span class="parm">dateval2</span> &nbsp; Mandatory.  Two date objects in current format.
   </p><p>
-  <span class="parm">resulttype</span> &nbsp; controls the granularity of the returned numeric difference.  
+  <span class="parm">resulttype</span> &nbsp; optional; granularity of the returned numeric difference.  
   Default is <tt>'days'</tt>.  Other accepted values include: <tt>'hours'  'minutes'  'seconds'</tt>
   </p>
   <br>
@@ -1449,8 +1475,10 @@ All args are keyword args unless otherwise indicated.
   data and render one plot for each chunk of data). Usually you'll have a data column that 
   corresponds to the category / panel name.
   </p><p>
+  <a href="pages/e8.html"><img src="static/examples/e8.svg" )}}"></a>
+  </p><p>
   Multiple panel displays can be useful for rendering:
-  <br> &nbsp; &bull; a series of plots side by side for easy visual comparison 
+  <br> &nbsp; &bull; a series of plots side by side (as above) for easy visual comparison 
   <br> &nbsp; &bull; a series of curves grouped from top to bottom for comparison
   <br> &nbsp; &bull; business day / business hour and market/trading plots
   <br> &nbsp; &bull; 2-D matrices of plots such as scatterplot matrix

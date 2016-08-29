@@ -1,9 +1,9 @@
+# curves plot with error bars; irregular X axis stubs; data point tooltips 
+# option: bandsopt .... if True show shaded SEM bands also
 
 import minplot as p
 
 def example6( bandsopt=False ):     
-    # produce a plot with 3 curves, error bars, and irregular X axis stubs, and data point tooltips 
-    # bandsopt .... if True show shaded SEM bands also
    
     colnames = [ "time", "group1", "group1sem", "group2", "group2sem", "group3", "group3sem" ]
 
@@ -30,7 +30,6 @@ def example6( bandsopt=False ):
 
     # set up the Y numerically scaled space... 
     p.numspace( axis='Y', axmin=0.0, axmax=100.0, poslo=100, poshi=400 )
-    # with alt1 use: p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=100, poshi=400 )
 
     # render X and Y axes...  
     p.lineprops( color='#aaa' )
@@ -73,7 +72,7 @@ def example6( bandsopt=False ):
             p.datapoint( x=row[xcol], y=row[ycol], fill=linecolor, diameter=12, opacity=0.5 )  # do datapoints last
 
     # display the legend...
-    p.legendrender( location='upperleft', format='across' )
+    p.legendrender( location='top', format='across' )
 
     # capture the entire SVG...
     return p.svgresult()

@@ -1,18 +1,18 @@
+# beeswarm and boxplot display; tooltips on outlier data points
+# option: ylog .... if True use a log Y axis; otherwise use linear
 
 import minplot as p
-import sampledata as sd
+import sampledata2 
 
 def example7( ylog=False ):
-    # produce beeswarm and boxplot display
-    # ylog .... if True use a log Y axis; otherwise use linear
 
     plotdata = {}
 
-    # sampledata() provides several 1-D example arrays of numbers sorted on magnitude
-    plotdata['1f'] = sd.sampledata( '1f' )   # eg. [ 33, 36, 39, 41, 41, 49,.. ]
-    plotdata['2f'] = sd.sampledata( '2f' )
-    plotdata['1m'] = sd.sampledata( '1m' )
-    plotdata['2m'] = sd.sampledata( '2m' )
+    # get several 1-D example arrays of numbers sorted on magnitude
+    plotdata['1f'] = sampledata2.vectors( 'set1' )   # eg. [ 33, 36, 39, 41, 41, 49,.. ]
+    plotdata['2f'] = sampledata2.vectors( 'set2' )
+    plotdata['1m'] = sampledata2.vectors( 'set3' )
+    plotdata['2m'] = sampledata2.vectors( 'set4' )
 
     p.svgbegin( width=550, height=350 )
 
@@ -36,7 +36,7 @@ def example7( ylog=False ):
     p.axisrender( axis='X', axisline=False, loc='min-8' )
     if ylog == False: p.axisrender( axis='y', tics=8, loc='min-8', grid=True )
     else: p.axisrender( axis='y', tics=8, loc='min-8', grid=True, inc=5, stubcull=20 )   
-    p.plotdeco( ylabel='glucose [mg/dL]', ylabeladj=(-20,0) )
+    p.plotdeco( ylabel='glucose [mg/dL]' )
 
     # compute percentiles and other summary info for each 1-D array
     info = {}
@@ -45,26 +45,27 @@ def example7( ylog=False ):
 
     # render the beeswarms assisted by clustermode 
     p.clustermode( mode='left+right', tolerance=1.0 )
-    diameter = 6; color = '#88c'; xofs = -8;
+    diameter = 6; color = '#88c'; leftward = -8
     for key in plotdata:
         for val in plotdata[key]:
             if key in ['1f', '2f']: color = '#88c'
             else: color = '#db8'
             pctiles = info[key].percentiles
-            if val < pctiles["5th"] or val > pctiles["95th"]:   
+            if val < pctiles.p5 or val > pctiles.p95:   
                 p.tooltip( "Outlier: " + str(val) + "    ID: nnnnnn" )    # tooltip for outliers 
-            p.datapoint( x=key, y=val, diameter=diameter, fill=color, xofs=xofs )
+            p.datapoint( x=key, y=val, diameter=diameter, fill=color, xadjust=leftward )
 
     # render box plots and the "N = nnn" annotation
     p.lineprops( color='#777' )
     p.textprops( ptsize=8, color='#777', anchor='middle' )
+    rightward = 8
     for key in plotdata:
         if key in ['1f', '2f']: color = '#ddf'
         else: color = '#fed'
         pctiles = info[key].percentiles
-        p.errorbar( x=key, ymin=pctiles['5th'], ymax=pctiles['95th'], xofs=8 )
-        p.bar( x=key, ybase=pctiles['25th'], y=pctiles['75th'], width=16, outline=True, xofs=8, fill=color )
-        p.datapoint( x=key, y=pctiles['median'], diameter=6, fill='#777', xofs=8 )
-        p.txt( p.nx(key), p.nmin('Y')-40, 'N = ' + str(info[key].nvals) )   # display N = nnn
+        p.errorbar( x=key, ymin=pctiles.p5, ymax=pctiles.p95, adjust=rightward )
+        p.bar( x=key, ybase=pctiles.p25, y=pctiles.p75, width=16, outline=True, adjust=rightward, fill=color )
+        p.datapoint( x=key, y=pctiles.median, diameter=6, fill='#777', xadjust=rightward )
+        p.label( text='N = '+str(info[key].nvals), x=key, y=None, yadjust=20, anchor='middle' )   # display N = nnn
 
     return  p.svgresult()

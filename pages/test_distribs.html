@@ -66,11 +66,11 @@
 ----
 
 Numeric distribtion result:
-[{'accum': 14, 'binmid': 1.0, 'binlo': 0.0}, {'accum': 3, 'binmid': 3.0, 'binlo': 2.0}, {'accum': 7, 'binmid': 5.0, 'binlo': 4.0}, {'accum': 21, 'binmid': 7.0, 'binlo': 6.0}, {'accum': 15, 'binmid': 9.0, 'binlo': 8.0}]
+[Distrow(binmid=1.0, binlo=0.0, accum=14), Distrow(binmid=3.0, binlo=2.0, accum=3), Distrow(binmid=5.0, binlo=4.0, accum=7), Distrow(binmid=7.0, binlo=6.0, accum=21), Distrow(binmid=9.0, binlo=8.0, accum=15)]
 ----
 
 Percentiles result:
-{'75th': 7.5, '5th': 1.0, '25th': 2.5, 'median': 5.5, '95th': 9.0}
+Percentiles(p5=1.0, p25=2.5, median=5.5, p75=7.5, p95=9.0)
 ----
 
 Categorical distribution result:
@@ -81,7 +81,7 @@ Categorical distribution result:
 ----
 
 numinfo Using 1D array via vec2d() ...
-[{'accum': 1, 'binmid': 2.5, 'binlo': 0.0}, {'accum': 2, 'binmid': 7.5, 'binlo': 5.0}, {'accum': 1, 'binmid': 12.5, 'binlo': 10.0}, {'accum': 1, 'binmid': 17.5, 'binlo': 15.0}, {'accum': 1, 'binmid': 22.5, 'binlo': 20.0}]
+[Distrow(binmid=2.5, binlo=0.0, accum=1), Distrow(binmid=7.5, binlo=5.0, accum=2), Distrow(binmid=12.5, binlo=10.0, accum=1), Distrow(binmid=17.5, binlo=15.0, accum=1), Distrow(binmid=22.5, binlo=20.0, accum=1)]
 ----
 
 catinfo Using 1D array via vec2d() ...
@@ -95,8 +95,9 @@ catinfo Using 1D array via vec2d() ...
 <br>
 
 
-<pre><span class="purple">
 
+
+<pre><span class="purple">
 
 import minplot as p
 

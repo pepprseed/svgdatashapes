@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.33  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
+# minplot.py  v0.34  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
 #
 
 

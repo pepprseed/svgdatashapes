@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by minplot -->
+<polyline points="100,308 350,308" stroke="#777"  />
+<polyline points="350,308 100,308" stroke="#777"  />
+<polyline points="100,308 100,316" stroke="#777"  />
+<polyline points="150,308 150,316" stroke="#777"  />
+<polyline points="200,308 200,316" stroke="#777"  />
+<polyline points="250,308 250,316" stroke="#777"  />
+<polyline points="300,308 300,316" stroke="#777"  />
+<polyline points="350,308 350,316" stroke="#777"  />
+<text x="100" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >0</text>
+<text x="150" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >2</text>
+<text x="200" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >4</text>
+<text x="250" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >6</text>
+<text x="300" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >8</text>
+<text x="350" y="329.89" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" >10</text>
+<polyline points="92,300 92,50" stroke="#777"  />
+<polyline points="92,50 92,300" stroke="#777"  />
+<polyline points="92,300 84,300" stroke="#777"  />
+<polyline points="92,250 84,250" stroke="#777"  />
+<polyline points="92,200 84,200" stroke="#777"  />
+<polyline points="92,150 84,150" stroke="#777"  />
+<polyline points="92,100 84,100" stroke="#777"  />
+<polyline points="92,50 84,50" stroke="#777"  />
+<text x="82" y="304.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >0</text>
+<text x="82" y="254.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >2</text>
+<text x="82" y="204.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >4</text>
+<text x="82" y="154.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >6</text>
+<text x="82" y="104.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >8</text>
+<text x="82" y="54.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >10</text>
+<rect x="92.0" y="42" width="266" height="266" stroke="#777"  fill="#eee" />
+<rect x="100.0" y="50" width="250" height="250" fill="none" />
+<text x="225" y="360" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" > weight [g]</text>
+<text x="40" y="175" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" transform="rotate(-90 40,175)" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
+<g><title>N = 0</title>
+<rect x="100.0" y="50" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="125.0" y="50" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 1</title>
+<rect x="150.0" y="50" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 3</title>
+<rect x="175.0" y="50" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="200.0" y="50" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="225.0" y="50" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 4</title>
+<rect x="250.0" y="50" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 3</title>
+<rect x="275.0" y="50" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 8</title>
+<rect x="300.0" y="50" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 10</title>
+<rect x="325.0" y="50" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 0</title>
+<rect x="100.0" y="75" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 1</title>
+<rect x="125.0" y="75" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="150.0" y="75" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="175.0" y="75" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="200.0" y="75" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 4</title>
+<rect x="225.0" y="75" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 3</title>
+<rect x="250.0" y="75" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 8</title>
+<rect x="275.0" y="75" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 7</title>
+<rect x="300.0" y="75" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 3</title>
+<rect x="325.0" y="75" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 1</title>
+<rect x="100.0" y="100" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="125.0" y="100" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="150.0" y="100" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="175.0" y="100" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 4</title>
+<rect x="200.0" y="100" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 3</title>
+<rect x="225.0" y="100" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 12</title>
+<rect x="250.0" y="100" width="25" height="25" fill="#f0f" />
+</g>
+<g><title>N = 7</title>
+<rect x="275.0" y="100" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 3</title>
+<rect x="300.0" y="100" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="100" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="100.0" y="125" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="125.0" y="125" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="150.0" y="125" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 2</title>
+<rect x="175.0" y="125" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 3</title>
+<rect x="200.0" y="125" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 9</title>
+<rect x="225.0" y="125" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 11</title>
+<rect x="250.0" y="125" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 3</title>
+<rect x="275.0" y="125" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 1</title>
+<rect x="300.0" y="125" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="125" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="100.0" y="150" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 3</title>
+<rect x="125.0" y="150" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="150.0" y="150" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 4</title>
+<rect x="175.0" y="150" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 7</title>
+<rect x="200.0" y="150" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 5</title>
+<rect x="225.0" y="150" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 2</title>
+<rect x="250.0" y="150" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 0</title>
+<rect x="275.0" y="150" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 1</title>
+<rect x="300.0" y="150" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="150" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="100.0" y="175" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="125.0" y="175" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 4</title>
+<rect x="150.0" y="175" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 3</title>
+<rect x="175.0" y="175" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 12</title>
+<rect x="200.0" y="175" width="25" height="25" fill="#f0f" />
+</g>
+<g><title>N = 16</title>
+<rect x="225.0" y="175" width="25" height="25" fill="#f0f" />
+</g>
+<g><title>N = 3</title>
+<rect x="250.0" y="175" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="275.0" y="175" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 1</title>
+<rect x="300.0" y="175" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="175" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="100.0" y="200" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 3</title>
+<rect x="125.0" y="200" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 7</title>
+<rect x="150.0" y="200" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 11</title>
+<rect x="175.0" y="200" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 14</title>
+<rect x="200.0" y="200" width="25" height="25" fill="#f0f" />
+</g>
+<g><title>N = 3</title>
+<rect x="225.0" y="200" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 2</title>
+<rect x="250.0" y="200" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 0</title>
+<rect x="275.0" y="200" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="300.0" y="200" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="200" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 2</title>
+<rect x="100.0" y="225" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 4</title>
+<rect x="125.0" y="225" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 10</title>
+<rect x="150.0" y="225" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 7</title>
+<rect x="175.0" y="225" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 3</title>
+<rect x="200.0" y="225" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="225.0" y="225" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="250.0" y="225" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="275.0" y="225" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 2</title>
+<rect x="300.0" y="225" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="225" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 7</title>
+<rect x="100.0" y="250" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 9</title>
+<rect x="125.0" y="250" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 6</title>
+<rect x="150.0" y="250" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 2</title>
+<rect x="175.0" y="250" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 0</title>
+<rect x="200.0" y="250" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 2</title>
+<rect x="225.0" y="250" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 0</title>
+<rect x="250.0" y="250" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 1</title>
+<rect x="275.0" y="250" width="25" height="25" fill="#303" />
+</g>
+<g><title>N = 0</title>
+<rect x="300.0" y="250" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="250" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 10</title>
+<rect x="100.0" y="275" width="25" height="25" fill="#d0d" />
+</g>
+<g><title>N = 8</title>
+<rect x="125.0" y="275" width="25" height="25" fill="#b0b" />
+</g>
+<g><title>N = 3</title>
+<rect x="150.0" y="275" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 4</title>
+<rect x="175.0" y="275" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="200.0" y="275" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="225.0" y="275" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 2</title>
+<rect x="250.0" y="275" width="25" height="25" fill="#606" />
+</g>
+<g><title>N = 4</title>
+<rect x="275.0" y="275" width="25" height="25" fill="#909" />
+</g>
+<g><title>N = 0</title>
+<rect x="300.0" y="275" width="25" height="25" fill="#000" />
+</g>
+<g><title>N = 0</title>
+<rect x="325.0" y="275" width="25" height="25" fill="#000" />
+</g>
+</svg>

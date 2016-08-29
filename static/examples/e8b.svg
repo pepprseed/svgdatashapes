@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="600" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by minplot -->
+<rect x="267.5" y="20" width="62.50" height="135" fill="#ffc" />
+<polyline points="80,120 80,128" stroke="#ada"  />
+<polyline points="142.50,120 142.50,128" stroke="#ada"  />
+<polyline points="205,120 205,128" stroke="#ada"  />
+<polyline points="267.50,120 267.50,128" stroke="#ada"  />
+<polyline points="330,120 330,128" stroke="#ada"  />
+<polyline points="392.50,120 392.50,128" stroke="#ada"  />
+<polyline points="455,120 455,128" stroke="#ada"  />
+<polyline points="517.50,120 517.50,128" stroke="#ada"  />
+<polyline points="580,120 580,128" stroke="#ada"  />
+<polyline points="80,120 80,20" stroke="#ada"  />
+<polyline points="142.50,120 142.50,20" stroke="#ada"  />
+<polyline points="205,120 205,20" stroke="#ada"  />
+<polyline points="267.50,120 267.50,20" stroke="#ada"  />
+<polyline points="330,120 330,20" stroke="#ada"  />
+<polyline points="392.50,120 392.50,20" stroke="#ada"  />
+<polyline points="455,120 455,20" stroke="#ada"  />
+<polyline points="517.50,120 517.50,20" stroke="#ada"  />
+<polyline points="580,120 580,20" stroke="#ada"  />
+<text x="111.25" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >A</text>
+<text x="173.75" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >B</text>
+<text x="236.25" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >C</text>
+<text x="298.75" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >D</text>
+<text x="361.25" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >E</text>
+<text x="423.75" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >F</text>
+<text x="486.25" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >G</text>
+<text x="548.75" y="144.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >H</text>
+<text x="68" y="125" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >-10</text>
+<text x="68" y="91.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >0</text>
+<text x="68" y="58.33" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >10</text>
+<text x="68" y="25" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >20</text>
+<rect x="80.0" y="20" width="500" height="100" fill="none" />
+<text x="330" y="180" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" >Group</text>
+<text x="20" y="70" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" transform="rotate(-90 20,70)" >Change</text>
+<polyline points="95.62,113 95.62,97.67" stroke="#bbb"  />
+<polyline points="93.12,113 98.12,113" stroke="#bbb"  />
+<polyline points="93.12,97.67 98.12,97.67" stroke="#bbb"  />
+<polyline points="106.04,110 106.04,81.33" stroke="#bbb"  />
+<polyline points="103.54,110 108.54,110" stroke="#bbb"  />
+<polyline points="103.54,81.33 108.54,81.33" stroke="#bbb"  />
+<polyline points="116.46,96.33 116.46,53.67" stroke="#bbb"  />
+<polyline points="113.96,96.33 118.96,96.33" stroke="#bbb"  />
+<polyline points="113.96,53.67 118.96,53.67" stroke="#bbb"  />
+<polyline points="126.88,103.67 126.88,65" stroke="#bbb"  />
+<polyline points="124.38,103.67 129.38,103.67" stroke="#bbb"  />
+<polyline points="124.38,65 129.38,65" stroke="#bbb"  />
+<rect x="93.125" y="86.67" width="5" height="18.67" fill="orange" />
+<rect x="103.541666667" y="86.67" width="5" height="9" fill="blue" />
+<rect x="113.958333333" y="75" width="5" height="11.67" fill="green" />
+<rect x="124.375" y="84.33" width="5" height="2.33" fill="red" />
+<polyline points="158.12,112 158.12,86.67" stroke="#bbb"  />
+<polyline points="155.62,112 160.62,112" stroke="#bbb"  />
+<polyline points="155.62,86.67 160.62,86.67" stroke="#bbb"  />
+<polyline points="168.54,101.33 168.54,79.33" stroke="#bbb"  />
+<polyline points="166.04,101.33 171.04,101.33" stroke="#bbb"  />
+<polyline points="166.04,79.33 171.04,79.33" stroke="#bbb"  />
+<polyline points="178.96,106.67 178.96,32" stroke="#bbb"  />
+<polyline points="176.46,106.67 181.46,106.67" stroke="#bbb"  />
+<polyline points="176.46,32 181.46,32" stroke="#bbb"  />
+<polyline points="189.38,88 189.38,47.33" stroke="#bbb"  />
+<polyline points="186.88,88 191.88,88" stroke="#bbb"  />
+<polyline points="186.88,47.33 191.88,47.33" stroke="#bbb"  />
+<rect x="155.625" y="86.67" width="5" height="12.67" fill="orange" />
+<rect x="166.041666667" y="86.67" width="5" height="3.67" fill="blue" />
+<rect x="176.458333333" y="69.33" width="5" height="17.33" fill="green" />
+<rect x="186.875" y="67.67" width="5" height="19" fill="red" />
+<polyline points="220.62,125.67 220.62,105.67" stroke="#bbb"  />
+<polyline points="218.12,125.67 223.12,125.67" stroke="#bbb"  />
+<polyline points="218.12,105.67 223.12,105.67" stroke="#bbb"  />
+<polyline points="231.04,127.33 231.04,88.67" stroke="#bbb"  />
+<polyline points="228.54,127.33 233.54,127.33" stroke="#bbb"  />
+<polyline points="228.54,88.67 233.54,88.67" stroke="#bbb"  />
+<polyline points="241.46,108.67 241.46,82.67" stroke="#bbb"  />
+<polyline points="238.96,108.67 243.96,108.67" stroke="#bbb"  />
+<polyline points="238.96,82.67 243.96,82.67" stroke="#bbb"  />
+<polyline points="251.88,101.67 251.88,56.33" stroke="#bbb"  />
+<polyline points="249.38,101.67 254.38,101.67" stroke="#bbb"  />
+<polyline points="249.38,56.33 254.38,56.33" stroke="#bbb"  />
+<rect x="218.125" y="86.67" width="5" height="29" fill="orange" />
+<rect x="228.541666667" y="86.67" width="5" height="21.33" fill="blue" />
+<rect x="238.958333333" y="86.67" width="5" height="9" fill="green" />
+<rect x="249.375" y="79" width="5" height="7.67" fill="red" />
+<polyline points="283.12,108 283.12,73.33" stroke="#bbb"  />
+<polyline points="280.62,108 285.62,108" stroke="#bbb"  />
+<polyline points="280.62,73.33 285.62,73.33" stroke="#bbb"  />
+<polyline points="303.96,85 303.96,36.33" stroke="#bbb"  />
+<polyline points="301.46,85 306.46,85" stroke="#bbb"  />
+<polyline points="301.46,36.33 306.46,36.33" stroke="#bbb"  />
+<polyline points="314.38,81.33 314.38,27.33" stroke="#bbb"  />
+<polyline points="311.88,81.33 316.88,81.33" stroke="#bbb"  />
+<polyline points="311.88,27.33 316.88,27.33" stroke="#bbb"  />
+<rect x="280.625" y="86.67" width="5" height="4" fill="orange" />
+<rect x="301.458333333" y="60.67" width="5" height="26" fill="green" />
+<rect x="311.875" y="54.33" width="5" height="32.33" fill="red" />
+<polyline points="345.62,117.33 345.62,72" stroke="#bbb"  />
+<polyline points="343.12,117.33 348.12,117.33" stroke="#bbb"  />
+<polyline points="343.12,72 348.12,72" stroke="#bbb"  />
+<polyline points="356.04,104.33 356.04,74.33" stroke="#bbb"  />
+<polyline points="353.54,104.33 358.54,104.33" stroke="#bbb"  />
+<polyline points="353.54,74.33 358.54,74.33" stroke="#bbb"  />
+<polyline points="366.46,103.67 366.46,51.67" stroke="#bbb"  />
+<polyline points="363.96,103.67 368.96,103.67" stroke="#bbb"  />
+<polyline points="363.96,51.67 368.96,51.67" stroke="#bbb"  />
+<polyline points="376.88,91.67 376.88,56.33" stroke="#bbb"  />
+<polyline points="374.38,91.67 379.38,91.67" stroke="#bbb"  />
+<polyline points="374.38,56.33 379.38,56.33" stroke="#bbb"  />
+<rect x="343.125" y="86.67" width="5" height="8" fill="orange" />
+<rect x="353.541666667" y="86.67" width="5" height="2.67" fill="blue" />
+<rect x="363.958333333" y="77.67" width="5" height="9" fill="green" />
+<rect x="374.375" y="74" width="5" height="12.67" fill="red" />
+<polyline points="408.12,114.33 408.12,99.67" stroke="#bbb"  />
+<polyline points="405.62,114.33 410.62,114.33" stroke="#bbb"  />
+<polyline points="405.62,99.67 410.62,99.67" stroke="#bbb"  />
+<polyline points="418.54,102.67 418.54,86.67" stroke="#bbb"  />
+<polyline points="416.04,102.67 421.04,102.67" stroke="#bbb"  />
+<polyline points="416.04,86.67 421.04,86.67" stroke="#bbb"  />
+<polyline points="428.96,100.33 428.96,72.33" stroke="#bbb"  />
+<polyline points="426.46,100.33 431.46,100.33" stroke="#bbb"  />
+<polyline points="426.46,72.33 431.46,72.33" stroke="#bbb"  />
+<polyline points="439.38,94.67 439.38,46.67" stroke="#bbb"  />
+<polyline points="436.88,94.67 441.88,94.67" stroke="#bbb"  />
+<polyline points="436.88,46.67 441.88,46.67" stroke="#bbb"  />
+<rect x="405.625" y="86.67" width="5" height="20.33" fill="orange" />
+<rect x="416.041666667" y="86.67" width="5" height="8" fill="blue" />
+<rect x="426.458333333" y="86.33" width="5" height="0.33" fill="green" />
+<rect x="436.875" y="70.67" width="5" height="16" fill="red" />
+<polyline points="470.62,121 470.62,97.67" stroke="#bbb"  />
+<polyline points="468.12,121 473.12,121" stroke="#bbb"  />
+<polyline points="468.12,97.67 473.12,97.67" stroke="#bbb"  />
+<polyline points="481.04,108.33 481.04,66.33" stroke="#bbb"  />
+<polyline points="478.54,108.33 483.54,108.33" stroke="#bbb"  />
+<polyline points="478.54,66.33 483.54,66.33" stroke="#bbb"  />
+<polyline points="501.88,83.67 501.88,45" stroke="#bbb"  />
+<polyline points="499.38,83.67 504.38,83.67" stroke="#bbb"  />
+<polyline points="499.38,45 504.38,45" stroke="#bbb"  />
+<rect x="468.125" y="86.67" width="5" height="22.67" fill="orange" />
+<rect x="478.541666667" y="86.67" width="5" height="0.67" fill="blue" />
+<rect x="499.375" y="64.33" width="5" height="22.33" fill="red" />
+<polyline points="533.12,115.67 533.12,95.67" stroke="#bbb"  />
+<polyline points="530.62,115.67 535.62,115.67" stroke="#bbb"  />
+<polyline points="530.62,95.67 535.62,95.67" stroke="#bbb"  />
+<polyline points="543.54,124 543.54,92" stroke="#bbb"  />
+<polyline points="541.04,124 546.04,124" stroke="#bbb"  />
+<polyline points="541.04,92 546.04,92" stroke="#bbb"  />
+<polyline points="553.96,115.33 553.96,82.67" stroke="#bbb"  />
+<polyline points="551.46,115.33 556.46,115.33" stroke="#bbb"  />
+<polyline points="551.46,82.67 556.46,82.67" stroke="#bbb"  />
+<polyline points="564.38,98.33 564.38,73" stroke="#bbb"  />
+<polyline points="561.88,98.33 566.88,98.33" stroke="#bbb"  />
+<polyline points="561.88,73 566.88,73" stroke="#bbb"  />
+<rect x="530.625" y="86.67" width="5" height="19" fill="orange" />
+<rect x="541.041666667" y="86.67" width="5" height="21.33" fill="blue" />
+<rect x="551.458333333" y="86.67" width="5" height="12.33" fill="green" />
+<rect x="561.875" y="85.67" width="5" height="1" fill="red" />
+<rect x="52" y="166" width="6" height="6" fill="orange" />
+<text x="63" y="172" font-size="9pt" fill="#444" >t1</text>
+<rect x="100" y="166" width="6" height="6" fill="blue" />
+<text x="111" y="172" font-size="9pt" fill="#444" >t2</text>
+<rect x="148" y="166" width="6" height="6" fill="green" />
+<text x="159" y="172" font-size="9pt" fill="#444" >t3</text>
+<rect x="196" y="166" width="6" height="6" fill="red" />
+<text x="207" y="172" font-size="9pt" fill="#444" >t4</text>
+</svg>

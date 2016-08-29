@@ -103,7 +103,7 @@
 <text x="98" y="97.86" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >120</text>
 <text x="98" y="55" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >140</text>
 <rect x="100.0" y="50" width="430" height="300" fill="none" />
-<text x="52" y="200" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" transform="rotate(-90 52,200)" >Avg. Calls / day</text>
+<text x="40" y="200" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" transform="rotate(-90 40,200)" >Avg. Calls / day</text>
 <polyline points="121.50,331.57 121.50,317" stroke="#777"  />
 <polyline points="116.50,331.57 126.50,331.57" stroke="#777"  />
 <polyline points="116.50,317 126.50,317" stroke="#777"  />
@@ -157,7 +157,10 @@
 <br>
 
 
+
+
 <pre><span class="purple">
+# bar graph plotted from dict rows; color-coded bars; multi-line legend entries
 
 import minplot as p
 
@@ -207,7 +210,7 @@ def example1():
         p.bar( x=row['state'], y=row['avg'], ybase=0.0, fill=barcolor, width=20, opacity=0.8 )
 
     # render the legend...
-    p.legendrender( location='upperleft', format='across' )
+    p.legendrender( location='top', format='across' )
 
     # return the SVG...
     return p.svgresult()

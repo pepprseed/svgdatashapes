@@ -1,3 +1,5 @@
+# basic example of plotting date data
+
 import minplot as p
 import minplot_dt as pdt
 

@@ -1,3 +1,5 @@
+# basic example of plotting data + time data
+
 import minplot as p
 import minplot_dt as pdt
 

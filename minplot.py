@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.33  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# minplot.py  v0.34  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 
 import math
@@ -46,9 +46,9 @@ def _init():
         p_text["anchor"] = "start"; p_text["rotate"] = 0; p_text["adjust"] = None; p_text["class"] = None; p_text["style"] = None; p_text["props"] = ""; \
         p_text["height"] =  (p_text["ptsize"]/72.0)*100.0
     p_line["width"] = 1.0; p_line["color"] = "#000"; p_line["opacity"] = 1.0; \
-        p_line["dash"] = None; p_line["class"] = None; p_line["style"] = None; p_line["props"] = None;
+        p_line["dash"] = None; p_line["class"] = None; p_line["style"] = None; p_line["props"] = ""; 
     p_clust["mode"] = None
-    p_curve["x"] = p_curve["y"] = None
+    p_curve["x"] = p_curve["y"] = None; p_curve["adjust"] = None;
     p_leg = []
     p_tt = {} 
     p_ar = {}; p_ar["active"] = False
@@ -387,6 +387,7 @@ def svgresult( noclose=False ):
 def numspace( axis=None, axmin=None, axmax=None, poslo=None, poshi=None, log=None, reverse=False, allint=False ):    
     # set up a numeric X or Y space (linear or log)
     global p_space
+    if axis == None: raise AppError( "numspace(): required arg 'axis' not provided" )
     if p_svg["active"] == False:
         raise AppError( "numspace(): no active graphic exists yet, see svgbegin()" )
     iax = _getiax( axis )
@@ -442,6 +443,7 @@ def numspace( axis=None, axmin=None, axmax=None, poslo=None, poshi=None, log=Non
 def catspace( axis=None, catlist=None, poslo=None, poshi=None, reverse=False ):
     # set up a categorical X or Y space 
     global p_space
+    if axis == None: raise AppError( "catspace(): required arg 'axis' not provided" )
     if p_svg["active"] == False:
         raise AppError( "catspace(): no active graphic exists yet, see svgbegin()" )
     if catlist == None or len(catlist) < 2:
@@ -476,7 +478,7 @@ def catspace( axis=None, catlist=None, poslo=None, poshi=None, reverse=False ):
 
 
 
-def findrange( testval=None, testfor='both', finish=False, nearest=None, addlpad=None ):
+def findrange( testval=None, erramt=0.0, testfor='both', finish=False, nearest=None, addlpad=None ):
     # find suitable numeric axis min and max.  This function is called repeatedly for each row of data, 
     # allowing programmer flexibility with regard to stacked bars, clustered bars, etc.
     # When finally called with finish=True it returns a dict with members axmin, axmax, and others.
@@ -528,7 +530,7 @@ def findrange( testval=None, testfor='both', finish=False, nearest=None, addlpad
     # otherwise we're testing values...
     p_ar["active"] = True
     
-    try: fval = float( testval )
+    try: fval = float( testval ) + float( erramt )
     except: p_ar["nbadvals"] += 1; return False
 
     p_ar["nvals"] += 1
@@ -591,7 +593,7 @@ def numinfo( datarows=None, numcol=None, distrib=False, distbinsize=None, accumc
     sd = math.sqrt( ( sumsq - ((sum*sum)/float(nvals)) ) / float(nvals-1) )
     sem = sd / math.sqrt( float(nvals) )
 
-    dist = None
+    distout = None
     binsize = None
     if distrib == True:   # run a freq distribution
         # compute inc and axmax, axmin ... needed for calculating distribution
@@ -638,6 +640,12 @@ def numinfo( datarows=None, numcol=None, distrib=False, distbinsize=None, accumc
             for drow in dist:
                 if fval < (drow["binmid"]+halfbin): drow["accum"] += tallyval; break
 
+        # convert result to array of namedtuples
+        distout = []
+        Distrow = collections.namedtuple( "Distrow", ["binmid", "binlo", "accum"] )
+        for drow in dist:
+            distout.append( Distrow( drow["binmid"], drow["binlo"], drow["accum"] ) )
+
     pcl = None
     if percentiles == True:
         if numsorted == False: raise AppError( "numinfo(): pcttiles=True requires data to be sorted in numeric order (low to high)" )
@@ -646,7 +654,7 @@ def numinfo( datarows=None, numcol=None, distrib=False, distbinsize=None, accumc
     # prepare namedtuple result....
     Numinfo = collections.namedtuple( "Numinfo", ["min", "max", "nvals", "nbad", "allint", "numsorted", 
                                           "mean", "sd", "sem", "sum", "distribution", "distbinsize", "percentiles" ] )
-    return Numinfo( min, max, nvals, nbadvals, allint, numsorted, mean, sd, sem, sum, dist, binsize, pcl )
+    return Numinfo( min, max, nvals, nbadvals, allint, numsorted, mean, sd, sem, sum, distout, binsize, pcl )
 
 
 def catinfo( datarows=None, catcol=None, nullspacers=False, distrib=False, accumcol=None ):
@@ -723,20 +731,20 @@ def plotdeco( title=None, outline=False, shade=None, opacity=1.0, xlabel=None, y
         else: txt( nmin("X"), nmax("Y")+(titleadj+5), title, anchor="start" )
         _gtooltip( "end" )
     if xlabel != None:
-        xofs = 0; yofs = -55; xadj = 0; yadj = 0  # was -48
+        xofs = 0; yofs = -60; xadj = 0; yadj = 0  # was -48
         if xlabeladj != None:
             try: xadj = float(xlabeladj[0]); yadj = float(xlabeladj[1])    # see if specified as (xadj, yadj)
             except: raise AppError( "plotdeco() is expecting xlabeladj as 2 member numeric list, but got: " + str(xlabeladj) )
         _gtooltip( "begin" ); txt( ((nmin("X")+nmax("X"))/2.0)+(xofs+xadj), nmin("Y")+(yofs+yadj), xlabel, anchor="middle" ); _gtooltip( "end" )
     if ylabel != None:
-        xofs = -48; yofs = 0; xadj = 0; yadj = 0   # was -40
+        xofs = -60; yofs = 0; xadj = 0; yadj = 0   # was -40
         if ylabeladj != None:
             try: xadj = float(ylabeladj[0]); yadj = float(ylabeladj[1]);
             except: raise AppError( "plotdeco() is expecting ylabeladj as 2 member numeric list, but got: " + str(ylabeladj) )
         p_text["rotate"] = -90
         _gtooltip( "begin" ); txt( nmin("X")+(xofs+xadj), ((nmin("Y")+nmax("Y"))/2.0)+(yofs+yadj), ylabel, anchor="middle" ); _gtooltip( "end" )
     if y2label != None:
-        xofs = 48; yofs = 0; xadj = 0; yadj = 0    # was 40
+        xofs = 60; yofs = 0; xadj = 0; yadj = 0    # was 40
         if ylabeladj2 != None:
             try: xadj = float(y2labeladj[0]); yadj = float(y2labeladj[1]); 
             except: raise AppError( "plotdeco() is expecting y2labeladj as 2 member numeric list, but got: " + str(y2labeladj) )
@@ -752,6 +760,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
     global p_space, p_text
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "axisrender(): plot area has not yet been set up yet." )
+    if axis == None: raise AppError( "axisrender(): required arg 'axis' not provided" )
     axis = axis.upper()
     iax = _getiax( axis )
     if axis == "X": othax = "Y"
@@ -922,7 +931,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
     return True
 
 
-def bar( x=None, y=None, ybase=None, width=8, fill="#e0ffe0", opacity=1.0, outline=False, xofs=0.0, horiz=False ):
+def bar( x=None, y=None, ybase=None, width=8, fill="#afa", opacity=1.0, outline=False, adjust=0.0, horiz=False ):
     # render a column bar
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "bar(): no plot area has been set up yet." )
@@ -934,16 +943,17 @@ def bar( x=None, y=None, ybase=None, width=8, fill="#e0ffe0", opacity=1.0, outli
         else: ybase = dmin("X")
     try: ybase = float(ybase)
     except:  raise AppError( "bar() is expecting numeric 'ybase': " + str(ybase) )
-    if ybase > y: ytmp = y; y = ybase; ybase = ytmp;  # downward bars
+    if ybase > y: 
+        ytmp = y; y = ybase; ybase = ytmp;  # downward bars
     f = width/2.0
     _gtooltip( "begin" )
-    if horiz == True: rect( nx(ybase), (ny(x)-f)+xofs, nx(y), (ny(x)+f)+xofs, fill=fill, opacity=opacity, outline=outline )
-    else:             rect( (nx(x)-f)+xofs, ny(ybase), (nx(x)+f)+xofs, ny(y), fill=fill, opacity=opacity, outline=outline )
+    if horiz == True: rect( nx(ybase), (ny(x)-f)+adjust, nx(y), (ny(x)+f)+adjust, fill=fill, opacity=opacity, outline=outline )
+    else:             rect( (nx(x)-f)+adjust, ny(ybase), (nx(x)+f)+adjust, ny(y), fill=fill, opacity=opacity, outline=outline )
     _gtooltip( "end" )
     return True
 
 
-def errorbar( x=None, y=None, erramt=None, ymin=None, ymax=None, tailsize=5, xofs=0.0, horiz=False ):
+def errorbar( x=None, y=None, erramt=None, ymin=None, ymax=None, tailsize=5, adjust=0.0, horiz=False ):
     # render an error bar.  x is always specified.  Either y and erramt, or ymin and ymax, must be specified.
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "errorbar(): no plot area has been set up yet." )
@@ -959,19 +969,19 @@ def errorbar( x=None, y=None, erramt=None, ymin=None, ymax=None, tailsize=5, xof
         lin( nx(ymin), ny(x)+ofs, nx(ymax), ny(x)+ofs )
         lin( nx(ymin), (ny(x)+ofs)-f, nx(ymin), (ny(x)+ofs)+f ); lin( nx(ymax), (ny(x)+ofs)-f, nx(ymax), (ny(x)+ofs)+f )
     else:             
-        lin( nx(x)+xofs, ny(ymin), nx(x)+xofs, ny(ymax) )
-        lin( (nx(x)+xofs)-f, ny(ymin), (nx(x)+xofs)+f, ny(ymin) ); lin( (nx(x)+xofs)-f, ny(ymax), (nx(x)+xofs)+f, ny(ymax) )
+        lin( nx(x)+adjust, ny(ymin), nx(x)+adjust, ny(ymax) )
+        lin( (nx(x)+adjust)-f, ny(ymin), (nx(x)+adjust)+f, ny(ymin) ); lin( (nx(x)+adjust)-f, ny(ymax), (nx(x)+adjust)+f, ny(ymax) )
     return True
 
 
-def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=None, xofs=0.0, yofs=0.0 ):
+def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=None, xadjust=0, yadjust=0 ):
     # render a circle data point                                   
     global p_clust
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "datapoint(): plot area has not been set up yet." )
     if x == None or y == None:  return False   # tolerate None coords... render nothing
     if fill == None and outline == None:  raise AppError( "datapoint() 'fill' or 'outline' must be specified" )
-    natx = nx(x)+xofs; naty = ny(y)+yofs
+    natx = nx(x)+xadjust; naty = ny(y)+yadjust;
     cofsx = 0.0; cofsy = 0.0;
     if p_clust["mode"] != None:    # clustering...
         if math.fabs( natx - p_clust["prevx"] ) <= p_clust["tol"] and math.fabs( naty - p_clust["prevy"] ) <= p_clust["tol"]:  
@@ -1006,19 +1016,23 @@ def clustermode( mode=None, offset=0.8, tolerance=0.0, dampen=1 ):
     return True
 
 
-def label( x=None, y=None, anchor="start", xofs=5.0, yofs=5.0, text="[label]" ):
-    # render a piece of text somewhere in data space
-    if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
-        raise AppError( "label(): plot area has not been set up yet." )
-    if x == None or y == None:   return False   # coords may include None... render nothing
-    natx = nx(x)+xofs; naty = (ny(y)+yofs)-(p_text["height"]*0.3)
+def label( text=None, x=None, y=None, anchor="start", xadjust=0, yadjust=0 ):
+    # render a piece of text at data location (x, y) or in minplot units at (xadjust, yadjust), or a combination of the two
+    if text == None: return False    # render nothing
+    if (x != None or y != None) and p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
+        raise AppError( "label(): data units location (x, y) was given but plot area has not been set up yet." )
+    if x != None: natx = nx(x)+xadjust
+    else: natx = xadjust
+    if y != None: naty = (ny(y)+yadjust)-(p_text["height"]*0.3)
+    else: naty = yadjust
+
     _gtooltip( "begin" )
     txt( natx, naty, text, anchor=anchor )
     _gtooltip( "end" )
     return True
 
 
-def rectangle( x=None, y=None, width=None, height=None, fill="#e0ffe0", opacity=1.0, outline=False ):
+def rectangle( x=None, y=None, width=None, height=None, fill="#afa", opacity=1.0, outline=False, adjust=None ):
     # render a filled rectangle somewhere in data space   ... 
     # because of elaborate parameter scheme don't try to handle None as done elsewhere
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
@@ -1031,21 +1045,29 @@ def rectangle( x=None, y=None, width=None, height=None, fill="#e0ffe0", opacity=
         elif height == "all": pass
         else:  natheight = ndist("Y", height )
     except: raise AppError( "rectangle(): invalid args" )
+
+    mx1 = 0; my1 = 0; mx2 = 0; my2 = 0
+    if adjust != None:
+        if type(adjust) is int: mx1 = my1 = -adjust; mx2 = my2 = adjust;
+        else:
+            try: mx1 = adjust[0]; my1 = adjust[1]; mx2 = adjust[2]; my2 = adjust[3];
+            except: pass
+
     if width  == "all": nx1 = nmin("X"); nx2 = nmax("X")
     else: nx1 = nx(x)-(natwidth/2.0); nx2 = nx(x)+(natwidth/2.0)
     if height == "all": ny1 = nmin("Y"); ny2 = nmax("Y")
     else: ny1 = ny(y)-(natheight/2.0); ny2 = ny(y)+(natheight/2.0)
     _gtooltip( "begin" )
-    rect( nx1, ny1, nx2, ny2, fill=fill, opacity=opacity, outline=outline )
+    rect( nx1+mx1, ny1+my1, nx2+mx2, ny2+my2, fill=fill, opacity=opacity, outline=outline )
     _gtooltip( "end" )
     return True
 
 
-def curvebegin( stairs=False, fill=None, opacity=1.0, onbadval="bridge", band=False, xofs=None ):
+def curvebegin( stairs=False, fill=None, opacity=1.0, onbadval="bridge", band=False, adjust=0.0 ):
     global p_curve
     p_curve["stairs"] = stairs; p_curve["fill"] = fill; p_curve["opacity"] = opacity;
     p_curve["onbad" ] = onbadval; p_curve["band"] = band; p_curve["x"] = p_curve["y"] = None;
-    p_curve["xofs"] = xofs;
+    p_curve["adjust"] = adjust;
     return True
 
 def curvenext( x=None, y=None, y2=None ):
@@ -1067,14 +1089,14 @@ def curvenext( x=None, y=None, y2=None ):
 
     if firsttime == True:  return True    # nothing more to do..
 
-    xofs = p_curve["xofs"]
-    if xofs == None: xofs = 0.0
+    adjust = p_curve["adjust"]
+    if adjust == None: adjust = 0.0
     if p_curve["band"] == True or p_curve["fill"] != None: 
-        startingpt = (nx(prevx)+xofs,ny(prevy))
-        polygon( ( startingpt, (nx(x)+xofs,ny(y)), (nx(x)+xofs,ny(y2)), (nx(prevx)+xofs,ny(prevy2)), startingpt ), \
+        startingpt = (nx(prevx)+adjust,ny(prevy))
+        polygon( ( startingpt, (nx(x)+adjust,ny(y)), (nx(x)+adjust,ny(y2)), (nx(prevx)+adjust,ny(prevy2)), startingpt ), \
                                  fill=p_curve["fill"], opacity=p_curve["opacity"] )
-    elif p_curve["stairs"] == True: lin( nx(prevx)+xofs, ny(prevy), nx(x)+xofs, ny(prevy) ); lin( nx(x)+xofs, ny(prevy), nx(x)+xofs, ny(y) ); 
-    else: lin( nx(prevx)+xofs, ny(prevy), nx(x)+xofs, ny(y) )
+    elif p_curve["stairs"] == True: lin( nx(prevx)+adjust, ny(prevy), nx(x)+adjust, ny(prevy) ); lin( nx(x)+adjust, ny(prevy), nx(x)+adjust, ny(y) ); 
+    else: lin( nx(prevx)+adjust, ny(prevy), nx(x)+adjust, ny(y) )
 
     return True
 
@@ -1117,7 +1139,7 @@ def arrow( x1=None, y1=None, x2=None, y2=None, headlen=18, headwid=0.3, fill="#8
     return True
 
 
-def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0, placement="right", showpct=None ):
+def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0, placement="right", showpct=False ):
     # render a piegraph slice.   pctval controls size of slice and is 0.0 to 1.0.
     # startval controls where (radially) the slice "starts" and is also 0.0 to 1.0.
 
@@ -1152,7 +1174,7 @@ def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0
     _gtooltip( "begin" )
     polygon( pts, fill=fill, outline=outline, opacity=opacity )
 
-    if showpct != None:
+    if showpct != False:
         txtrad = radius * 0.7
         if showpct == True: showpct = "%.0f"
         pctstr = showpct % (pctval*100.0)
@@ -1181,26 +1203,20 @@ def legenditem( sample='square', label=None, color=None, outline=None, width=Non
     p_leg[-1]["tooltip"] = p_tt.copy(); p_tt = {}   # take a copy of any current tooltip settings, then clear p_tt
     return True
 
-def legendrender( location=None, locadj=None, format="down", sampsize=6, linelen=20, title=None ):
+
+def legendrender( location=None, format="down", sampsize=6, linelen=20, title=None, xadjust=0, yadjust=0 ):
     # render the legend using entries posted earlier
     global p_leg, p_tt
 
     if len( p_leg ) == 0: raise AppError( "legendrender(): no legend entries defined yet, use legenditem() first" )
-    if location != None and location not in [ 'upperleft', 'lowerleft', 'upperright', 'lowerright' ]: 
+    if location != None and location not in [ "top", "bottom" ]: 
         raise AppError( "legendrender(): invalid value for 'location' arg, got: " + location )
 
-    if location == None and locadj == None: location = "upperleft" 
+    if location == None and xadjust == 0 and yadjust == 0: location = "top" 
 
-    if location == "upperleft": xpos = nmin("X")+5; ypos = nmax("Y")-p_text["height"]
-    elif location == "lowerleft": xpos = nmin("X")+5; ypos = nmin("Y")+3
-    elif location == "upperright": xpos = nmax("X")-200; ypos = nmax("Y")-p_text["height"]
-    elif location == "lowerright": xpos = nmax("X")-200; ypos = nmin("Y")+3
-    if location == None and locadj != None:
-        try: xpos = int(locadj[0]); ypos = int(locadj[1])
-        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list of int" )
-    elif locadj != None:
-        try: xpos += int(locadj[0]); ypos += int(locadj[1])
-        except: raise( AppError, "legendrender() if 'locadj' is specified it must be a 2-member list of int" )
+    if location == "top": xpos = nmin("X")+5+xadjust; ypos = nmax("Y")-p_text["height"]+yadjust
+    elif location == "bottom": xpos = nmin("X")+5+xadjust; ypos = nmin("Y")+3+yadjust
+    elif location == None: xpos = xadjust; ypos = yadjust
 
     if format == "down":
         sampw = 10
@@ -1313,11 +1329,7 @@ def _getiax( axis ):
 def _spacepos( iax, poslo, poshi ):
     # handle the native coordinates for numspace() and catspace() routines, supplying default location if necessary
     global p_svg, p_space
-    if iax != 0 and iax != 1: raise AppError( "_spacepos got invalid iax argument" )
-    if poslo == None: poslo = 80
-    if poshi == None:
-        if iax == 0: poshi = p_svg["width"] - 50
-        else: poshi = p_svg["height"] - 50
+    if iax != 0 and iax != 1: raise AppError( "invalid axis argument" )
     try: p_space[iax]["poslo"] = float(poslo); p_space[iax]["poshi"] = float(poshi)
     except: raise ValueError( "native unit values must be numeric, got: " + str(poshi) + " " + str(poslo)  )
 
@@ -1362,7 +1374,7 @@ def _log( dataval ):
 
 def _percentiles( datarows, colname, dfindex ):
     # compute 5th, 25th, 50th, 75th, and 95th percentiles on a data column
-    pcl = {}
+
     nums= []
     # first we must make a vector of values, leaving out any non-numerics...
     for row in datarows:
@@ -1374,25 +1386,24 @@ def _percentiles( datarows, colname, dfindex ):
     nvals = len( nums )
     if nvals < 3: raise AppError( "not enough numeric values to compute percentiles" )
     cell = nvals/20; 
-    if nvals % 20 != 0: pcl["5th"] = nums[cell]; 
-    else: pcl["5th"] = (nums[cell-1] + nums[cell])/2.0
+    if nvals % 20 != 0: p5 = nums[cell]; 
+    else: p5 = (nums[cell-1] + nums[cell])/2.0
+
     cell = nvals/4; 
-    if nvals % 4 != 0: pcl["25th"] = nums[cell]; 
-    else: pcl["25th"] = (nums[cell-1] + nums[cell])/2.0
+    if nvals % 4 != 0: p25 = nums[cell]; 
+    else: p25 = (nums[cell-1] + nums[cell])/2.0
+
     cell = nvals/2; 
-    if nvals % 2 != 0: pcl["median"] = nums[cell]; 
-    else: pcl["median"] = (nums[cell-1] + nums[cell])/2.0
+    if nvals % 2 != 0: p50 = nums[cell]; 
+    else: p50 = (nums[cell-1] + nums[cell])/2.0
+
     cell = (nvals-(nvals/4))-1; 
-    if nvals % 4 != 0: pcl["75th"] = nums[cell]; 
-    else: pcl["75th"] = (nums[cell] + nums[cell+1])/2.0
+    if nvals % 4 != 0: p75 = nums[cell]; 
+    else: p75 = (nums[cell] + nums[cell+1])/2.0
+
     cell = (nvals-(nvals/20))-1; 
-    if nvals % 20 != 0: pcl["95th"] = nums[cell]; 
-    else: pcl["95th"] = (nums[cell] + nums[cell+1])/2.0
+    if nvals % 20 != 0: p95 = nums[cell]; 
+    else: p95 = (nums[cell] + nums[cell+1])/2.0
 
-    return pcl
-
-#    pctile = (n % 20 ) ? PLV[(n/20) + 1] :  (PLV[n/20] + PLV[(n/20) + 1] ) /2.0 ;  /* 5th */
-#    pctile = ( n % 4 ) ?  PLV[(n/4) + 1]  :  (PLV[n/4] + PLV[(n/4) + 1])/2.0 ;      /* 25 */
-#    pctile = ( n % 2 ) ?  PLV[(n+1) / 2]  :  (PLV[n/2] + PLV[(n/2)+1])/2.0 ;   /* median/ 50th */
-#    pctile = ( n % 4 )  ? PLV[n - (n/4)]  :  (PLV[(n+1) - (n/4)] + PLV[n-(n/4)])/2.0 ;   /* 75 */
-#    pctile = ( n % 20 ) ? PLV[n - (n/20)] : (PLV[(n+1) - (n/20)] + PLV[n - (n/20)]) / 2.0 ;  /* 95 */
+    Percentiles = collections.namedtuple( "Percentiles", ["p5", "p25", "median", "p75", "p95"] )
+    return Percentiles( p5, p25, p50, p75, p95 )

@@ -28,8 +28,8 @@
 <text x="82" y="54.17" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="end" >10</text>
 <rect x="92.0" y="42" width="266" height="266" stroke="#777"  fill="#eee" />
 <rect x="100.0" y="50" width="250" height="250" fill="none" />
-<text x="225" y="365" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
-<text x="37" y="175" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" transform="rotate(-90 37,175)" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
+<text x="225" y="360" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" > weight [g]</text>
+<text x="40" y="175" style="font-family: sans-serif; font-weight: bold;" fill="#777"  text-anchor="middle" transform="rotate(-90 40,175)" > density [g/cm<tspan dy="-8.33" font-size="8pt">2</tspan><tspan dy="8.33">]</tspan></text>
 <polyline points="100,175 350,175" stroke="#888" stroke-dasharray="3,3"  />
 <polyline points="225,300 225,50" stroke="#888" stroke-dasharray="3,3"  />
 <g><title>(-6.3,-5.2)</title>
