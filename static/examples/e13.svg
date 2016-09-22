@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="550" height="450" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by minplot -->
+<polyline points="80,350 520,350" stroke="#aaa"  />
+<polyline points="520,350 80,350" stroke="#aaa"  />
+<polyline points="80,350 80,355" stroke="#aaa"  />
+<polyline points="168,350 168,355" stroke="#aaa"  />
+<polyline points="256,350 256,355" stroke="#aaa"  />
+<polyline points="344,350 344,355" stroke="#aaa"  />
+<polyline points="432,350 432,355" stroke="#aaa"  />
+<polyline points="520,350 520,355" stroke="#aaa"  />
+<text x="124" y="371.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Trial1</text>
+<text x="212" y="371.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Trial2</text>
+<text x="300" y="371.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Trial3</text>
+<text x="388" y="371.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Trial4</text>
+<text x="476" y="371.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >Trial5</text>
+<polyline points="60,350 520,350" stroke="#aaa"  />
+<polyline points="60,295.45 520,295.45" stroke="#aaa"  />
+<polyline points="60,240.91 520,240.91" stroke="#aaa"  />
+<polyline points="60,186.36 520,186.36" stroke="#aaa"  />
+<polyline points="60,131.82 520,131.82" stroke="#aaa"  />
+<polyline points="60,77.27 520,77.27" stroke="#aaa"  />
+<text x="58" y="355" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >0</text>
+<text x="58" y="300.45" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >20</text>
+<text x="58" y="245.91" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >40</text>
+<text x="58" y="191.36" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >60</text>
+<text x="58" y="136.82" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >80</text>
+<text x="58" y="82.27" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >100</text>
+<rect x="110.0" y="260" width="8" height="90" fill="#8d8" />
+<polyline points="114,266.55 114,253.45" stroke="#aaa"  />
+<polyline points="111.50,266.55 116.50,266.55" stroke="#aaa"  />
+<polyline points="111.50,253.45 116.50,253.45" stroke="#aaa"  />
+<rect x="120.0" y="216.36" width="8" height="133.64" fill="#88d" />
+<polyline points="124,228.09 124,204.64" stroke="#aaa"  />
+<polyline points="121.50,228.09 126.50,228.09" stroke="#aaa"  />
+<polyline points="121.50,204.64 126.50,204.64" stroke="#aaa"  />
+<rect x="130.0" y="145.45" width="8" height="204.55" fill="#d88" />
+<polyline points="134,161.27 134,129.64" stroke="#aaa"  />
+<polyline points="131.50,161.27 136.50,161.27" stroke="#aaa"  />
+<polyline points="131.50,129.64 136.50,129.64" stroke="#aaa"  />
+<rect x="198.0" y="254.55" width="8" height="95.45" fill="#8d8" />
+<polyline points="202,263 202,246.09" stroke="#aaa"  />
+<polyline points="199.50,263 204.50,263" stroke="#aaa"  />
+<polyline points="199.50,246.09 204.50,246.09" stroke="#aaa"  />
+<rect x="208.0" y="230" width="8" height="120" fill="#88d" />
+<polyline points="212,240.64 212,219.36" stroke="#aaa"  />
+<polyline points="209.50,240.64 214.50,240.64" stroke="#aaa"  />
+<polyline points="209.50,219.36 214.50,219.36" stroke="#aaa"  />
+<rect x="218.0" y="159.09" width="8" height="190.91" fill="#d88" />
+<polyline points="222,175.73 222,142.45" stroke="#aaa"  />
+<polyline points="219.50,175.73 224.50,175.73" stroke="#aaa"  />
+<polyline points="219.50,142.45 224.50,142.45" stroke="#aaa"  />
+<rect x="286.0" y="268.18" width="8" height="81.82" fill="#8d8" />
+<polyline points="290,275.82 290,260.55" stroke="#aaa"  />
+<polyline points="287.50,275.82 292.50,275.82" stroke="#aaa"  />
+<polyline points="287.50,260.55 292.50,260.55" stroke="#aaa"  />
+<rect x="296.0" y="210.91" width="8" height="139.09" fill="#88d" />
+<polyline points="300,219.64 300,202.18" stroke="#aaa"  />
+<polyline points="297.50,219.64 302.50,219.64" stroke="#aaa"  />
+<polyline points="297.50,202.18 302.50,202.18" stroke="#aaa"  />
+<rect x="306.0" y="167.27" width="8" height="182.73" fill="#d88" />
+<polyline points="310,178.18 310,156.36" stroke="#aaa"  />
+<polyline points="307.50,178.18 312.50,178.18" stroke="#aaa"  />
+<polyline points="307.50,156.36 312.50,156.36" stroke="#aaa"  />
+<rect x="374.0" y="257.27" width="8" height="92.73" fill="#8d8" />
+<polyline points="378,267.36 378,247.18" stroke="#aaa"  />
+<polyline points="375.50,267.36 380.50,267.36" stroke="#aaa"  />
+<polyline points="375.50,247.18 380.50,247.18" stroke="#aaa"  />
+<rect x="384.0" y="191.82" width="8" height="158.18" fill="#88d" />
+<polyline points="388,202.18 388,181.45" stroke="#aaa"  />
+<polyline points="385.50,202.18 390.50,202.18" stroke="#aaa"  />
+<polyline points="385.50,181.45 390.50,181.45" stroke="#aaa"  />
+<rect x="394.0" y="170" width="8" height="180" fill="#d88" />
+<polyline points="398,180.64 398,159.36" stroke="#aaa"  />
+<polyline points="395.50,180.64 400.50,180.64" stroke="#aaa"  />
+<polyline points="395.50,159.36 400.50,159.36" stroke="#aaa"  />
+<rect x="462.0" y="276.36" width="8" height="73.64" fill="#8d8" />
+<polyline points="466,290 466,262.73" stroke="#aaa"  />
+<polyline points="463.50,290 468.50,290" stroke="#aaa"  />
+<polyline points="463.50,262.73 468.50,262.73" stroke="#aaa"  />
+<rect x="472.0" y="145.45" width="8" height="204.55" fill="#88d" />
+<polyline points="476,162.36 476,128.55" stroke="#aaa"  />
+<polyline points="473.50,162.36 478.50,162.36" stroke="#aaa"  />
+<polyline points="473.50,128.55 478.50,128.55" stroke="#aaa"  />
+<rect x="482.0" y="178.18" width="8" height="171.82" fill="#d88" />
+<polyline points="486,200.55 486,155.82" stroke="#aaa"  />
+<polyline points="483.50,200.55 488.50,200.55" stroke="#aaa"  />
+<polyline points="483.50,155.82 488.50,155.82" stroke="#aaa"  />
+<rect x="389.0" y="60.67" width="6" height="6" fill="#8d8" />
+<text x="400" y="66.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group1</text>
+<rect x="389.0" y="79" width="6" height="6" fill="#88d" />
+<text x="400" y="85" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group2</text>
+<rect x="389.0" y="97.33" width="6" height="6" fill="#d88" />
+<text x="400" y="103.33" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group3</text>
+</svg>

@@ -364,7 +364,7 @@ def example2():                                          # scatterplot example
 
     p.svgbegin( width=400, height=400 )
 
-    p.textprops( color='#777', cssstyle="font-family: sans-serif; font-weight: bold;" )
+    p.textprops( color='#777', cssstyle='font-family: sans-serif; font-weight: bold;' )
     p.lineprops( color='#777' )
 
     # pretend we're getting data dynamically and find the data range in X and Y
@@ -380,27 +380,29 @@ def example2():                                          # scatterplot example
     p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=100, poshi=350 )
 
     # render axes and plotting area
-    p.axisrender( axis='X', tics=8, loc="min-8" )
-    p.axisrender( axis='y', tics=8, loc="min-8" )
+    p.axisrender( axis='X', tics=8, loc='min-8' )
+    p.axisrender( axis='y', tics=8, loc='min-8' )
     p.plotdeco( shade='#eee', outline=True, rectadj=8 )
     p.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
 
     # do crosshairs at 0, 0
-    p.lineprops( color='#888', dash="3,3" )
+    p.lineprops( color='#888', dash='3,3' )
     p.line( x1='min', y1=0.0, x2='max', y2=0.0 )
     p.line( x1=0.0, y1='min', x2=0.0, y2='max' )
 
     # render dataset1 in red data points
-    p.legenditem( label="Group A", sample='circle', color='#a00', width=80 )
+    p.legenditem( label='Group A', sample='circle', color='#a00', width=80 )
     for dp in dataset1:
-        p.tooltip( "("+str(dp[0])+","+str(dp[1])+")" )
-        p.datapoint( x=dp[0], y=dp[1], fill='#a00', diameter=8, opacity=0.6 )
+        p.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
+        p.datapoint( x=dp[0], y=dp[1], color='#a00', diameter=8, opacity=0.6 )
 
     # render dataset2 in blue data points
-    p.legenditem( label="Group B", sample='circle', color='#00a', width=80 )
+    p.legenditem( label='Group B', sample='circle', color='#00a', width=80 )
     for dp in dataset2:
-        p.tooltip( "("+str(dp[0])+","+str(dp[1])+")" )
-        p.datapoint( x=dp[0], y=dp[1], fill='#00a', diameter=8, opacity=0.6 )
+        p.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
+        p.datapoint( x=dp[0], y=dp[1], color='#00a', diameter=8, opacity=0.6 )
+
+    p.lineprops( reset=True )
 
     p.legendrender( location='top', yadjust=30, format='across' )
 

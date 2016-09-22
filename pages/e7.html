@@ -970,17 +970,15 @@ import sampledata2
 
 def example7( ylog=False ):
 
-    plotdata = {}
 
-    # get several 1-D example arrays of numbers sorted on magnitude
+    # get several 1-D example arrays of numbers sorted on magnitude, and put them into a dict
+    plotdata = {}
     plotdata['1f'] = sampledata2.vectors( 'set1' )   # eg. [ 33, 36, 39, 41, 41, 49,.. ]
     plotdata['2f'] = sampledata2.vectors( 'set2' )
     plotdata['1m'] = sampledata2.vectors( 'set3' )
     plotdata['2m'] = sampledata2.vectors( 'set4' )
 
     p.svgbegin( width=550, height=350 )
-
-    textstyle = "font-family: sans-serif; font-weight: bold;"
 
     # find overall data range in Y (examine all 4 datasets)
     for key in plotdata:
@@ -996,7 +994,7 @@ def example7( ylog=False ):
 
     # render axes and plotting area
     p.lineprops( color='#aaa' )
-    p.textprops( color='#777', cssstyle=textstyle )
+    p.textprops( color='#777', cssstyle='font-family: sans-serif; font-weight: bold;' )
     p.axisrender( axis='X', axisline=False, loc='min-8' )
     if ylog == False: p.axisrender( axis='y', tics=8, loc='min-8', grid=True )
     else: p.axisrender( axis='y', tics=8, loc='min-8', grid=True, inc=5, stubcull=20 )   
@@ -1016,10 +1014,10 @@ def example7( ylog=False ):
             else: color = '#db8'
             pctiles = info[key].percentiles
             if val < pctiles.p5 or val > pctiles.p95:   
-                p.tooltip( "Outlier: " + str(val) + "    ID: nnnnnn" )    # tooltip for outliers 
-            p.datapoint( x=key, y=val, diameter=diameter, fill=color, xadjust=leftward )
+                p.tooltip( 'Outlier: ' + str(val) + '    ID: nnnnnn' )    # tooltip for outliers 
+            p.datapoint( x=key, y=val, diameter=diameter, color=color, xadjust=leftward )
 
-    # render box plots and the "N = nnn" annotation
+    # render box plots and the 'N = nnn' annotation
     p.lineprops( color='#777' )
     p.textprops( ptsize=8, color='#777', anchor='middle' )
     rightward = 8
@@ -1028,8 +1026,8 @@ def example7( ylog=False ):
         else: color = '#fed'
         pctiles = info[key].percentiles
         p.errorbar( x=key, ymin=pctiles.p5, ymax=pctiles.p95, adjust=rightward )
-        p.bar( x=key, ybase=pctiles.p25, y=pctiles.p75, width=16, outline=True, adjust=rightward, fill=color )
-        p.datapoint( x=key, y=pctiles.median, diameter=6, fill='#777', xadjust=rightward )
+        p.bar( x=key, ybase=pctiles.p25, y=pctiles.p75, width=16, outline=True, adjust=rightward, color=color )
+        p.datapoint( x=key, y=pctiles.median, diameter=6, color='#777', xadjust=rightward )
         p.label( text='N = '+str(info[key].nvals), x=key, y=None, yadjust=20, anchor='middle' )   # display N = nnn
 
     return  p.svgresult()

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="700" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by minplot -->
+<polyline points="100,220 100,20" stroke="#aaa"  />
+<polyline points="100,20 100,220" stroke="#aaa"  />
+<polyline points="100,20 95,20" stroke="#aaa"  />
+<polyline points="100,60 95,60" stroke="#aaa"  />
+<polyline points="100,100 95,100" stroke="#aaa"  />
+<polyline points="100,140 95,140" stroke="#aaa"  />
+<polyline points="100,180 95,180" stroke="#aaa"  />
+<polyline points="100,220 95,220" stroke="#aaa"  />
+<text x="93" y="45" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >Trial1</text>
+<text x="93" y="85" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >Trial2</text>
+<text x="93" y="125" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >Trial3</text>
+<text x="93" y="165" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >Trial4</text>
+<text x="93" y="205" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="end" >Trial5</text>
+<polyline points="100,220 100,20" stroke="#aaa"  />
+<polyline points="175,220 175,20" stroke="#aaa"  />
+<polyline points="250,220 250,20" stroke="#aaa"  />
+<polyline points="325,220 325,20" stroke="#aaa"  />
+<polyline points="400,220 400,20" stroke="#aaa"  />
+<text x="100" y="236.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >0</text>
+<text x="175" y="236.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >50</text>
+<text x="250" y="236.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >100</text>
+<text x="325" y="236.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >150</text>
+<text x="400" y="236.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777"  text-anchor="middle" >200</text>
+<rect x="100.0" y="31" width="49.50" height="18" fill="#8d8" opacity="0.5"/>
+<rect x="149.5" y="31" width="73.50" height="18" fill="#88d" opacity="0.5"/>
+<rect x="223.0" y="31" width="112.50" height="18" fill="#d88" opacity="0.5"/>
+<rect x="100.0" y="71" width="52.50" height="18" fill="#8d8" opacity="0.5"/>
+<rect x="152.5" y="71" width="66" height="18" fill="#88d" opacity="0.5"/>
+<rect x="218.5" y="71" width="105" height="18" fill="#d88" opacity="0.5"/>
+<rect x="100.0" y="111" width="45" height="18" fill="#8d8" opacity="0.5"/>
+<rect x="145.0" y="111" width="76.50" height="18" fill="#88d" opacity="0.5"/>
+<rect x="221.5" y="111" width="100.50" height="18" fill="#d88" opacity="0.5"/>
+<rect x="100.0" y="151" width="51" height="18" fill="#8d8" opacity="0.5"/>
+<rect x="151.0" y="151" width="87" height="18" fill="#88d" opacity="0.5"/>
+<rect x="238.0" y="151" width="99" height="18" fill="#d88" opacity="0.5"/>
+<rect x="100.0" y="191" width="40.50" height="18" fill="#8d8" opacity="0.5"/>
+<rect x="140.5" y="191" width="112.50" height="18" fill="#88d" opacity="0.5"/>
+<rect x="253.0" y="191" width="94.50" height="18" fill="#d88" opacity="0.5"/>
+<rect x="369.0" y="30.67" width="6" height="6" fill="#8d8" />
+<text x="380" y="36.67" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group1</text>
+<rect x="369.0" y="49" width="6" height="6" fill="#88d" />
+<text x="380" y="55" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group2</text>
+<rect x="369.0" y="67.33" width="6" height="6" fill="#d88" />
+<text x="380" y="73.33" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#777" >Group3</text>
+</svg>

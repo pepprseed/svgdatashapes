@@ -8,3 +8,6 @@ iterable. Numeric, categorical, and dates/times are all supported.  Developing g
 and straightforward. To get started download minplot.py and import it. The minplot.py API is procedural and non-complex.
 
 Web site:  https://grubbcode.github.io/minplot/
+
+
+

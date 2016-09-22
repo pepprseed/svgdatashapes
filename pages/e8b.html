@@ -251,8 +251,6 @@ def example8( dispmode='curves' ):
     if dispmode in ['curves', 'bars' ]: plotdata = sampledata3.dictrows( 'set1' )
     elif dispmode == 'updown': plotdata = sampledata3.dictrows( 'mixedsign' )
 
-    textstyle = 'font-family: sans-serif; font-weight: bold;'    
-
     # initialize minplot and begin building our svg...
     p.svgbegin( width=600, height=200 )
 
@@ -278,11 +276,11 @@ def example8( dispmode='curves' ):
     p.numspace( axis='Y', axmin=ymin, axmax=yrange.axmax, poslo=80, poshi=180 )
 
     # highlight one of the panels...
-    p.rectangle( x='D', height='all', fill='#ffc', adjust=(0,-35,0,0) )
+    p.rectangle( x='D', height='all', color='#ffc', adjust=(0,-35,0,0) )
 
     # render the whole-plot X and Y axes...  
     p.lineprops( color='#ada' )
-    p.textprops( ptsize=12, color='#444', cssstyle=textstyle )  
+    p.textprops( ptsize=12, color='#444', cssstyle='font-family: sans-serif; font-weight: bold;' )
     p.axisrender( axis='X', tics=8, axisline=False, grid=True )
     p.axisrender( axis='Y', axisline=False, inc=10, loc='left-10' )
     p.plotdeco( xlabel='Group', ylabel=ylabel )
@@ -310,13 +308,13 @@ def example8( dispmode='curves' ):
             p.curvebegin()
             for key in [ 't1', 't2', 't3', 't4' ]:
                 p.curvenext( x=key, y=row[key] )
-                p.datapoint( x=key, y=row[key], diameter=5, fill='#b44' )
+                p.datapoint( x=key, y=row[key], diameter=5, color='#b44' )
 
         elif dispmode in ['bars', 'updown']:
             barcolor = [ 'orange', 'blue', 'green', 'red' ]
             icolor = 0
             for key in [ 't1', 't2', 't3', 't4' ]:
-                p.bar( x=key, y=row[key], width=5, fill=barcolor[icolor], ybase=ybase )
+                p.bar( x=key, y=row[key], width=5, color=barcolor[icolor], ybase=ybase )
                 icolor += 1
 
     if dispmode in ['bars', 'updown']:   # add a legend for the colors

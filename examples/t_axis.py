@@ -56,7 +56,7 @@ def test_axis():
     p.axisrender( axis='X', tics=8, stubrotate=-45 )
 
     p.numspace( axis='Y', axmin=0, axmax=10, poslo=100, poshi=150 )
-    xstubs = [ [ 0, "0" ], [ 1000, "1000"], [ 2000, "2000" ], [ 5000, "5000" ], [ 10000, "10000" ] ]
+    xstubs = [ [ 0, '0' ], [ 1000, '1000'], [ 2000, '2000' ], [ 5000, '5000' ], [ 10000, '10000' ] ]
     p.axisrender( axis='X', tics=8, stublist=xstubs, stubrotate=90 )
   
     

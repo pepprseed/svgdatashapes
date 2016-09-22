@@ -16,7 +16,6 @@ def example1():
     dataset.append( { 'state':'New Hampshire', 'avg':97.5, 'sem':27.8 , 'new':False} )
     dataset.append( { 'state':'Georgia',       'avg':89,   'sem':19.2 , 'new':False} )
 
-    textstyle = 'font-family: sans-serif; font-weight: bold;'    
 
     # initialize minplot and begin building our svg...
     p.svgbegin( width=550, height=450 )
@@ -32,10 +31,10 @@ def example1():
 
     # render the X and Y axes...  
     p.lineprops( color='#ccc' )
-    p.textprops( ptsize=12, color='#444', cssstyle=textstyle )  
+    p.textprops( ptsize=12, color='#444', cssstyle='font-family: sans-serif; font-weight: bold;' )
     p.axisrender( axis='X', tics=8 )
     p.axisrender( axis='Y', axisline=False, grid=True )
-    p.plotdeco( ylabel="Avg. Calls / day" )
+    p.plotdeco( ylabel='Avg. Calls / day' )
 
     # render the column bars and error bars.... set up legend entries too
     p.legenditem( label='2010 expansion\nstates', sample='square', color='pink')
@@ -45,7 +44,7 @@ def example1():
         if row['new'] == True: barcolor='pink'
         else: barcolor='powderblue'
         p.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
-        p.bar( x=row['state'], y=row['avg'], ybase=0.0, fill=barcolor, width=20, opacity=0.8 )
+        p.bar( x=row['state'], y=row['avg'], ybase=0.0, color=barcolor, width=20, opacity=0.8 )
 
     # render the legend...
     p.legendrender( location='top', format='across' )

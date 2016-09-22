@@ -4,15 +4,13 @@ import minplot as p
 import sampledata2
 
 def example9():
-    # produce a histogram
 
     # get a 1-D example array of numbers 
     plotdata = sampledata2.vectors( 'set1' )   # eg. [ 33, 36, 39, 41, 41, 49,.. ]
 
     p.svgbegin( width=500, height=350 )
 
-    textstyle = "font-family: sans-serif; font-weight: bold;"
-    p.textprops( cssstyle=textstyle )
+    p.textprops( cssstyle='font-family: sans-serif; font-weight: bold;' )
 
     # compute a frequency distribution....
     info = p.numinfo( datarows=p.vec2d( plotdata ), numcol=0, distrib=True, distbinsize='inc/4' )
@@ -38,7 +36,7 @@ def example9():
 
     # render histogram
     for row in freqdata:
-        p.bar( x=row.binmid, y=row.accum, width=5, fill='pink' )
+        p.bar( x=row.binmid, y=row.accum, width=5, color='pink' )
 
     p.label( text='bin size = '+str( info.distbinsize ), xadjust=320, yadjust=300 )
 

@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.34  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# minplot.py  v0.35  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    minplot.com    MIT License
 #
 
 import math
@@ -133,7 +133,7 @@ def lineprops( width=None, color=None, opacity=None, dash=False, cssclass=False,
         p_line["color"] = color
 
     if reset == True or opacity != None:         # opacity
-        if opacity != None: opacity = 1.0
+        if opacity == None: opacity = 1.0
         p_line["opacity"] = opacity
 
     if reset == True or dash != False:            # dash .... note False vs. None
@@ -154,7 +154,8 @@ def lineprops( width=None, color=None, opacity=None, dash=False, cssclass=False,
     if p_line["class"] != None: p_line["props"] += "class=" + quo(p_line["class"]) + " "
     if p_line["style"] != None: p_line["props"] += "style=" + quo(p_line["style"]) + " "
     if p_line["width"] != 1.0: p_line["props"] += "stroke-width=" + quo(p_line["width"]) + " " 
-    if p_line["color"] not in [ "black", "#000", "#000000" ]: p_line["props"] += "stroke=" + quo(p_line["color"]) + " "   
+    # if p_line["color"] not in [ "black", "#000", "#000000" ]:   
+    p_line["props"] += "stroke=" + quo(p_line["color"]) + " "     # lines always need a stroke attribte
     if p_line["opacity"] != 1.0: p_line["props"] += "stroke-opacity=" + quo(p_line["opacity"]) + " " 
     if p_line["dash"] != None: p_line["props"] += "stroke-dasharray=" + quo(p_line["dash"]) + " " 
 
@@ -204,44 +205,44 @@ def txt( x, y, txt, anchor=None ):
     p_svg["out"] += ">" + txt + "</text>\n"
     return True
 
-def rect( x1, y1, x2, y2, fill="#e0e0e0", opacity=1.0, outline=False ):
+def rect( x1, y1, x2, y2, color="#e0e0e0", opacity=1.0, outline=False ):
     # render shaded rectangle with lower-left at x1,y1 and upper right at x2,y2  (native)
     global p_svg
     try: testnum = float(x1) + y1 + x2 + y2
     except: raise AppError( "rect() is expecting four numeric values, but got: " + str(x1) + " " + str(y1) + " " + str(x2) + " " + str(y2) )
     p_svg["out"] += "<rect x=" + quo(x1) + " y=" + quo(str2f(flip(y2))) + " width=" + quo(str2f(x2-x1)) + \
                      " height=" + quo(str2f(y2-y1)) + " "
-    if fill == None: fill = "none"
-    _polyparms( fill, opacity, outline )
+    if color == None: color = "none"
+    _polyparms( color, opacity, outline )
     p_svg["out"] += "/>\n"
     return True
 
-def circle( x, y, diameter, fill="#e0e0e0", opacity=1.0, outline=False ):
+def circle( x, y, diameter, color="#e0e0e0", opacity=1.0, outline=False ):
     # render a circle
     global p_svg
     try: testnum = float(x) + y + diameter
     except: raise AppError( "circle() is expecting x, y, diameter as numeric values, but got " + str(x) + " " + str(y) + " " + str(diameter) )
     p_svg["out"] += "<circle cx=" + quo(str2f(x)) + " cy=" + quo(str2f(flip(y))) + " r=" + quo(str2f(diameter/2.0)) + " "
-    _polyparms( fill, opacity, outline )
+    _polyparms( color, opacity, outline )
     p_svg["out"] += "/>\n"
     return True
 
-def polygon( ptlist, fill="#e0e0e0", opacity=1.0, outline=False ):
+def polygon( ptlist, color="#e0e0e0", opacity=1.0, outline=False ):
     # render a polygon
     global p_svg
     p_svg["out"] += "<polygon points=\""
     for pt in ptlist:
         p_svg["out"] += str2f(pt[0]) + "," + str2f(flip(pt[1])) + " "
-    if fill == None: raise AppError( "the fill= arg is mandatory for polygon()" )
+    if color == None: raise AppError( "the color= arg is mandatory for polygon()" )
     p_svg["out"] += "\" "
-    _polyparms( fill, opacity, outline )
+    _polyparms( color, opacity, outline )
     p_svg["out"] += "/>\n"
     return True
 
-def _polyparms( fill, opacity, outline ):
+def _polyparms( color, opacity, outline ):
     # this code shared by several routines above 
     if outline == True: p_svg["out"] += p_line["props"] + " "
-    if fill != None: p_svg["out"] += "fill=" + quo(fill) + " "
+    if color != None: p_svg["out"] += "fill=" + quo(color) + " "
     try:
         if opacity != 1.0: p_svg["out"] += "opacity=" + quo(opacity)
     except: raise AppError( "expecting numeric 'opacity' value, but got: " + str(opacity) )
@@ -457,8 +458,8 @@ def catspace( axis=None, catlist=None, poslo=None, poshi=None, reverse=False ):
     p_space[iax]["catlist"] = catlist
 
     p_space[iax]["reverse"] = False
-    if axis == "Y" and reverse == False:   p_space[iax]["reverse"] = True  # Y cats are normally top to bottom
-    elif axis == "X" and reverse == True:   p_space[iax]["reverse"] = True
+    if axis.upper() == "Y" and reverse == False:   p_space[iax]["reverse"] = True  # Y cats are normally top to bottom
+    elif axis.upper() == "X" and reverse == True:   p_space[iax]["reverse"] = True
    
     natrange = nmax(axis) - nmin(axis) 
     datrange = dmax(axis) - dmin(axis)
@@ -549,10 +550,10 @@ def datacolumns( namelist=None ):
     return True
 
 
-def icol( colname ):
-    # return integer index corresponding to a defined column name
+def index( colname ):
+    # Return integer index position of colname
     try:    return p_colnames.index( colname )
-    except: raise AppError( "icol(): '" + str(colname) + "' is not recognized / not defined using datacolumns()" )
+    except: raise AppError( "index(): '" + str(colname) + "' is not recognized / not defined yet using datacolumns()" )
 
 
 def numinfo( datarows=None, numcol=None, distrib=False, distbinsize=None, accumcol=None, percentiles=False ):
@@ -721,7 +722,7 @@ def plotdeco( title=None, outline=False, shade=None, opacity=1.0, xlabel=None, y
                 try: mx1 = rectadj[0]; my1 = rectadj[1]; mx2 = rectadj[2]; my2 = rectadj[3];
                 except: pass
             titleadj=my2
-        rect( nmin('X')+mx1, nmin('Y')+my1, nmax('X')+mx2, nmax('Y')+my2, fill=shade, opacity=opacity, outline=outline )
+        rect( nmin('X')+mx1, nmin('Y')+my1, nmax('X')+mx2, nmax('Y')+my2, color=shade, opacity=opacity, outline=outline )
 
     rothold = p_text["rotate"] 
     if title != None: 
@@ -763,7 +764,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
     if axis == None: raise AppError( "axisrender(): required arg 'axis' not provided" )
     axis = axis.upper()
     iax = _getiax( axis )
-    if axis == "X": othax = "Y"
+    if axis.upper() == "X": othax = "Y"
     else: othax = "X"
 
     # get 'loc' and handle loc+ofs and loc-ofs constructs...  (ofs handling added 18 Aug '16)
@@ -788,7 +789,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
         
 
     if axisline == True:
-        if axis == "X":  lin( a, c, b, c ); lin( b, c, a, c )
+        if axis.upper() == "X":  lin( a, c, b, c ); lin( b, c, a, c )
         else:  lin( c, a, c, b ); lin( c, b, c, a )
 
     iscat = False
@@ -814,7 +815,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
             val += valinc
             if inspace( axis, val ) == False: val += valinc; continue
             if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
-            if axis == "X":   lin( nx( val ), c, nx( val ), ticend )
+            if axis.upper() == "X":   lin( nx( val ), c, nx( val ), ticend )
             else:   lin( c, ny( val ), ticend, ny( val ) )
             prevdrawn = nu( axis, val ) 
 
@@ -827,7 +828,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
             val += valinc
             if inspace( axis, val ) == False:   val += valinc; continue
             if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
-            if axis == "X":   lin( nx( val ), c, nx( val ), gridend )
+            if axis.upper() == "X":   lin( nx( val ), c, nx( val ), gridend )
             else:   lin( c, ny( val ), gridend, ny( val ) )
             prevdrawn = nu( axis, val ) 
 
@@ -838,7 +839,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
         # we spend a fair amt of effort here fine-tuning rotated stubs... rotate = -90 to 90
         rot0 = p_text["rotate"]
         if stubrotate == None:      # default to rotate=45 when appropriate....
-            if axis == "X":      # see if any X axis stubs will be long (> 3 chars)...
+            if axis.upper() == "X":      # see if any X axis stubs will be long (> 3 chars)...
                 if iscat == True:
                     for cat in p_space[iax]["catlist"]:   
                         if len( cat ) > 3:  p_text["rotate"] = 45; break
@@ -854,11 +855,11 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
         else: tics_clr = 0             
         
         if loc == "max":
-            if axis == "X" and rotate > 0 and rotate <= 90:  xstubanchor = "end"; stubstart = c
-            elif axis == "X" and rotate < 0 and rotate >= -90:   xstubanchor = "start"; stubstart = c
+            if axis.upper() == "X" and rotate > 0 and rotate <= 90:  xstubanchor = "end"; stubstart = c
+            elif axis.upper() == "X" and rotate < 0 and rotate >= -90:   xstubanchor = "start"; stubstart = c
             else:   stubstart = c + tics_clr + 2
         else:
-            if axis == "X":
+            if axis.upper() == "X":
                 if iscat == True or stublist != None:
                     if iscat == True: basis = p_space[iax]["natinc"]
                     elif stublist != None: basis = p_text["height"]   
@@ -876,7 +877,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
             else:
                 stubstart = (c - tics_clr) -2
 
-        if axis == "Y":
+        if axis.upper() == "Y":
             txtadj = p_text["height"] * 0.3   # vertical centering of Y stub texts 
 
 
@@ -891,7 +892,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
                     val = float( pair[0] )
                     if inspace( axis, val ) == False:  continue
                     outstr = stubformat % pair[1] 
-                    if axis == "X":
+                    if axis.upper() == "X":
                         txt( nx(val)-txtadj, stubstart, outstr, anchor=xstubanchor )
                         if tics != 0.0: lin( nx( val ), c, nx( val ), ticend )
                         if grid == True:   lin( nx(val), c, nx(val), gridend )
@@ -906,7 +907,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
             for cat in p_space[iax]["catlist"]:
                 if cat == None or cat == "":  continue   # skip spacers
                 outstr = stubformat % cat
-                if axis == "X": txt( nx( cat )-txtadj, stubstart, outstr, anchor=xstubanchor )
+                if axis.upper() == "X": txt( nx( cat )-txtadj, stubstart, outstr, anchor=xstubanchor )
                 else: txt( stubstart, ny( cat )-txtadj, outstr, anchor="end" )
 
         else:   # numeric
@@ -920,7 +921,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
                     if inspace( axis, val ) == False:  continue
                     if stubcull != None and math.fabs(nu( axis, val ) - prevdrawn) < stubcull:  continue
                     outstr = stubformat % (val/divideby)
-                    if axis == "X":  txt( nx( val )-txtadj, stubstart, outstr, anchor=xstubanchor )
+                    if axis.upper() == "X":  txt( nx( val )-txtadj, stubstart, outstr, anchor=xstubanchor )
                     else:  txt( stubstart, ny( val )-txtadj, outstr, anchor="end" )
                     prevdrawn = nu( axis, val ) 
             except:
@@ -931,7 +932,7 @@ def axisrender( axis=None, axisline=True, inc=None, tics=None, stubs=True, grid=
     return True
 
 
-def bar( x=None, y=None, ybase=None, width=8, fill="#afa", opacity=1.0, outline=False, adjust=0.0, horiz=False ):
+def bar( x=None, y=None, ybase=None, width=8, color="#afa", opacity=1.0, outline=False, adjust=0.0, horiz=False ):
     # render a column bar
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "bar(): no plot area has been set up yet." )
@@ -947,8 +948,8 @@ def bar( x=None, y=None, ybase=None, width=8, fill="#afa", opacity=1.0, outline=
         ytmp = y; y = ybase; ybase = ytmp;  # downward bars
     f = width/2.0
     _gtooltip( "begin" )
-    if horiz == True: rect( nx(ybase), (ny(x)-f)+adjust, nx(y), (ny(x)+f)+adjust, fill=fill, opacity=opacity, outline=outline )
-    else:             rect( (nx(x)-f)+adjust, ny(ybase), (nx(x)+f)+adjust, ny(y), fill=fill, opacity=opacity, outline=outline )
+    if horiz == True: rect( nx(ybase), (ny(x)-f)+adjust, nx(y), (ny(x)+f)+adjust, color=color, opacity=opacity, outline=outline )
+    else:             rect( (nx(x)-f)+adjust, ny(ybase), (nx(x)+f)+adjust, ny(y), color=color, opacity=opacity, outline=outline )
     _gtooltip( "end" )
     return True
 
@@ -974,13 +975,13 @@ def errorbar( x=None, y=None, erramt=None, ymin=None, ymax=None, tailsize=5, adj
     return True
 
 
-def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=None, xadjust=0, yadjust=0 ):
+def datapoint( x=None, y=None, diameter=5.0, color=None, opacity=0.7, outline=None, xadjust=0, yadjust=0 ):
     # render a circle data point                                   
     global p_clust
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
         raise AppError( "datapoint(): plot area has not been set up yet." )
     if x == None or y == None:  return False   # tolerate None coords... render nothing
-    if fill == None and outline == None:  raise AppError( "datapoint() 'fill' or 'outline' must be specified" )
+    if color == None and outline == None:  raise AppError( "datapoint() 'color' or 'outline' must be specified" )
     natx = nx(x)+xadjust; naty = ny(y)+yadjust;
     cofsx = 0.0; cofsy = 0.0;
     if p_clust["mode"] != None:    # clustering...
@@ -1001,7 +1002,7 @@ def datapoint( x=None, y=None, diameter=5.0, fill=None, opacity=0.7, outline=Non
             p_clust["ndup"] = 0
 
     _gtooltip( "begin" )
-    circle( natx+cofsx, naty+cofsy, diameter=diameter, fill=fill, opacity=opacity, outline=outline )
+    circle( natx+cofsx, naty+cofsy, diameter=diameter, color=color, opacity=opacity, outline=outline )
     _gtooltip( "end" )
     return True
         
@@ -1032,7 +1033,7 @@ def label( text=None, x=None, y=None, anchor="start", xadjust=0, yadjust=0 ):
     return True
 
 
-def rectangle( x=None, y=None, width=None, height=None, fill="#afa", opacity=1.0, outline=False, adjust=None ):
+def rectangle( x=None, y=None, width=None, height=None, color="#afa", opacity=1.0, outline=False, adjust=None ):
     # render a filled rectangle somewhere in data space   ... 
     # because of elaborate parameter scheme don't try to handle None as done elsewhere
     if p_space[0]["scalefactor"] == None or p_space[1]["scalefactor"] == None:
@@ -1058,7 +1059,7 @@ def rectangle( x=None, y=None, width=None, height=None, fill="#afa", opacity=1.0
     if height == "all": ny1 = nmin("Y"); ny2 = nmax("Y")
     else: ny1 = ny(y)-(natheight/2.0); ny2 = ny(y)+(natheight/2.0)
     _gtooltip( "begin" )
-    rect( nx1+mx1, ny1+my1, nx2+mx2, ny2+my2, fill=fill, opacity=opacity, outline=outline )
+    rect( nx1+mx1, ny1+my1, nx2+mx2, ny2+my2, color=color, opacity=opacity, outline=outline )
     _gtooltip( "end" )
     return True
 
@@ -1094,7 +1095,7 @@ def curvenext( x=None, y=None, y2=None ):
     if p_curve["band"] == True or p_curve["fill"] != None: 
         startingpt = (nx(prevx)+adjust,ny(prevy))
         polygon( ( startingpt, (nx(x)+adjust,ny(y)), (nx(x)+adjust,ny(y2)), (nx(prevx)+adjust,ny(prevy2)), startingpt ), \
-                                 fill=p_curve["fill"], opacity=p_curve["opacity"] )
+                                 color=p_curve["fill"], opacity=p_curve["opacity"] )
     elif p_curve["stairs"] == True: lin( nx(prevx)+adjust, ny(prevy), nx(x)+adjust, ny(prevy) ); lin( nx(x)+adjust, ny(prevy), nx(x)+adjust, ny(y) ); 
     else: lin( nx(prevx)+adjust, ny(prevy), nx(x)+adjust, ny(y) )
 
@@ -1120,12 +1121,21 @@ def line( x1=None, y1=None, x2=None, y2=None ):
     return True
 
 
-def arrow( x1=None, y1=None, x2=None, y2=None, headlen=18, headwid=0.3, fill="#888", opacity=1.0 ):
+def arrow( x1=None, y1=None, x2=None, y2=None, headlen=18, headwid=0.3, tiptype="solid", tipcolor="#888", opacity=1.0, direction=None, magnitude=None ):
     # draw an arrow in data space with tip at x2, y2.  r is length of arrowhead; w is theta for arrowhead stoutness
-    if x1 == None or y1 == None or x2 == None or y2 == None: raise AppError( "arrow() is expecting 4 args x1, y1, x2, y2" )
-    line( x1=x1, y1=y1, x2=x2, y2=y2 )
-    x1 = nx(x1); y1 = ny(y1); x2 = nx(x2); y2 = ny(y2); # now go to native units
+    if x1 == None or y1 == None: raise AppError( "arrow() is expecting args x1, y1" )
+    if (x2 == None or y2 == None) and (direction == None or magnitude == None): raise AppError( "arrow() not all required args were supplied" )
+
     halfpi = 1.5707963
+    # do everyting in minplot units...
+    x1 = nx(x1); y1 = ny(y1); 
+    if x2 != None: x2 = nx(x2); y2 = ny(y2); 
+    elif direction != None:
+        theta = (direction / 360.0) * (4.0*halfpi)
+        x2 = x1 + (magnitude * math.cos(theta)); y2 = y1 + (magnitude * math.sin(theta))
+
+    lin( x1, y1, x2, y2 )
+        
     vx = x2 - x1; vy = y2 - y1;
     if vx == 0.0 and y2 > y1: th0 = halfpi; # avoid divide by zero 
     elif vx == 0.0 and y1 > y2: th0 = -(halfpi); # avoid divide by zero 
@@ -1135,11 +1145,13 @@ def arrow( x1=None, y1=None, x2=None, y2=None, headlen=18, headwid=0.3, fill="#8
     r = headlen
     if x2 < x1: ax1 = x2+(r*math.cos(th1)); ay1 = y2+(r*math.sin(th1)); ax2 = x2+(r*math.cos(th2)); ay2 = y2+(r*math.sin(th2));
     else:       ax1 = x2-(r*math.cos(th1)); ay1 = y2-(r*math.sin(th1)); ax2 = x2-(r*math.cos(th2)); ay2 = y2-(r*math.sin(th2));
-    polygon(  ((x2,y2), (ax1,ay1), (ax2,ay2) ), fill=fill, opacity=opacity, outline=False )
+    if tiptype == "solid": polygon(  ((x2,y2), (ax1,ay1), (ax2,ay2) ), color=tipcolor, opacity=opacity, outline=False )
+    elif tiptype[:4] == "line": lin( x2, y2, ax1, ay1 ); lin( x2, y2, ax2, ay2 )
+    elif tiptype[:4] == "barb": lin( x2, y2, ax1, ay1 ); 
     return True
 
 
-def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0, placement="right", showpct=False ):
+def pieslice( pctval=None, startval=0.0, color="#ccc", outline=False, opacity=1.0, placement="right", showpct=False ):
     # render a piegraph slice.   pctval controls size of slice and is 0.0 to 1.0.
     # startval controls where (radially) the slice "starts" and is also 0.0 to 1.0.
 
@@ -1172,7 +1184,7 @@ def pieslice( pctval=None, startval=0.0, fill="#ccc", outline=False, opacity=1.0
         pts.append( ( cx + (radius * math.cos( theta )), cy + (radius * math.sin( theta )) ) )
 
     _gtooltip( "begin" )
-    polygon( pts, fill=fill, outline=outline, opacity=opacity )
+    polygon( pts, color=color, outline=outline, opacity=opacity )
 
     if showpct != False:
         txtrad = radius * 0.7
@@ -1232,8 +1244,8 @@ def legendrender( location=None, format="down", sampsize=6, linelen=20, title=No
             else: sampw = sampsize+2
         if len(row["tooltip"]) > 0: p_tt = row["tooltip"].copy(); _gtooltip( "begin" )   # render tooltip assoc. w/ legend row (if any)
         if row["shape"] == "line": lin( x, y+halfln, x+sampw, y+halfln, props=row["lineprops"] )
-        elif row["shape"] == "circle": circle( x+(sampw-(sampsize/2.0)), y+halfln, sampsize+1, fill=row["color"], outline=row["outline"] )
-        elif row["shape"] == "square": rx = x+(sampw-(sampsize)); rect( rx, y, rx+sampsize, y+(sampsize), fill=row["color"], outline=row["outline"] )
+        elif row["shape"] == "circle": circle( x+(sampw-(sampsize/2.0)), y+halfln, sampsize+1, color=row["color"], outline=row["outline"] )
+        elif row["shape"] == "square": rx = x+(sampw-(sampsize)); rect( rx, y, rx+sampsize, y+(sampsize), color=row["color"], outline=row["outline"] )
         txt( x+sampw+5, y, row["label"] )
         _gtooltip( "end" ) # end tooltip assoc. w/ legend row (if any)
         nlines = row["label"].count( "\n" ) + 1

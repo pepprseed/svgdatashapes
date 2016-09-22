@@ -141,23 +141,21 @@ Here's an example of 3 curves with error bars &nbsp; &nbsp; <a href="pages/e6.ht
 
 <h3>Working with different data types</h3>
   <p>
-  Numerics can be integers, floating point, or scientific notation values.  To work with numeric data,
+  <u>Numerics</u> can be integers, floating point, or scientific notation values.  To work with numeric data,
   set up a numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and then
   render a numeric axis using <span class="fxn">axisrender()</span>.  
   If you wish, you can find the numeric range of your data, or compute quartiles or 
   frequency distributions using <span class="fxn">numinfo()</span>.
   </p><p>
-  Categorical data are tags, labels or any other non-continuous data.  To work with categorical data,
+  <u>Categorical data</u> are tags, labels or any other non-continuous data.  To work with categorical data,
   set up a categorical data space in X or Y using <span class="fxn">catspace()</span>, and
   render a categorical axis using <span class="fxn">axisrender()</span>.  
   If you wish you can find a unique list of categories, or run frequency distributions, using <span class="fxn">catinfo()</span>.
   </p><p>
-  To plot dates and times, 
-  you'll need <a href="minplot_dt.py">minplot_dt.py</a>; import it along with minplot.py.
-  Many date / time notations are supported; for details see the <a href="index.html#dt">datetime section below</a>.
-  <a href="pages/e4.html">Dates example</a> &nbsp; <a href="pages/e5.html">Dates + times example</a>.
+  <u>Dates</u> are calendar dates, or calendar dates with times appended.
+  Many date and time notations are supported.  For details and examples see the <a href="index.html#dt">datetime section below</a>.
   </p><p>
-  <a href="index.html#missingdata">What happens with missing / invalid data</a>
+  <a href="index.html#missingdata">&bull; Handling of missing or invalid data</a>
   </p>
   
   <br>
@@ -377,7 +375,7 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="datacolumns">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datacolumns" href="index.html#datacolumns-content">&bull; datacolumns( namelist ) &nbsp; &nbsp; icol( name )</a>
+    <a data-toggle="collapse" data-parent="#datacolumns" href="index.html#datacolumns-content">&bull; datacolumns( namelist ) &nbsp; &nbsp; index( name )</a>
     </i></b></span>
     <div id="datacolumns-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -391,9 +389,10 @@ All args are keyword args unless otherwise indicated.
   your data structure.  Most DBMS provide a way to get a list of query result column names.  
   </p><p>
   <br>
-  <b>icol( colname )</b>
+  <b>index( colname )</b>
   </p><p>
   Given a column name that was registered earlier with <span class="fxn">datacolumns()</span>, this returns its integer array index.
+  If your data structure uses dict rows or named tuple rows, you don't use this.
   </p>
   
       
@@ -765,7 +764,7 @@ All args are keyword args unless otherwise indicated.
   Default is the bottom of the plotting area.  Typical use is to 
   specify <i>ybase=0</i> to show negative values with downward bars and positive values with upward bars.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; optional; bar color. Default is light green.  <tt>fill=None</tt> is ok.
+  <span class="parm">color=</span> &nbsp; optional; bar color. Default is light green.  <tt>color=None</tt> is ok.
   </p><p>
   <span class="parm">opacity=</span> &nbsp; optional; opacity of the bar fill.  Default is 1.0  (opaque).
   </p><p>
@@ -830,7 +829,8 @@ All args are keyword args unless otherwise indicated.
     </i></b></span>
     <div id="datapoint-content" class="panel-collapse collapse "> <div class="panel-body">
 
-  <h4>datapoint( x, y )</h4>
+
+  <b>datapoint( x, y )</b>
   <p>
   Render a round data point symbol.  Typical use is in scatterplots.
   <br>Automatic clustering of duplicate data points is available, see <span class="fxn">clustermode()</span>
@@ -839,7 +839,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">diameter=</span> &nbsp; optional; diameter of the circle in minplot units.  Default is 5.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; optional; data point fill color.  Default is <tt>None</tt>
+  <span class="parm">color=</span> &nbsp; optional; data point fill color.  Default is <tt>None</tt>
   </p><p>
   <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0  (opaque).
   </p><p>
@@ -852,7 +852,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
 
   <br>
-  <h4>clustermode( )</h4>
+  <b>clustermode( )</b>
   <p> 
   Enable <span class="fxn">datapoint()</span> to slightly offset duplicate or near-duplicate data points
   to give the viewer a feel for the amount of duplicity.  Also can be used to do simple frequency
@@ -895,9 +895,8 @@ All args are keyword args unless otherwise indicated.
   the current line properties.  
   </p><p>
   <a href="pages/e6.html"><img src="static/examples/e6.svg" )" height=200></a>
-
   <br>
-  <h3><i>curvebegin( )</i></h3>
+  <b>curvebegin( )</b>
   </p><p>
   Sets up to begin a lineplot or filled band.
   </p><p>
@@ -922,7 +921,7 @@ All args are keyword args unless otherwise indicated.
   </p>
 
   <br>
-  <h3><i>curvenext( x, y )</i></h3>
+  <b>curvenext( x, y )</b>
   <p>
   Called for every data point to be plotted, including the first one.
   </p><p>
@@ -960,7 +959,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">startval=</span> &nbsp; Mandatory.  Where the slice "starts" in radial space, and is a number between 0.0 and 1.0.
   See the example for usage pattern.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; optional; fill the pie slice with this color.
+  <span class="parm">color=</span> &nbsp; optional; fill the pie slice with this color.
   </p><p>
   <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0.
   </p><p>
@@ -993,7 +992,10 @@ All args are keyword args unless otherwise indicated.
   highlight a particular category or region in the display.
   The rectangle is positioned and sized using various combinations of <i>x=</i>, <i>y=</i>, <i>width=</i> and <i>height=</i>
   and perhaps <i>adjust=</i>, 
-  and exactly how depends on what you're doing, and the scale types (numeric or categorical).  See the examples for clarification.
+  and exactly how depends on what you're doing and your scale types (numeric or categorical).  See the examples for clarification.
+  This function is oriented to data units; to render rectangles in minplot units see the <a href="index.html#lowlevel">low-level function rect()</a>.
+  </p><p>
+  <a href="pages/e10.html"><img src="static/examples/e10.svg" height=200></a>
   </p><p>
   <span class="parm">x=</span> &nbsp; X location of rectangle's center in data units.
   </p><p>
@@ -1001,22 +1003,20 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">width=</span> and <span class="parm">height=</span> &nbsp; control the size of the rectangle, in data units.
   If your X and Y space are both numeric, <i>width</i> and <i>height</i> are both required.
-  If your X space is categorical and your Y space is numeric, just specify <i>height</i> (<i>height='all'</i> is allowed).
-  If your X space is numeric and your Y space is categorical, just specify <i>width</i> (<i>width='all'</i> is allowed).
+  If X is categorical and Y is numeric, just specify <i>height</i> (<i>height='all'</i> is allowed).
+  If X is numeric and Y is categorical, just specify <i>width</i> (<i>width='all'</i> is allowed).
   If both axes are categorical neither <i>height</i> nor <i>width</i> should be specified.
   </p><p>
-  <span class="parm">adjust=</span> allows fine tuning the rectangle's size.
-       If specified as an integer it will be an amount of extra margin to add on all 4 sides, eg. <i>adjust=8</i>.
+  <span class="parm">adjust=</span> &nbsp; optional; fine tune the rectangle's size.
+       If specified as one integer it will be a margin amount added on all 4 sides, eg. <i>adjust=8</i>.
        Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be
-       controlled individually for each of the 4 sides eg. <i>adjust=(-20,-10,20,10)</i>.  All values are minplot units.
+       controlled individually for each side eg. <i>adjust=(-20,-10,20,10)</i>.  All values are minplot units.
   </p><p>
-  <span class="parm">fill=</span> &nbsp; optional; shading of rectangle.  Default is light green.
+  <span class="parm">color=</span> &nbsp; optional; shading of rectangle.  Default is light green.
   </p><p>
   <span class="parm">opacity=</span> &nbsp; optional; opacity of the fill.  Default is 1.0 (opaque).
   </p><p>
-  <span class="parm">outline=True</span> &nbsp; optional; outline the rectangle using current line properties.  Default is <tt>False</tt>
-  </p><p>
-  To render a rectangle using minplot units use the <a href="index.html#lowlevel">low-level function rect()</a>.
+  <span class="parm">outline=True</span> &nbsp; optional; outline using current line properties.  Default is <tt>False</tt>
   </p>
       
 
@@ -1066,9 +1066,9 @@ All args are keyword args unless otherwise indicated.
     </i></b></span>
     <div id="line-content" class="panel-collapse collapse "> <div class="panel-body">
 
-  <h4>line( x1, y1, x2, y2 )</h4>
+  <b>line( x1, y1, x2, y2 )</b>
   <p>
-  Draw a line between x1, y1 and x2, y2 in data space using the current line properties.
+  Draw a line in data space between x1, y1 and x2, y2 using the current line properties.
   Typical use is for threshold lines and other annotation.
   </p><p>
   <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; Mandatory.  Where the line begins.
@@ -1082,18 +1082,28 @@ All args are keyword args unless otherwise indicated.
   </p>
 
   <br>
-  <h4>arrow( x1, y1, x2, y2 )</h4>
+  <b>arrow( x1, y1, x2, y2 )</b>
   <p>
-  Draw an arrow starting at x1, y1 with the arrowhead at x2, y2.
+  Draw an arrow in data space starting at x1, y1 with the arrowhead at x2, y2.
   Typical use is for annotation or vector plots such as weather windbarbs.
   </p><p>
   <span class="parm">x1=</span> and <span class="parm">y1=</span> &nbsp; Mandatory. Location of the non-tip end.
   </p><p>
-  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; Mandatory. Location of the arrowhead tip.
+  <span class="parm">x2=</span> and <span class="parm">y2=</span> &nbsp; Location of the arrowhead tip. 
+         Mandatory except when <i>direction=</i> and <i>magnitude=</i> are being used. 
   </p><p>
-  <span class="parm">headlen=</span> &nbsp; optional; length of the arrowhead in minplot units.  Default is 18.
+  <span class="parm">direction=</span> and <span class="parm">magnitude=</span> &nbsp; Allow location of arrowhead tip to be determined by <i>direction=</i> in degrees 
+     (0 is straight up) and <i>magnitude=</i> a distance in minplot units.  If these are used then don't specify <i>x2</i> and <i>y2</i>.
+  </p><p>
+  <span class="parm">headlen=</span> &nbsp; optional; length of one side of the arrowhead in minplot units.  Default is 18.
   </p><p>
   <span class="parm">headwid=</span> &nbsp; optional; a theta value controlling stoutness of the arrowhead.  Default is 0.3
+  </p><p>
+  <span class="parm">tiptype=</span> &nbsp; optional; the type of arrowhead tip to render.  Default is <tt>'solid'</tt>.
+     Other options include <tt>'lines'</tt> and <tt>'barb'</tt>.
+  </p><p>
+  <span class="parm">tipcolor=</span> &nbsp; <span class="parm">opacity=</span> &nbsp; optional; for <tt>solid</tt> arrowhead
+    tips this controls the color and opacity.  Defaults are <tt>#888</tt> and 1.0
   </p>
       
 
@@ -1165,7 +1175,7 @@ All args are keyword args unless otherwise indicated.
   Then when ready to render the legend, call <span class="fxn">legendrender()</span>.
   </p>
   <br>
-  <h3>legenditem( sample, label )</h3>
+  <b>legenditem( sample, label )</b>
   <p>
   <span class="parm">label=</span> &nbsp; Mandatory.  The text that will appear for this legend entry. 
   </p><p>
@@ -1184,7 +1194,7 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <h3>legendrender( )</h3>
+  <b>legendrender( )</b>
   <p>
   Render a legend, made up of all currently posted legend entries.  Labels are rendered 
   using current text properties.  Any outlines will use current line properties.
@@ -1194,13 +1204,13 @@ All args are keyword args unless otherwise indicated.
   <tt>'top'</tt> to position the legend in the top-left of plotting area, or <tt>'bottom'</tt> to position
    it in the bottom-left of the plotting area.
   </p><p>
-  <span class="parm">xdjust=</span> &nbsp; integer value in minplot units.
+  <span class="parm">xadjust=</span> &nbsp; integer value in minplot units.
      If <i>location=</i> is supplied this adjusts the legend's X location.
      Otherwise it specifies the legend's absolute X location.  
      The legend's upper-left corner is used for positioning purposes.
      Default is 0.
   </p><p>
-  <span class="parm">ydjust=</span> &nbsp; same as above but for Y.  Default is 0.
+  <span class="parm">yadjust=</span> &nbsp; same as above but for Y.  Default is 0.
   </p><p>
   <span class="parm">format=</span> &nbsp; optional; if specified as <tt>'across'</tt>, legend entries are 
   rendered side by side.  Default is <tt>'down"</tt>.
@@ -1254,7 +1264,8 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="dt">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Plotting dates and times &nbsp; &nbsp; &bull; setformat( ) &nbsp; &bull; dtrange( ) &nbsp; &bull; num( ) &nbsp; &bull; diff( )</a>
+    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Plotting dates and times<br> &nbsp; &nbsp; &bull; dateformat( ) &nbsp; 
+    <nobr>&bull; daterange( ) &nbsp; </nobr> <nobr> &bull; dateitem( ) &nbsp; </nobr> <nobr>&bull; toint( ) &nbsp;</nobr> &bull; datediff( )</a>
     </i></b></span>
     <div id="dt-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1266,8 +1277,8 @@ All args are keyword args unless otherwise indicated.
   <br><tt>import minplot as p</tt>
   <br><tt>import minplot_dt as pdt</tt>
   </p><p>
-  The basic approach is to use <span class="fxn">pdt.num()</span> to convert dates to integers, then plot in numeric space.
-  To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.dtrange()</span>.
+  The basic approach is to convert dates to integers, then plot in numeric space.
+  To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.daterange()</span>.
   Here's an example where dates are plotted. <a href="pages/e4.html">View code</a>
   </p>
   <br>
@@ -1281,15 +1292,15 @@ All args are keyword args unless otherwise indicated.
   <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior" target="_blank">
   python's strftime / strptime date format specifiers</a>.
   See also your local system's strftime and strptime man pages for additional codes (OS-dependent).
-  </p><p>
+  </p>
   <br>
 
-  <h4>setformat( formatstring )</h4>
+  <b>dateformat( format )</b>
   <p>Set the current format for parsing the dates in your data.
   </p><p>
-  <span class="parm">formatstring</span> &nbsp; the date format to be used in parsing your dates.  
-  This is <u>not</u> a keyword arg.  Default is <tt>'%Y-%m-%d'</tt>
-  An example to handle dates with times (separated by a 'T' as is often done) is <nobr><tt>pdt.setdateformat( '%Y-%m-%dT%H:%M:%S' )</tt></nobr>.
+  <span class="parm">format=</span> &nbsp; Mandatory. The date format to be used in parsing your dates.  
+  Default is <tt>'%Y-%m-%d'</tt>
+  An example to handle dates with times (separated by a 'T' as is often done) is <nobr><tt>pdt.dateformat( '%Y-%m-%dT%H:%M:%S' )</tt></nobr>.
   Within this string use punctuation to match the date constructs you're parsing.  Typical codes include:
   <br>
   <tt>%Y</tt> = 4-digit year &nbsp; &nbsp; &nbsp; &nbsp; <tt>%y</tt> = 2-digit year<br>
@@ -1301,15 +1312,25 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <h4>num( dateval )</h4>
+  <b>toint( dateval )</b>
   <p>Given a date in the current format, return the equivalent integer value for plotting.
   <nobr>Example: <tt>pdt.num( '2016-02-29' )</tt></nobr>
   </p><p> 
-  <span class="parm">dateval</span> &nbsp; a date or datetime in the current format.  This is <u>not</u> a keyword arg.
+  <span class="parm">dateval</span> &nbsp; Mandatory. A date or datetime in the current format.  This is <u>not</u> a keyword arg.
   </p>
   <br>
 
-  <h4>dtrange( dtcol, datarows, nearest, stubformat )</h4>
+  <b>dateitem( colname, datarow )</b>
+  <p>Convenience routine.  Extract the date data item from column 'colname' of 'datarow', and do the <span class="fxn">toint()</span> 
+     integer conversion to make it suitable for plotting.  
+  </p><p> 
+  <span class="parm">colname=</span> &nbsp; Mandatory. Name of a data column as defined earlier with <span class="fxn">dataitems()</span>
+  </p><p> 
+  <span class="parm">datarow=</span> &nbsp; Mandatory. A row from your data structure.
+  </p>
+  <br>
+
+  <b>daterange( datecol, datarows, nearest, stubformat )</b>
   <p>Returns a tuple with these members:  <tt>axmin</tt>, <tt>axmax</tt>, and <tt>stublist</tt>.
   This function examines a column in your data that contains dates, and determines the axis min and max
   (<tt>axmin</tt> and <tt>axmax</tt>) along with 
@@ -1317,7 +1338,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">datarows=</span> &nbsp; Mandatory. Your data structure.
   </p><p>
-  <span class="parm">dtcol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
+  <span class="parm">datecol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
   Either a name or an integer array index.
   </p><p>
   <span class="parm">nearest=</span> &nbsp; Mandatory.  Determines a clean
@@ -1352,8 +1373,8 @@ All args are keyword args unless otherwise indicated.
   </ul>
   <br>
 
-  <h4>diff( dateval1, dateval2, resulttype )</h4>
-  <p>Computes the numeric difference of <nobr><i>datetval1</i>&ndash;<i>dateval2</i></nobr> .
+  <b>datediff( dateval1, dateval2 )</b>
+  <p>Returns an integer difference of <nobr><i>datetval1</i>&ndash;<i>dateval2</i></nobr> .
   By default it returns the number of days between two dates.
   </p><p>
   <span class="parm">dateval1</span> and 
@@ -1375,9 +1396,9 @@ All args are keyword args unless otherwise indicated.
   for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> with one panel per day where business
   activity occurred, then within each panel set up a date X space for the desired business hour range.
   </p><p>
-  To get different combinations of stubs and tics you can invoke <span class+"fxn">dtrange()</span> and <span class="fxn">axisrender()</span> 
+  To get different combinations of stubs and tics you can invoke <span class+"fxn">daterange()</span> and <span class="fxn">axisrender()</span> 
   two or more times.
-  If you just want to render tics call <span class="fxn">dtrange()</span> with <i>stubformat=''</i>
+  If you just want to render tics call <span class="fxn">daterange()</span> with <i>stubformat=''</i>
   </p><p>
   If you just have time values eg. <tt>14:35</tt> without any dates, you can prepend a faux date to each and then 
   ignore the date portion when plotting.
@@ -1388,7 +1409,7 @@ All args are keyword args unless otherwise indicated.
   2015.2 for 1st quarter of 2015, and 2015.4, 2015.6, and 2015.8 for the other quarters... then plot them as plain numerics.
   </p><p>
   To get one-letter month stubs (eg. J F M A M J J A S O N D)
-  use %b in <span class="fxn">dtrange()</span> then in <span class="fxn">axisrender()</span> use <i>stubformat='%.1s'</i>.
+  use %b in <span class="fxn">daterange()</span> then in <span class="fxn">axisrender()</span> use <i>stubformat='%.1s'</i>.
   </p><p>
   <b>Frequency distributions and tabulations on dates:</b>
   There's no special function for computing frequency distributions on dates,
@@ -1396,59 +1417,6 @@ All args are keyword args unless otherwise indicated.
   a collection of <tt>yyyy-mm-dd</tt> dates and want to tabulate on month, just strip off the <tt>-dd</tt>
   portion and use <span class="fxn">catinfo()</span> on the result.
   </p>
-      
-
-    </div></div></div></div>
-
-
-
-
-
-    <div class="panel-group" id="reactivity">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &nbsp; &bull; groupbegin( id, css ) &nbsp; &nbsp; &bull; groupend( ) </a>
-    </i></b></span>
-    <div id="reactivity-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  There are some ways to do basic updates to your rendered plots and graphs without a roundtrip
-  back to the server for a complete redraw, such as to to hide or show labels,
-  or select which of several elements to show and hide the others.  
-  Hiding/showing elements is straightforward, as are certain other basic style alterations.  
-  If you need to do more elaborate clientside activity consider something like D3.js instead of minplot.
-  </p><p>
-  To do this use <span class="fxn">groupbegin()</span> and <span class="fxn">groupend()</span> to set up an SVG &lt;g&gt; container for a set of elements
-  you render.  These groupings have element IDs and can have CSS style attributes.
-  You can pass this element ID to a javascript function which updates the style attributes.
-  </p><p>
-  <b>Hiding / showing things:</b> There are several options for CSS style attributes 
-  to make things hidden or shown.  One is <tt>display: none</tt>.
-  Another is <tt>visibility: hidden</tt> and <tt>visibility: visible</tt>.
-  Yet another is to simple change the opacity, e.g. <tt>opacity=0</tt> or <tt>opacity=1</tt>.
-  Opacity is apparently the most "expensive" in terms of clientside computation.
-  </p>
-  <br>
-  <h4>groupbegin( id, cssclass, cssstyle, transform )</h4>
-  <p>Begin an SVG &lt;g&gt; element group container.
-  </p><p>
-  <span class="parm">id=</span> &nbsp; dom object ID string.  
-  </p><p>
-  <span class="parm">cssclass=</span> &nbsp;
-  A CSS element name that will influence all elements within the container.  
-  </p><p>
-  <span class="parm">cssstyle=</span> &nbsp;
-  A CSS style string that will influence all elements within the container.  
-  For example to try hiding an object use <tt>cssstyle='visibility: hidden'</tt>.
-  </p><p>
-  <span class="parm">transform=</span> &nbsp; apply a matrix manipulations / transformations to 
-  all elements in the container.  See SVG documentation for details.
-  </p>
-  <br>
-  <h4>groupend( )</h4>
-  <p>Ends an SVG &lt;/g&gt; element group container.
-  </p>
-
       
 
     </div></div></div></div>
@@ -1506,6 +1474,61 @@ All args are keyword args unless otherwise indicated.
     </div></div></div></div>
 
 
+
+
+
+    <div class="panel-group" id="reactivity">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &bull; groupbegin( ) &nbsp; &nbsp; &bull; groupend( ) </a>
+    </i></b></span>
+    <div id="reactivity-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  There are some ways to do basic updates to your rendered plots and graphs without a roundtrip
+  back to the server for a complete redraw, such as to to hide or show labels,
+  or select which of several elements to show and hide the others.  
+  Hiding/showing elements is straightforward, as are certain other basic style alterations.  
+  If you need to do more elaborate clientside activity consider something like D3.js instead of minplot.
+  </p><p>
+  To do this use <span class="fxn">groupbegin()</span> and <span class="fxn">groupend()</span> to set up an SVG &lt;g&gt; container for a set of elements
+  you render.  These groupings have element IDs and can have CSS style attributes.
+  You can pass this element ID to a javascript function which updates the style attributes.
+  </p><p>
+  <b>Hiding / showing things:</b> There are several options for CSS style attributes 
+  to make things hidden or shown.  One is <tt>display: none</tt>.
+  Another is <tt>visibility: hidden</tt> and <tt>visibility: visible</tt>.
+  Yet another is to simple change the opacity, e.g. <tt>opacity=0</tt> or <tt>opacity=1</tt>.
+  Opacity is apparently the most "expensive" in terms of clientside computation.
+  </p>
+  <br>
+  <b>groupbegin( id )</b>
+  <p>Begin an SVG &lt;g&gt; element group container.
+  </p><p>
+  <span class="parm">id=</span> &nbsp; Mandatory.  DOM object ID string.  
+  </p><p>
+  <span class="parm">cssclass=</span> &nbsp; optional;
+  a CSS element name that will influence all elements within the container.  
+  </p><p>
+  <span class="parm">cssstyle=</span> &nbsp; optional;
+  a CSS style string that will influence all elements within the container.  
+  For example to try hiding an object use <tt>cssstyle='visibility: hidden'</tt>.
+  </p><p>
+  <span class="parm">transform=</span> &nbsp; optional; apply a matrix manipulations / transformations to 
+  all elements in the container.  See SVG documentation for details.
+  </p>
+  <br>
+  <b>groupend( )</b>
+  <p>Ends an SVG &lt;/g&gt; element group container.
+  </p>
+
+      
+
+    </div></div></div></div>
+
+
+
+
 <a name="lowlevel"></a>
 <br>
 <br>
@@ -1527,9 +1550,9 @@ All args are keyword args unless otherwise indicated.
   </p><p> 
   &bull; txt( x, y, text ) &nbsp; render text at (x, y) in minplot units, using current text properties.
   </p><p> 
-  &bull; rect( x1, y1, x2, y2, fill="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a rectangle in minplot units.
+  &bull; rect( x1, y1, x2, y2, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a rectangle in minplot units.
   </p><p> 
-  &bull; circle( x, y, diameter, fill="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a circle in minplot units.
+  &bull; circle( x, y, diameter, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a circle in minplot units.
   </p><p> 
   &bull; comment( commenttext ) &nbsp; write a comment into the SVG file.
   </p><p> 

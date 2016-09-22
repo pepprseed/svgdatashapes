@@ -1,5 +1,5 @@
 #
-# minplot.py  v0.34  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    MIT License
+# minplot.py  v0.35  Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com    minplot.com   MIT License
 #
 
 
@@ -14,25 +14,32 @@ class AppDt_Error(Exception): pass
 
 
 
-def setformat( fmt ):
+def dateformat( format=None ):
     # set the format string to be used for parsing datetimes found in the input data
     # format codes explained here: https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
     # Note that when they say zero-padded this refers to output only; parsing can handle eg. 3/4/2015
     global p_dtformat
-    p_dtformat = fmt
+    if format == None: raise AppDt_Error( "dateformat() expecting 'format' arg" )
+    p_dtformat = format
     return True
 
 
-def num( val ):
+def toint( dateval=None ):
     # for the given date/time string in whatever format, return the int utime value
-    # conv( "1970-01-01.00:00" ) == 0
-    if val == None: return None
+    # toint( "1970-01-01.00:00" ) == 0
+    if dateval == None: return None
     try:
-        tt = d.datetime.strptime( val, p_dtformat ).timetuple()      # parse out the components
+        tt = d.datetime.strptime( dateval, p_dtformat ).timetuple()      # parse out the components
         utime = calendar.timegm( tt )
-    except: raise AppDt_Error( "num got bad datetime value: " + str(val) + " (expecting format of " + p_dtformat + ")" )
+    except: raise AppDt_Error( "toint() got bad datetime value: " + str(dateval) + " (expecting format of " + p_dtformat + ")" )
     return utime 
-    
+
+
+def dateitem( colname=None, datarow=None ):
+    # convenience routine to get a data item and convert to integer utime value
+    if colname == None or datarow == None: raise AppDt_Error( "dateitem() arg error" )
+    return toint( datarow[ minplot.index( colname ) ] )
+
 
 def make( utime, fmt=None ):
     # format the given minplot dt value as per fmt...
@@ -45,12 +52,12 @@ def make( utime, fmt=None ):
     return outstr
 
 
-def diff( val1, val2, result="days" ):
-    # return number of days difference (dt1 - dt2)
+def datediff( val1, val2, result="days" ):
+    # return integer number of days difference (dt1 - dt2)
     try: dt1 = d.datetime.strptime( val1, p_dtformat )
-    except: raise AppDt_Error( "diff() invalid val1 arg: " + str(val1) )
+    except: raise AppDt_Error( "datediff() invalid val1 arg: " + str(val1) )
     try: dt2 = d.datetime.strptime( val2, p_dtformat )
-    except: raise AppDt_Error( "diff() invalid val2 arg: " + str(val2) )
+    except: raise AppDt_Error( "datediff() invalid val2 arg: " + str(val2) )
     if result != "seconds":
         dt1 = dt1.replace( second=0, microsecond=0 )
         dt2 = dt2.replace( second=0, microsecond=0 )
@@ -68,7 +75,7 @@ def diff( val1, val2, result="days" ):
     return int(calendar.timegm( dt1.timetuple() ) - calendar.timegm( dt2.timetuple() ) ) / div
 
 
-def dtrange( dtcol=None, datarows=None, nearest=None, inc=None, stubformat=None, 
+def daterange( dtcol=None, datarows=None, nearest=None, inc=None, stubformat=None, 
              inc2=None, stub2format=None, stub2place="append", stub2first=True ):
 
     dfindex = minplot.getdfindex( dtcol, datarows )
@@ -89,7 +96,7 @@ def dtrange( dtcol=None, datarows=None, nearest=None, inc=None, stubformat=None,
         if dfindex == -1:  strval = row[catcol]   # dict rows
         else:  strval = row[dfindex]
 
-        utime = num( strval )
+        utime = toint( strval )
         if utime < dmin: dmin = utime
         if utime > dmax: dmax = utime
 

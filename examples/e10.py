@@ -19,7 +19,7 @@ def example10():
 
     p.svgbegin( width=400, height=400 )
 
-    p.textprops( color='#777', cssstyle="font-family: sans-serif; font-weight: bold;" )
+    p.textprops( color='#777', cssstyle='font-family: sans-serif; font-weight: bold;' )
     p.lineprops( color='#777' )
 
     # set up X and Y space...
@@ -27,8 +27,8 @@ def example10():
     p.numspace( axis='Y', axmin=0, axmax=10, poslo=100, poshi=350 )
 
     # render axes and plotting area
-    p.axisrender( axis='X', tics=8, loc="min-8" )
-    p.axisrender( axis='y', tics=8, loc="min-8" )
+    p.axisrender( axis='X', tics=8, loc='min-8' )
+    p.axisrender( axis='y', tics=8, loc='min-8' )
     p.plotdeco( shade='#eee', outline=True, rectadj=8 )
     p.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
 
@@ -41,9 +41,9 @@ def example10():
             if val == None: continue
             color = findcolor( val )
             p.tooltip( title='N = ' + str(val) )
-            p.rectangle( x=ix+0.5, y=iy+0.5, width=1.0, height=1.0, fill=color )
+            p.rectangle( x=ix+0.5, y=iy+0.5, width=1.0, height=1.0, color=color )
 
-    # p.legenditem( label="Group B", sample='circle', color='#00a', width=80 )
+    # p.legenditem( label='Group B', sample='circle', color='#00a', width=80 )
     # p.legendrender( location='top', yadjust=30, format='across' )
 
     # return the svg 
