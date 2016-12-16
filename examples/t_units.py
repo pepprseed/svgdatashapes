@@ -1,8 +1,8 @@
 
-import minplot as p
+import svgdatashapes as s
 
 def test_units():
 
-    p.svgbegin( width=500, height=400, testgrid=True )
+    s.svgbegin( width=500, height=400, testgrid=True )
 
-    return p.svgresult()
+    return s.svgresult()

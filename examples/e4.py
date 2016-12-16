@@ -1,44 +1,46 @@
 # basic example of plotting date data
 
-import minplot as p
-import minplot_dt as pdt
+import svgdatashapes as s
+import svgdatashapes_dt as sdt     # for date/time support
 
 def example4():                                        # plot some date-based data
 
     dataset1 = [ ('2015/04/10', 45), ('2015/12/2', 33),  ('2015/12/7', 22), 
                  ('2015/12/28', 30), ('2016/01/14', 38), ('2016/02/8', 32) ]
 
-    p.svgbegin( width=500, height=300 )
+    s.setline( color='#777' )   # set gray line color
+    s.settext( color='#777' )   # set gray text color
 
-    pdt.dateformat( '%Y/%m/%d' )
+    s.svgbegin( width=500, height=300 )
 
-    xrange = pdt.daterange( dtcol='0', datarows=dataset1, nearest='3month', inc='3month', 
+    # indicate our date notation..
+    sdt.dateformat( '%Y/%m/%d' )
+
+    # find min max date range and set up x space...
+    xrange = sdt.daterange( column=0, datarows=dataset1, nearest='3month', inc='3month', 
                 stubformat='%b', inc2='year', stub2format=' %Y' )
-    # alt1:  xrange = pdt.daterange( dtcol='0', datarows=dataset1, 
-    #          nearest='year', inc='month', stubformat='1 %b '%y' )  
-    # alt2:  xrange = pdt.daterange( dtcol='0', datarows=dataset1, 
-    #          nearest='week_day2', stubformat='%b %d' )             
+    s.xspace( svgrange=(60,400), datarange=xrange )
 
-    # set up X space...
-    p.numspace( axis='X', axmin=xrange.axmin, axmax=xrange.axmax, poslo=60, poshi=400 )
 
-    # find Y range and set up Y space...
+    # find min max Y numeric range and set up Y space...
     for dp in dataset1:  
-        p.findrange( testval=dp[1] )  
-    yrange = p.findrange( finish=True )
-    p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=60, poshi=280 )
-
-    p.lineprops( color='#777' )   # set gray line color
-    p.textprops( color='#777' )   # set gray text color
-
-    p.plotdeco( title='Date time data', outline=True )
+        s.findrange( testval=dp[1] )  
+    yrange = s.findrange( finish=True )
+    s.yspace( svgrange=(60,280), datarange=yrange )
 
     # render axes...
-    p.axisrender( axis='X', stublist=xrange.stublist, tics=8, grid=True )
-    p.axisrender( axis='y', tics=8 )
+    s.xaxis( stublist=xrange.stublist, tics=8, grid=True )
+    s.yaxis( tics=8 )
+    s.plotdeco( title='Date time data', outline=True )
 
-    # render red data points
+    # render red bars 
     for dp in dataset1:
-        p.bar( x=pdt.toint(dp[0]), y=dp[1], color='#d44', width=5, opacity=0.6 )
+        s.bar( x=sdt.toint(dp[0]), y=dp[1], color='#d44', width=5, opacity=0.6 )
 
-    return p.svgresult()
+    # return the svg.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
+
+
+# Note, here are some alternatives to try, for the daterange call above:
+# sdt.daterange( column=0, datarows=dataset1, nearest='year', inc='month', stubformat='1 %b '%y' )  
+# sdt.daterange( column=0, datarows=dataset1, nearest='week_day2', stubformat='%b %d' )             

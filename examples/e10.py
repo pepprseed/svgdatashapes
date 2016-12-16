@@ -1,6 +1,6 @@
 # elementary heatmap 
 
-import minplot as p
+import svgdatashapes as s
 
 def example10():
 
@@ -17,20 +17,20 @@ def example10():
                  [ 10, 8, 3, 4, 0, 0, 2, 4, 0, 0 ] ]
 
 
-    p.svgbegin( width=400, height=400 )
+    s.svgbegin( width=400, height=400 )
 
-    p.textprops( color='#777', cssstyle='font-family: sans-serif; font-weight: bold;' )
-    p.lineprops( color='#777' )
+    s.settext( color='#777', style='font-family: sans-serif; font-weight: bold;' )
+    s.setline( color='#777' )
 
     # set up X and Y space...
-    p.numspace( axis='X', axmin=0, axmax=10, poslo=100, poshi=350 )
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=100, poshi=350 )
+    s.xspace( svgrange=(100,350), datarange=(0,10) )
+    s.yspace( svgrange=(100,350), datarange=(0,10) )
 
     # render axes and plotting area
-    p.axisrender( axis='X', tics=8, loc='min-8' )
-    p.axisrender( axis='y', tics=8, loc='min-8' )
-    p.plotdeco( shade='#eee', outline=True, rectadj=8 )
-    p.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
+    s.xaxis( tics=8, loc='min-8' )
+    s.yaxis( tics=8, loc='min-8' )
+    s.plotdeco( shade='#eee', outline=True, rectadj=8 )
+    s.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
 
     iy = 10
     for row in plotdata:
@@ -40,14 +40,11 @@ def example10():
             ix += 1
             if val == None: continue
             color = findcolor( val )
-            p.tooltip( title='N = ' + str(val) )
-            p.rectangle( x=ix+0.5, y=iy+0.5, width=1.0, height=1.0, color=color )
+            s.tooltip( title='N = ' + str(val) )
+            s.rectangle( x=ix+0.5, y=iy+0.5, width=1.0, height=1.0, color=color )
 
-    # p.legenditem( label='Group B', sample='circle', color='#00a', width=80 )
-    # p.legendrender( location='top', yadjust=30, format='across' )
-
-    # return the svg 
-    return p.svgresult()
+    # return the svg.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
 
 def findcolor( val ):
             if val == 0:   return '#000'

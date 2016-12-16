@@ -1,6 +1,6 @@
 # bar graph plotted from dict rows; color-coded bars; multi-line legend entries
 
-import minplot as p
+import svgdatashapes as s
 
 def example1():
 
@@ -16,38 +16,38 @@ def example1():
     dataset.append( { 'state':'New Hampshire', 'avg':97.5, 'sem':27.8 , 'new':False} )
     dataset.append( { 'state':'Georgia',       'avg':89,   'sem':19.2 , 'new':False} )
 
+    # get a unique list of state names 
+    catlist = s.uniqcats( datarows=dataset, column='state' )
 
-    # initialize minplot and begin building our svg...
-    p.svgbegin( width=550, height=450 )
+    # set our text and line properties
+    textstyle = 'font-family: sans-serif; font-weight: bold;' 
+    s.settext( ptsize=12, color='#444', style=textstyle )
+    s.setline( color='#ccc' )
 
-    # get an list of unique state names from the data...
-    catinfo = p.catinfo( catcol='state', datarows=dataset )
+    # begin building our svg...
+    s.svgbegin( width=550, height=450 )
 
-    # set up the X categorical space... 
-    p.catspace( axis='X', catlist=catinfo.catlist, poslo=100, poshi=530 )
-
-    # set up the Y numerically scaled space... 
-    p.numspace( axis='Y', axmin=0, axmax=140, poslo=100, poshi=400 )
+    # set up categorical X space and numeric Y space...
+    s.xspace( svgrange=(100,530), catlist=catlist )
+    s.yspace( svgrange=(100,400), datarange=(0,140) )
 
     # render the X and Y axes...  
-    p.lineprops( color='#ccc' )
-    p.textprops( ptsize=12, color='#444', cssstyle='font-family: sans-serif; font-weight: bold;' )
-    p.axisrender( axis='X', tics=8 )
-    p.axisrender( axis='Y', axisline=False, grid=True )
-    p.plotdeco( ylabel='Avg. Calls / day' )
+    s.xaxis( tics=8 )
+    s.yaxis( axisline=False, grid=True )
+    s.plotdeco( ylabel='Avg. Calls / day' )
 
-    # render the column bars and error bars.... set up legend entries too
-    p.legenditem( label='2010 expansion\nstates', sample='square', color='pink')
-    p.legenditem( label='Pre-2010\nstates', sample='square', color='powderblue')
-    p.lineprops( color='#777' )
+    # render the bars and error bars.... set up legend entries too
+    s.setline( color='#777' )
     for row in dataset:
         if row['new'] == True: barcolor='pink'
         else: barcolor='powderblue'
-        p.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
-        p.bar( x=row['state'], y=row['avg'], ybase=0.0, color=barcolor, width=20, opacity=0.8 )
+        s.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
+        s.bar( x=row['state'], y=row['avg'], ybase=0.0, color=barcolor, width=20, opacity=0.8 )
 
-    # render the legend...
-    p.legendrender( location='top', format='across' )
+    # set up some legend entries and render the legend...
+    s.legenditem( label='2010 expansion\nstates', sample='square', color='pink')
+    s.legenditem( label='Pre-2010\nstates', sample='square', color='powderblue')
+    s.legendrender( location='top', format='across' )
 
-    # return the SVG...
-    return p.svgresult()
+    # return the SVG.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()

@@ -1,4 +1,4 @@
-import minplot as p
+import svgdatashapes as s
 
 def test_axis():
 
@@ -16,48 +16,48 @@ def test_axis():
 
     textstyle = 'font-family: sans-serif;'    # ensure sans-serif even via [img]
 
-    # initialize minplot and begin building our svg...
-    p.svgbegin( width=800, height=600 )
+    # building our svg...
+    s.svgbegin( width=800, height=600 )
 
-    p.lineprops( color='#555' )
-    p.textprops( color='#444', cssstyle=textstyle )  
+    s.setline( color='#555' )
+    s.settext( color='#444', style=textstyle )  
 
 
     # left column ... X categorical space... 
-    catinfo = p.catinfo( catcol='state', datarows=dataset )
-    p.catspace( axis='X', catlist=catinfo.catlist, poslo=50, poshi=350 )
+    cats = s.uniqcats( datarows=dataset, column='state' )
+    s.xspace( svgrange=(50,350), catlist=cats )
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=500, poshi=550 )
-    p.axisrender( axis='X', tics=8 )   # use default stubrotate
+    s.yspace( svgrange=(500,550), datarange=(0,10) )
+    s.xaxis( tics=8 )   # use default stubrotate
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=400, poshi=450 )
-    p.axisrender( axis='X', tics=8, stubrotate=90 )
+    s.yspace( svgrange=(400,450), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=90 )
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=300, poshi=350 )
-    p.axisrender( axis='X', tics=8, stubrotate=-45 )
+    s.yspace( svgrange=(300,350), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=-45 )
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=200, poshi=250 )
-    p.axisrender( axis='X', tics=8, stubrotate=60 )
+    s.yspace( svgrange=(200,250), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=60 )
 
 
     # right column ... X numeric space....
-    p.numspace( axis='X', axmin=0, axmax=10000, poslo=450, poshi=750 )
+    s.xspace( svgrange=(450,750), datarange=(0,10000) )
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=500, poshi=550 )
-    p.axisrender( axis='X', tics=8 )  # use default stubrotate
+    s.yspace( svgrange=(500,550), datarange=(0,10) )
+    s.xaxis( tics=8 )   # use default stubrotate
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=400, poshi=450 )
-    p.axisrender( axis='X', tics=8, stubrotate=0 )
+    s.yspace( svgrange=(400,450), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=0 )   
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=300, poshi=350 )
-    p.axisrender( axis='X', tics=8, stubrotate=90 )
+    s.yspace( svgrange=(300,350), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=90 )   
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=200, poshi=250 )
-    p.axisrender( axis='X', tics=8, stubrotate=-45 )
+    s.yspace( svgrange=(200,250), datarange=(0,10) )
+    s.xaxis( tics=8, stubrotate=-45 )   
 
-    p.numspace( axis='Y', axmin=0, axmax=10, poslo=100, poshi=150 )
+    s.yspace( svgrange=(100,150), datarange=(0,10) )
+
     xstubs = [ [ 0, '0' ], [ 1000, '1000'], [ 2000, '2000' ], [ 5000, '5000' ], [ 10000, '10000' ] ]
-    p.axisrender( axis='X', tics=8, stublist=xstubs, stubrotate=90 )
+    s.xaxis( tics=8, stublist=xstubs, stubrotate=90 )
   
-    
-    return p.svgresult()
+    return s.svgresult()

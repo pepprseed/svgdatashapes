@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<!-- SVG graphic by minplot -->
+<!-- SVG graphic by SVGdatashapes ... SVGdatashapes.com -->
 <polyline points="100,308 350,308" stroke="#777"  />
 <polyline points="350,308 100,308" stroke="#777"  />
 <polyline points="100,308 100,316" stroke="#777"  />

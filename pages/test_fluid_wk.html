@@ -2,10 +2,10 @@
 
 <!doctype html>
 
-<!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
+<!-- View these pages here:  https://pepprseed.github.io/svgdatashapes/  -->
 
 <head>
-<title>minplot.py on GitHub</title>
+<title>SVGdatashapes</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,11 +58,11 @@
 <div class="col-md-1"></div>
 
 <div class="col-md-10">
-<h3><a href="examplist.html">minplot examples</a>: &nbsp; Minplot units with fluid sizing (static chrome / webkit example)</h3>
+<h3><a href="examplist.html">SVGdatashapes examples</a>: &nbsp; SVG units with fluid sizing (static chrome / webkit example)</h3>
 
 
 <svg viewBox="0 0 500 400" height="100%" width="100%"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<!-- SVG graphic by minplot -->
+<!-- SVG graphic by SVGdatashapes ... SVGdatashapes.com -->
 <polyline points="100,400 100,0" stroke-width="0.5" stroke="#a0a0a0" stroke-dasharray="5,3"  />
 <text x="100" y="400" font-size="11pt" fill="#d08080" fill-opacity="0.5"  text-anchor="middle" >100</text>
 <polyline points="200,400 200,0" stroke-width="0.5" stroke="#a0a0a0" stroke-dasharray="5,3"  />
@@ -84,7 +84,7 @@
 <polyline points="0,400 500,400" stroke-width="0.5" stroke="#a0a0a0" stroke-dasharray="5,3"  />
 <polyline points="0,400 0,0" stroke-width="0.5" stroke="#a0a0a0" stroke-dasharray="5,3"  />
 <text x="0" y="400" font-size="11pt" fill="#d08080" fill-opacity="0.5" >0</text>
-<text x="490" y="20" font-size="11pt" fill="#d08080" fill-opacity="0.5"  text-anchor="end" >minplot units</text>
+<text x="490" y="20" font-size="11pt" fill="#d08080" fill-opacity="0.5"  text-anchor="end" >SVG units</text>
 </svg>
 
 
@@ -101,12 +101,12 @@
 # Try resizing your browser window down to something small.
 # note, in flask you can get the 'browser' string via:  request.user_agent.browser
 
-import minplot as p
+import svgdatashapes as s
 
 def test_units_fluid( browser ):    #  browser:  'firefox', 'chrome', 'safari', or 'msie'
 
-    p.svgbegin( width=500, height=400, fluidsize=True, browser=browser, testgrid=True )
-    return p.svgresult()
+    s.svgbegin( width=500, height=400, fluidsize=True, browser=browser, testgrid=True )
+    return s.svgresult()
 
 </span></pre>
 

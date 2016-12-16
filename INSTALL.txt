@@ -1,13 +1,15 @@
 
-To install simply put minplot.py into your project directory.  Then in your python code do:  
+To install with pip:   (Coming soon)
+    pip install svgdatashapes
+    pip install svgdatashapes_dt   (if you need date/time support)
 
-import minplot
-
-
-To get date and time plotting functionality also put minplot_dt.py into your project directory
-and do this:  
-
-import minplot
-import minplot_dt
+Or if you prefer, you can just download directly and place into your python source directory:
+    svgdatashapes.py
+    svgdatashapes_dt.py   (if you need date/time support) 
 
 
+Then, in your python code do:
+    import svgdatashapes
+
+If you need date/time support also do:
+    import svgdatashapes_dt   

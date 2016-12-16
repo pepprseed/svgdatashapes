@@ -2,10 +2,10 @@
 
 <!doctype html>
 
-<!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
+<!-- View these pages here:  https://pepprseed.github.io/svgdatashapes/  -->
 
 <head>
-<title>minplot.py on GitHub</title>
+<title>SVGdatashapes</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,11 +58,11 @@
 <div class="col-md-1"></div>
 
 <div class="col-md-10">
-<h3><a href="examplist.html">minplot examples</a>: &nbsp; Example 1</h3>
+<h3><a href="examplist.html">SVGdatashapes examples</a>: &nbsp; Example 1</h3>
 
 
 <svg width="550" height="450" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<!-- SVG graphic by minplot -->
+<!-- SVG graphic by SVGdatashapes ... SVGdatashapes.com -->
 <polyline points="100,350 530,350" stroke="#ccc"  />
 <polyline points="530,350 100,350" stroke="#ccc"  />
 <polyline points="100,350 100,358" stroke="#ccc"  />
@@ -76,16 +76,16 @@
 <polyline points="444,350 444,358" stroke="#ccc"  />
 <polyline points="487,350 487,358" stroke="#ccc"  />
 <polyline points="530,350 530,358" stroke="#ccc"  />
-<text x="108.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 108.60,363)" >Ohio</text>
-<text x="151.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 151.60,363)" >Kansas</text>
-<text x="194.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 194.60,363)" >Michigan</text>
-<text x="237.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 237.60,363)" >Oklahoma</text>
-<text x="280.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 280.60,363)" >Mississippi</text>
-<text x="323.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 323.60,363)" >New Mexico</text>
-<text x="366.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 366.60,363)" >Wisconsin</text>
-<text x="409.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 409.60,363)" >South Dakota</text>
-<text x="452.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 452.60,363)" >New Hampshire</text>
-<text x="495.60" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 495.60,363)" >Georgia</text>
+<text x="115.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 115.05,363)" >Ohio</text>
+<text x="158.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 158.05,363)" >Kansas</text>
+<text x="201.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 201.05,363)" >Michigan</text>
+<text x="244.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 244.05,363)" >Oklahoma</text>
+<text x="287.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 287.05,363)" >Mississippi</text>
+<text x="330.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 330.05,363)" >New Mexico</text>
+<text x="373.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 373.05,363)" >Wisconsin</text>
+<text x="416.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 416.05,363)" >South Dakota</text>
+<text x="459.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 459.05,363)" >New Hampshire</text>
+<text x="502.05" y="363" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 502.05,363)" >Georgia</text>
 <polyline points="100,350 530,350" stroke="#ccc"  />
 <polyline points="100,307.14 530,307.14" stroke="#ccc"  />
 <polyline points="100,264.29 530,264.29" stroke="#ccc"  />
@@ -162,7 +162,7 @@
 <pre><span class="purple">
 # bar graph plotted from dict rows; color-coded bars; multi-line legend entries
 
-import minplot as p
+import svgdatashapes as s
 
 def example1():
 
@@ -178,41 +178,41 @@ def example1():
     dataset.append( { 'state':'New Hampshire', 'avg':97.5, 'sem':27.8 , 'new':False} )
     dataset.append( { 'state':'Georgia',       'avg':89,   'sem':19.2 , 'new':False} )
 
+    # get a unique list of state names 
+    catlist = s.uniqcats( datarows=dataset, column='state' )
 
-    # initialize minplot and begin building our svg...
-    p.svgbegin( width=550, height=450 )
+    # set our text and line properties
+    textstyle = 'font-family: sans-serif; font-weight: bold;' 
+    s.settext( ptsize=12, color='#444', style=textstyle )
+    s.setline( color='#ccc' )
 
-    # get an list of unique state names from the data...
-    catinfo = p.catinfo( catcol='state', datarows=dataset )
+    # begin building our svg...
+    s.svgbegin( width=550, height=450 )
 
-    # set up the X categorical space... 
-    p.catspace( axis='X', catlist=catinfo.catlist, poslo=100, poshi=530 )
-
-    # set up the Y numerically scaled space... 
-    p.numspace( axis='Y', axmin=0, axmax=140, poslo=100, poshi=400 )
+    # set up categorical X space and numeric Y space...
+    s.xspace( svgrange=(100,530), catlist=catlist )
+    s.yspace( svgrange=(100,400), datarange=(0,140) )
 
     # render the X and Y axes...  
-    p.lineprops( color='#ccc' )
-    p.textprops( ptsize=12, color='#444', cssstyle='font-family: sans-serif; font-weight: bold;' )
-    p.axisrender( axis='X', tics=8 )
-    p.axisrender( axis='Y', axisline=False, grid=True )
-    p.plotdeco( ylabel='Avg. Calls / day' )
+    s.xaxis( tics=8 )
+    s.yaxis( axisline=False, grid=True )
+    s.plotdeco( ylabel='Avg. Calls / day' )
 
-    # render the column bars and error bars.... set up legend entries too
-    p.legenditem( label='2010 expansion\nstates', sample='square', color='pink')
-    p.legenditem( label='Pre-2010\nstates', sample='square', color='powderblue')
-    p.lineprops( color='#777' )
+    # render the bars and error bars.... set up legend entries too
+    s.setline( color='#777' )
     for row in dataset:
         if row['new'] == True: barcolor='pink'
         else: barcolor='powderblue'
-        p.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
-        p.bar( x=row['state'], y=row['avg'], ybase=0.0, color=barcolor, width=20, opacity=0.8 )
+        s.errorbar( x=row['state'], y=row['avg'], erramt=row['sem'], tailsize=10 )
+        s.bar( x=row['state'], y=row['avg'], ybase=0.0, color=barcolor, width=20, opacity=0.8 )
 
-    # render the legend...
-    p.legendrender( location='top', format='across' )
+    # set up some legend entries and render the legend...
+    s.legenditem( label='2010 expansion\nstates', sample='square', color='pink')
+    s.legenditem( label='Pre-2010\nstates', sample='square', color='powderblue')
+    s.legendrender( location='top', format='across' )
 
-    # return the SVG...
-    return p.svgresult()
+    # return the SVG.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
 </span></pre>
 
 </div>

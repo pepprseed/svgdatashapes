@@ -1,6 +1,6 @@
 # producce a histogram by computing a frequency distribution then plotting the bins
 
-import minplot as p
+import svgdatashapes as s
 import sampledata2
 
 def example9():
@@ -8,37 +8,39 @@ def example9():
     # get a 1-D example array of numbers 
     plotdata = sampledata2.vectors( 'set1' )   # eg. [ 33, 36, 39, 41, 41, 49,.. ]
 
-    p.svgbegin( width=500, height=350 )
+    s.svgbegin( width=500, height=350 )
 
-    p.textprops( cssstyle='font-family: sans-serif; font-weight: bold;' )
+    s.settext( style='font-family: sans-serif; font-weight: bold;' )
+    s.setline( color='#aaa' )
 
     # compute a frequency distribution....
-    info = p.numinfo( datarows=p.vec2d( plotdata ), numcol=0, distrib=True, distbinsize='inc/4' )
+    info = s.columninfo( datarows=s.vec2d( plotdata ), column=0, distrib=True, distbinsize='inc/4' )
     freqdata = info.distribution
 
     # find the data min and max for X axis....
     for val in plotdata:
-        p.findrange( testval=val )
-    range = p.findrange( finish=True )
-    p.numspace( axis='X', axmin=range.axmin, axmax=range.axmax, poslo=80, poshi=450 )
+        s.findrange( testval=val )
+    xrange = s.findrange( finish=True )
+    s.xspace( svgrange=(80,450), datarange=xrange )
     
     # find the histogram min and max for Y axis...
     for row in freqdata:
-        p.findrange( testval=row.accum )
-    range = p.findrange( finish=True )
-    p.numspace( axis='Y', axmin=range.axmin, axmax=range.axmax, poslo=80, poshi=320 )
+        s.findrange( testval=row.accum )
+    yrange = s.findrange( finish=True )
+    s.yspace( svgrange=(80,320), datarange=yrange )
 
     # render X and Y axes
-    p.lineprops( color='#aaa' )
-    p.axisrender( axis='X' )
-    p.axisrender( axis='Y', loc='left-20', grid=True )
-    p.plotdeco( xlabel='glucose  [mg/dL]', ylabel='Number of instances' )
+    s.xaxis()
+    s.yaxis( loc='left-20', grid=True )
+    s.plotdeco( xlabel='glucose  [mg/dL]', ylabel='Number of instances' )
 
     # render histogram
     for row in freqdata:
-        p.bar( x=row.binmid, y=row.accum, width=5, color='pink' )
+        s.bar( x=row.binmid, y=row.accum, width=5, color='pink' )
 
-    p.label( text='bin size = '+str( info.distbinsize ), xadjust=320, yadjust=300 )
+    # add a label mentioning the bin size...
+    s.label( text='bin size = '+str( info.distbinsize ), xadjust=320, yadjust=300 )
 
-    return p.svgresult()
+    # return the svg.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
 

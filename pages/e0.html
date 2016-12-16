@@ -1,0 +1,157 @@
+
+
+<!doctype html>
+
+<!-- View these pages here:  https://pepprseed.github.io/svgdatashapes/  -->
+
+<head>
+<title>SVGdatashapes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../static/css/pack1.css">
+
+<script src="../static/js/jquery-1.11.3.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+
+</head>
+
+<body text="000000" link="5533aa" vlink="5533aa" alink="5533aa" bgcolor="ffffff">
+
+
+
+
+  
+<nav role="navigation" class="navbar navbar-default navbar-static-top" >    
+
+
+    <div class="container">
+        
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+            <br><br>
+        </div>
+
+        
+        
+    </div>
+</nav>
+
+
+
+
+<div class="container">  
+
+
+<style>
+  
+</style>
+
+<div class="row">
+<div class="col-md-1"></div>
+
+<div class="col-md-10">
+<h3><a href="examplist.html">SVGdatashapes examples</a>: &nbsp; Hello world</h3>
+
+
+<svg width="550" height="350" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by SVGdatashapes ... SVGdatashapes.com -->
+<polyline points="100,250 400,250" stroke="#ccc"  />
+<polyline points="400,250 100,250" stroke="#ccc"  />
+<polyline points="100,250 100,258" stroke="#ccc"  />
+<polyline points="200,250 200,258" stroke="#ccc"  />
+<polyline points="300,250 300,258" stroke="#ccc"  />
+<polyline points="400,250 400,258" stroke="#ccc"  />
+<text x="135" y="263" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 135,263)" >Group A</text>
+<text x="235" y="263" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 235,263)" >Group B</text>
+<text x="335" y="263" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" transform="rotate(45 335,263)" >Group C</text>
+<polyline points="100,250 400,250" stroke="#ccc"  />
+<polyline points="100,210 400,210" stroke="#ccc"  />
+<polyline points="100,170 400,170" stroke="#ccc"  />
+<polyline points="100,130 400,130" stroke="#ccc"  />
+<polyline points="100,90 400,90" stroke="#ccc"  />
+<polyline points="100,50 400,50" stroke="#ccc"  />
+<text x="98" y="255" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >0</text>
+<text x="98" y="215" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >20</text>
+<text x="98" y="175" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >40</text>
+<text x="98" y="135" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >60</text>
+<text x="98" y="95" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >80</text>
+<text x="98" y="55" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="end" >100</text>
+<rect x="100.0" y="50" width="300" height="200" fill="none" />
+<text x="40" y="150" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444"  text-anchor="middle" transform="rotate(-90 40,150)" >Score</text>
+<rect x="125.0" y="173.20" width="50" height="76.80" fill="#8a8" opacity="0.8"/>
+<rect x="225.0" y="115.20" width="50" height="134.80" fill="#8a8" opacity="0.8"/>
+<rect x="325.0" y="151.60" width="50" height="98.40" fill="#8a8" opacity="0.8"/>
+<polyline points="100,130 400,130" stroke="#33a" stroke-dasharray="5,2"  />
+<text x="410" y="135" style="font-family: sans-serif; font-weight: bold;" font-size="12pt" fill="#444" >Goal</text>
+</svg>
+
+
+<br>
+
+
+<br>
+
+
+
+
+<pre><span class="purple">
+# A simple hello-world example to create a bar graph
+
+import svgdatashapes as s
+
+def example0():
+
+    mydata = [ { 'name':'Group A', 'value':38.4 }, 
+               { 'name':'Group B', 'value':67.4 }, 
+               { 'name':'Group C', 'value':49.2 } ]
+
+    # get a unique list of the categories for the X axis
+    cats = s.uniqcats( datarows=mydata, column="name" )
+
+    # set our text and line properties....
+    textstyle = 'font-family: sans-serif; font-weight: bold;'
+    s.settext( ptsize=12, color='#444', style=textstyle )
+    s.setline( color='#ccc' )
+
+    # begin building our svg
+    s.svgbegin( width=550, height=350 )
+
+    # set up our X axis space (categorical) located from x=100 to x=400 in the svg 
+    s.xspace( svgrange=(100,400), catlist=cats )
+
+    # set up our Y axis space (numeric) located from y=100 to y=300 in the svg 
+    s.yspace( svgrange=(100,300), datarange=(0,100) )
+
+    # render the X and Y axis...
+    s.xaxis( tics=8 )
+    s.yaxis( axisline=False, grid=True )
+    s.plotdeco( ylabel='Score' )
+
+    # render the column bars and error bars.... 
+    for row in mydata:
+        s.bar( x=row['name'], y=row['value'], color='#8a8', width=50, opacity=0.8 )
+
+    # add a "Goal" line
+    s.setline( color='#33a', dash='5,2' )
+    s.line( x1='min', y1=60.0, x2='max', y2=60.0 )
+    s.label( x='max', y=60.0, text="Goal", xadjust=10 )
+
+    # return the SVG.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
+</span></pre>
+
+</div>
+
+</div> 
+</div> 
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 
-import minplot as p
+import svgdatashapes as s
 
 def test_distribs():
 
@@ -13,13 +13,12 @@ def test_distribs():
     
     outstr += '\n----\n\nNumeric distribtion result:\n'
     
-    p.datacolumns( [ 'f1', 'f2'] )
-    result = p.numinfo( numcol='f1', datarows=dataset1, distrib=True, distbinsize=2, accumcol='f2' )
+    result = s.columninfo( column=0, datarows=dataset1, distrib=True, distbinsize=2, accumcol=1 )
     outstr += str(result.distribution)
     
     outstr += '\n----\n\nPercentiles result:\n'
     
-    result = p.numinfo( numcol='f1', datarows=dataset1, percentiles=True )
+    result = s.columninfo( column=0, datarows=dataset1, percentiles=True )
     outstr += str(result.percentiles)
     
     
@@ -30,8 +29,7 @@ def test_distribs():
     
     dataset2 = ( [ 'red', 4 ], ['green', 2], ['red', 8 ], ['blue', 1 ], ['green', 7] )
     
-    p.datacolumns( [ 'f1', 'f2' ] )
-    result = p.catinfo( catcol='f1', datarows=dataset2, distrib=True, accumcol='f2' )
+    result = s.columninfo( column=0, categorical=True, datarows=dataset2, distrib=True, accumcol=1 )
     
     for row in result.distribution:
         outstr += str(row) + '\n'
@@ -39,14 +37,14 @@ def test_distribs():
 
     outstr += '\n----\n\nnuminfo Using 1D array via vec2d() ...\n'
     vector = [ 5, 2, 7, 11, 15, 21 ]
-    datarows = p.vec2d( vector )
-    result = p.numinfo( datarows=datarows, numcol=0, distrib=True, distbinsize=5 )
+    datarows = s.vec2d( vector )
+    result = s.columninfo( datarows=datarows, column=0, distrib=True, distbinsize=5 )
     outstr += str(result.distribution)
 
     outstr += '\n----\n\ncatinfo Using 1D array via vec2d() ...\n'
     vector = [ 'red', 'red', 'red', 'blue' ]
-    datarows = p.vec2d( vector )
-    result = p.catinfo( datarows=datarows, catcol=0, distrib=True )
+    datarows = s.vec2d( vector )
+    result = s.columninfo( categorical=True, datarows=datarows, column=0, distrib=True )
     outstr += str(result.distribution)
 
     

@@ -2,10 +2,10 @@
 
 <!doctype html>
 
-<!-- View these pages here:  https://grubbcode.github.io/minplot/  -->
+<!-- View these pages here:  https://pepprseed.github.io/svgdatashapes/  -->
 
 <head>
-<title>minplot.py on GitHub</title>
+<title>SVGdatashapes</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -50,7 +50,7 @@
 <div class="container">  
 
 
-<div class="row"><div class="col-md-2"></div><div class="col-md-8">
+<div class="row"><div class="col-md-2"></div><div class="col-md-7">
 
 
 
@@ -63,164 +63,362 @@
 
 <span class="text14">
 
-<h2><i>minplot.py</i></h2>
+<h2><i>SVGdatashapes</i></h2>
 
 <div align=right>
   <span class="text11">
   <nobr><a href="index.html#api">API</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="pages/examplist.html">Examples</a> &nbsp; &nbsp; &nbsp;</nobr>
-  <nobr><a href="https://github.com/grubbcode/minplot">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
+  <nobr><a href="https://github.com/pepprseed/svgdatashapes">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
   <nobr><a href="LICENSE.txt">MIT License</a></nobr>
   </span>
 </div>
 <br>
+<p>
+SVGdatashapes.py is a compact set of python functions 
+for creating many types of plots and data displays in SVG for use in web pages.
+General purpose, useful in areas such as biomedical, scientific, business, process monitoring, report generation.
+Plenty of control over legends, tooltips, colors, transparency, and many other appearance details.
+It has no package dependencies, and
+can work nicely in frameworks such as Flask and Bootstrap.
+No javascript, CSS, DOM, or SVG knowledge is required.
+</p>
+<a name="install"></a>
 
-minplot.py is a somewhat minimalist general-purpose python library for creating 
-bar graphs, line plots, scatterplots, piegraphs, boxplots, errorbars, heatmaps, multipanel displays and more
-with plenty of control over plot options, axes, legends, colors, transparency, and other details.
-Graphics are produced in SVG format.
-<br><br>
-Your plot data can be numeric, categorical, or date/time and can come from a database or anywhere else. 
-You represent it as an array of dict or other similar 2-D python iterable.
-<br><br>
-Developing with minplot.py is meant to be agile, rapid, straightforward.
-To get started <a href="minplot.py">download minplot.py</a> and import it.  
-The <a href="index.html#api">minplot.py API</a> is procedural and non-complex.
-In web pages you can display your SVG <a href="index.html#inline">inline</a> or using
-<a href="index.html#inline">&lt;img&gt;, &lt;object&gt;, or &lt;iframe&gt;</a>.
-<br><br>
-
-Here's a first minplot.py example: &nbsp; <a href="pages/e1.html">View code</a><br>
-<img src="static/examples/e1.svg">
-<br><br>
-
-Minplot.py works nicely in frameworks such as Flask.
-No javascript coding is necessary, and knowledge of SVG or CSS isn't required (but could be useful).
-Minplot has some limited reactive UI capabilities (tooltips, clickthru, hide/show of elements)
-and limited stats functionality (compute means, SD, SEM, distributions and quartiles).  
-<br><br>
-Here's an example of 3 curves with error bars &nbsp; &nbsp; <a href="pages/e6.html">View code</a> <br>
-<img src="static/examples/e6.svg" )}}">
-<br><br>
-
-...some beeswarms with boxplots &nbsp; &nbsp; <a href="pages/e7.html">View code</a><br>
 <br>
-<img src="static/examples/e7.svg" )}}"></a>
+
+<a data-toggle="collapse" data-parent="#install" href="index.html#install-content">
+Download / Install</a>
+
+<div class="panel-group" id="install">
+<div class="panel"><div id="install-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+To install with pip: &nbsp; (Coming soon)
+<br> &nbsp; &nbsp; pip install svgdatashapes
+<br> &nbsp; &nbsp; pip install svgdatashapes_dt &nbsp; (if you need date/time support)
+<br>
+<br>
+Or if you prefer, you can just download directly and place into your python source directory:
+<br> &nbsp; &nbsp; <a href="svgdatashapes.py">svgdatashapes.py</a> 
+<br> &nbsp; &nbsp; <a href="svgdatashapes_dt.py">svgdatashapes_dt.py</a> &nbsp; (if you need date/time support)
+    
+
+    </div></div></div></div>
+
+
+
+<a data-toggle="collapse" data-parent="#otherpackages" href="index.html#otherpackages-content">
+Compare vs. D3, plotly, numpy, ggplot</a>
+
+<div class="panel-group" id="otherpackages">
+<div class="panel"><div id="otherpackages-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+SVGdatashapes produces attractive results for many typical straightforward graphing / data display needs, as
+can be seen in the examples.
+The approach is procedural and the code is relatively simple and agile (click on examples to see code).
+It supports some basic 'reactive' things: tooltips, clickthru, hyperlinks, element hide/show with js.
+It does some basic stat / computational things: data ranges, frequency distributions, mean and SD, quartiles for boxplots.
+</p><p>
+Projects that require animations or high-end reactivity would need to use D3, Plotly, or similar;
+projects that require integrated statistics / computational ability should use something like Numpy or R + ggplot instead.
+    
+
+    </div></div></div></div>
+
+
+
+
+<a data-toggle="collapse" data-parent="#usingsvg" href="index.html#usingsvg-content">
+How to use SVG graphics</a>
+
+<div class="panel-group" id="usingsvg">
+<div class="panel"><div id="usingsvg-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+<p>
+SVGdatahshapes renders its results in SVG.
+An SVG graphic is simply a block of xml code within an &lt;svg&gt; tag.
+All modern web browsers support viewing and printing of SVG graphics.
+</p><p>
+SVG is a good format for web-based data displays and line art because it's vector-based and has full support for good fonts, 
+text in any direction, transparency, as well as tooltip and hyperlink support.  
+SVG can share CSS styling from the host web page and can use the full range of html special 
+characters to get Greek letters, etc.  (SVGdatashapes also supports &lt;sup&gt; and &lt;sub&gt; for superscripts and subscripts).
+</p><p>
+You can include a chunk of SVG code directly into your html (referred to as an "inline SVG").
+Or, you can put the SVG in a separate file and reference it using an &lt;img&gt; tag.
+(We do it both ways on this web site.) *
+</p><p>
+There are some differences between "inline" and "&lt;img&gt;":
+</p><p>
+If you use the "inline" method your SVG can be influenced by the host web page's CSS, you can use tooltips,
+and you can use HTML special character constructs such as &amp;Delta; .  On the minus side, you'll have a big
+blob of SVG code within your HTML web page.
+</p><p>
+If you use the &lt;img&gt; method you can use 
+&lt;img&gt; width= and height= to conveniently adjust the size, and the SVG objects are cacheable.
+However, tooltips and 
+<a href="http://stackoverflow.com/questions/24835497/saving-d3js-plot-locally" target="_blank">HTML special characters</a>
+won't work correctly and your SVG won't have access to the host web page's CSS
+(although it's possible to <a href="https://www.w3.org/TR/SVG/styling.html#StyleElementExample" target="_blank">embed CSS 
+class and style definitions into an SVG</a>).
+</p><p>
+One downside of SVG is that users generally can't just grab them from a web page and do something with it like
+incorporate it into a word or powerpoint doc, like they can with a PNG or JPG image.  A way of getting around
+this is discussed here ___________.
+</p><p>
+What about capturing SVG for import into Powerpoint and similar?
+Currently, this requires converting SVG to PNG.  Here's a way to do that:<br>
+_____________________<br>
+_____________________<br>
+_____________________<br>
+</p><p>
+* There are some additional ways to incorporate SVG into web pages that we won't discuss here, such as &lt;iframe&gt; or &lt;object&gt; 
+
+    
+
+    </div></div></div></div>
+
+<br>
+
+
+
+
+A 'Hello world' example &nbsp; 
+<a href="pages/e0.html">Click to view code
+<br><img src="static/examples/e0.svg" height="180" border="0"></a>
+
 <br><br>
+Bar graphs, error bars
+<table><tr>
+<td><a href="pages/e1.html"><img src="static/examples/e1.svg" height="180" border="0"></a></td>
+<td width=20></td>
+<td><a href="pages/e13.html"><img src="static/examples/e13.svg" height="220" border="0"></a></td>
+<td width=20></td>
+<td><a href="pages/e14.html"><img src="static/examples/e14.svg" height="120" border="0"></a></td>
+</tr></table>
+<br>
+Line plots and curves
+<table><tr>
+<td><a href="pages/e6.html"><img src="static/examples/e6.svg" height="220" border="0"></a></td>
+<td width=20></td>
+<td><a href="pages/e6a.html"><img src="static/examples/e6a.svg" height="220" border="0"></a></td>
+</tr></table>
+<br>
 
-...and a multipanel display with curves &nbsp; &nbsp; <a href="pages/e8.html">View code</a><br><br>
-<img src="static/examples/e8.svg" )}}"></a>
-<br><br>
+Dates and times
+<table><tr>
+<td><a href="pages/e4.html"><img src="static/examples/e4.svg" height="100" border="0"></a></td>
+<td width=40></td>
+<td><a href="pages/e5.html"><img src="static/examples/e5.svg" height="100" border="0"></a></td>
+</tr></table>
+<br>
 
-<a href="pages/examplist.html">View all available examples</a>
+<table><tr>
+<td align="center">
+Scatterplots<br>
+<a href="pages/e2.html"><img src="static/examples/e2.svg" height="150" border="0"></a></td>
+<td width=20></td>
+<td align="center">
+Pie charts<br>
+<a href="pages/e3.html"><img src="static/examples/e3.svg" height="150" border="0"></a></td>
+<td width=20></td>
+<td align="center">
+Heatmaps<br>
+<a href="pages/e10.html"><img src="static/examples/e10.svg" height="150" border="0"></a></td>
+</tr></table>
+<br>
 
-<br><br>
+
+<a data-toggle="collapse" data-parent="#moreex" href="index.html#moreex-content">
+More examples</a>
+
+<div class="panel-group" id="moreex">
+<div class="panel"><div id="moreex-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
 
-<h3>Minplot units, plot areas, data space</h3>
+Distributions, box plots, histograms
+<table><tr>
+<td><a href="pages/e7.html"><img src="static/examples/e7.svg" height="150" border="0"></a></td>
+<td width=20></td>
+<td><a href="pages/e7a.html"><img src="static/examples/e7a.svg" height="150" border="0"></a></td>
+<td width=20></td>
+<td><a href="pages/e9.html"><img src="static/examples/e9.svg" height="150" border="0"></a></td>
+</tr></table>
+<br>
+
+Multipanel
+<table><tr>
+<td><a href="pages/e8.html"><img src="static/examples/e8.svg" height="150" width="350" border="0"></a></td>
+<td width=40></td>
+<td><a href="pages/e8b.html"><img src="static/examples/e8b.svg" height="150"  width="350" border="0"></a></td>
+</tr></table>
+<br>
+
+Other: &nbsp; Wind barbs<br>
+<a href="pages/e11.html"><img src="static/examples/e11.svg" height="120" width="450" border="0"></a>
+<br>
+<br>
+Other: &nbsp; Secchi depths<br>
+<a href="pages/e12.html"><img src="static/examples/e12.svg" height="120" width="450" border="0"></a>
+<br>
+
+<br>
+<h4><a href="pages/examplist.html">All examples</a></h4>
+
+    
+
+    </div></div></div></div>
+
+
+<br>
+
+ 
+
+
+
+<a data-toggle="collapse" data-parent="#units" href="index.html#units-content">
+Units and data spaces</a>
+
+<div class="panel-group" id="units">
+<div class="panel"><div id="units-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
   <p>
-  Here's some terminology we use:
-  <u>Minplot units</u> are based on the SVG width and height with
-  origin (0, 0) in lower-left corner.  <a href="pages/test_units.html">Here's an illustration</a>.
-  The <u>plot area</u> is the rectangular area where you plot your data.  
-  <u>Data space</u> is the X, Y space expressed in the context of your data points in X and Y.
+  Some terminology we use:
+  </p><p>
+  <u>SVG units</u> are used for positioning things within the SVG image.
+  For example, you might use SVG units to specify the location of a legend and other labels.
+  The origin (0, 0) is always in the lower-left corner.  
+  In a fixed-size SVG these units usually correspond to pixels at 100 per inch.
+  <a href="pages/test_units.html">Here's an illustration</a>.
+  </p><p>
+  <u>Plot area</u> is the rectangular area where data can be plotted.
+  </p><p>
+  <u>Data space</u> is the plot area space expressed in the context of your data in X and Y.
+  For example if you were plotting daily average temperatures, the 
+  data space might be 0 to 100 in Y (for degrees Fahrenheit) and the date range Jan 1 to Dec 31 2016 in X.
   </p>
-  <br>
+    
+
+    </div></div></div></div>
 
 
-<h3>Plot data and "column" names</h3>
+
+
+<a data-toggle="collapse" data-parent="#data" href="index.html#data-content">
+Your data, data types, missing data, data column names</a>
+
+<div class="panel-group" id="data">
+<div class="panel"><div id="data-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
   <p>
-  minplot.py works with data that you have put into a 2-D python iterative (rows and columns), 
-  such as an array of dict or an array of array.
-  With array of dict you can identify columns simply by giving the dict element names.
-  Otherwise you can assign column names using <span class="fxn">datacolumns()</span>, or
-  just identify columns by array index position.
+  SVGdatashapes is driven by data coming from a database, a file, or anywhere else.
+  </p><p>
+  Your data should be organized as rows and columns, and should be put into a rectangular 2-D python structure
+  such as an array of dict, an array of tuples, or an array of array.  
+  Typically you'll iterate through rows of data and do things using specific columns.
+  To handle 1-D structures see <span class="fxn">vec2d()</span>.
   </p>
-  <br>
-
-
-<h3>Working with different data types</h3>
   <p>
-  <u>Numerics</u> can be integers, floating point, or scientific notation values.  To work with numeric data,
-  set up a numerically scaled space in X or Y using <span class="fxn">numspace()</span>, and then
-  render a numeric axis using <span class="fxn">axisrender()</span>.  
-  If you wish, you can find the numeric range of your data, or compute quartiles or 
-  frequency distributions using <span class="fxn">numinfo()</span>.
+  These data types are supported: 
+  <u>numeric data</u> which are integers, floating point, or scientific notation values.
+  <u>categorical data</u> which are tags or labels;
+  <u>dates</u> are calendar dates, optionally with clock <u>times</u> appended <a href="index.html#dt">[more info]</a>.
+  You can implement other coordinate systems by writing your own translation layer.
+  In fact, that's how we implement date / time support.
   </p><p>
-  <u>Categorical data</u> are tags, labels or any other non-continuous data.  To work with categorical data,
-  set up a categorical data space in X or Y using <span class="fxn">catspace()</span>, and
-  render a categorical axis using <span class="fxn">axisrender()</span>.  
-  If you wish you can find a unique list of categories, or run frequency distributions, using <span class="fxn">catinfo()</span>.
+  Handling of missing or invalid data:
+  Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
+  When <tt>None</tt> is encountered most of the API functions silently return 
+  <tt>False</tt> without rendering anything or raising an error.
+  (The <span class="fxn">curvenext()</span> and <span class="fxn">rectangle()</span> functions differ from this a little).
+  If an invalid piece of data other than <tt>None</tt> is encountered
+  (such as a non-numeric value when numeric is expected, an unrecognized categorical term, a malformed date,
+  or a zero-length item), the API functions will typically raise an error (class <span class="fxn">AppError</span>).
   </p><p>
-  <u>Dates</u> are calendar dates, or calendar dates with times appended.
-  Many date and time notations are supported.  For details and examples see the <a href="index.html#dt">datetime section below</a>.
-  </p><p>
-  <a href="index.html#missingdata">&bull; Handling of missing or invalid data</a>
+  Data column names:
+  Some API functions take a column name parameter.
+  If your data are an array of dict, then data columns are identified simply using the dict element name.
+  Otherwise data columns are identified using an integer which is the column's array position within the row, 
+  and you may want to write your code so that you reference columns by name using your own
+  array of names and <tt>.index()</tt>.
   </p>
-  
-  <br>
+    
+
+    </div></div></div></div>
 
 
-<h3>Line and text properties, colors, opacity, CSS</h3>
+
+
+<a data-toggle="collapse" data-parent="#props" href="index.html#props-content">
+Setting text and line styles, colors, opacity, CSS</a>
+
+<div class="panel-group" id="props">
+<div class="panel"><div id="props-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
   <p>
-  Use <span class="fxn">lineprops()</span> to set the
-  color, width, and dash pattern of lines.
-  Use <span class="fxn">textprops()</span> to set the size, color, and other properties of rendered text.
+  To control the size, font, color, transparency and direction of text use <a href="index.html#settext">settext()</a>.
+  To control the color, thickness, and any dashing of lines use <a href="index.html#settext">setline()</a>.
   </p><p>
-  Colors are specified in the usual way for example <tt>'#a0ffa0'</tt> is light green; '#aaa' is a light shade of gray.
+  Colors are specified in the usual way for example <tt>#afa</tt> is light green; <tt>#aaa</tt> is a light shade of gray.
   There are also some <a href="http://www.december.com/html/spec/colorsvg.html" target="_blank">named colors</a> that SVG recognizes.
   </p><p>
   Opacity is a value ranging from 0.0 (totally transparent) to 1.0 (completely opaque).
   </p><p>
-  Text rendering: Use <tt>\n</tt> to embed newlines in text.
-  Use eg. <tt>&lt;sup>2&lt;/sup></tt> or <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
-  Special character html constructs such as <tt>&amp;micro;</tt> (&micro;) can be used if
-  you're doing <a href="index.html#inline">inline SVG</a>.
+  When rendering text you can use these constructs within the text string:  <tt>\n</tt> to embed newlines in text,
+  and eg. <tt>&lt;sup>2&lt;/sup></tt> or <tt>&lt;sub>2&lt;/sub></tt> to get superscripts or subscripts.
+  HTML special character constructs such as <tt>&amp;micro;</tt> (&micro;) can be used if you're doing inline SVG.
   </p><p>
-  CSS:&nbsp; If you wish, lines and text can be explicitly CSS-styled 
-  using the <i>cssclass=</i> and/or <i>cssstyle=</i> arguments.
-  Exactly how CSS behaves depends on whether you're <a href="index.html#inline">doing inline SVG or not</a>.
-  Within an SVG there are some attributes (eg. colors) that can be done either via CSS style or SVG parameters;
-    if both are given the CSS seems to takes precedence.
-  To CSS-style sets of elements together, see <span class="fxn">groupbegin()</span> below.
+  CSS: &nbsp; text and lines can often be CSS-styled using the <i>css=</i> and/or <i>style=</i> arguments.
+  To style sets of elements together, see <span class="fxn">groupbegin()</span> below.
   </p>
+    
+
+    </div></div></div></div>
+
+
+
+
+
+
+
 
 <a name="api"></a>
 <br>
-
-<a name="api"></a>
 <br>
-<br>
-<h3>minplot.py API</h3>
+<h3>SVGdatashapes API</h3>
 <p>
-Here's the minplot API reference.  
 Mandatory args are shown within the function templates and indicated as such.
 All args are keyword args unless otherwise indicated.
 </p>
 
-
 <br>
-<h3><i>Preliminaries</i></h3>
 
 
+<a data-toggle="collapse" data-parent="#svgbegin" href="index.html#svgbegin-content">
+<b><i>&bull; svgbegin</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; <i>begin a new SVG graphic</i>
 
-    <div class="panel-group" id="svgbegin">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#svgbegin" href="index.html#svgbegin-content">&bull; svgbegin( width, height )</a>
-    </i></b></span>
-    <div id="svgbegin-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="svgbegin">
+<div class="panel"><div id="svgbegin-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>svgbegin( width, height )</i></h3>
   <p>
-  Initialize minplot.py and begin a new SVG graphic.
-  <br>
   In most cases you'll start with <span class="fxn">svgbegin()</span> and end with <span class="fxn">svgresult()</span>.
   In more elaborate applications <span class="fxn">svgbegin()</span> and <span class="fxn">svgend()</span> can be used multiple times.
   </p><p>
+  This function must be called before any other API function that produces graphical content or sets X or Y space.
+  </p><p>
   <span class="parm">width=</span> and <span class="parm">height=</span> &nbsp; Mandatory.  
-  Integers that specify the SVG's size, aspect ratio, and the minplot units
-  (X will range from 0 to <i>width</i>, and Y from 0 to <i>height</i> with origin in the lower-left corner).  
-  To create a fixed-size SVG the above is all you need, and <i>width</i> and <i>height</i> are same as
+  Integers that specify the SVG's size, aspect ratio, and the SVG units.
+  X will range from 0 to <i>width</i>, and Y from 0 to <i>height</i> with origin in the lower-left corner.
+  To create a fixed-size SVG the above is all you need, and <i>width</i> and <i>height</i> map to
   screen pixels.  To create a dynamically-sized SVG use <i>fluidsize=True</i> and your SVG will be
   sized relative to the containing &lt;div> and <i>width</i>, <i>height</i> will influence the aspect ratio.
   </p><p>
@@ -230,14 +428,14 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">bgcolor=color</span> &nbsp; optional; shade entire SVG with this color initially.
   </p><p>
-  <span class="parm">testgrid=True</span> &nbsp; optional; render a test grid showing minplot units.
+  <span class="parm">testgrid=True</span> &nbsp; optional; render a test grid showing SVG units.
   </p><p>
   <span class="parm">notag=True</span> &nbsp; optional; suppress the opening &lt;svg> tag, in case you want to generate your own.
   If you do, the width and height you give in your svg tag must match svgbegin's <i>width</i> and <i>height</i> args.
   </p><p>
   <span class="parm">browser=</span> &nbsp; optional; only needed with <i>fluidsize=True</i> and is necessary due to browser's
   implementing SVG dynamic sizing differently.  It indicates the user's browser type, one of
-  <tt>'firefox'</tt>, <tt>'chrome'</tt>, <tt>'safari'</tt>, or <tt>'msie'</tt>. In flask you can use <tt>request.user_agent.browser</tt> to get this.
+  <tt>firefox</tt>, <tt>chrome</tt>, <tt>safari</tt>, or <tt>msie</tt>. In flask you can use <tt>request.user_agent.browser</tt> to get this.
   </p>
       
 
@@ -246,52 +444,53 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#findrange" href="index.html#findrange-content">
+<b><i>&bull; findrange</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; <i>find min and max of your numeric data</i>
 
-    <div class="panel-group" id="findrange">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#findrange" href="index.html#findrange-content">&bull; findrange( )</a>
-    </i></b></span>
-    <div id="findrange-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="findrange">
+<div class="panel"><div id="findrange-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+   <h3><i>findrange( testval )</i></h3>
    <p>
-   Determine a reasonable axis numeric min and max using your data.
-   To use this you iterate over your data rows and call <span class="fxn">findrange()</span> for each row.
-   Then when done call it once more to return the results.  Here's an example:
+   Find the min and max of one or more columns of numeric data.  
+   To use this, iterate over your data rows, calling <span class="fxn">findrange()</span> with a data value (or sum of values) from the row.
+   At the end call it once more with <i>finished=True</i> to return the results.  
+   It's set up this way to be flexibile enough to get correct axis min max when presenting stacked or 
+   clustered bars, &plusmn; error bars, showing several curves together, or plotting cumulative values.
+   In addition to actual datamin and datamax, padded axmin and axmax are also supplied to support axis rendering.
+   Here's an example:
    <pre>
-   import minplot as p
+   import svgdatashapes as s
    for row in dataset:
-       p.findrange( testval=row["avg"] )
-   result = p.findrange( finish=True )
+       s.findrange( testval=row["avg"] )
+   result = s.findrange( finish=True )
    print str(result.axmin), str(result.axmax)
    </pre>
-   It's set up this way to give you the flexibility to check one data column or several, which is needed
-   if you're doing stacked bars, clustered bars, error bars, showing several curves, or plotting cumulative values.
-  </p><p>
-  Results are returned in a namedtuple having these members: 
-  <br><tt>axmin</tt> and <tt>axmax</tt> ... the nicely adjusted axis min and max 
-  <br><tt>datamin</tt> and <tt>datamax</tt> ... the actual raw data min and max 
-  <br>Also includes <tt>nvals</tt>, <tt>allint</tt>, <tt>allpos</tt>, <tt>allneg</tt> and <tt>nbadvals</tt>
-  which have same meaning as in <span class="fxn">numinfo()</span> below.
-  </p><p>
-  <span class="parm">testval=</span> &nbsp; Mandatory. A numeric value to test, in data units.
-  </p><p>
-  <span class="parm">erramt=</span> &nbsp; optional; an error bar value in data units.  This will be added to <i>testval=</i>
-    in finding maxima, and deducted from <i>testval=</i> for finding minima.
-  </p><p>
-  <span class="parm">testfor=</span> &nbsp; optional; if given as <tt>'max'</tt> look for a maxima only.
-  If given as <tt>'min'</tt> look for a minima only.  
-  Default is <tt>'both'</tt> (look for both minima and maxima).
-  </p><p>
-  <span class="parm">finish=True</span> &nbsp; Mandatory on last call. Causes the result to be returned.
-  </p><p>
-  <span class="parm">nearest=</span> and <span class="parm">addlpad=</span> &nbsp; optional; can be specified along with 
-  <i>finish=True</i> to help get a clean boundary for the axis min and max.   For example if you had data ranging from 17 to 62 
-  <span class="fxn">findrange()</span> would normally determine the axis range to be from 15 to 65 with stubs every 5.
-  To get stubs (etc) every 10 you could specify <i>nearest=10</i>.  For automated situations 
-  where data magnitude varies you can use eg. <i>addlpad=1</i> or <i>addlpad=2</i> to get additional 
-  padding at the ends that's proportional to your data range.
-  </p>
+   </p><p>
+   The result is a tuple that can be passed directly to
+   <span class="fxn">xspace</span> or <span class="fxn">yspace</span> 
+   via the <i>datarange</i> parameter.
+   The result tuple has these members: 
+   <br><tt>axmin</tt> and <tt>axmax</tt> ... the adjusted min and max for axis rendering purposes
+   <br><tt>datamin</tt> and <tt>datamax</tt> ... the actual raw data min and max 
+   </p><p>
+   <span class="parm">testval=</span> &nbsp; Mandatory except when <i>finish=True</i> A numeric data value to test for min and/or max.
+   </p><p>
+   <span class="parm">erramt=</span> &nbsp; optional; an error bar value in data units.  This will be added to <i>val</i>
+   in finding maxima, and deducted from <i>val</i> for finding minima.
+   </p><p>
+   <span class="parm">finish=True</span> &nbsp; Mandatory on last call. Compute and return the result.
+   </p><p>
+   <span class="parm">nearest=</span> and <span class="parm">addlpad=</span> &nbsp; optional; can be specified along with 
+   <i>finish=True</i> to help get a clean boundary for the axis min and max.   For example if you had data ranging from 17 to 62 
+   <span class="fxn">findrange()</span> would normally determine the axis range to be from 15 to 65 with stubs every 5.
+   To get stubs (etc) every 10 you could specify <i>nearest=10</i>.  For automated situations 
+   where data magnitude varies you can use eg. <i>addlpad=1</i> or <i>addlpad=2</i> to get additional 
+   padding at the ends that's proportional to your data range.
+   </p><p>
+   See also <span class="fxn">columninfo()</span> which can compute distributions and quartiles.
+   </p>
       
 
     </div></div></div></div>
@@ -299,122 +498,55 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#uniqcats" href="index.html#uniqcats-content">
+<b><i>&bull; uniqcats</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>get a unique list of category terms from your data</i>
 
-    <div class="panel-group" id="numspace">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numspace" href="index.html#numspace-content">&bull; numspace( axis, axmin, axmax, poslo, poshi )</a>
-    </i></b></span>
-    <div id="numspace-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="uniqcats">
+<div class="panel"><div id="uniqcats-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-  <p>
-  Set up numeric scaling in one dimension (either X or Y) of your plot area.
-  </p><p>
-  <span class="parm">axis=</span> &nbsp; Mandatory.  Either <tt>'X'</tt> or <tt>'Y'</tt>
-  </p><p>
-  <span class="parm">axmin=</span> and <span class="parm">axmax=</span> &nbsp; Mandatory. The axis min and max.
-  <i>axmin</i> must be less then <i>axmax</i>.
-  These may be computed in advance using <span class="fxn">findrange()</span> 
-  </p><p>
-  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; Mandatory.  Specify the location of the axis 
-  in minplot units.  For example if you're doing X space, <i>poslo=100, poshi=400</i> will set up X space from
-  minplot coordinates 100 to 400 in the SVG.  
-  </p><p>
-  <span class="parm">log=True</span> &nbsp; optional; set up logarithmic scaling.  You can also specify <i>log='log+1'</i>
-  </p><p>
-  <span class="parm">reverse=True</span> &nbsp; optional; if specified the axis will use high-to-low data scaling, opposite of usual.
-  </p>
-  <span class="parm">allint=True</span> &nbsp; optional; indicates that the all data are integer to avoid odd-looking fractional scale increments.
-  </p>
-      
-
-    </div></div></div></div>
-
-
-
-
-
-
-    <div class="panel-group" id="catspace">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catspace" href="index.html#catspace-content">&bull; catspace( axis, catlist, poslo, poshi )</a>
-    </i></b></span>
-    <div id="catspace-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Set up categorical scaling in one dimension (either X or Y) of your plot area.
-  Normal behavior is for categories to be placed from left to right on X axis, or from
-  top to bottom on Y axis.  
-  </p><p>
-  This function returns a list of the category panels with
-  names and boundary coordinates (an array of tuples each with: <tt>name poslo poshi</tt>) 
-  which is useful when doing <a href="index.html#multipanel">multipanel displays</a>.
-  </p><p>
-  <span class="parm">axis=</span> Mandatory.  Either <tt>'X'</tt> or <tt>'Y'</tt>
-  </p><p>
-  <span class="parm">catlist=</span> &nbsp; Mandatory. An iterable containing the desired category terms as they appear in your
-  data, in the order they are to be placed.  It can include members of None or '' which 
-  will act as spacers.  The non-spacer terms should be unique with no duplication.
-  To derive this from your data you can use <span class="fxn">catinfo()</span>
-  </p><p>
-  <span class="parm">poslo=</span> and <span class="parm">poshi=</span> &nbsp; Mandatory. Specify the locations of the axis min and max,
-  in minplot units.  For example if you're doing X space, <i>poslo=100, poshi=400</i> will set up X space from
-  minplot coordinates 100 to 400 in the SVG.  
-  </p><p>
-  <span class="parm">reverse=True</span> &nbsp; optional; order the categories opposite of usual.
-  </p>
-      
+   <h3><i>uniqcats( )</i></h3>
+   Get a unique list of categories from a column of categorical data.
+   This can be passed directly to 
+   <span class="fxn">xspace</span> or <span class="fxn">yspace</span> 
+   via the <i>catlist</i> parameter.
+   </p><p>
+   <span class="parm">datarows=</span> &nbsp; Mandatory. Your 2-D data structure.  (If you have a 1-D vector
+   you can use <span class="fxn">vec2d()</span> to convert it.)
+   </p><p>
+   <span class="parm">column=</span> &nbsp; Mandatory. Identifies the data column to be characterizaed.
+   Either a dict element name, or an integer (array index).
+   </p><p>
+   <span class="parm">handlenulls=</span> &nbsp; optional. Specify how category value of <tt>None</tt> (or zero-length) are
+   to be handled.  One of <tt>ignore</tt>, <tt>keep</tt> or <tt>spacers</tt>.  Default is <tt>ignore</tt>;
+   <tt>keep</tt> causes one null instance to be retained; <tt>spacers</tt> causes all null instances to be retained
+   as a way of adding spacing within the categorical axis.
+   </p><p>
+   See also <span class="fxn">columninfo()</span> which can compute categorical distributions.
+   </p>
+    
 
     </div></div></div></div>
 
 
 
 
+<a data-toggle="collapse" data-parent="#columninfo" href="index.html#columninfo-content">
+<b><i>&bull; columninfo</i></b></a> &nbsp; &nbsp; &nbsp; <i>run stats or freq distributions on a data column</i>
 
-    <div class="panel-group" id="datacolumns">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datacolumns" href="index.html#datacolumns-content">&bull; datacolumns( namelist ) &nbsp; &nbsp; index( name )</a>
-    </i></b></span>
-    <div id="datacolumns-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="columninfo">
+<div class="panel"><div id="columninfo-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>columninfo( datarows, columnname )</i></h3>
   <p>
-  <b>datacolumns( namelist )</b>
+  Sometimes you may want to characterize a numeric data column more thoroughly than is possible with <span class="fxn">findrange()</span>.
+  Or, you may wish to run frequency distributions on a numeric or categorical data column.
+  Or, if you're doing boxplots you may need to compute percentiles on a numeric data column.
+  <br><br>
+  This function does those things.  It returns a tuple of characteristics for the specified data column.
   </p><p>
-  Set the internal current data column name list so that data columns can be identified by name.
-  If your data structure uses dict rows you don't use this.
-  </p><p>
-  <span class="parm">namelist=</span> &nbsp; Mandatory.  Iterable of column names in left-to-right order as they appear in 
-  your data structure.  Most DBMS provide a way to get a list of query result column names.  
-  </p><p>
-  <br>
-  <b>index( colname )</b>
-  </p><p>
-  Given a column name that was registered earlier with <span class="fxn">datacolumns()</span>, this returns its integer array index.
-  If your data structure uses dict rows or named tuple rows, you don't use this.
-  </p>
-  
-      
-
-    </div></div></div></div>
-
-
-
-
-
-    <div class="panel-group" id="numinfo">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#numinfo" href="index.html#numinfo-content">&bull; numinfo( datarows, numcol )</a>
-    </i></b></span>
-    <div id="numinfo-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Return a tuple of characteristics for a numeric data column, optionally including 
-  frequency distributions and boxplot percentiles.
-  </p><p>
-  Results are returned as a namedtuple having these members: 
+  For numeric data columns, results are returned as a namedtuple having these members: 
   <br><tt>min</tt> and <tt>max</tt> ... the min and max observations
   <br><tt>mean</tt> ... the average
   <br><tt>nvals</tt> ... number of valid observations
@@ -428,19 +560,25 @@ All args are keyword args unless otherwise indicated.
   <br><tt>distbinsize</tt> ... the binsize used in the above
   <br><tt>percentiles</tt> ... optional percentiles dict (see below)
   </p><p>
+  For categorical data columns, only <tt>distribution</tt> is supported, and <i>categorical=True</i> must be specified.
+  </p><p>
   <span class="parm">datarows=</span> &nbsp; Mandatory. Your 2-D data structure.  (If you have a 1-D vector
   you can use <span class="fxn">vec2d()</span> to convert it.)
   </p><p>
   <span class="parm">numcol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
-  Either a column name, dict element name, or an integer (array index).  
+  Either a dict element name or an integer array index.
+  </p><p>
+  <span class="parm">categorical=True</span> &nbsp; If specified the data column contains categorical data
+   and only a frequency distribution will be produced (implies <i>distrib=True</i>).
   </p><p>
   <span class="parm">distrib=True</span> &nbsp; optional; if specified, compute a frequency distribution on the 
-  examined data column and provide it in the <tt>distribution</tt> member of the result
-  (an array of namedtuple each having members <tt>binlo binmid accum</tt>).
-  A reasonable default numeric binsize (inc/2) is determined (it can be overridden using <i>distbinsize=</i>, see below).  
-  The result is suitable for plotting if you wish.
+  examined data column and provide it in the <tt>distribution</tt> member of the result.
+  For numeric data columns
+  an array of namedtuple each having members <tt>binlo binmid accum</tt> is returned, and
+  a reasonable default numeric binsize (inc/2) is determined (it can be overridden using <i>distbinsize=</i>, see below).  
+  The result can be plotted as a histogram. 
   </p><p>
-  <span class="parm">distbinsize=</span> &nbsp; optional; may be used with <i>distrib=True</i> to explicitly control 
+  <span class="parm">distbinsize=</span> &nbsp; optional; may be used with <i>distrib=True</i> on numeric data columns, to explicitly control 
   a frequency distribution's binsize.  It may be a number eg. <i>distbinsize=10</i> which sets the 
   binsize explicitly, or it may be a construct such as <i>distbinsize='inc/4'</i> which sets the the 
   binsize to the tic increment (which was computed on-the-fly earlier) divided by 4.
@@ -450,7 +588,7 @@ All args are keyword args unless otherwise indicated.
   incrementally.  Default is <tt>None</tt>.
   </p><p>
   <span class="parm">percentiles=True</span> &nbsp; optional; if specified, compute the 5th, 25th, 50th (median), 
-  75th, and 95th percentile for the examined data column and put them in the <tt>percentiles</tt> member
+  75th, and 95th percentile for the examined numeric data column and put them in the <tt>percentiles</tt> member
   of the result (a namedtuple with members <tt>p5 p25 median p75 p95</tt>).
   The examined data column <u>must</u> already be sorted 
   numerically from low to high.  The usual use for these percentiles data is to generate box plots 
@@ -462,85 +600,65 @@ All args are keyword args unless otherwise indicated.
 
 
 
-
-    <div class="panel-group" id="catinfo">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#catinfo" href="index.html#catinfo-content">&bull; catinfo( datarows, catcol )</a>
-    </i></b></span>
-    <div id="catinfo-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Return some characteristics of a categorical data column, including a 
-  unique list of the categories seen (for subsequent use by <span class="fxn">catspace()</span>), or
-  frequency distributions (which can later be plotted).
-  Categories are accumulated in the order encountered.
-  </p><p>
-  Results are returned in a namedtuple having these members: 
-  <br><tt>catlist</tt> ... the unique list of categories in the order encountered
-  <br><tt>distribution</tt> ... optional distribution bins structure
-  </p><p>
-  <span class="parm">datarows=</span> &nbsp; Mandatory. Your 2-D data structure.  (If you have a 1-D vector
-  you can use <span class="fxn">vec2d()</span> to convert it.)
-  </p><p>
-  <span class="parm">catcol=</span> &nbsp; Mandatory. Identifies the data column to be characterizaed. 
-  Either a column name, dict element name, or an integer (array index). 
-  </p><p>
-  <span class="parm">nullspacers=True</span> &nbsp; optional; if True then any encountered category terms 
-  that are None or '' are retained to serve as spacers.  Default is <tt>True</tt> 
-  </p><p>
-  <span class="parm">distrib=True</span> &nbsp; optional; if specified, compute a frequency 
-  distribution on the categorical data column of interest, and put it in the <tt>distribution</tt>
-  member of the result; this can be plotted if you wish.
-  </p><p>
-  <span class="parm">accumcol=</span> &nbsp; optional; if specified with <i>distrib=True</i>, identifies a data
-  column holding numeric values to be accumulated.  If <tt>None</tt> instances will just be counted
-  incrementally.  Default is <tt>None</tt>.
-  </p>
-      
-
-    </div></div></div></div>
-
-
-
-
-
-    <div class="panel-group" id="vec2d">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#vec2d" href="index.html#vec2d-content">&bull; vec2d( vector )</a>
-    </i></b></span>
-    <div id="vec2d-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Given a one-dimensional array of data (a vector), return a two-dimensional (rows with 1 column) representation that can be used with 
-  <span class="fxn">numinfo()</span> or <span class="fxn">catinfo()</span> 
-  (use <i>numfield=0</i> or <i>catfield=0</i>).
-  Provided for convenience.
-  </p><p>
-  <span class="parm">vector=</span> &nbsp; a 1-D array / data vector.
-  </p>
-
-      
-
-    </div></div></div></div>
-
-
-
-
-
+<a name="settext"></a>
 <br>
-<h3><i>Line and text styles / properties</i></h3>
+
+
+
  
 
 
-    <div class="panel-group" id="lineprops">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#lineprops" href="index.html#lineprops-content">&bull; lineprops( )</a>
-    </i></b></span>
-    <div id="lineprops-content" class="panel-collapse collapse "> <div class="panel-body">
+<a data-toggle="collapse" data-parent="#settext" href="index.html#settext-content">
+<b><i>&bull; settext</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>set text point size, font, color, style, alignment</i>
 
+<div class="panel-group" id="settext">
+<div class="panel"><div id="settext-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+  <h3><i>settext( )</i></h3>
+  <p>
+  Set the current properties to be applied to subsequent text rendering. 
+  Each property corresponds with an argument below.  
+  Individual properties remain in effect until explicitly updated or <tt>reset</tt>
+  All args are optional; specify one or several.
+  </p><p>
+  <span class="parm">ptsize=</span> &nbsp; text point size.  Integer. Default is 10.
+  It's best to set <i>ptsize=</i> this way rather than CSS, for correct internal layout computations.
+  </p><p>
+  <span class="parm">color=</span> &nbsp; text color.  Default is <tt>'#000'</tt> (black).
+  </p><p>
+  <span class="parm">opacity=</span> &nbsp; text opacity.  Default is 1.0 (opaque).
+  </p><p>
+  <span class="parm">anchor=</span> &nbsp; text alignment.  Use <tt>'start'</tt> for left-adjusted text;
+  <tt>'middle'</tt> for centered text; <tt>'end'</tt> for right-adjusted text.  Default is <tt>'start'</tt>
+  </p><p>
+  <span class="parm">rotate=</span> &nbsp; text rotation (degrees clockwise).  <i>rotate=0</i> gives
+  ordinary horizontal text.  Usually a value from 0 to 90, or 0 to -90.  Default is <tt>None</tt>
+  </p><p>
+  <span class="parm">style=</span> &nbsp; a CSS style specification for the text.  Default is None.
+  </p><p>
+  <span class="parm">css=</span> &nbsp; a CSS class name to style the text.  Default is None.
+  </p><p>
+  <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to future text positions.  
+       Specify as a 2-member list of (x, y) in SVG units.  Default is <tt>None</tt>.
+  </p><p>
+  <span class="parm">reset=True</span> &nbsp; reset to use all of the defaults.  
+       Can be combined with any other args.
+    
+
+    </div></div></div></div>
+
+
+
+
+<a data-toggle="collapse" data-parent="#setline" href="index.html#setline-content">
+<b><i>&bull; setline</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>set line color, thickness, style</i>
+
+<div class="panel-group" id="setline">
+<div class="panel"><div id="setline-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+  <h3><i>setline( )</i></h3>
   <p>
   Set the current properties to be applied to subsequent line rendering.  
   Each property corresponds with an argument below.  
@@ -556,96 +674,88 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">dash=</span> &nbsp; dash pattern.  Example: <tt>dash='5,2'</tt>.
   Default is <tt>None</tt> for solid line.
   </p><p>
-  <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the line.  Default is None.
+  <span class="parm">style=</span> &nbsp; a CSS style specification for the line.  Default is None.
   </p><p>
-  <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the line.  Default is None.
+  <span class="parm">css=</span> &nbsp; a CSS class name to style the line.  Default is None.
   </p><p>
-  <span class="parm">reset=True</span> &nbsp; apply all of the defaults.  
+  <span class="parm">reset=True</span> &nbsp; reset to use all of the defaults.  
        Can be combined with any other args.
+  </p>
+    
+
+    </div></div></div></div>
+
+
+<br>
+
+
+
+
+<a data-toggle="collapse" data-parent="#xspace" href="index.html#xspace-content">
+<b><i>&bull; xspace, yspace</i></b></a> &nbsp; &nbsp; <i>set up a data space in X or Y</i>
+
+<div class="panel-group" id="xspace">
+<div class="panel"><div id="xspace-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+  <h3><i>xspace( svgrange )<br>yspace( svgrange )</i></h3>
+  <p>
+  Set up data space and scaling in either X or Y.
+  If <i>datarange=</i> parameter is present the space will use numeric scaling.
+  Otherwise if <i>catlist=</i> parameter is present the space will use categorical scaling.
+  </p><p>
+  <span class="parm">svgrange=</span> &nbsp; Mandatory.  A tuple of two values indicating location of the data space in SVG units.
+  Both values should be within the SVG's size as defined in <span class="fxn">svgbegin()</span>.
+  Example: <tt>(100,450)</tt>
+  <br>
+  For xspace the two values would indicate left edge and right edge of the new plot area.
+  <br>
+  For yspace the two values would indicate bottom edge and top edge of the new plot area.
+  </p><p>
+  <span class="parm">datarange=</span> &nbsp; A tuple of two values indicating axis min and max, in data units.
+  You can simply pass <span class="fxn">findrange()</span> return value, if you used it.
+  If this parameter is present it means the space will use numeric scaling.
+  </p><p>
+  <span class="parm">catlist=</span> &nbsp; A unique list of categories.
+  You can simply pass <span class="fxn">uniqcats()</span> return value, if you used it.
+  If this parameter is present it means the space will use categorical scaling.
+  It also means that the function will return a structure that can be iterated over to do <a href="index.html#multipanel">multipanel displays</a>.
+  </p><p>
+  <span class="parm">reverse=True</span> &nbsp; optional; if specified the axis will use high-to-low data scaling, opposite of usual.
+  </p><p>
+  <span class="parm">log=True</span> &nbsp; optional; set up logarithmic scaling.  You can also specify <i>log='log+1'</i>
+  </p>
+  <span class="parm">allint=True</span> &nbsp; optional; indicates that the all data are integer to avoid odd-looking fractional scale increments.
   </p>
       
 
     </div></div></div></div>
 
 
+ 
 
+<a data-toggle="collapse" data-parent="#xaxis" href="index.html#xaxis-content">
+<b><i>&bull; xaxis, yaxis</i></b></a> &nbsp; &nbsp; &nbsp; <i>render an X axis or Y axis</i>
 
+<div class="panel-group" id="xaxis">
+<div class="panel"><div id="xaxis-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-    <div class="panel-group" id="textprops">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#textprops" href="index.html#textprops-content">&bull; textprops( )</a>
-    </i></b></span>
-    <div id="textprops-content" class="panel-collapse collapse "> <div class="panel-body">
-
+  <h3><i>xaxis( )<br>yaxis( )</i></h3>
   <p>
-  Set the current properties to be applied to subsequent text rendering. 
-  Each property corresponds with an argument below.  
-  Individual properties remain in effect until explicitly updated or <tt>reset</tt>
-  All args are optional; specify one or several.
-  </p><p>
-  <span class="parm">ptsize=</span> &nbsp; text point size.  Integer. Default is 10.
-  It's best to always set <i>ptsize=</i> to get proper minplot layout computations.
-  </p><p>
-  </p><p>
-  <span class="parm">color=</span> &nbsp; text color.  Default is <tt>'#000'</tt> (black).
-  </p><p>
-  <span class="parm">opacity=</span> &nbsp; text opacity.  Default is 1.0 (opaque).
-  </p><p>
-  <span class="parm">anchor=</span> &nbsp; text alignment.  Use <tt>'start'</tt> for left-adjusted text;
-  <tt>'middle'</tt> for centered text; <tt>'end'</tt> for right-adjusted text.  Default is <tt>'start'</tt>
-  </p><p>
-  <span class="parm">rotate=</span> &nbsp; text rotation (degrees clockwise).  <i>rotate=0</i> gives
-  ordinary horizontal text.  Usually a value from 0 to 90, or 0 to -90.  Default is <tt>None</tt>
-  </p><p>
-  <span class="parm">cssclass=</span> &nbsp; a CSS class name to style the text.  Default is None.
-  </p><p>
-  <span class="parm">cssstyle=</span> &nbsp; a CSS style specification for the text.  Default is None.
-  </p><p>
-  <span class="parm">adjust=</span> &nbsp; allows finetune adjustments to future text positions.  
-       Specify as a 2-member list of (x, y) in minplot units.  Default is <tt>None</tt>.
-  </p><p>
-  <span class="parm">reset=True</span> &nbsp; apply all of the defaults.  
-       Can be combined with any other args.
-      
-
-    </div></div></div></div>
-
-
-
-
-
-
-
-<br>
-<h3><i>Plotting and drawing</i></h3>
-
-
-
-
-    <div class="panel-group" id="axisrender">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#axisrender" href="index.html#axisrender-content">&bull; axisrender( axis )</a>
-    </i></b></span>
-    <div id="axisrender-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Render an X axis or a Y axis in the currently defined space.  The axis can have a line, 
+  Render an X axis or a Y axis for the currently defined plot area.  The axis can have a line, 
   tic marks, and scaling labels (stubs).  Grid lines can also be rendered.  Behavior is numeric 
-  or categorical (depending on how the space was set up).  The only required parameter is <i>axis</i>.
-  </p><p>
-  <span class="parm">axis=</span> &nbsp; Mandatory. Either <tt>'X'</tt> or <tt>'Y'</tt>.
+  or categorical (depending on how the data space was set up).
   </p><p>
   <span class="parm">axisline=True</span> &nbsp; optional; draw an axis line using current line properties.  Default is <tt>True</tt> 
   </p><p>
   <span class="parm">loc=</span> &nbsp; optional; controls the axis position. 
   For example to render a Y axis at the right side of the plot area use <i>loc='right'</i>.
   For example to render an X axis at the top of the plot area use <i>loc='top'</i>.
-  To render a Y axis 30 minplot units to the left of the plot area's left side use <i>loc='left-30'</i>.
+  To render a Y axis 30 SVG units to the left of the plot area's left side use <i>loc='left-30'</i>.
   Default is <tt>bottom</tt> for X axis and <tt>left</tt> for Y axis.
   </p><p>
-  <span class="parm">tics=</span> &nbsp; optional integer; draw tic marks to this length in minplot units
+  <span class="parm">tics=</span> &nbsp; optional integer; draw tic marks to this length in SVG units
   using current line properties.  Positive values give tics that run outward from the 
   plotting area; negative values give tics that run inward.  Default is <tt>None</tt>.
   </p><p>
@@ -674,7 +784,7 @@ All args are keyword args unless otherwise indicated.
   apply to categorical scaling.
   </p><p>
   <span class="parm">stubcull=</span> &nbsp; optional; any stubs closer together than this distance will be omitted.
-  An integer minplot units value. Mostly useful with log scaling.  Default is <tt>None</tt>.
+  An integer SVG units value. Mostly useful with log scaling.  Default is <tt>None</tt>.
   </p><p>
   <span class="parm">divideby=</span> &nbsp; optional; a numeric value to have the displayed stubs be the 
   underlying data value divided by this value (usually a power of 10).  E.g. with
@@ -685,17 +795,17 @@ All args are keyword args unless otherwise indicated.
 
     </div></div></div></div>
 
-  
 
 
 
-    <div class="panel-group" id="plotdeco">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#plotdeco" href="index.html#plotdeco-content">&bull; plotdeco( )</a>
-    </i></b></span>
-    <div id="plotdeco-content" class="panel-collapse collapse "> <div class="panel-body">
+<a data-toggle="collapse" data-parent="#plotdeco" href="index.html#plotdeco-content">
+<b><i>&bull; plotdeco</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <i>render axis labels, plot title, outline, shading</i>
 
+<div class="panel-group" id="plotdeco">
+<div class="panel"><div id="plotdeco-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+  <h3><i>plotdeco( )</i></h3>
   <p>
   After a plot area is set up, use this to do things like
   render a title at the top, render labels beside or below the plot area, outline or shade the plot area.
@@ -720,10 +830,10 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">titlepos=</span> &nbsp; title's position with respect to the plot area.  
   One of <tt>'left'</tt>, <tt>'center'</tt>, or <tt>'right'</tt>.  Default is <tt>'left'</tt>.
   </p><p>
-  <span class="parm">xlabeladj=</span> specify an (x, y) adjustment of the <i>xlabel</i>, in minplot units.
+  <span class="parm">xlabeladj=</span> specify an (x, y) adjustment of the <i>xlabel</i>, in SVG units.
      eg. <i>xlabeladj=(0,-20)</i> adjusts the xlabel downward from its default position.  Default is None.
   </p><p>
-  <span class="parm">ylabeladj=</span> specify an (x, y) adjustment of the <i>ylabel</i>, in minplot units.
+  <span class="parm">ylabeladj=</span> specify an (x, y) adjustment of the <i>ylabel</i>, in SVG units.
      eg. <i>ylabeladj=(-20,0)</i> adjusts the ylabel leftward from its default position.  Default is None.
   </p><p>
   <span class="parm">y2labeladj=</span> same as <i>ylabeladj</i> but for the <i>y2label</i>,
@@ -732,7 +842,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">rectadj=</span> allows fine tuning (stretching) the size of <i>outline=</i> or <i>shade=</i>. 
        If specified as an integer it will be an amount of extra margin to add on all 4 sides, eg. <i>rectmargin=8</i>.
        Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be 
-       controlled individually for each of the 4 sides eg. <i>rectmargin=(-20,-10,20,10)</i>.  All values are minplot units.
+       controlled individually for each of the 4 sides eg. <i>rectmargin=(-20,-10,20,10)</i>.  All values are SVG units.
   </p><p>
   Note, if you're doing a tooltip it will be associated with the first-rendered title or label only.
   </p>
@@ -744,13 +854,14 @@ All args are keyword args unless otherwise indicated.
 
 
 
-    <div class="panel-group" id="bar">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#bar" href="index.html#bar-content">&bull; bar( x, y )</a>
-    </i></b></span>
-    <div id="bar-content" class="panel-collapse collapse "> <div class="panel-body">
+<a data-toggle="collapse" data-parent="#bar" href="index.html#bar-content">
+<b><i>&bull; bar</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <i>render a column bar</i>
 
+<div class="panel-group" id="bar">
+<div class="panel"><div id="bar-content" class="panel-collapse collapse ">
+<div class="panel-body">
+
+  <h3><i>bar( x, y )</i></h3>
   <p>
   Render a column bar. 
   </p><p>
@@ -758,7 +869,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">y=</span> &nbsp; Mandatory. "Top" of bar will be at this location in Y data space.
   </p><p>
-  <span class="parm">width=</span> &nbsp; optional; bar width.  An integer minplot units value. Default is 8.
+  <span class="parm">width=</span> &nbsp; optional; bar width.  An integer SVG units value. Default is 8.
   </p><p>
   <span class="parm">ybase=</span> &nbsp;  optional; location of the "bottom" or "base" of the bar in data space.
   Default is the bottom of the plotting area.  Typical use is to 
@@ -770,7 +881,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">outline=True</span> &nbsp; optional; outline the bar using current line properties.
   </p><p>
-  <span class="parm">adjust=</span> &nbsp; optional; adjusts bar's position by this numeric distance rightward in minplot units.
+  <span class="parm">adjust=</span> &nbsp; optional; adjusts bar's position by this numeric distance rightward in SVG units.
     Supply a negative value to adjust leftward.
     Useful with a categorical axis for rendering pairs, triples (etc) of bars.
   </p><p>
@@ -784,21 +895,24 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#errorbar" href="index.html#errorbar-content">
+<b><i>&bull; errorbar</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>render an error bar</i>
 
-    <div class="panel-group" id="errorbar">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#errorbar" href="index.html#errorbar-content">&bull; errorbar( x, y, erramt )</a>
-    </i></b></span>
-    <div id="errorbar-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="errorbar">
+<div class="panel"><div id="errorbar-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>errorbar( x, y, erramt )</i>
+  <br>...or...
+  <br><i>errorbar( x, ymin, ymax )</i></h3>
   <p>
   Render an error bar using the current line properties.  
-  The above template applies except when <i>ymin</i> and <i>ymax</i> are being used.
+  If <i>erramt=</i> is specified a symmetrical error bar is rendered around <i>x, y</i>.
+  Otherwise if <i>ymin=</i> and <i>ymax=</i> are specified the bar min and max are controlled explicitly (and <i>y=</i> is not specified).
   </p><p>
   <span class="parm">x=</span> &nbsp; Mandatory.  Error bar will be centered on this location in X data space.
   </p><p>
-  <span class="parm">y=</span> &nbsp; Usually required.  Y data location of underlying data point.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
+  <span class="parm">y=</span> &nbsp; Y data location of underlying data point.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
   </p><p>
   <span class="parm">erramt=</span> &nbsp; Usually required.  The SD, SEM or other error statistic.  It will be rendered 
   symetrically upward and downward.  Required except when <i>ymin</i> and <i>ymax</i> are being used.
@@ -806,7 +920,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">ymin=</span> and <span class="parm">ymax</span> &nbsp; optional; may be specified to explicitly control
   where top and bottom of bar will be located, to produce assymetric error bars, hi-lo bars and similar.
   </p><p>
-  <span class="parm">tailsize=</span> &nbsp; optional; integer minplot units value to control the length 
+  <span class="parm">tailsize=</span> &nbsp; optional; integer SVG units value to control the length 
     of the little tails at each end.  Default is 5
   </p><p>
   <span class="parm">adjust=</span> &nbsp; optional; has similar purpose as with <span class="fxn">bar()</span> above.
@@ -821,23 +935,21 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#datapoint" href="index.html#datapoint-content">
+<b><i>&bull; datapoint</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>render a data point symbol with optional clustering</i>
 
-    <div class="panel-group" id="datapoint">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#datapoint" href="index.html#datapoint-content">&bull; datapoint( x, y ) &nbsp; &nbsp; &nbsp; &bull; clustermode( )</a>
-    </i></b></span>
-    <div id="datapoint-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="datapoint">
+<div class="panel"><div id="datapoint-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-
-  <b>datapoint( x, y )</b>
+  <h3><i>datapoint( x, y )</i></h3>
   <p>
   Render a round data point symbol.  Typical use is in scatterplots.
   <br>Automatic clustering of duplicate data points is available, see <span class="fxn">clustermode()</span>
   </p><p>
   <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; Mandatory.  Location in data space where data point will be renderd.
   </p><p>
-  <span class="parm">diameter=</span> &nbsp; optional; diameter of the circle in minplot units.  Default is 5.
+  <span class="parm">diameter=</span> &nbsp; optional; diameter of the circle in SVG units.  Default is 5.
   </p><p>
   <span class="parm">color=</span> &nbsp; optional; data point fill color.  Default is <tt>None</tt>
   </p><p>
@@ -845,17 +957,17 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   <span class="parm">outline=True</span> &nbsp; optional; outline the data point using current line properties.
   </p><p>
-  <span class="parm">xadjust=</span> &nbsp; optional; adjust location of data point in X by this distance in minplot units;
+  <span class="parm">xadjust=</span> &nbsp; optional; adjust location of data point in X by this distance in SVG units;
      sometimes useful with categorical scaling.
   </p><p>
   <span class="parm">yadjust=</span> &nbsp; optional; same as above but for Y.
   </p><p>
 
   <br>
-  <b>clustermode( )</b>
+  <h3><i>setclustering( )</i></h3>
   <p> 
   Enable <span class="fxn">datapoint()</span> to slightly offset duplicate or near-duplicate data points
-  to give the viewer a feel for the amount of duplicity.  Also can be used to do simple frequency
+  to convey the degree of duplicity.  Also can be used to do simple frequency
   distributions or beeswarms (data must be sorted on x, y for this to work).
   All args are optional, specify one or several.
   </p><p>
@@ -864,10 +976,10 @@ All args are keyword args unless otherwise indicated.
   This controls where cluster members will be placed relative to the home data point.
   Default is <tt>None</tt> which turns off clustering.
   </p><p>
-  <span class="parm">offset=</span> &nbsp; a numeric minplot value indicating the distance that 
-  duplicate data points will be offset, in minplot units.  Default is 0.8
+  <span class="parm">offset=</span> &nbsp; a numeric SVG units value indicating the distance that 
+  duplicate data points will be offset, in SVG units.  Default is 0.8
   </p><p>
-  <span class="parm">tolerance=</span> &nbsp; numeric value that indicates how close (in minplot units) two 
+  <span class="parm">tolerance=</span> &nbsp; numeric value that indicates how close (in SVG units) two 
   data points must be in order to be considered the "same" for clustering purposes.  Default is 0.0
   </p><p>
   <span class="parm">dampen=</span> &nbsp; an integer value that can be set to > 1 when there are a lot of duplicates 
@@ -881,21 +993,20 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#curve" href="index.html#curve-content">
+<b><i>&bull; curve*</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>render a lineplot, a curve, or a filled band</i>
 
-    <div class="panel-group" id="curve">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#curve" href="index.html#curve-content">&bull; curvebegin( ) &nbsp; &nbsp; &nbsp; &nbsp; &bull; curvenext( x, y )</a>
-    </i></b></span>
-    <div id="curve-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="curve">
+<div class="panel"><div id="curve-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
   <p>
   To render a lineplot or filled band, start by calling <span class="fxn">curvebegin()</span>.  Then iterate over 
-  your data rows and for each row call <span class="fxn">curvenext()</span>.  The lineplot will be rendered using 
-  the current line properties.  
-  </p><p>
+  your data rows and for each row call <span class="fxn">curvenext()</span>.  Uses current line properties.  
+  <br>
   <a href="pages/e6.html"><img src="static/examples/e6.svg" )" height=200></a>
   <br>
+  <h3><i>curvebegin( )</i></h3>
   <b>curvebegin( )</b>
   </p><p>
   Sets up to begin a lineplot or filled band.
@@ -921,7 +1032,7 @@ All args are keyword args unless otherwise indicated.
   </p>
 
   <br>
-  <b>curvenext( x, y )</b>
+  <h3><i>curvenext( x, y )</i></h3>
   <p>
   Called for every data point to be plotted, including the first one.
   </p><p>
@@ -938,18 +1049,18 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#pieslice" href="index.html#pieslice-content">
+<b><i>&bull; pieslice</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i>render one piegraph slice</i>
 
-    <div class="panel-group" id="pieslice">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#pieslice" href="index.html#pieslice-content">&bull; pieslice( pctval, startval, fill )</a>
-    </i></b></span>
-    <div id="pieslice-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="pieslice">
+<div class="panel"><div id="pieslice-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>pieslice( pctval, startval, fill )</i></h3>
   <p>
-  This function renders one pie slice.  It is called several times in succession to build a complete pie graph.
+  This function renders one piegraph slice.  It is called several times in succession to build a complete pie graph.
   </p><p>
-  Rendering a pie graph requires a plotting area for placement and sizing of the pie (use axmin=0 and axmax=1, these are required but ignored).
+  Rendering a pie graph requires a plotting area for placement and sizing of the pie (but no datarange is necessary).
   A legend is usually needed with piegraphs; there's no direct slice labelling.
   </p><p>
   <a href="pages/e3.html"><img src="static/examples/e3.svg" height=200></a>.
@@ -979,21 +1090,21 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#rectangle" href="index.html#rectangle-content">
+<b><i>&bull; rectangle</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>render a shaded rectangle for highlighting or heatmaps</i>
 
-    <div class="panel-group" id="rectangle">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#rectangle" href="index.html#rectangle-content">&bull; rectangle( x, y )</a>
-    </i></b></span>
-    <div id="rectangle-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="rectangle">
+<div class="panel"><div id="rectangle-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>rectangle( x, y )</i></h3>
   <p> 
   Render a rectangle or square of a certain color.  Used to create heatmaps or to
   highlight a particular category or region in the display.
   The rectangle is positioned and sized using various combinations of <i>x=</i>, <i>y=</i>, <i>width=</i> and <i>height=</i>
   and perhaps <i>adjust=</i>, 
   and exactly how depends on what you're doing and your scale types (numeric or categorical).  See the examples for clarification.
-  This function is oriented to data units; to render rectangles in minplot units see the <a href="index.html#lowlevel">low-level function rect()</a>.
+  This function is oriented to data units; to render rectangles in SVG units see the <a href="index.html#lowlevel">low-level function rect()</a>.
   </p><p>
   <a href="pages/e10.html"><img src="static/examples/e10.svg" height=200></a>
   </p><p>
@@ -1010,7 +1121,7 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">adjust=</span> &nbsp; optional; fine tune the rectangle's size.
        If specified as one integer it will be a margin amount added on all 4 sides, eg. <i>adjust=8</i>.
        Or, if specified as a 4 member tuple (left, bottom, right, top) the amount of adjustment can be
-       controlled individually for each side eg. <i>adjust=(-20,-10,20,10)</i>.  All values are minplot units.
+       controlled individually for each side eg. <i>adjust=(-20,-10,20,10)</i>.  All values are SVG units.
   </p><p>
   <span class="parm">color=</span> &nbsp; optional; shading of rectangle.  Default is light green.
   </p><p>
@@ -1025,24 +1136,24 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#label" href="index.html#label-content">
+<b><i>&bull; label</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>render a text label</i>
 
-    <div class="panel-group" id="label">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#label" href="index.html#label-content">&bull; label( text )</a>
-    </i></b></span>
-    <div id="label-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="label">
+<div class="panel"><div id="label-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+  <h3><i>label( text )</i></h3>
   <p>
   Render some text at a specific location using the current text properties.
   Uses include general labeling as well as creation of a scatterplot-like display with text as the data point symbol.
-  Location can be specified in data units, or minplot units, or a combination of the two.
+  Location can be specified in data units, or SVG units, or a combination of the two.
   </p><p>
   <span class="parm">text=</span> &nbsp; Mandatory.  The text to be rendered.
   </p><p>
   <span class="parm">x=</span> and <span class="parm">y=</span> &nbsp; optional; a location in data space.
   </p><p>
-  <span class="parm">xdjust=</span> &nbsp; optional; integer value in minplot units.  
+  <span class="parm">xdjust=</span> &nbsp; optional; integer value in SVG units.  
      If data location <i>x=</i> is supplied this adjusts the label's <i>x=</i> location.
      Otherwise this specifies the label's absolute x location.  Default is 0.
   </p><p>
@@ -1058,15 +1169,14 @@ All args are keyword args unless otherwise indicated.
 
   
 
+<a data-toggle="collapse" data-parent="#line" href="index.html#line-content">
+<b><i>&bull; line, arrow</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; <i>render a line or arrow as annotation</i>
 
-    <div class="panel-group" id="line">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#line" href="index.html#line-content">&bull; line( x1, y1, x2, y2 ) &nbsp; &nbsp; &nbsp; &bull; arrow( x1, y1, x2, y2)</a>
-    </i></b></span>
-    <div id="line-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="line">
+<div class="panel"><div id="line-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-  <b>line( x1, y1, x2, y2 )</b>
+  <h3><i>line( x1, y1, x2, y2 )</i></h3>
   <p>
   Draw a line in data space between x1, y1 and x2, y2 using the current line properties.
   Typical use is for threshold lines and other annotation.
@@ -1093,9 +1203,9 @@ All args are keyword args unless otherwise indicated.
          Mandatory except when <i>direction=</i> and <i>magnitude=</i> are being used. 
   </p><p>
   <span class="parm">direction=</span> and <span class="parm">magnitude=</span> &nbsp; Allow location of arrowhead tip to be determined by <i>direction=</i> in degrees 
-     (0 is straight up) and <i>magnitude=</i> a distance in minplot units.  If these are used then don't specify <i>x2</i> and <i>y2</i>.
+     (0 is straight up) and <i>magnitude=</i> a distance in SVG units.  If these are used then don't specify <i>x2</i> and <i>y2</i>.
   </p><p>
-  <span class="parm">headlen=</span> &nbsp; optional; length of one side of the arrowhead in minplot units.  Default is 18.
+  <span class="parm">headlen=</span> &nbsp; optional; length of one side of the arrowhead in SVG units.  Default is 18.
   </p><p>
   <span class="parm">headwid=</span> &nbsp; optional; a theta value controlling stoutness of the arrowhead.  Default is 0.3
   </p><p>
@@ -1112,25 +1222,23 @@ All args are keyword args unless otherwise indicated.
 
 
 
-<br>
-<h3><i>Adding tooltips / clickthru, and a legend</i></h3>
 
 
+<a data-toggle="collapse" data-parent="#tooltip" href="index.html#tooltip-content">
+<b><i>&bull; tooltip</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i>do a tooltip or hyperlink</i>
 
-    <div class="panel-group" id="tooltip">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#tooltip" href="index.html#tooltip-content">&bull; tooltip( )</a>
-    </i></b></span>
-    <div id="tooltip-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="tooltip">
+<div class="panel"><div id="tooltip-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
+   <h3><i>tooltip()</i></h3>
    <p>
    Enable a tooltip and/or a clickthru hyperlink using the bounding box of
    whatever plot element is rendered next.  (A tooltip is a text box that appears when the user hovers
    their mouse pointer over a specific element.)
    </p><p>
    Plot element functions that support tooltips / clickthru are:
-   <span class="fxn">bar(), datapoint(), label(), rectangle(), pieslice(), legenditem(), plotdeco()</span>, and <span class="fxn">axisrender()</span>.
+   <span class="fxn">bar(), datapoint(), label(), rectangle(), pieslice(), legenditem(), plotdeco()</span>, and <span class="fxn">xaxis() / yaxis()</span>.
    You call <span class="fxn">tooltip()</span> once for each desired tooltip, usually within the loop where you're iterating
    over your data, just before drawing the object that the tooltip will be associated with. 
    The tooltip settings do not persist after the associated plot element is rendered.
@@ -1162,20 +1270,16 @@ All args are keyword args unless otherwise indicated.
 
 
 
+<a data-toggle="collapse" data-parent="#legend" href="index.html#legend-content">
+<b><i>&bull; legend*</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i>render a legend</i>
 
-    <div class="panel-group" id="legend">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#legend" href="index.html#legend-content">&bull; legenditem( label ) &nbsp; &nbsp; &bull; legendrender( )</a>
-    </i></b></span>
-    <div id="legend-content" class="panel-collapse collapse "> <div class="panel-body">
+<div class="panel-group" id="legend">
+<div class="panel"><div id="legend-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-  <p>
+  <h3><i>legenditem( sample, label )</i></h3>
   Call <span class="fxn">legenditem()</span> for each legend entry you wish to show. 
   Then when ready to render the legend, call <span class="fxn">legendrender()</span>.
-  </p>
-  <br>
-  <b>legenditem( sample, label )</b>
   <p>
   <span class="parm">label=</span> &nbsp; Mandatory.  The text that will appear for this legend entry. 
   </p><p>
@@ -1184,7 +1288,7 @@ All args are keyword args unless otherwise indicated.
   If <tt>'line'</tt> the current line properties will be used; otherwise <i>color=</i> must be specified.
   Default is <tt>'square'</tt>
   </p><p>
-  <span class="parm">width=</span> &nbsp; optional; controls the entry's displayed width in minplot units.
+  <span class="parm">width=</span> &nbsp; optional; controls the entry's displayed width in SVG units.
   </p><p>
   <span class="parm">color=</span> &nbsp; required for <i>shape='circle'</i> and <i>shape='square'</i>.
    ignored for <i>shape='line'</i>
@@ -1194,7 +1298,7 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <b>legendrender( )</b>
+  <h3><i>legendrender( )</i></h3>
   <p>
   Render a legend, made up of all currently posted legend entries.  Labels are rendered 
   using current text properties.  Any outlines will use current line properties.
@@ -1204,7 +1308,7 @@ All args are keyword args unless otherwise indicated.
   <tt>'top'</tt> to position the legend in the top-left of plotting area, or <tt>'bottom'</tt> to position
    it in the bottom-left of the plotting area.
   </p><p>
-  <span class="parm">xadjust=</span> &nbsp; integer value in minplot units.
+  <span class="parm">xadjust=</span> &nbsp; integer value in SVG units.
      If <i>location=</i> is supplied this adjusts the legend's X location.
      Otherwise it specifies the legend's absolute X location.  
      The legend's upper-left corner is used for positioning purposes.
@@ -1216,9 +1320,9 @@ All args are keyword args unless otherwise indicated.
   rendered side by side.  Default is <tt>'down"</tt>.
   </p><p>
   <span class="parm">sampsize=</span> &nbsp; optional; diameter of circle or square
-  color samples. It is a distance in minplot units.   Default is 6.
+  color samples. It is a distance in SVG units.   Default is 6.
   </p><p>
-  <span class="parm">linelen=</span> &nbsp; optional; length of line sample in minplot units. Default is 20.
+  <span class="parm">linelen=</span> &nbsp; optional; length of line sample in SVG units. Default is 20.
   </p><p>
   <span class="parm">title=</span> &nbsp; optional; a legend title.
   Rendered using the same text properties as the rest of the legend.
@@ -1229,20 +1333,16 @@ All args are keyword args unless otherwise indicated.
 
 
 
-<br>
-<h3><i>Getting your SVG result</i></h3>
 
+<a data-toggle="collapse" data-parent="#svgresult" href="index.html#svgresult-content">
+<b><i>&bull; svgresult</i></b></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>return your SVG result</i>
 
+<div class="panel-group" id="svgresult">
+<div class="panel"><div id="svgresult-content" class="panel-collapse collapse ">
+<div class="panel-body">
 
-    <div class="panel-group" id="svgresult">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#svgresult" href="index.html#svgresult-content">&bull; svgresult( )</a>
-    </i></b></span>
-    <div id="svgresult-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  Returns your SVG result, as a string.
+  <h3><i>svgresult()</i></h3>
+  Returns your SVG result, as a string.  The calling program can then add it into rendered HTML or write it to a file.
   </p><p>
   <span class="parm">noclose=True</span> &nbsp; optional; suppress the closing &lt;/svg> tag and allows your SVG 
    result to be gotten incrementally in chunks.  This is done by calling
@@ -1253,10 +1353,54 @@ All args are keyword args unless otherwise indicated.
     </div></div></div></div>
 
 
+
+<a name="lowlevel"></a>
+<br>
 <br>
 
 
+
+    <div class="panel-group" id="lowlevel">
+    <div class="panel">
+    <span class="text15"><b><i>
+    <a data-toggle="collapse" data-parent="#lowlevel" href="index.html#lowlevel-content">&bull; Low-level functions for drawing and data conversion</a>
+    </i></b></span>
+    <div id="lowlevel-content" class="panel-collapse collapse "> <div class="panel-body">
+
+  <p>
+  These low-level functions may be useful, depending on what you're doing.
+  For these, the parameters are <u>not</u> keyword args unless shown as such.
+  </p>
+  &bull; lin( x1, y1, x2, y2 ) &nbsp; draw a line from (x1, y1) to (x2, y2) in SVG units using current line properties.
+  </p><p> 
+  &bull; txt( x, y, text ) &nbsp; render text at (x, y) in SVG units, using current text properties.
+  </p><p> 
+  &bull; rect( x1, y1, x2, y2, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a rectangle in SVG units.
+  </p><p> 
+  &bull; circle( x, y, diameter, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a circle in SVG units.
+  </p><p> 
+  &bull; comment( commenttext ) &nbsp; write a comment into the SVG file.
+  </p><p> 
+  &bull; nx( dataval ) &nbsp; &bull; ny( dataval ) &nbsp; return a SVG coordinate given a data value in X or Y.
+  </p><p> 
+  &bull; nmin( axis ) &nbsp; &bull; nmax( axis ) &nbsp; return the SVG coordinate of an edge of the plotting area.
+  </p><p> 
+  &bull; dmin( axis ) &nbsp; &bull; dmax( axis ) &nbsp; return the data value at an edge of the plotting area.
+  </p><p>
+  &bull; vec2d( h ) &nbsp; given a 1-D array return a 2-D equivalent (multiple rows with one column)
+      
+
+    </div></div></div></div>
+
+
+<br>
+<br>
+
 <h3><i>Going further</i></h3>
+
+<br>
+
+
 
 <a name="dt"></a>
 
@@ -1264,21 +1408,20 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="dt">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Plotting dates and times<br> &nbsp; &nbsp; &bull; dateformat( ) &nbsp; 
-    <nobr>&bull; daterange( ) &nbsp; </nobr> <nobr> &bull; dateitem( ) &nbsp; </nobr> <nobr>&bull; toint( ) &nbsp;</nobr> &bull; datediff( )</a>
+    <a data-toggle="collapse" data-parent="#dt" href="index.html#dt-content">&bull; Working with dates / times</a>
     </i></b></span>
     <div id="dt-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
-  Minplot can work with calendar dates in a variety of formats, with clock times optionally appended
+  SVGdatashapes can work with calendar dates in a variety of formats, with clock times optionally appended
   (all referred to as "dates").
-  To get minplot's date-related functionality you'll need to <a href="minplot_dt.py">download minplot_dt.py</a>
-  and then use two imports like this:
-  <br><tt>import minplot as p</tt>
-  <br><tt>import minplot_dt as pdt</tt>
+  To get date-related functionality you'll need the <a href="index.html#install">svgdatashapes_dt package</a>; 
+  in your code do something like this:
+  <br><tt>import svgdatashapes as s</tt>
+  <br><tt>import svgdatashapes_dt as sdt</tt>
   </p><p>
   The basic approach is to convert dates to integers, then plot in numeric space.
-  To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">pdt.daterange()</span>.
+  To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">daterange()</span>.
   Here's an example where dates are plotted. <a href="pages/e4.html">View code</a>
   </p>
   <br>
@@ -1288,14 +1431,14 @@ All args are keyword args unless otherwise indicated.
   <br><br>
   <p>
   <b>Date formats:</b> 
-  The default date format is <tt>'%Y-%m-%d'</tt>.  Minplot uses
+  The default date format is <tt>'%Y-%m-%d'</tt>.  SVGdatashapes uses
   <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior" target="_blank">
   python's strftime / strptime date format specifiers</a>.
   See also your local system's strftime and strptime man pages for additional codes (OS-dependent).
   </p>
   <br>
 
-  <b>dateformat( format )</b>
+  <h3><i>dateformat( format )</i></h3>
   <p>Set the current format for parsing the dates in your data.
   </p><p>
   <span class="parm">format=</span> &nbsp; Mandatory. The date format to be used in parsing your dates.  
@@ -1312,7 +1455,7 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <b>toint( dateval )</b>
+  <h3><i>toint( dateval )</i></h3>
   <p>Given a date in the current format, return the equivalent integer value for plotting.
   <nobr>Example: <tt>pdt.num( '2016-02-29' )</tt></nobr>
   </p><p> 
@@ -1320,31 +1463,21 @@ All args are keyword args unless otherwise indicated.
   </p>
   <br>
 
-  <b>dateitem( colname, datarow )</b>
-  <p>Convenience routine.  Extract the date data item from column 'colname' of 'datarow', and do the <span class="fxn">toint()</span> 
-     integer conversion to make it suitable for plotting.  
-  </p><p> 
-  <span class="parm">colname=</span> &nbsp; Mandatory. Name of a data column as defined earlier with <span class="fxn">dataitems()</span>
-  </p><p> 
-  <span class="parm">datarow=</span> &nbsp; Mandatory. A row from your data structure.
-  </p>
-  <br>
-
-  <b>daterange( datecol, datarows, nearest, stubformat )</b>
+  <h3><i>daterange( column, datarows, nearest, stubformat )</i></h3>
   <p>Returns a tuple with these members:  <tt>axmin</tt>, <tt>axmax</tt>, and <tt>stublist</tt>.
   This function examines a column in your data that contains dates, and determines the axis min and max
   (<tt>axmin</tt> and <tt>axmax</tt>) along with 
-  a list of formatted axis stubs (<tt>stublist</tt>); this can later be passed to <span class="fxn">axisrender()</span>.
+  a list of formatted axis stubs (<tt>stublist</tt>); this can later be passed to <span class="fxn">xaxis()</span>.
   </p><p>
   <span class="parm">datarows=</span> &nbsp; Mandatory. Your data structure.
   </p><p>
-  <span class="parm">datecol=</span> &nbsp; Mandatory. Identifies the numeric data column to be characterized.
-  Either a name or an integer array index.
+  <span class="parm">column=</span> &nbsp; Mandatory. Identifies the date data column.
+  Either a dict element name or an integer array index.
   </p><p>
   <span class="parm">nearest=</span> &nbsp; Mandatory.  Determines a clean
   boundary for axis min and max.  For example, <i>nearest=month</i> gives an axis min
   and max on month boundaries.  Allowed values include:
-  <nobr><tt>year  3month  month  week  week_dayN  day  12hour  6hour  4hour  3hour  hour  30minute  10minute  minute</tt></nobr>
+  ><tt>year  3month  month  week  week_dayN  day  12hour  6hour  4hour  3hour  hour  30minute  10minute  minute</tt>
   <br>(<tt>week</tt> uses Mondays.  To get other weekday use eg. <tt>week_day2</tt> for Wednesdays or <tt>week_day6</tt> for Sundays).
   </p><p>
   <span class="parm">inc=</span> &nbsp; optional; the increment to be used in building a list of axis stubs.  
@@ -1373,7 +1506,7 @@ All args are keyword args unless otherwise indicated.
   </ul>
   <br>
 
-  <b>datediff( dateval1, dateval2 )</b>
+  <h3><i>datediff( dateval1, dateval2 )</i></h3>
   <p>Returns an integer difference of <nobr><i>datetval1</i>&ndash;<i>dateval2</i></nobr> .
   By default it returns the number of days between two dates.
   </p><p>
@@ -1396,7 +1529,7 @@ All args are keyword args unless otherwise indicated.
   for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> with one panel per day where business
   activity occurred, then within each panel set up a date X space for the desired business hour range.
   </p><p>
-  To get different combinations of stubs and tics you can invoke <span class+"fxn">daterange()</span> and <span class="fxn">axisrender()</span> 
+  To get different combinations of stubs and tics you can invoke <span class+"fxn">daterange()</span> and <span class="fxn">xaxis()</span> 
   two or more times.
   If you just want to render tics call <span class="fxn">daterange()</span> with <i>stubformat=''</i>
   </p><p>
@@ -1409,13 +1542,12 @@ All args are keyword args unless otherwise indicated.
   2015.2 for 1st quarter of 2015, and 2015.4, 2015.6, and 2015.8 for the other quarters... then plot them as plain numerics.
   </p><p>
   To get one-letter month stubs (eg. J F M A M J J A S O N D)
-  use %b in <span class="fxn">daterange()</span> then in <span class="fxn">axisrender()</span> use <i>stubformat='%.1s'</i>.
+  use %b in <span class="fxn">daterange()</span> then in <span class="fxn">xaxis()</span> use <i>stubformat='%.1s'</i>.
   </p><p>
   <b>Frequency distributions and tabulations on dates:</b>
   There's no special function for computing frequency distributions on dates,
-  but you may be able to use <span class="fxn">catinfo()</span> to do this.  For example if you have
-  a collection of <tt>yyyy-mm-dd</tt> dates and want to tabulate on month, just strip off the <tt>-dd</tt>
-  portion and use <span class="fxn">catinfo()</span> on the result.
+  but you may be able to use <span class="fxn">columninfo( categorical=True )</span> to do this.  For example if you have
+  a collection of <tt>yyyy-mm-dd</tt> dates and want to tabulate on month, just strip off the <tt>-dd</tt> portion first.
   </p>
       
 
@@ -1430,13 +1562,13 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="multipanel">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#multipanel" href="index.html#multipanel-content">&bull; Multiple panel displays</a>
+    <a data-toggle="collapse" data-parent="#multipanel" href="index.html#multipanel-content">&bull; Producing multi-panel displays</a>
     </i></b></span>
     <div id="multipanel-content" class="panel-collapse collapse "> <div class="panel-body">
 
   <p>
   Suppose you're doing a display with 10 side-by-side panels all using the same Y axis scaling.
-  Minplot provides some ways to make it easier to define the 10 plot areas you'll need.
+  SVGdatashapes provides some ways to make it easier to define the 10 plot areas you'll need.
   You start with a categorical space where the area for each category panel becomes a 
   separate individual plot area.  Your python code then iterates over the panels
   and renders a plot inside each one in the normal fashion.  (Or, you might iterate over your
@@ -1453,22 +1585,15 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   Here's the basic approach:
   Suppose you're doing a display with 10 side-by-side panels all using the same Y axis scaling.
-  First you'd set up your Y scaling with <span class="fxn">numspace()</span>.
-  Next you'd call <span class="fxn">catspace()</span> to set up the categorical X axis; it returns a list of 
+  First you'd set up your Y scaling with <span class="fxn">yspace()</span>.
+  Next you'd call <span class="fxn">xspace()</span> to set up the categorical X axis; it returns a list of 
   category / panel names along with the coordinates for each panel.
   You can then iterate over this panel list (or perhaps over your data), and for each panel 
-  set a new X data space using <span class="fxn">numspace()</span> or <span class="fxn">catspace()</span>, then plot your data however you wish.
+  set an individual X data space using <span class="fxn">xpace()</span>, then plot your data however you wish.
   </p><p>
   For 2-D matrices you'd extend the above to start with categorical in both X and Y, and
   you'd have two panel coordinate lists to work from.
-  </p><p>
-  To see what <span class="fxn">catspace()</span> is returning you can do something like this:
   </p>
-  <pre>
-  panellist = p.catspace( axis='X', catlist=states, poslo=50, poshi=500 )
-  for pan in panellist:
-      print pan.name, str(pan.poslo), str(pan.poshi)
-  </pre> 
       
 
     </div></div></div></div>
@@ -1480,7 +1605,7 @@ All args are keyword args unless otherwise indicated.
     <div class="panel-group" id="reactivity">
     <div class="panel">
     <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &bull; groupbegin( ) &nbsp; &nbsp; &bull; groupend( ) </a>
+    <a data-toggle="collapse" data-parent="#reactivity" href="index.html#reactivity-content">&bull; Reactivity and &lt;g&gt; containers &nbsp; &nbsp; &bull; groupbegin &nbsp; &nbsp; &bull; groupend</a>
     </i></b></span>
     <div id="reactivity-content" class="panel-collapse collapse "> <div class="panel-body">
 
@@ -1489,7 +1614,7 @@ All args are keyword args unless otherwise indicated.
   back to the server for a complete redraw, such as to to hide or show labels,
   or select which of several elements to show and hide the others.  
   Hiding/showing elements is straightforward, as are certain other basic style alterations.  
-  If you need to do more elaborate clientside activity consider something like D3.js instead of minplot.
+  If you need to do more elaborate clientside activity consider something like D3.js instead.
   </p><p>
   To do this use <span class="fxn">groupbegin()</span> and <span class="fxn">groupend()</span> to set up an SVG &lt;g&gt; container for a set of elements
   you render.  These groupings have element IDs and can have CSS style attributes.
@@ -1528,94 +1653,6 @@ All args are keyword args unless otherwise indicated.
 
 
 
-
-<a name="lowlevel"></a>
-<br>
-<br>
-
-
-
-    <div class="panel-group" id="lowlevel">
-    <div class="panel">
-    <span class="text15"><b><i>
-    <a data-toggle="collapse" data-parent="#lowlevel" href="index.html#lowlevel-content">&bull; Low-level functions for drawing and units conversion</a>
-    </i></b></span>
-    <div id="lowlevel-content" class="panel-collapse collapse "> <div class="panel-body">
-
-  <p>
-  These low-level functions may occasionally be useful.  
-  For these, the parameters are <u>not</u> keyword args unless shown as such.
-  </p>
-  &bull; lin( x1, y1, x2, y2 ) &nbsp; draw a line from (x1, y1) to (x2, y2) in minplot units using current line properties.
-  </p><p> 
-  &bull; txt( x, y, text ) &nbsp; render text at (x, y) in minplot units, using current text properties.
-  </p><p> 
-  &bull; rect( x1, y1, x2, y2, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a rectangle in minplot units.
-  </p><p> 
-  &bull; circle( x, y, diameter, color="#e0e0e0", opacity=1.0, outline=False ) &nbsp; render a circle in minplot units.
-  </p><p> 
-  &bull; comment( commenttext ) &nbsp; write a comment into the SVG file.
-  </p><p> 
-  &bull; nx( dataval ) &nbsp; &bull; ny( dataval ) &nbsp; return a minplot coordinate given a data value in X or Y.
-  </p><p> 
-  &bull; nmin( axis ) &nbsp; &bull; nmax( axis ) &nbsp; return the minplot coordinate of an edge of the plotting area.
-  </p><p> 
-  &bull; dmin( axis ) &nbsp; &bull; dmax( axis ) &nbsp; return the data value at an edge of the plotting area.
-      
-
-    </div></div></div></div>
-
-<br>
-
-
-<a name="inline"></a>
-<br>
-<br>
-
-<h3>Inline SVG vs. &lt;img&gt; or &lt;iframe&gt; or &lt;object&gt;</h3>
-  <p>
-  "Inline SVG" is an SVG chunk embedded within an html document.
-     This tends to be convenient with dynamic web content systems, and is how we display the
-     <a href="pages/e1.html">individual example pages</a> on this site (go to an example page and View Page Source).
-  </p><p>
-  You could also display an SVG by storing it as a separate file and 
-  using &lt;img&gt; for example &lt;img src="examples/e2.svg"&gt;. This is how we display
-  the examples that are visible near the <a href="index.html#top">top of this page</a>.
-  An <tt><?xml?></tt> and a <tt>doctype</tt> statement should be present at top.
-  You can use &lt;img&gt; width= and height= to conveniently adjust the size, 
-  and these objects are cacheable.
-  </p><p>
-  &bull; Inline SVGs have access to the containing page's CSS and can be influenced by it;
-  with &lt;img&gt; this isn't the case (although <tt>style=</tt> statements should work and
-  <a href="https://www.w3.org/TR/SVG/styling.html#StyleElementExample" target="_blank">CSS can be embedded in the SVG</a>).
-  </p><p>
-  &bull; Tooltips probably won't work via &lt;img&gt; unless special arrangements are made.
-  </p><p>
-  &bull; Special character HTML constructs such as &amp;Delta; that work fine in an inline SVG don't work via &lt;img&gt; 
-  </p><p>
-  &bull; &lt;iframe&gt; and &lt;object&gt; are additional alternatives that I haven't used much as yet.
-  </p>
-  <br>
-
-<a name="missingdata"></a>
-<br>
-<br>
-<h3>Handling of missing data or invalid data</h3>
-  <p>
-  Database <tt>NULL</tt>s usually end up in python as <tt>None</tt>.
-  When <tt>None</tt> is encountered most of the plotting functions silently return 
-  <tt>False</tt> without rendering anything or raising an error.
-  The <span class="fxn">curvenext()</span> and <span class="fxn">rectangle()</span> functions differ from this a little.
-  </p><p>
-  If an invalid piece of data other than <tt>None</tt> is encountered
-  (such as a non-numeric value when numeric is expected, an unrecognized categorical term, a malformed date,
-  or a zero-length item), minplot functions will typically raise an error (class <span class="fxn">AppError</span>).
-  </p>
-  <br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>

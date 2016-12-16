@@ -1,6 +1,6 @@
 # scatterplot of mixed sign data; crosshairs at (0,0); superscripts in labels; data points have tooltips
 
-import minplot as p
+import svgdatashapes as s
 import sampledata1 
 
 def example2():                                          # scatterplot example
@@ -9,49 +9,53 @@ def example2():                                          # scatterplot example
     dataset1 = sampledata1.datapoints( 'set1' )
     dataset2 = sampledata1.datapoints( 'set2' )
 
-    p.svgbegin( width=400, height=400 )
+    s.svgbegin( width=400, height=400 )
 
-    p.textprops( color='#777', cssstyle='font-family: sans-serif; font-weight: bold;' )
-    p.lineprops( color='#777' )
+    textstyle = 'font-family: sans-serif; font-weight: bold;'
+    s.settext( color='#777', style=textstyle )
+    s.setline( color='#777' )
 
-    # pretend we're getting data dynamically and find the data range in X and Y
-    for dp in dataset1 + dataset2:       # find range in X
-        p.findrange( testval=dp[0] )    
-    xrange = p.findrange( finish=True )
-    for dp in dataset1 + dataset2:       # find range in Y
-        p.findrange( testval=dp[1] )    
-    yrange = p.findrange( finish=True )
+    # find the data min and max in X
+    for dp in dataset1 + dataset2:
+        s.findrange( testval=dp[0] )    
+    xrange = s.findrange( finish=True )
+
+    # find the data min and max in Y
+    for dp in dataset1 + dataset2:
+        s.findrange( testval=dp[1] )    
+    yrange = s.findrange( finish=True )
 
     # set up X and Y space...
-    p.numspace( axis='X', axmin=xrange.axmin, axmax=xrange.axmax, poslo=100, poshi=350 )
-    p.numspace( axis='Y', axmin=yrange.axmin, axmax=yrange.axmax, poslo=100, poshi=350 )
+    s.xspace( svgrange=(100,350), datarange=xrange )
+    s.yspace( svgrange=(100,350), datarange=yrange )
 
-    # render axes and plotting area
-    p.axisrender( axis='X', tics=8, loc='min-8' )
-    p.axisrender( axis='y', tics=8, loc='min-8' )
-    p.plotdeco( shade='#eee', outline=True, rectadj=8 )
-    p.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
+    # render axes and a shaded plotting area
+    s.xaxis( tics=8, loc='min-8' )
+    s.yaxis( tics=8, loc='min-8' )
+    s.plotdeco( shade='#eee', outline=True, rectadj=8 )
+
+    # render axis labels with superscript, greek char...
+    s.plotdeco( ylabel='&Delta; density [g/cm<sup>2</sup>]', xlabel='&Delta; weight [g]')
 
     # do crosshairs at 0, 0
-    p.lineprops( color='#888', dash='3,3' )
-    p.line( x1='min', y1=0.0, x2='max', y2=0.0 )
-    p.line( x1=0.0, y1='min', x2=0.0, y2='max' )
+    s.setline( color='#888', dash='3,3' )
+    s.line( x1='min', y1=0.0, x2='max', y2=0.0 )
+    s.line( x1=0.0, y1='min', x2=0.0, y2='max' )
 
     # render dataset1 in red data points
-    p.legenditem( label='Group A', sample='circle', color='#a00', width=80 )
     for dp in dataset1:
-        p.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
-        p.datapoint( x=dp[0], y=dp[1], color='#a00', diameter=8, opacity=0.6 )
+        s.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
+        s.datapoint( x=dp[0], y=dp[1], color='#a00', diameter=8, opacity=0.6 )
 
     # render dataset2 in blue data points
-    p.legenditem( label='Group B', sample='circle', color='#00a', width=80 )
     for dp in dataset2:
-        p.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
-        p.datapoint( x=dp[0], y=dp[1], color='#00a', diameter=8, opacity=0.6 )
+        s.tooltip( '('+str(dp[0])+','+str(dp[1])+')' )
+        s.datapoint( x=dp[0], y=dp[1], color='#00a', diameter=8, opacity=0.6 )
 
-    p.lineprops( reset=True )
+    # create a legend...
+    s.legenditem( label='Group A', sample='circle', color='#a00', width=80 )
+    s.legenditem( label='Group B', sample='circle', color='#00a', width=80 )
+    s.legendrender( location='top', yadjust=30, format='across' )
 
-    p.legendrender( location='top', yadjust=30, format='across' )
-
-    # return the svg 
-    return p.svgresult()
+    # return the svg.  The caller could then add it in to the rendered HTML.
+    return s.svgresult()
