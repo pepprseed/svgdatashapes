@@ -17,7 +17,7 @@ in the examples. The approach is procedural and the code is relatively simple an
 It supports some basic 'reactive' things: tooltips, clickthru, hyperlinks, element hide/show with js. It does some basic 
 stat / computational things: data ranges, frequency distributions, mean and SD, quartiles for boxplots. 
 
-SVGdatahshapes renders its results in SVG. All modern web browsers support viewing and printing of SVG graphics.
+SVGdatashapes renders its results in SVG. All modern web browsers support viewing and printing of SVG graphics.
 SVG is a good format for web-based data displays and line art because it's vector-based and has full support for 
 good fonts, text in any direction, transparency, as well as tooltip and hyperlink support. SVG can share CSS styling 
 from the host web page and can use the full range of html special characters to get Greek letters, etc. 

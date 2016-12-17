@@ -1,5 +1,5 @@
 #
-# SVGdatashapes_dt  v0.35   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
+# SVGdatashapes_dt  0.3.5   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
 # Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 # This module provides date / time support for svgdatashapes

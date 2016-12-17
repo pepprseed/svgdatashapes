@@ -1,5 +1,5 @@
 #
-# SVGdatashapes  v0.35   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
+# SVGdatashapes  0.3.5   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
 # Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 
