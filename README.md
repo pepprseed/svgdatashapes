@@ -9,7 +9,8 @@ Plenty of control over legends, tooltips, colors, transparency, and many other a
 It has no package dependencies, and can work nicely in frameworks such as Flask and Bootstrap. 
 No javascript, CSS, DOM, or SVG knowledge is required. 
 
-Produce many types of bargraphs, lineplots, curves, bands, scatterplots, pie graphs, heatmaps, multipanel displays, 
+Produce many types of bargraphs, lineplots, curves, bands, scatterplots, pie graphs, heatmaps, boxplots,
+histograms, multipanel displays, 
 and other data displays like windbarbs and Secchi depth graphs.  Plot from your numeric, categorical, or date/time data.
 
 SVGdatashapes produces attractive results for many typical straightforward graphing / data display needs, as can be seen 

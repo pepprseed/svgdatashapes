@@ -8,6 +8,10 @@
 <title>SVGdatashapes</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="SVGdatashapes, SVG data shapes, SVG, plotting, graphing, charting, data display, visualization">
+<meta name="keywords" content="python, flask, WSGI, API, dynamic web content, biomedical, medical, bioinformatics, scientific, business, process monitoring, report generation">
+<meta name="keywords" content="bars, curves, scatterplot, pie chart, boxplot, histogram, distribution, legends, tooltips, transparency">
+<meta name="keywords" content="categorical, dates, datetimes, times, log, procedural, simple, scalable vector graphics">
 
 <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="static/css/pack1.css">
@@ -35,12 +39,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            
             <br><br>
         </div>
 
-        
-        
     </div>
 </nav>
 
@@ -70,10 +71,12 @@
   <nobr><a href="index.html#api">API</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="pages/examplist.html">Examples</a> &nbsp; &nbsp; &nbsp;</nobr>
   <nobr><a href="https://github.com/pepprseed/svgdatashapes">GitHub</a> &nbsp; &nbsp; &nbsp; </nobr>
+  <nobr><a href="https://pypi.python.org/pypi/SVGdatashapes">PyPi</a> &nbsp; &nbsp; &nbsp; </nobr>
   <nobr><a href="LICENSE.txt">MIT License</a></nobr>
   </span>
 </div>
 <br>
+<a name="install"></a>
 <p>
 SVGdatashapes.py is a compact set of python functions 
 for creating many types of plots and data displays in SVG for use in web pages.
@@ -83,7 +86,6 @@ It has no package dependencies, and
 can work nicely in frameworks such as Flask and Bootstrap.
 No javascript, CSS, DOM, or SVG knowledge is required.
 </p>
-<a name="install"></a>
 
 <br>
 
@@ -94,13 +96,16 @@ Download / Install</a>
 <div class="panel"><div id="install-content" class="panel-collapse collapse ">
 <div class="panel-body">
 
-To install with pip: 
+To install with pip: &nbsp; 
 <br> &nbsp; &nbsp; pip install svgdatashapes
 <br>
 <br>
 Or if you prefer, you can just download directly and place into your python source directory:
 <br> &nbsp; &nbsp; <a href="svgdatashapes.py">svgdatashapes.py</a> 
 <br> &nbsp; &nbsp; <a href="svgdatashapes_dt.py">svgdatashapes_dt.py</a> &nbsp; (if you need date/time support)
+<br>
+<br>
+Current version is 0.3.5
     
 
     </div></div></div></div>
@@ -712,7 +717,8 @@ All args are keyword args unless otherwise indicated.
   <span class="parm">catlist=</span> &nbsp; A unique list of categories.
   You can simply pass <span class="fxn">uniqcats()</span> return value, if you used it.
   If this parameter is present it means the space will use categorical scaling.
-  It also means that the function will return a structure that can be iterated over to do <a href="index.html#multipanel">multipanel displays</a>.
+  It also means that the function will return a structure that can be iterated over to do <a href="index.html#multipanel">multipanel displays</a>
+  as seen in <a href="pages/e8.html">this example</a>.
   </p><p>
   <span class="parm">reverse=True</span> &nbsp; optional; if specified the axis will use high-to-low data scaling, opposite of usual.
   </p><p>
@@ -1518,8 +1524,9 @@ All args are keyword args unless otherwise indicated.
   The same thing goes for number of elapsed hours expressed numerically.
   </p><p>
   You can create business and trading types of graphs that cover business days and business hours without any gaps
-  for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> with one panel per day where business
-  activity occurred, then within each panel set up a date X space for the desired business hour range.
+  for weekends, holidays, or overnights; use the <a href="index.html#multipanel">multiple panel approach</a> where you'd set up
+  categorical space in X having one category / panel per business day;
+  then within each panel set up a date X space for the desired business hour range.
   </p><p>
   To get different combinations of stubs and tics you can invoke <span class+"fxn">daterange()</span> and <span class="fxn">xaxis()</span> 
   two or more times.
@@ -1578,8 +1585,8 @@ All args are keyword args unless otherwise indicated.
   Here's the basic approach:
   Suppose you're doing a display with 10 side-by-side panels all using the same Y axis scaling.
   First you'd set up your Y scaling with <span class="fxn">yspace()</span>.
-  Next you'd call <span class="fxn">xspace()</span> to set up the categorical X axis; it returns a list of 
-  category / panel names along with the coordinates for each panel.
+  Next you'd call <span class="fxn">xspace()</span> to set up the categorical X axis.  
+  The xspace() function returns a list of category / panel names along with the coordinates for each panel.
   You can then iterate over this panel list (or perhaps over your data), and for each panel 
   set an individual X data space using <span class="fxn">xpace()</span>, then plot your data however you wish.
   </p><p>
