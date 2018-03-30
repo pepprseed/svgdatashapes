@@ -1,5 +1,5 @@
 
-To install with pip:   (Coming soon)
+To install with pip:   
     pip install svgdatashapes
     pip install svgdatashapes_dt   (if you need date/time support)
 
@@ -13,3 +13,6 @@ Then, in your python code do:
 
 If you need date/time support also do:
     import svgdatashapes_dt   
+
+
+svgdatashapes has been tested on python 2.7 and 3.6

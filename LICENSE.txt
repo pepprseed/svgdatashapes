@@ -1,7 +1,7 @@
 
 SVGdatashapes       SVGdatashapes.com
 
-Copyright (c) 2016  Stephen C Grubb    stevegrubb@gmail.com
+Copyright (c) 2016-8  Stephen C Grubb    stevegrubb@gmail.com
 
 (MIT License)
 

@@ -1,7 +1,7 @@
 # scatterplot of mixed sign data; crosshairs at (0,0); superscripts in labels; data points have tooltips
 
 import svgdatashapes as s
-import sampledata1 
+import examples.sampledata1 as sampledata1
 
 def example2():                                          # scatterplot example
 

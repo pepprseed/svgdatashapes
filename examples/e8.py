@@ -2,7 +2,7 @@
 # option: dispmode .... either 'curves',  'bars', or 'updown'
 
 import svgdatashapes as s
-import sampledata3 
+import examples.sampledata3 as sampledata3
 
 def example8( dispmode='curves' ):
 

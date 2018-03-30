@@ -2,7 +2,7 @@
 # option: ylog .... if True use a log Y axis; otherwise use linear
 
 import svgdatashapes as s
-import sampledata2 
+import examples.sampledata2 as sampledata2
 
 def example7( ylog=False ):
 

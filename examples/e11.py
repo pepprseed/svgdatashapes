@@ -3,7 +3,7 @@
 
 import svgdatashapes as s
 import svgdatashapes_dt as sdt          # for date/time support
-import sampledata4                      
+import examples.sampledata4 as sampledata4 
 
 def example11():                                          
 

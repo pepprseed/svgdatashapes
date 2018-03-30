@@ -1,6 +1,6 @@
 #
-# SVGdatashapes_dt  0.3.5   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
-# Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# SVGdatashapes_dt  0.3.6   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
+# Copyright 2016-8  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 # This module provides date / time support for svgdatashapes
 #
@@ -157,7 +157,6 @@ def daterange( column=None, datarows=None, nearest=None, inc=None, stubformat=No
     elif nearest in [ "30minute", "10minute" ]:
         nmin = int(nearest[:-6])
         newmin = (dtmin.minute / nmin ) * nmin
-        print str(dtmin.minute), str(newmin)
         dtmin = dtmin.replace( minute=newmin )
         newmin = ((dtmax.minute / nmin)+1) * nmin
         hr = dtmax.hour

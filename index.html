@@ -62,7 +62,7 @@
 <a name="top"></a>
 
 
-<span class="text14">
+<span class="text13">
 
 <h2><i>SVGdatashapes</i></h2>
 
@@ -78,13 +78,20 @@
 <br>
 <a name="install"></a>
 <p>
-SVGdatashapes.py is a compact set of python functions 
-for creating many types of plots and data displays in SVG for use in web pages.
-General purpose, useful in areas such as biomedical, scientific, business, process monitoring, report generation.
-Plenty of control over legends, tooltips, colors, transparency, and many other appearance details.
-It has no package dependencies, and
-can work nicely in frameworks such as Flask and Bootstrap.
-No javascript, CSS, DOM, or SVG knowledge is required.
+SVGdatashapes.py is a compact library for creating many types of plots and visualizations in SVG,
+for biomedical and scientific uses, as well as business, process monitoring, report generation and the like.
+</p>
+<p>
+It's a little bit unusual in that it's a python-based procedural server-side tool, rather than a javascript solution such as D3.
+Nice-looking results can often be achieved in less time and with less code vs. the javascript-based choices, depending on what you're doing and how you prefer to code.
+You don't need javascript, CSS, DOM, or deep SVG knowledge to get reasonable results,
+and it can work nicely within frameworks such as Flask and Bootstrap.
+</p>
+<p>
+There's plenty of control over legends, tooltips, colors, transparency, and many other appearance details.
+Numeric, categorical, and datetime datatypes are supported.
+There's some interactivity / reactivity capability, although certainly not to the degree that the javascript solutions offer.
+It's been tested on python 2.7 and 3.6.
 </p>
 
 <br>
@@ -105,28 +112,7 @@ Or if you prefer, you can just download directly and place into your python sour
 <br> &nbsp; &nbsp; <a href="svgdatashapes_dt.py">svgdatashapes_dt.py</a> &nbsp; (if you need date/time support)
 <br>
 <br>
-Current version is 0.3.5
-    
-
-    </div></div></div></div>
-
-
-
-<a data-toggle="collapse" data-parent="#otherpackages" href="index.html#otherpackages-content">
-Compare vs. D3, plotly, numpy, ggplot</a>
-
-<div class="panel-group" id="otherpackages">
-<div class="panel"><div id="otherpackages-content" class="panel-collapse collapse ">
-<div class="panel-body">
-
-SVGdatashapes produces attractive results for many typical straightforward graphing / data display needs, as
-can be seen in the examples.
-The approach is procedural and the code is relatively simple and agile (click on examples to see code).
-It supports some basic 'reactive' things: tooltips, clickthru, hyperlinks, element hide/show with js.
-It does some basic stat / computational things: data ranges, frequency distributions, mean and SD, quartiles for boxplots.
-</p><p>
-Projects that require animations or high-end reactivity would need to use D3, Plotly, or similar;
-projects that require integrated statistics / computational ability should use something like Numpy or R + ggplot instead.
+Current version is svgdatashapes 0.3.6
     
 
     </div></div></div></div>
@@ -142,11 +128,11 @@ How to use SVG graphics</a>
 <div class="panel-body">
 
 <p>
-SVGdatahshapes renders its results in SVG.
+SVGdatashapes renders its results in SVG.
 An SVG graphic is simply a block of xml code within an &lt;svg&gt; tag.
 All modern web browsers support viewing and printing of SVG graphics.
 </p><p>
-SVG is a good format for web-based data displays and line art because it's vector-based and has full support for good fonts, 
+SVG works well for web-based data displays... it's vector-based and has full support for good fonts, 
 text in any direction, transparency, as well as tooltip and hyperlink support.  
 SVG can share CSS styling from the host web page and can use the full range of html special 
 characters to get Greek letters, etc.  (SVGdatashapes also supports &lt;sup&gt; and &lt;sub&gt; for superscripts and subscripts).
@@ -208,7 +194,7 @@ Line plots and curves
 
 Dates and times
 <table><tr>
-<td><a href="pages/e4.html"><img src="static/examples/e4.svg" height="100" border="0"></a></td>
+<td><a href="http://bhmpd01.jax.org:5005/pages/e4"><img src="static/examples/e4.svg" height="100" border="0"></a></td>
 <td width=40></td>
 <td><a href="pages/e5.html"><img src="static/examples/e5.svg" height="100" border="0"></a></td>
 </tr></table>
@@ -262,6 +248,12 @@ Other: &nbsp; Wind barbs<br>
 <br>
 Other: &nbsp; Secchi depths<br>
 <a href="pages/e12.html"><img src="static/examples/e12.svg" height="120" width="450" border="0"></a>
+<br>
+<br>
+<br>
+Other: &nbsp; Venn-like design for a web page<br>
+<a href="pages/e15.html"><img src="static/examples/e15.svg" height="200" width="200" border="0"></a>
+<br>
 <br>
 
 <br>
@@ -1399,8 +1391,6 @@ All args are keyword args unless otherwise indicated.
 
 <br>
 
-
-
 <a name="dt"></a>
 
 
@@ -1420,7 +1410,7 @@ All args are keyword args unless otherwise indicated.
   </p><p>
   The basic approach is to convert dates to integers, then plot in numeric space.
   To find a date-based axis range and produce a set of properly formatted axis stubs use <span class="fxn">daterange()</span>.
-  Here's an example where dates are plotted. <a href="pages/e4.html">View code</a>
+  Here's an example where dates are plotted. <a href="http://bhmpd01.jax.org:5005/pages/e4">View code</a>
   </p>
   <br>
   <img src="static/examples/e4.svg" >
@@ -1661,6 +1651,8 @@ All args are keyword args unless otherwise indicated.
 <br>
 <br>
 <br>
+
+</span>
 
 </div></div>
 

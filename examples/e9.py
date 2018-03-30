@@ -1,7 +1,7 @@
 # producce a histogram by computing a frequency distribution then plotting the bins
 
 import svgdatashapes as s
-import sampledata2
+import examples.sampledata2 as sampledata2
 
 def example9():
 

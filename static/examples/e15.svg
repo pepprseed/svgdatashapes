@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="800" height="750" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- SVG graphic by SVGdatashapes ... SVGdatashapes.com -->
+<ellipse cx="400" cy="350" rx="375" ry="250" fill="#ffdab9" opacity="0.5"/>
+<ellipse cx="150" cy="110" rx="140" ry="75" fill="#ddf" opacity="0.5"/>
+<text x="150" y="100" style="font-family: sans-serif; " font-size="16pt" fill="#228"  text-anchor="middle" ><tspan>Mouse strain</tspan><tspan x="150" dy="1.05em">comparison studies</tspan></text>
+<ellipse cx="400" cy="75" rx="150" ry="75" fill="#dfd" opacity="0.5"/>
+<text x="400" y="65" style="font-family: sans-serif; " font-size="16pt" fill="#228"  text-anchor="middle" ><tspan>Population studies</tspan><tspan x="400" dy="1.05em">and QTL archives</tspan></text>
+<ellipse cx="650" cy="110" rx="140" ry="75" fill="#fdf" opacity="0.5"/>
+<g><title>Click here to see a list</title>
+<a xlink:href="https://phenome.jax.org/procedures"  >
+<text x="650" y="100" style="font-family: sans-serif; " font-size="16pt" fill="#228"  text-anchor="middle" ><tspan>Phenotyping methods</tspan><tspan x="650" dy="1.05em">and protocols</tspan></text>
+</a>
+</g>
+<ellipse cx="190" cy="610" rx="110" ry="55" fill="#dff" opacity="0.5"/>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/centers"  >
+<text x="190" y="610" style="font-family: sans-serif;" font-size="14pt" fill="#228"  text-anchor="middle" ><tspan>Contributing centers</tspan><tspan x="190" dy="1.05em">and investigators</tspan></text>
+</a>
+</g>
+<ellipse cx="400" cy="630" rx="110" ry="55" fill="#ffa" opacity="0.5"/>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/about"  >
+<text x="400" y="630" style="font-family: sans-serif;" font-size="14pt" fill="#228"  text-anchor="middle" ><tspan>Helpful user</tspan><tspan x="400" dy="1.05em">resources</tspan></text>
+</a>
+</g>
+<ellipse cx="610" cy="610" rx="110" ry="55" fill="#cfa" opacity="0.5"/>
+<g><title></title>
+<text x="610" y="610" style="font-family: sans-serif;" font-size="15pt" fill="#228"  text-anchor="middle" ><tspan>Analysis tools</tspan><tspan x="610" dy="1.05em">and views</tspan></text>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/procedures?listmode=behavior"  >
+<text x="280" y="230" style="font-family: sans-serif;" font-size="20pt" fill="#77c"  text-anchor="middle" transform="rotate(10 280,230)" >Behavior</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/studies/aging"  >
+<text x="280" y="320" style="font-family: sans-serif;" font-size="18pt" fill="#77c"  text-anchor="middle" transform="rotate(-2 280,320)" >Aging</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/projects/ITP1"  >
+<text x="330" y="360" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(3 330,360)" >ITP</text>
+</a>
+</g>
+<text x="300" y="415" style="font-family: sans-serif;" font-size="14pt" fill="#77c"  text-anchor="middle" transform="rotate(-4 300,415)" >Reproducibility</text>
+<text x="450" y="330" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(-6 450,330)" >Environment</text>
+<text x="460" y="400" style="font-family: sans-serif;" font-size="14pt" fill="#77c"  text-anchor="middle" transform="rotate(3 460,400)" >Colony mgmt</text>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/interventions"  >
+<text x="600" y="310" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(-5 600,310)" >Alcohol</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/interventions"  >
+<text x="690" y="350" style="font-family: sans-serif;" font-size="16pt" fill="#77c"  text-anchor="middle" transform="rotate(-3 690,350)" >Diet</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/snp/retrievals"  >
+<text x="150" y="280" style="font-family: sans-serif;" font-size="20pt" fill="#77c"  text-anchor="middle" transform="rotate(-8 150,280)" >SNPs</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/markers/search"  >
+<text x="130" y="350" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(2 130,350)" >Genes</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/interventions"  >
+<text x="660" y="260" style="font-family: sans-serif;" font-size="16pt" fill="#77c"  text-anchor="middle" transform="rotate(6 660,260)" >Drug studies</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/procedures"  >
+<text x="480" y="220" style="font-family: sans-serif;" font-size="20pt" fill="#77c"  text-anchor="middle" transform="rotate(-4 480,220)" >Physiology</text>
+</a>
+</g>
+<text x="410" y="270" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" >Function</text>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/interventions"  >
+<text x="550" y="370" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(3 550,370)" >Toxicity</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/interventions"  >
+<text x="680" y="400" style="font-family: sans-serif;" font-size="15pt" fill="#77c"  text-anchor="middle" transform="rotate(-9 680,400)" >Pathogens</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/strains"  >
+<text x="140" y="430" style="font-family: courier;" font-size="17pt" fill="#777"  text-anchor="middle" transform="rotate(-9 140,430)" >C57BL/6J</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/strains"  >
+<text x="220" y="530" style="font-family: courier;" font-size="14pt" fill="#777"  text-anchor="middle" transform="rotate(5 220,530)" >NOD/ShiLtJ</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/strains"  >
+<text x="540" y="460" style="font-family: courier;" font-size="16pt" fill="#777"  text-anchor="middle" transform="rotate(-2 540,460)" >FVB/NJ</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/panels"  >
+<text x="650" y="450" style="font-family: courier;" font-size="16pt" fill="#777"  text-anchor="middle" >KOMP</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/panels"  >
+<text x="620" y="520" style="font-family: courier;" font-size="18pt" fill="#777"  text-anchor="middle" transform="rotate(3 620,520)" >BXD</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/panels"  >
+<text x="350" y="460" style="font-family: courier;" font-size="14pt" fill="#777"  text-anchor="middle" ><tspan>Collaborative</tspan><tspan x="350" dy="1.05em">Cross</tspan></text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/panels"  >
+<text x="440" y="510" style="font-family: courier;" font-size="16pt" fill="#777"  text-anchor="middle" transform="rotate(1 440,510)" >DO</text>
+</a>
+</g>
+<g><title></title>
+<a xlink:href="https://phenome.jax.org/panels"  >
+<text x="430" y="550" style="font-family: courier;" font-size="14pt" fill="#777"  text-anchor="middle" transform="rotate(-8 430,550)" >QTL Archive</text>
+</a>
+</g>
+</svg>

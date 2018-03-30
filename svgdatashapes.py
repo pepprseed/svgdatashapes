@@ -1,6 +1,6 @@
 #
-# SVGdatashapes  0.3.5   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
-# Copyright 2016  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
+# SVGdatashapes  0.3.6   SVGdatashapes.com    github.com/pepprseed/svgdatashapes
+# Copyright 2016-8  Stephen C. Grubb   stevegrubb@gmail.com      MIT License
 #
 
 import math
@@ -148,7 +148,6 @@ def findrange( testval=None, erramt=0.0, finish=False, nearest=None, addlpad=Non
 def uniqcats( datarows=None, column=None, handlenulls="ignore" ):
     # get a unique list of categories from user data set.  Result category list is ordered as encountered.
     # handlenulls can be one of "ignore", "keep", "spacers"
-    print str(column)
     dfindex = _getdfindex( column, datarows )
     catlist = [] 
     prevcat = ""
@@ -836,6 +835,15 @@ def circle( x, y, diameter, color="#e0e0e0", opacity=1.0, outline=False ):
     p_svg["out"] += "/>\n"
     return True
 
+def ellipse( x, y, width, height, color="#e0e0e0", opacity=1.0, outline=False ):
+    global p_svg
+    try: testnum = float(x) + y + height + width
+    except: raise AppError( "ellipse() is expecting x, y, height, width as numeric values, but got " + str(x) + " " + str(y) + " " + str(height) + " " + str(width) )
+    p_svg["out"] += "<ellipse cx=" + quo(str2f(x)) + " cy=" + quo(str2f(_flip(y))) + " rx=" + quo(str2f(width/2.0)) + " ry=" + quo(str2f(height/2.0)) + " "
+    _polyparms( color, opacity, outline )
+    p_svg["out"] += "/>\n"
+    return True
+
 def polygon( ptlist, color="#e0e0e0", opacity=1.0, outline=False ):
     # render a polygon
     global p_svg
@@ -1442,23 +1450,23 @@ def _percentiles( datarows, colname, dfindex ):
         nums.append( fval )
     nvals = len( nums )
     if nvals < 3: raise AppError( "not enough numeric values to compute percentiles" )
-    cell = nvals/20; 
+    cell = nvals//20; 
     if nvals % 20 != 0: p5 = nums[cell]; 
     else: p5 = (nums[cell-1] + nums[cell])/2.0
 
-    cell = nvals/4; 
+    cell = nvals//4; 
     if nvals % 4 != 0: p25 = nums[cell]; 
     else: p25 = (nums[cell-1] + nums[cell])/2.0
 
-    cell = nvals/2; 
+    cell = nvals//2; 
     if nvals % 2 != 0: p50 = nums[cell]; 
     else: p50 = (nums[cell-1] + nums[cell])/2.0
 
-    cell = (nvals-(nvals/4))-1; 
+    cell = (nvals-(nvals//4))-1; 
     if nvals % 4 != 0: p75 = nums[cell]; 
     else: p75 = (nums[cell] + nums[cell+1])/2.0
 
-    cell = (nvals-(nvals/20))-1; 
+    cell = (nvals-(nvals//20))-1; 
     if nvals % 20 != 0: p95 = nums[cell]; 
     else: p95 = (nums[cell] + nums[cell+1])/2.0
 
